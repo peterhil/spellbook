@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Spellbook",
+  "description": "Spellbook bookmark manager",
+  "version": "0.2.0",
+
+  "background": {
+    "pages": [
+      "background.html"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "bookmarks",
+    "tabs"
+  ]
+}
