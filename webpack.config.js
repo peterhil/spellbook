@@ -2,8 +2,12 @@
 // Webpack config for Spellbook extension
 //
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path')
 const sass = require('dart-sass')
+
+const devMode = process.env.NODE_ENV !== 'production'
+const styleLoader = (devMode ? 'style-loader' : MiniCssExtractPlugin.loader)
 
 const config = {
   entry: {
@@ -29,7 +33,7 @@ const config = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          { loader: 'style-loader' },
+          { loader: styleLoader },
           { loader: 'css-loader' },
           { loader: 'sass-loader',
             options: {
@@ -57,6 +61,10 @@ const config = {
       { from: 'src/popup.html' },
       { from: 'src/icon.png' },
     ]),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
   ],
   // resolve: {
   //   alias: {
