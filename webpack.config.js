@@ -33,6 +33,19 @@ const config = {
       //   }
       // },
       {
+        test: /\.tag$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'riot-tag-loader',
+          options: {
+            hot: false, // set it to true if you are using hmr
+            type: 'es6',
+            // add here all the other riot-compiler options riot.js.org/guide/compiler/
+            // template: 'pug' for example
+          }
+        }]
+      },
+      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           { loader: styleLoader },

@@ -8,7 +8,8 @@
   "dependencies": {
     "kefir": "^3.8.5",
     "rambda": "^1.2.2",
-    "riot": "^3.12.0"
+    "riot": "^3.12.0",
+    "riotgear": "^3.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -27,6 +28,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "riot-compiler": "^3.5.1",
+    "riot-tag-loader": "^2.1.0",
     "rollup": "^0.66.5",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",

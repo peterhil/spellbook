@@ -5073,6 +5073,13 @@ riot-observable@^3.0.0:
   resolved "https://registry.yarnpkg.com/riot-observable/-/riot-observable-3.0.0.tgz#8bbd2daf72a2141bb043082df4023dc504bad2eb"
   integrity sha1-i70tr3KiFBuwQwgt9AI9xQS60us=
 
+riot-tag-loader@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/riot-tag-loader/-/riot-tag-loader-2.1.0.tgz#396926e5711d31002380bfb92cf67f9a54262d41"
+  integrity sha512-TmFfg/CRgceoIxRJKNw6fMjgg3HUdQvUK6Doigs1lRKaa2PSbxa7azcL0zSppPlqzqFPPgC33eIUH34gU0FIUg==
+  dependencies:
+    loader-utils "^1.1.0"
+
 riot-tmpl@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/riot-tmpl/-/riot-tmpl-3.0.8.tgz#dd654e72a3a1520cb009cbef70c73856ded584a6"
@@ -5091,6 +5098,11 @@ riot@^3.12.0:
     riot-tmpl "^3.0.8"
     simple-dom "1.3.0"
     simple-html-tokenizer "^0.5.1"
+
+riotgear@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/riotgear/-/riotgear-3.5.0.tgz#847be311f49ddcb0108764a48fff2e8cb01ced62"
+  integrity sha1-hHvjEfSd3LAQh2Skj/8ujLAc7WI=
 
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.2"
