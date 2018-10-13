@@ -7,7 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "kefir": "^3.8.5",
-    "rambda": "^1.2.2"
+    "rambda": "^1.2.2",
+    "riot": "^3.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
