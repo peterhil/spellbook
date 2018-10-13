@@ -21,7 +21,12 @@ export default {
       exclude: [
         'node_modules/**',
         'src/vendor/**',
-      ]
+      ],
+      // babelrc: false,
+      // presets: [
+      //   ['env', { modules: false }]
+      // ],
+      runtimeHelpers: true,
     }),
     commonjs(),
     eslint({
