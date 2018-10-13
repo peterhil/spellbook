@@ -3,6 +3,7 @@
 //
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
+const sass = require('dart-sass')
 
 const config = {
   entry: {
@@ -26,10 +27,15 @@ const config = {
       //   }
       // },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' }
+          { loader: 'css-loader' },
+          { loader: 'sass-loader',
+            options: {
+              implementation: sass
+            }
+          },
         ]
       },
       {
