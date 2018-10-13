@@ -15,16 +15,16 @@ const config = {
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env']
+      //     }
+      //   }
+      // },
       {
         test: /\.css$/,
         use: [
@@ -52,12 +52,12 @@ const config = {
       { from: 'src/icon.png' },
     ]),
   ],
-  resolve: {
-    alias: {
-      'kefir$': './vendor/kefir/dist/kefir.js',
-    },
-    extensions: [".js", ".json", ".tag"],
-  }
+  // resolve: {
+  //   alias: {
+  //     'kefir$': './vendor/kefir/dist/kefir.js',
+  //   },
+  //   extensions: [".js", ".json", ".tag"],
+  // }
 }
 
 module.exports = (env, argv) => {
