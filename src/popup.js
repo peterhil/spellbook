@@ -3,12 +3,11 @@
 /* global document */
 
 import { Kefir } from 'kefir'
-// import { map } from 'ramda'
-// import * as R from 'ramda'
+import * as R from 'rambda'
 
 // import './popup.sass'
 
-// R.map([1, 2, 3], console.log)
+R.map(console.log, [1, 2, 3])
 Kefir.fromEvents(document, 'DOMContentLoaded')
   .log()
 

@@ -3939,10 +3939,10 @@ querystring@0.2.0:
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
 
-ramda@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
-  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
+rambda@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/rambda/-/rambda-1.2.2.tgz#92e22c70e3eac170b79defe75053a9806d88c6ca"
+  integrity sha512-nXHvvgXqtWJgbRY7k/UH4NBIcB2PHf7kE6OLnjRbTWjvntRqAShGaqEr0UNg3OzXE4TUrxrjMMQXQUqFcSG3fA==
 
 randomatic@^3.0.0:
   version "3.1.0"
