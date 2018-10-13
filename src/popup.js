@@ -2,9 +2,9 @@
 
 /* global document */
 
-import Kefir from './vendor/kefir/dist/kefir.js'
-// import map from './vendor/ramda/dist/ramda.js'
-// import * as R from './vendor/ramda/dist/ramda.js'
+import { Kefir } from 'kefir'
+// import { map } from 'ramda'
+// import * as R from 'ramda'
 
 // import './popup.sass'
 
