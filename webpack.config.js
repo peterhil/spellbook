@@ -2,7 +2,9 @@
 // Webpack config for Spellbook extension
 //
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 const sass = require('dart-sass')
 
@@ -54,6 +56,16 @@ const config = {
         }
       }
     ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
