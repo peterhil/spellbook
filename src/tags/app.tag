@@ -2,7 +2,7 @@
   <h1>Add bookmark</h1>
 
   <my-tag></my-tag>
-  <timer>Timer</timer>
+  <timer start="10">Timer</timer>
 
   <style>
     :scope {
@@ -15,6 +15,9 @@
   </style>
 
   <script>
+    import './timer.tag'
+    import '../greeting'
+
     const name = 'Rollup'
     this.content = `Hello **${name}**!`
   </script>

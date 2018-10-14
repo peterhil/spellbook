@@ -5,13 +5,11 @@
 import riot from 'riot'
 import Kefir from 'kefir'
 import './tags/app.tag'
-import './tags/timer.tag'
-import './greeting'
 
 import './popup.sass'
 
 function onPopup (event) {
-  riot.mount('*')
+  riot.mount('app')
   return true
 }
 
