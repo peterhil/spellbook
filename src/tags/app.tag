@@ -1,8 +1,7 @@
 <app>
   <h1>Add bookmark</h1>
 
-  <my-tag></my-tag>
-  <timer start="10">Timer</timer>
+  <popup-bookmark-form></popup-bookmark-form>
 
   <style>
     :scope {
@@ -15,8 +14,7 @@
   </style>
 
   <script>
-    import './timer.tag'
-    import '../greeting'
+    import './popup-bookmark-form.tag'
 
     const name = 'Rollup'
     this.content = `Hello **${name}**!`
