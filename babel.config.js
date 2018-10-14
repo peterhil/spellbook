@@ -1,4 +1,10 @@
 module.exports = function (api) {
+  const isProd = api.cache(() => process.env.NODE_ENV === "production");
+
+  const presets = [
+    "@babel/preset-env"
+  ];
+
   const plugins = [
     [
       "@babel/plugin-transform-runtime",
@@ -11,7 +17,8 @@ module.exports = function (api) {
     ],
   ];
 
-  var isProd = api.cache(() => process.env.NODE_ENV === "production");
-
-  return { plugins };
+  return {
+    presets,
+    plugins
+  };
 }
