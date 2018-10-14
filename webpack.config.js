@@ -22,19 +22,19 @@ const config = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //     options: {
-      //       presets: ['@babel/preset-env']
-      //     }
-      //   }
-      // },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
       {
         test: /\.tag$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         use: [{
           loader: 'riot-tag-loader',
           options: {
@@ -42,7 +42,8 @@ const config = {
             type: 'es6',
             // add here all the other riot-compiler options riot.js.org/guide/compiler/
             // template: 'pug' for example
-          }
+            sourcemap: false,
+          },
         }]
       },
       {
