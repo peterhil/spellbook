@@ -4,14 +4,16 @@
 
 import riot from 'riot'
 import { Kefir } from 'kefir'
+import { timer } from './timer'
+import { greeting } from './greeting'
 
 import './popup.sass'
 
-riot.mount('*')
 
 function onPopup (event) {
-  // const tags = riot.mount('*')
+  return riot.mount('*')
 }
 
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 domStream.onValue(onPopup)
+  .log()
