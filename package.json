@@ -5,6 +5,10 @@
   "main": "src/popup.js",
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
   "dependencies": {
     "kefir": "^3.8.5",
     "rambda": "^1.2.2",
@@ -28,22 +32,21 @@
     "eslint-plugin-standard": "^4.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss": "^6.0.16",
+    "postcss-cssnext": "^3.1.0",
     "riot-compiler": "^3.5.1",
-    "riot-tag-loader": "^2.1.0",
     "rollup": "^0.66.5",
-    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-buble": "^0.18.0",
     "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-copy-glob": "^0.2.2",
     "rollup-plugin-eslint": "^5.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-riot": "^2.0.0",
     "rollup-plugin-sass": "^0.9.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
-  },
-  "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
   }
 }
