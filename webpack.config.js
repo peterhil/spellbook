@@ -83,6 +83,7 @@ const config = {
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/manifest.json' },
+      { from: 'src/background.html' },
       { from: 'src/popup.html' },
       { from: 'src/icon.png' },
     ]),
