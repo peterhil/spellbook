@@ -80,32 +80,42 @@
     }
 
     function updateForm () {
+      const form = vm.refs.bookmarkForm
       vm.form = {
-        title: 'Google',
-        url: 'https://www.google.com/',
-        icon_url: 'https://www.google.com/favicon.ico',
+        title: vm.refs.title.value || 'Google',
+        url: vm.refs.url.value || 'https://www.google.com/',
+        icon_url: vm.refs.icon_url.value || 'https://www.google.com/favicon.ico',
+        category: vm.refs.category.value,
       }
       vm.update()
-      console.debug('Form updated:', vm.form)
+      console.debug('Form updated:', vm.form, vm.refs.bookmarkForm)
     }
 
-    const onUpdate = (event) => {
+    function onUpdate (event) {
       updateForm()
       event.preventDefault()
     }
 
-    const onSubmit = (event) => {
-      console.debug('Form submitted:', vm.form, vm.refs.bookmarkForm)
+    function onSubmit (event) {
+      const form = vm.refs.bookmarkForm
+      vm.form = {
+        title: form.title.value,
+        url: form.url.value,
+        icon_url: form.icon_url.value,
+        category: form.category.value,
+      }
+      console.debug('Form submitted:', vm.form, form, event)
       vm.update()
       event.preventDefault()
+      return true
     }
 
-    const onClose = (event) => {
+    function onClose (event) {
       window.close()
       event.preventDefault()
     }
 
-    const onReset = (event) => {
+    function onReset (event) {
       reset()
       event.preventDefault()
     }
@@ -126,7 +136,7 @@
     vm.on('mount', addEvents)
     vm.on('unmount', removeEvents)
 
-    updateForm()
+    /* updateForm()*/
 
   </script>
 
