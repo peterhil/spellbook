@@ -4,14 +4,14 @@
     <fieldset>
       <div class="form-group">
         <label for="title">Title</label>
-        <input id="title" value="{form.title}" class="form-input">
+        <input name="title" ref="title" value="{form.title}" class="form-input">
       </div>
 
       <div class="form-group">
         <label for="url">Url</label>
         <div class="input-group">
-          <input id="url" type="url" value="{form.url}" class="form-input">
-          <input id="icon_url" type="hidden" value="{form.icon_url}" class="form-input">
+          <input name="url" ref="url" type="url" value="{form.url}" class="form-input">
+          <input name="icon_url"  ref="icon_url" type="hidden" value="{form.icon_url}" class="form-input">
           <a class="btn btn-primary input-group-btn icon-button" href="{form.icon_url}" target="_new">
             <img if="{form.icon_url}" class="icon favicon" src="{form.icon_url}" alt="{form.icon_url}" title="{form.icon_url}">
           </a>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="form-group">
-        <select id="category" class="form-select form-input">
+        <select name="category" ref="category" class="form-select form-input">
           <option>Kirjanmerkkipalkki</option>
           <option>Internet</option>
           <option>Programming</option>
