@@ -84,6 +84,8 @@ export default [
       copy([
         { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
         { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
+        { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
+        { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
         { files: 'src/background.html', dest: 'dist' },
         { files: 'src/icon.png', dest: 'dist' },
         { files: 'src/manifest.json', dest: 'dist' },
