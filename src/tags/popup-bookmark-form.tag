@@ -66,7 +66,6 @@
 
   <script>
     import { events } from '../lib/events'
-
     const vm = this
 
     function reset () {
@@ -108,11 +107,6 @@
       vm.update()
       event.preventDefault()
       return true
-    }
-
-    function onClose (event) {
-      window.close()
-      event.preventDefault()
     }
 
     function onReset (event) {

@@ -9,7 +9,6 @@
   <script>
     import './popup-bookmark-form.tag'
     import { events } from '../lib/events'
-
     const vm = this
 
     function onClose (event) {

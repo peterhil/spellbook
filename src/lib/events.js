@@ -3,7 +3,7 @@ const add = (element, event, fn, useCapture = false) => {
     throw new Error('[events] Trying to attach event listener to an element that does not exist!')
   }
   if (typeof fn !== 'function') {
-    console.warn("[events] Trying to add nonexisting event handler on:\n", element, fn)
+    console.warn('[events] Trying to add nonexisting event handler on:\n', element, fn)
     return false
   }
   console.debug(`[events] add '${event}' event with {useCapture: ${useCapture}} on element using function:\n`, element, fn)

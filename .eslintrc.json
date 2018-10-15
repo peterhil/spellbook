@@ -9,5 +9,17 @@
       "off",
       "always"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [ "*.tag" ],
+      "excludedFiles": [],
+      "rules": {
+        "indent": [
+          "off",
+          "always"
+        ]
+      }
+    }
+  ]
 }
