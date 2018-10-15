@@ -1,10 +1,30 @@
 <app>
   <h1>Add bookmark</h1>
-  <button class="btn btn-action btn-sm float-right close-button">
+  <a ref="closeButton" class="btn btn-action btn-close btn-sm float-right">
     <i class="icon icon-cross"></i>
-  </button>
+  </a>
 
   <popup-bookmark-form></popup-bookmark-form>
+
+  <script>
+    import './popup-bookmark-form.tag'
+    import { events } from '../lib/events'
+
+    const vm = this
+
+    function onClose (event) {
+      event.preventDefault()
+      window.close()
+    }
+
+    vm.on('mount', () => {
+      events.add(vm.refs.closeButton, 'click', onClose)
+    })
+
+    vm.on('unmount', () => {
+      events.remove(vm.refs.closeButton, 'click', onClose)
+    })
+  </script>
 
   <style>
     :scope {
@@ -16,7 +36,7 @@
       color: var(--riot-color);
     }
 
-    .close-button {
+    .btn-close {
       position: absolute;
       right: 0.5rem;
       top: 0.5rem;
@@ -24,10 +44,4 @@
     }
   </style>
 
-  <script>
-    import './popup-bookmark-form.tag'
-
-    const name = 'Rollup'
-    this.content = `Hello **${name}**!`
-  </script>
 </app>
