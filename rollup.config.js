@@ -82,14 +82,17 @@ export default [
       sourcemap: true,
       globals: {
         'kefir': 'Kefir',
+        'fkit': 'F',
       },
     },
     external: [
       'kefir',
+      'fkit',
     ],
     plugins: plugins.push(
       copy([
         { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
+        { files: 'node_modules/fkit/dist/fkit.js', dest: 'dist/external' },
         { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
         { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },

@@ -1,9 +1,10 @@
 // Copyright (c) 2018 Peter Hillerström. All rights reserved.
 
-/* global document */
-
+import F from 'fkit'
 import Kefir from 'kefir'
-import { tabUpdateCompleted$ } from './lib/chrome/tabs'
+import { isComplete, tabUpdated$ } from './lib/chrome/tabs'
 
-tabUpdateCompleted$
+tabUpdated$
+  .filter(isComplete)
+  .map(event => F.get('tab', event))
   .log()
