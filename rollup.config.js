@@ -78,8 +78,15 @@ export default [
     input: 'src/background.js',
     output: {
       file: 'dist/background.js',
-      format: outputFormat
+      format: outputFormat,
+      sourcemap: true,
+      globals: {
+        'kefir': 'Kefir',
+      },
     },
+    external: [
+      'kefir',
+    ],
     plugins: plugins.push(
       copy([
         { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },

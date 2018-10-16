@@ -1,0 +1,4 @@
+// Chrome bookmarks
+
+/* global chrome */
+
