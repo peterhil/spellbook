@@ -1,19 +1,23 @@
 <popup-bookmark-form>
 
-  <form ref="bookmarkForm" model={form}>
+  <form ref="form" model="{bookmark}">
     <fieldset>
       <div class="form-group">
         <label for="title">Title</label>
-        <input name="title" ref="title" value="{form.title}" class="form-input">
+        <input name="title" ref="title" value="{bookmark.title}" class="form-input">
       </div>
 
       <div class="form-group">
         <label for="url">Url</label>
         <div class="input-group">
-          <input name="url" ref="url" type="url" value="{form.url}" class="form-input">
-          <input name="icon_url"  ref="icon_url" type="hidden" value="{form.icon_url}" class="form-input">
-          <a class="btn btn-primary input-group-btn icon-button" href="{form.icon_url}" target="_new">
-            <img if="{form.icon_url}" class="icon favicon" src="{form.icon_url}" alt="{form.icon_url}" title="{form.icon_url}">
+          <input name="url" ref="url" type="url" value="{bookmark.url}" class="form-input">
+          <input name="icon_url" ref="icon_url" type="hidden" value="{bookmark.icon_url}" class="form-input">
+          <a class="btn btn-primary input-group-btn icon-button" href="{bookmark.icon_url}" target="_new">
+            <img class="icon favicon"
+              if="{bookmark.icon_url}"
+              src="{bookmark.icon_url}"
+              alt="{bookmark.icon_url}"
+              title="{bookmark.icon_url}">
           </a>
         </div>
       </div>
@@ -69,25 +73,25 @@
     const vm = this
 
     function reset () {
-      vm.form = {
+      vm.bookmark = {
         title: '',
         url: '',
         icon_url: '',
+        category: '',
       }
       vm.update()
       console.debug('Form reseted.')
     }
 
     function updateForm () {
-      const form = vm.refs.bookmarkForm
-      vm.form = {
-        title: vm.refs.title.value || 'Google',
-        url: vm.refs.url.value || 'https://www.google.com/',
-        icon_url: vm.refs.icon_url.value || 'https://www.google.com/favicon.ico',
-        category: vm.refs.category.value,
+      vm.bookmark = {
+        title: 'Google',
+        url: 'https://www.google.com/',
+        icon_url: 'https://www.google.com/favicon.ico',
+        category: 'Internet',
       }
       vm.update()
-      console.debug('Form updated:', vm.form, vm.refs.bookmarkForm)
+      console.debug('Form updated:', vm.bookmark, vm.refs.form)
     }
 
     function onUpdate (event) {
@@ -96,14 +100,14 @@
     }
 
     function onSubmit (event) {
-      const form = vm.refs.bookmarkForm
-      vm.form = {
+      const form = vm.refs.form
+      vm.bookmark = {
         title: form.title.value,
         url: form.url.value,
         icon_url: form.icon_url.value,
         category: form.category.value,
       }
-      console.debug('Form submitted:', vm.form, form, event)
+      console.debug('Form submitted:', vm.bookmark, form, event)
       vm.update()
       event.preventDefault()
       return true
@@ -115,13 +119,14 @@
     }
 
     const addEvents = () => {
-      events.add(vm.refs.bookmarkForm, 'submit', onSubmit)
+      events.add(vm.refs.form, 'submit', onSubmit)
       events.add(vm.refs.clearButton, 'click', onReset)
       events.add(vm.refs.submitButton, 'click', onSubmit)
       events.add(vm.refs.updateButton, 'click', onUpdate)
     }
+
     const removeEvents = () => {
-      events.remove(vm.refs.bookmarkForm, 'submit', onSubmit)
+      events.remove(vm.refs.form, 'submit', onSubmit)
       events.remove(vm.refs.clearButton, 'click', onReset)
       events.remove(vm.refs.submitButton, 'click', onSubmit)
       events.remove(vm.refs.updateButton, 'click', onUpdate)
@@ -130,7 +135,7 @@
     vm.on('mount', addEvents)
     vm.on('unmount', removeEvents)
 
-    /* updateForm()*/
+    updateForm()
 
   </script>
 
