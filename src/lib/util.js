@@ -9,3 +9,13 @@
 export const isFunction = fn => {
   return typeof fn === 'function'
 }
+
+export function callbackToPromise (fn, ...args) {
+  return new Promise((resolve, reject) => {
+    try {
+      fn(...args, resolve)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+}
