@@ -8,18 +8,37 @@
 
 /* global chrome */
 
+import F from 'fkit'
 import Kefir from 'kefir'
 import { fromEventPattern } from '../util/reactive'
+import { callbackToPromise } from '../util'
 
-export const isUrlChange = function (info) {
-  return info && info.change.hasOwnProperty('url')
+const isUrlChange = function (info) {
+  return !!F.getIn(['change', 'url'], info)
 }
 
-export const isComplete = function (info) {
-  return info && info.change.hasOwnProperty('status') && info.change.status === 'complete'
+const isComplete = function (info) {
+  return F.getIn(['change', 'status'], info) === 'complete'
 }
 
-export const tabUpdated$ = fromEventPattern(
+const is = F.get
+const isActive = is('active')
+const isSelected = is('selected')
+
+const isCurrent = (tab) => {
+  return isActive(tab) && isSelected(tab)
+}
+
+const getTab = (id) => {
+  return Kefir.fromPromise(callbackToPromise(chrome.tabs.get, id))
+}
+
+const onActivated$ = fromEventPattern(
+  chrome.tabs.onActivated.addListener.bind(chrome.tabs.onActivated),
+  chrome.tabs.onActivated.removeListener.bind(chrome.tabs.onActivated),
+)
+
+const onUpdated$ = fromEventPattern(
   chrome.tabs.onUpdated.addListener.bind(chrome.tabs.onUpdated),
   chrome.tabs.onUpdated.removeListener.bind(chrome.tabs.onUpdated),
 )
@@ -30,3 +49,24 @@ export const tabUpdated$ = fromEventPattern(
       tab: event[2]
     }
   })
+
+export const tabUpdate$ = onUpdated$
+  .map(F.get('tab'))
+
+export const tabActivation$ = onActivated$
+  .map(F.get('tabId'))
+  .flatMapLatest(getTab)
+
+export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$])
+  .filter(isActive)
+  .map(F.pick([
+    // 'active',
+    'id',
+    'favIconUrl',
+    // 'selected',
+    // 'status',
+    'title',
+    'url',
+    // 'windowId',
+  ]))
+  .skipDuplicates((a, b) => F.empty(F.difference(F.values(a), F.values(b))))

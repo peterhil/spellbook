@@ -8,9 +8,9 @@
 
 import riot from 'riot'
 import Kefir from 'kefir'
-import './tags/app.tag'
 
 import './popup.sass'
+import './tags/app.tag'
 
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 

@@ -4,11 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import F from 'fkit'
-import Kefir from 'kefir'
-import { isComplete, tabUpdated$ } from './lib/chrome/tabs'
+import { currentTab$ } from './lib/chrome/tabs'
 
-tabUpdated$
-  .filter(isComplete)
-  .map(event => F.get('tab', event))
-  .log()
+currentTab$.log()
