@@ -4,11 +4,32 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import F from 'fkit'
-import Kefir from 'kefir'
-import { isComplete, tabUpdated$ } from './lib/chrome/tabs'
+import { currentTab$ } from './lib/chrome/tabs'
+import { disconnectionHandler } from './lib/messaging'
 
-tabUpdated$
-  .filter(isComplete)
-  .map(event => F.get('tab', event))
-  .log()
+currentTab$.log()
+
+const messageHandler = function(port) {
+  return function messageHandlerWithPort (response) {
+    console.assert(port.name === 'popup')  // Handle differently?
+    console.log('Connected with:', port.name)
+    console.debug('Got message:', response)
+
+    switch (response.type) {
+    case 'popup-opened':
+      // Get current tab info and send it:
+      port.postMessage({ type: 'current-tab-info', data: {} })
+    case 'popup-opened':
+      // Query bookmarks with the tab info
+      port.postMessage({ type: 'bookmark-exists', data: {} })
+      break
+    default:
+      console.warn('Unhandled message:', response)
+    }
+  }
+}
+
+chrome.runtime.onConnect.addListener(function(port) {
+  port.onMessage.addListener(messageHandler(port))
+  port.onDisconnect.addListener(disconnectionHandler)
+})
