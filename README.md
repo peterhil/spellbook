@@ -31,5 +31,14 @@ rollup -c
 
 Then add the `dist` directory as unpacked extension to Chrome or compatible browser.
 
-## License
+## Licensing
 
+Copyright © 2018 Peter Hillerström and contributors
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a [copy of the MPL](https://github.com/peterhil/spellbook/blob/master/LICENSE.txt) was not distributed with this
+file, You can obtain one at [http://mozilla.org/MPL/2.0/](http://mozilla.org/MPL/2.0/).
+
+### Other licenses
+
+- The [reactive.js](https://github.com/peterhil/spellbook/blob/master/src/lib/util/reactive.js) file implements `fromEventPattern` function from RxJS in Kefir and is licensed under [Apache Software License](http://www.apache.org/licenses/LICENSE-2.0).
