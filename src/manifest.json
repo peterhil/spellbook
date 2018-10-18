@@ -3,7 +3,6 @@
   "name": "Spellbook",
   "version": "0.2.0",
 
-  "default_locale": "en",
   "description": "Use thousands of bookmarks easily",
   "icons": {
     "64": "icon.png"
