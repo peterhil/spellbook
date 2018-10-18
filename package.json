@@ -4,7 +4,7 @@
   "description": "Spellbook bookmark manager",
   "main": "src/popup.js",
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production"

@@ -30,3 +30,6 @@ rollup -c
 ```
 
 Then add the `dist` directory as unpacked extension to Chrome or compatible browser.
+
+## License
+
