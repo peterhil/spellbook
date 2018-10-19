@@ -14,6 +14,11 @@ import { fromEventPattern } from '../util/reactive'
 import { callbackToPromise } from '../util'
 import { withErrorChecking } from './apiHelpers'
 
+const currentTabQuery = {
+  active: true,
+  currentWindow: true,
+}
+
 const isUrlChange = function (info) {
   return !!F.getIn(['change', 'url'], info)
 }
@@ -32,6 +37,10 @@ const isCurrent = (tab) => {
 
 const getTab = (id) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
+}
+
+const getCurrentTab = () => {
+  return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
 
 const onActivated$ = fromEventPattern(
