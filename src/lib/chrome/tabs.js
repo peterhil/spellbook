@@ -35,6 +35,10 @@ const isCurrent = (tab) => {
   return isActive(tab) && isSelected(tab)
 }
 
+const tabsAreEqual = (a, b) => {
+  return F.empty(F.difference(F.values(a), F.values(b)))
+}
+
 const getTab = (id) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
 }
@@ -91,6 +95,6 @@ export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$])
     'url',
     // 'windowId',
   ]))
-  .skipDuplicates((a, b) => F.empty(F.difference(F.values(a), F.values(b))))
+  .skipDuplicates(tabsAreEqual)
 
 export const closedTab$ = onRemoved$
