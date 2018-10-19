@@ -6,6 +6,8 @@
 
 // Utility functions
 
+/* global chrome */
+
 export const isFunction = fn => {
   return typeof fn === 'function'
 }
@@ -15,7 +17,7 @@ export function callbackToPromise (fn, ...args) {
     try {
       fn(...args, resolve)
     } catch (err) {
-      console.error(err)
+      reject(err)
     }
   })
 }

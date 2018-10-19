@@ -4,10 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { currentTab$ } from './lib/chrome/tabs'
+/* global chrome */
+
+import { closedTab$, currentTab$ } from './lib/chrome/tabs'
 import { disconnectionHandler } from './lib/messaging'
 
-currentTab$.log()
+closedTab$.log('closedTab$')
+currentTab$.log('currentTab$')
 
 const messageHandler = function(port) {
   return function messageHandlerWithPort (response) {

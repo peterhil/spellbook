@@ -12,6 +12,7 @@ import F from 'fkit'
 import Kefir from 'kefir'
 import { fromEventPattern } from '../util/reactive'
 import { callbackToPromise } from '../util'
+import { withErrorChecking } from './apiHelpers'
 
 const isUrlChange = function (info) {
   return !!F.getIn(['change', 'url'], info)
@@ -30,13 +31,25 @@ const isCurrent = (tab) => {
 }
 
 const getTab = (id) => {
-  return Kefir.fromPromise(callbackToPromise(chrome.tabs.get, id))
+  return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
 }
 
 const onActivated$ = fromEventPattern(
   chrome.tabs.onActivated.addListener.bind(chrome.tabs.onActivated),
   chrome.tabs.onActivated.removeListener.bind(chrome.tabs.onActivated),
 )
+
+const onRemoved$ = fromEventPattern(
+  chrome.tabs.onRemoved.addListener.bind(chrome.tabs.onRemoved),
+  chrome.tabs.onRemoved.removeListener.bind(chrome.tabs.onRemoved),
+)
+  .map((event) => {
+    return {
+      id: event[0],
+      windowId: event[1].windowId,
+      isWindowClosing: event[1].isWindowClosing,
+    }
+  })
 
 const onUpdated$ = fromEventPattern(
   chrome.tabs.onUpdated.addListener.bind(chrome.tabs.onUpdated),
@@ -70,3 +83,5 @@ export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$])
     // 'windowId',
   ]))
   .skipDuplicates((a, b) => F.empty(F.difference(F.values(a), F.values(b))))
+
+export const closedTab$ = onRemoved$
