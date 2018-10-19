@@ -96,5 +96,6 @@ export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$])
     // 'windowId',
   ]))
   .skipDuplicates(tabsAreEqual)
+  .toProperty()
 
 export const closedTab$ = onRemoved$
