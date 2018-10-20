@@ -6,9 +6,10 @@
 
 /* global chrome */
 
-import { closedTab$, currentTab$ } from './lib/chrome/tabs'
+import { closedTab$, closedWindow$, currentTab$ } from './lib/chrome/tabs'
 import { disconnectionHandler } from './lib/messaging'
 
+closedWindow$.log('closedWindow$')
 closedTab$.log('closedTab$')
 currentTab$.log('currentTab$')
 
