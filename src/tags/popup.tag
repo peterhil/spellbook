@@ -4,7 +4,7 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<app>
+<popup>
   <h1>Add bookmark</h1>
   <a ref="closeButton" class="btn btn-action btn-close btn-sm float-right">
     <i class="icon icon-cross"></i>
@@ -49,4 +49,4 @@
     }
   </style>
 
-</app>
+</popup>
