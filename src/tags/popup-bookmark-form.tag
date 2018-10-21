@@ -5,6 +5,9 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <popup-bookmark-form>
+  <close-button></close-button>
+
+  <h1>{ popupHeader() }</h1>
 
   <form ref="form" model="{opts.bookmark}">
     <fieldset>
@@ -41,6 +44,12 @@
 
   <style>
     :scope {
+      --riot-color: #333;
+      display: block;
+    }
+
+    h1 {
+      color: var(--riot-color);
     }
 
     .btn:not(:last-child) {
@@ -68,23 +77,39 @@
   </style>
 
   <script>
-    import { events } from '../lib/events'
+    import './close-button.tag'
     import './popup-category-selector.tag'
+    import { createBookmark } from '../lib/chrome/bookmarks'
+    import { events } from '../lib/events'
     const vm = this
 
-    function onSubmit (event) {
-      console.log('onSubmit'. event)
+    vm.popupHeader = () => {
+      return vm.opts.bookmark.saved
+           ? 'Bookmark added'
+           : 'Add bookmark'
+    }
+
+    const onSubmit = (event) => {
       const form = vm.refs.form
-      vm.opts.bookmark = {
+      const valid = form.reportValidity()
+      const params = {
+        parentId: form.category.value,
         title: form.title.value,
         url: form.url.value,
-        favIconUrl: form.favIconUrl.value,
-        category: form.category.value,
       }
-      console.debug('Form submitted:', vm.bookmark, form, event)
+
+      console.debug('Bookmark form submitted:', params)
+
+      if (!valid) {
+        return
+      }
+
+      createBookmark(params, () => {
+        vm.opts.bookmark.saved = true
+      })
+
       vm.update()
       event.preventDefault()
-      return true
     }
 
     const addEvents = () => {

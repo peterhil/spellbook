@@ -16,6 +16,7 @@
     <div if="{categories}" class="categories">
       <select name="category" ref="category" class="form-select form-input">
         <option value="1">Bookmarks Bar</option>
+        <option value="2" selected>Other Bookmarks</option>
         <option each="{categories}" value="{id}">{title}</option>
       </select>
     </div>

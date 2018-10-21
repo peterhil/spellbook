@@ -31,3 +31,7 @@ export function bookmarkSearch (query) {
     { query: query }
   ))
 }
+
+export function createBookmark (params, callback) {
+  chrome.bookmarks.create(params, callback)
+}
