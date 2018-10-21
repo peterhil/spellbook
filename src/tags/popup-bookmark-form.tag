@@ -48,8 +48,6 @@
       </div>
 
       <div class="form-group text-right">
-        <button type="reset" ref="clearButton" class="btn btn-secondary">Clear</button>
-        <button type="button" ref="updateButton" class="btn btn-secondary">Update</button>
         <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
       </div>
     </fieldset>
@@ -78,17 +76,6 @@
     import { events } from '../lib/events'
     const vm = this
 
-    function reset () {
-      vm.opts.bookmark = {
-        title: '',
-        url: '',
-        favIconUrl: '',
-        category: '',
-      }
-      vm.update()
-      console.debug('Form reseted.')
-    }
-
     function updateForm (page) {
       vm.opts.bookmark = {
         title: page.title,
@@ -100,18 +87,8 @@
       console.debug('Form updated:', vm.bookmark, vm.refs.form)
     }
 
-    function onUpdate (event) {
-      updateForm({
-        title: 'Google',
-        url: 'https://www.google.com/',
-        favIconUrl: 'https://www.google.com/favicon.ico',
-        category: 'Internet',
-      })
-      vm.update()
-      event.preventDefault()
-    }
-
     function onSubmit (event) {
+      console.log('onSubmit'. event)
       const form = vm.refs.form
       vm.opts.bookmark = {
         title: form.title.value,
@@ -125,23 +102,14 @@
       return true
     }
 
-    function onReset (event) {
-      reset()
-      event.preventDefault()
-    }
-
     const addEvents = () => {
       events.add(vm.refs.form, 'submit', onSubmit)
-      events.add(vm.refs.clearButton, 'click', onReset)
       events.add(vm.refs.submitButton, 'click', onSubmit)
-      events.add(vm.refs.updateButton, 'click', onUpdate)
     }
 
     const removeEvents = () => {
       events.remove(vm.refs.form, 'submit', onSubmit)
-      events.remove(vm.refs.clearButton, 'click', onReset)
       events.remove(vm.refs.submitButton, 'click', onSubmit)
-      events.remove(vm.refs.updateButton, 'click', onUpdate)
     }
 
     vm.on('mount', (opts) => {
@@ -151,9 +119,6 @@
     vm.on('unmount', () => {
       removeEvents()
     })
-
-    reset()
-
   </script>
 
 </popup-bookmark-form>
