@@ -31,24 +31,7 @@
         </div>
       </div>
 
-      <popup-category-selector></popup-category-selector>
-
-      <div class="form-group">
-        <label for="category">Category</label>
-        <div class="input-group">
-          <input class="form-input" type="text" placeholder="Search by typing">
-          <button class="btn btn-primary input-group-btn">Filter</button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <select name="category" ref="category" class="form-select form-input">
-          <option>Kirjanmerkkipalkki</option>
-          <option>Internet</option>
-          <option>Programming</option>
-          <option>Services</option>
-        </select>
-      </div>
+      <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
 
       <div class="form-group text-right">
         <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
@@ -86,6 +69,7 @@
 
   <script>
     import { events } from '../lib/events'
+    import './popup-category-selector.tag'
     const vm = this
 
     function onSubmit (event) {
