@@ -12,35 +12,45 @@
       <input name="search" ref="search" class="form-input" type="text" placeholder="Search by typing">
       <button class="btn btn-primary input-group-btn">Filter</button>
     </div>
+
+    <div if="{categories}" class="categories">
+      <select name="category" ref="category" class="form-select form-input">
+        <option value="1">Bookmarks Bar</option>
+        <option each="{categories}" value="{id}">{title}</option>
+      </select>
+    </div>
   </div>
 
-  <div class="form-group">
-    <select name="category" ref="category" class="form-select form-input">
-      <option>Kirjanmerkkipalkki</option>
-      <option>Internet</option>
-      <option>Programming</option>
-      <option>Services</option>
-    </select>
-  </div>
+  <style>
+    .category-dropdown {
+      width: 100%;
+    }
+
+    .category-dropdown .menu {
+      right: 0;
+    }
+  </style>
 
   <script>
-    import F from 'fkit'
-    import Kefir from 'kefir'
-    import { bookmarkSearch, filterCategories, isCategory } from '../lib/chrome/bookmarks.js'
+    import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
+    import { inputEvent$ } from '../lib/util'
     const vm = this
 
-    vm.on('mount', () => {
-      const search$ = Kefir
-        .fromEvents(vm.refs.search, 'input')
-        .map(event => event.target.value)
+    vm.categories = []
 
-      search$
-        .filter(query => query && query.length >= 2)
-        .debounce(250)
-        .skipDuplicates()
+    const updateCategories = (categories) => {
+      console.debug('updateCategories:', categories)
+      vm.categories = categories
+      vm.update()
+    }
+
+    vm.on('mount', () => {
+      const categorySearch$ = inputEvent$(vm.refs.search)
         .flatMapLatest(bookmarkSearch)  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
-        .log()
+
+      categorySearch$
+        .observe(updateCategories, console.error)
     })
   </script>
 
