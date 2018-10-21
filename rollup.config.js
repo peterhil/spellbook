@@ -48,7 +48,9 @@ const plugins = [
     insert: true
   }),
   commonjs(),
-  buble(),
+  buble({
+    objectAssign: 'Object.assign',
+  }),
 ]
 const copyOptions = {
   verbose: true,
