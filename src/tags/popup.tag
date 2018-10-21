@@ -10,28 +10,39 @@
     <i class="icon icon-cross"></i>
   </a>
 
-  <popup-bookmark-form></popup-bookmark-form>
+  <popup-bookmark-form bookmark="{bookmark}"></popup-bookmark-form>
 
   <script>
     import './popup-bookmark-form.tag'
     import { events } from '../lib/events'
     const vm = this
 
-    function onClose (event) {
+    vm.bookmark = {
+      'title': '',
+      'url': '',
+      'favIconUrl': '',
+      'category': '',
+    }
+
+    const onTabUpdate = (tab) => {
+      console.log('currentTabInfo from background on popup:', tab)
+      vm.bookmark = tab
+      vm.update()
+    }
+
+    const onClose = (event) => {
       event.preventDefault()
       window.close()
     }
 
-    vm.opts.messages.on('currentTabInfo', function(tab) {
-      console.log('currentTabInfo from background on popup:', tab)
-    })
-
     vm.on('mount', () => {
       events.add(vm.refs.closeButton, 'click', onClose)
+      vm.opts.messages.on('currentTabInfo', onTabUpdate)
     })
 
     vm.on('unmount', () => {
       events.remove(vm.refs.closeButton, 'click', onClose)
+      vm.opts.messages.off('currentTabInfo', onTabUpdate)
     })
   </script>
 

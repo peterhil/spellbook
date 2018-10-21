@@ -6,24 +6,24 @@
    -->
 <popup-bookmark-form>
 
-  <form ref="form" model="{bookmark}">
+  <form ref="form" model="{opts.bookmark}">
     <fieldset>
       <div class="form-group">
         <label for="title">Title</label>
-        <input name="title" ref="title" value="{bookmark.title}" class="form-input">
+        <input name="title" ref="title" value="{opts.bookmark.title}" class="form-input">
       </div>
 
       <div class="form-group">
         <label for="url">Url</label>
         <div class="input-group">
-          <input name="url" ref="url" type="url" value="{bookmark.url}" class="form-input">
-          <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{bookmark.favIconUrl}" class="form-input">
-          <a class="btn btn-primary input-group-btn icon-button" href="{bookmark.favIconUrl}" target="_new">
+          <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
+          <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{opts.bookmark.favIconUrl}" class="form-input">
+          <a class="btn btn-primary input-group-btn icon-button" href="{opts.bookmark.favIconUrl}" target="_new">
             <img class="icon favicon"
-              if="{bookmark.favIconUrl}"
-              src="{bookmark.favIconUrl}"
-              alt="{bookmark.favIconUrl}"
-              title="{bookmark.favIconUrl}">
+              if="{opts.bookmark.favIconUrl}"
+              src="{opts.bookmark.favIconUrl}"
+              alt="{opts.bookmark.favIconUrl}"
+              title="{opts.bookmark.favIconUrl}">
           </a>
         </div>
       </div>
@@ -79,7 +79,7 @@
     const vm = this
 
     function reset () {
-      vm.bookmark = {
+      vm.opts.bookmark = {
         title: '',
         url: '',
         favIconUrl: '',
@@ -90,7 +90,7 @@
     }
 
     function updateForm (page) {
-      vm.bookmark = {
+      vm.opts.bookmark = {
         title: page.title,
         url: page.url,
         favIconUrl: page.favIconUrl,
@@ -107,12 +107,13 @@
         favIconUrl: 'https://www.google.com/favicon.ico',
         category: 'Internet',
       })
+      vm.update()
       event.preventDefault()
     }
 
     function onSubmit (event) {
       const form = vm.refs.form
-      vm.bookmark = {
+      vm.opts.bookmark = {
         title: form.title.value,
         url: form.url.value,
         favIconUrl: form.favIconUrl.value,
