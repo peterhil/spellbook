@@ -31,7 +31,7 @@ const messageHandler = function (response) {
 }
 
 function onPopup (event) {
-  riot.mount('*', {messages})
+  riot.mount('popup', { messages })
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)
