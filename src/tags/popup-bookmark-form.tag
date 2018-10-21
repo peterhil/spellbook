@@ -15,14 +15,19 @@
 
       <div class="form-group">
         <label for="url">Url</label>
-        <div class="input-group has-icon-right">
+        <div class="input-group">
           <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
           <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{opts.bookmark.favIconUrl}" class="form-input">
-          <img class="icon favicon form-icon"
-            if="{opts.bookmark.favIconUrl}"
-            src="{opts.bookmark.favIconUrl}"
-            alt="{opts.bookmark.favIconUrl}"
-            title="{opts.bookmark.favIconUrl}">
+          <span class={input-group-addon: true, with-icon: opts.bookmark.favIconUrl}>
+            <img class="icon favicon"
+              if="{opts.bookmark.favIconUrl}"
+              src="{opts.bookmark.favIconUrl}"
+              alt="{opts.bookmark.favIconUrl}"
+              title="{opts.bookmark.favIconUrl}">
+            <i class="icon icon-bookmark"
+              if="{!opts.bookmark.favIconUrl}">
+            </i>
+          </span>
         </div>
       </div>
 
@@ -63,9 +68,19 @@
       margin-top: 1rem;
     }
 
-    img.icon.favicon {
+    .input-group-addon.with-icon {
+      padding: 0.15rem;
+    }
+
+    .icon.favicon {
       height: auto;
       width: 1.4rem;
+    }
+
+    .icon-bookmark {
+      vertical-align: text-top;
+      height: 1rem;
+      width: 1rem;
     }
   </style>
 
