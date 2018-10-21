@@ -88,17 +88,6 @@
     import { events } from '../lib/events'
     const vm = this
 
-    function updateForm (page) {
-      vm.opts.bookmark = {
-        title: page.title,
-        url: page.url,
-        favIconUrl: page.favIconUrl,
-        category: page.category,
-      }
-      vm.update()
-      console.debug('Form updated:', vm.bookmark, vm.refs.form)
-    }
-
     function onSubmit (event) {
       console.log('onSubmit'. event)
       const form = vm.refs.form
