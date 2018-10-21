@@ -9,23 +9,22 @@
 import { closedTab$, closedWindow$, currentTab$ } from './lib/chrome/tabs'
 import { disconnectionHandler } from './lib/messaging'
 
-closedWindow$.log('closedWindow$')
-closedTab$.log('closedTab$')
-currentTab$.log('currentTab$')
+var currentPage = {
+  title: '',
+  url: '',
+  icon_url: '',
+  category: '',
+}
 
 const messageHandler = function(port) {
   return function messageHandlerWithPort (response) {
     console.assert(port.name === 'popup')  // Handle differently?
     console.log('Connected with:', port.name)
-    console.debug('Got message:', response)
+    console.debug('Background got message:', response.type, response.data, response)
 
     switch (response.type) {
-    case 'popup-opened':
-      // Get current tab info and send it:
-      port.postMessage({ type: 'current-tab-info', data: {} })
-    case 'popup-opened':
-      // Query bookmarks with the tab info
-      port.postMessage({ type: 'bookmark-exists', data: {} })
+    case 'popupOpen':
+      port.postMessage({ type: 'currentTabInfo', data: currentPage })
       break
     default:
       console.warn('Unhandled message:', response)
@@ -37,3 +36,16 @@ chrome.runtime.onConnect.addListener(function(port) {
   port.onMessage.addListener(messageHandler(port))
   port.onDisconnect.addListener(disconnectionHandler)
 })
+
+function onValue (tab) {
+  console.debug('onValue:', tab)
+  currentPage = {
+    ...tab
+  }
+}
+
+closedWindow$.log('closedWindow$')
+closedTab$.log('closedTab$')
+currentTab$
+  .spy('currentTab$')
+  .observe(onValue, console.error)

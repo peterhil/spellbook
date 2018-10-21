@@ -22,6 +22,10 @@
       window.close()
     }
 
+    vm.opts.messages.on('currentTabInfo', function(tab) {
+      console.log('currentTabInfo from background on popup:', tab)
+    })
+
     vm.on('mount', () => {
       events.add(vm.refs.closeButton, 'click', onClose)
     })

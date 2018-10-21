@@ -14,18 +14,16 @@ import './tags/popup.tag'
 import { disconnectionHandler } from './lib/messaging'
 
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
+var messages = riot.observable()
 
 const messageHandler = function (response) {
-  console.log('Got message:', response)
+  console.log('Popup got message:', response.type, response.data, response)
 
   switch (response.type) {
-  case 'current-tab-info':
+  case 'currentTabInfo':
     // Update the form
-    console.log('Message: Current tab changed')
-    break
-  case 'bookmark-exists':
-    // Update the icon showing the status for current url
-    console.log('Message: Bookmark exists')
+    console.log('messageHandler: Current tab changed', response.data)
+    messages.trigger(response.type, response.data)
     break
   default:
     console.warn('Unhandled message:', response)
@@ -33,13 +31,13 @@ const messageHandler = function (response) {
 }
 
 function onPopup (event) {
-  riot.mount('popup')
+  riot.mount('*', {messages})
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
-  port.postMessage({ type: 'popup-opened' })
+  port.postMessage({ type: 'popupOpen' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)

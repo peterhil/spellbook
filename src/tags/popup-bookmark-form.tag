@@ -89,19 +89,24 @@
       console.debug('Form reseted.')
     }
 
-    function updateForm () {
+    function updateForm (page) {
       vm.bookmark = {
-        title: 'Google',
-        url: 'https://www.google.com/',
-        icon_url: 'https://www.google.com/favicon.ico',
-        category: 'Internet',
+        title: page.title,
+        url: page.url,
+        icon_url: page.icon_url,
+        category: page.category,
       }
       vm.update()
       console.debug('Form updated:', vm.bookmark, vm.refs.form)
     }
 
     function onUpdate (event) {
-      updateForm()
+      updateForm({
+        title: 'Google',
+        url: 'https://www.google.com/',
+        icon_url: 'https://www.google.com/favicon.ico',
+        category: 'Internet',
+      })
       event.preventDefault()
     }
 
@@ -138,10 +143,15 @@
       events.remove(vm.refs.updateButton, 'click', onUpdate)
     }
 
-    vm.on('mount', addEvents)
-    vm.on('unmount', removeEvents)
+    vm.on('mount', (opts) => {
+      addEvents()
+    })
 
-    updateForm()
+    vm.on('unmount', () => {
+      removeEvents()
+    })
+
+    reset()
 
   </script>
 
