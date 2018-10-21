@@ -17,13 +17,13 @@
         <label for="url">Url</label>
         <div class="input-group">
           <input name="url" ref="url" type="url" value="{bookmark.url}" class="form-input">
-          <input name="icon_url" ref="icon_url" type="hidden" value="{bookmark.icon_url}" class="form-input">
-          <a class="btn btn-primary input-group-btn icon-button" href="{bookmark.icon_url}" target="_new">
+          <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{bookmark.favIconUrl}" class="form-input">
+          <a class="btn btn-primary input-group-btn icon-button" href="{bookmark.favIconUrl}" target="_new">
             <img class="icon favicon"
-              if="{bookmark.icon_url}"
-              src="{bookmark.icon_url}"
-              alt="{bookmark.icon_url}"
-              title="{bookmark.icon_url}">
+              if="{bookmark.favIconUrl}"
+              src="{bookmark.favIconUrl}"
+              alt="{bookmark.favIconUrl}"
+              title="{bookmark.favIconUrl}">
           </a>
         </div>
       </div>
@@ -82,7 +82,7 @@
       vm.bookmark = {
         title: '',
         url: '',
-        icon_url: '',
+        favIconUrl: '',
         category: '',
       }
       vm.update()
@@ -93,7 +93,7 @@
       vm.bookmark = {
         title: page.title,
         url: page.url,
-        icon_url: page.icon_url,
+        favIconUrl: page.favIconUrl,
         category: page.category,
       }
       vm.update()
@@ -104,7 +104,7 @@
       updateForm({
         title: 'Google',
         url: 'https://www.google.com/',
-        icon_url: 'https://www.google.com/favicon.ico',
+        favIconUrl: 'https://www.google.com/favicon.ico',
         category: 'Internet',
       })
       event.preventDefault()
@@ -115,7 +115,7 @@
       vm.bookmark = {
         title: form.title.value,
         url: form.url.value,
-        icon_url: form.icon_url.value,
+        favIconUrl: form.favIconUrl.value,
         category: form.category.value,
       }
       console.debug('Form submitted:', vm.bookmark, form, event)

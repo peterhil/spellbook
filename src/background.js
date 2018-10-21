@@ -12,7 +12,7 @@ import { disconnectionHandler } from './lib/messaging'
 var currentPage = {
   title: '',
   url: '',
-  icon_url: '',
+  favIconUrl: '',
   category: '',
 }
 
