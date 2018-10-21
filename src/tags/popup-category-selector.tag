@@ -9,7 +9,7 @@
   <div class="form-group">
     <label for="category">Category</label>
     <div class="input-group">
-      <input class="form-input" type="text" placeholder="Search by typing">
+      <input name="search" ref="search" class="form-input" type="text" placeholder="Search by typing">
       <button class="btn btn-primary input-group-btn">Filter</button>
     </div>
   </div>
@@ -22,5 +22,26 @@
       <option>Services</option>
     </select>
   </div>
+
+  <script>
+    import F from 'fkit'
+    import Kefir from 'kefir'
+    import { bookmarkSearch, filterCategories, isCategory } from '../lib/chrome/bookmarks.js'
+    const vm = this
+
+    vm.on('mount', () => {
+      const search$ = Kefir
+        .fromEvents(vm.refs.search, 'input')
+        .map(event => event.target.value)
+
+      search$
+        .filter(query => query && query.length >= 2)
+        .debounce(250)
+        .skipDuplicates()
+        .flatMapLatest(bookmarkSearch)  // TODO See how RxJS.switchMap cancel the previous observable
+        .map(filterCategories)
+        .log()
+    })
+  </script>
 
 </popup-category-selector>

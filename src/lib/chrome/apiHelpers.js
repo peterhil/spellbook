@@ -6,6 +6,8 @@
 
 /* global chrome */
 
+import F from 'fkit'
+
 export const withErrorChecking = (chromeAsyncFn) => {
   return function wrappedAsyncChromeFn (...args) {
     const callback = F.last(args)

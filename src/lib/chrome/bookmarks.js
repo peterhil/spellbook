@@ -8,3 +8,26 @@
 
 /* global chrome */
 
+import F from 'fkit'
+import Kefir from 'kefir'
+import { callbackToPromise } from '../util'
+import { withErrorChecking } from './apiHelpers'
+
+export function isCategory (bookmark) {
+  return !bookmark.hasOwnProperty('url')
+}
+
+export function isBookmarkNode (bookmark) {
+  return bookmark && bookmark.hasOwnProperty('parentId')
+}
+
+export function filterCategories (bookmarks) {
+  return bookmarks.filter(isCategory)
+}
+
+export function bookmarkSearch (query) {
+  return Kefir.fromPromise(callbackToPromise(
+    withErrorChecking(chrome.bookmarks.search),
+    { query: query }
+  ))
+}

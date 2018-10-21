@@ -66,11 +66,13 @@ export default [
       format: outputFormat,
       sourcemap: true,
       globals: {
+        'fkit': 'F',
         'kefir': 'Kefir',
         'riot': 'riot',
       },
     },
     external: [
+      'fkit',
       'kefir',
       'riot',
     ],
