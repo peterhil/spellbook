@@ -52,6 +52,11 @@ const onActivated$ = fromEventPattern(
   chrome.tabs.onActivated.removeListener.bind(chrome.tabs.onActivated),
 )
 
+export const onFocusChanged$ = fromEventPattern(
+  chrome.windows.onFocusChanged.addListener.bind(chrome.windows.onFocusChanged),
+  chrome.windows.onFocusChanged.removeListener.bind(chrome.windows.onFocusChanged),
+)
+
 const onRemoved$ = fromEventPattern(
   chrome.tabs.onRemoved.addListener.bind(chrome.tabs.onRemoved),
   chrome.tabs.onRemoved.removeListener.bind(chrome.tabs.onRemoved),
