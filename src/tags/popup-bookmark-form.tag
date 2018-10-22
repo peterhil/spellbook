@@ -86,6 +86,7 @@
 
       vm.update()
       event.preventDefault()
+      window.close()
     }
 
     const addEvents = () => {
