@@ -42,6 +42,11 @@ const getTab = (id) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
 }
 
+const getActiveTabOnWindow = (windowId) => {
+  return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.query), {windowId, active: true}))
+    .map(F.head)
+}
+
 const getCurrentTab = () => {
   return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
@@ -75,7 +80,10 @@ export const tabActivation$ = onActivated$
   .map(F.get('tabId'))
   .flatMapLatest(getTab)
 
-export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$])
+export const tabFocusChanged$ = onFocusChanged$
+  .flatMapLatest(getActiveTabOnWindow)
+
+export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$, tabFocusChanged$])
   .filter(isActive)
   .map(F.pick([
     // 'active',

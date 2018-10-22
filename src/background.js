@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import { closedTab$, closedWindow$, currentTab$, onFocusChanged$ } from './lib/chrome/tabs'
+import { closedTab$, closedWindow$, currentTab$ } from './lib/chrome/tabs'
 import { disconnectionHandler } from './lib/messaging'
 
 var currentPage = {
@@ -46,7 +46,6 @@ function onValue (tab) {
 
 closedWindow$.log('closedWindow$')
 closedTab$.log('closedTab$')
-onFocusChanged$.log('onFocusChanged$')
 currentTab$
   .spy('currentTab$')
   .observe(onValue, console.error)
