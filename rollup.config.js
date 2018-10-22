@@ -69,12 +69,14 @@ export default [
         'fkit': 'F',
         'kefir': 'Kefir',
         'riot': 'riot',
+        'zepto': '$',
       },
     },
     external: [
       'fkit',
       'kefir',
       'riot',
+      'zepto',
     ],
     plugins: plugins
   },
@@ -100,6 +102,8 @@ export default [
         { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
         { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
+        { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
+        { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
         { files: 'src/background.html', dest: 'dist' },
         { files: 'src/icon.png', dest: 'dist' },
         { files: 'src/manifest.json', dest: 'dist' },
