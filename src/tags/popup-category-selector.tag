@@ -59,8 +59,9 @@
 
   <script>
     import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
-    import { inputEvent$ } from '../lib/util'
+    import { inputEvent$, propertyCompare } from '../lib/util'
     import $ from 'zepto'
+    import F from 'fkit'
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
@@ -142,6 +143,7 @@
       const categorySearch$ = inputEvent$(vm.refs.search, 1)
         .flatMapLatest(bookmarkSearch)  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
+        .map(F.sortBy(propertyCompare('title', false)))
 
       categorySearch$
         .observe(updateCategories, console.error)

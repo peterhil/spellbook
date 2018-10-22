@@ -12,6 +12,21 @@ export const isFunction = fn => {
   return typeof fn === 'function'
 }
 
+//
+// Use propertyComparator with F.sortBy or similar sort function like this:
+// F.sortBy(propertyCompare('title'), list)
+// This function is curried.
+//
+export const propertyCompare = (property, caseSensitive = true) => {
+  const prop = caseSensitive
+        ? F.get(property)
+        : F.curry((item) => F.toLower(F.get(property, item)))
+
+  return function comparator (a, b) {
+    return prop(a) < prop(b) ? -1 : (prop(a) > prop(b) ? 1 : 0)
+  }
+}
+
 export function callbackToPromise (fn, ...args) {
   return new Promise((resolve, reject) => {
     try {
