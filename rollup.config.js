@@ -105,7 +105,7 @@ export default [
         { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
         { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
         { files: 'src/background.html', dest: 'dist' },
-        { files: 'src/icon.png', dest: 'dist' },
+        { files: 'src/icon*.png', dest: 'dist' },
         { files: 'src/manifest.json', dest: 'dist' },
         { files: 'src/popup.html', dest: 'dist' },
         // { files: 'src/tags', dest: 'dist' },
