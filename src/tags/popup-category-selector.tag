@@ -10,11 +10,9 @@
     <label for="category">Category</label>
     <div class="input-group category-search">
       <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder="Search by typing">
-      <a if="{!selection.title}" class="btn btn-primary input-group-btn">
-        <i class="icon icon-search"></i>
-      </a>
-      <a if={selection.title} class="clear-search btn btn-primary input-group-btn">
-        <i class="icon icon-cross"></i>
+      <a class="clear-search btn btn-primary input-group-btn">
+        <i class="icon icon-search" if="{!selection.title}"></i>
+        <i class="icon icon-cross" if="{selection.title}"></i>
       </a>
     </div>
 
