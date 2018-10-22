@@ -47,11 +47,6 @@
       overflow-y: scroll;
     }
 
-    .dropdown .menu {
-      width: 100%;
-      max-height: 9.6rem;
-    }
-
     .dropdown.active .menu,
     .dropdown .dropdown-toggle:focus + .menu,
     .dropdown .menu:hover {
@@ -59,16 +54,6 @@
       position: relative;
       white-space: nowrap;
       text-overflow: ellipsis;
-    }
-
-    .input-group-addon.with-icon {
-      padding: 0.15rem;
-    }
-
-    .with-icon .icon {
-      vertical-align: text-top;
-      height: 1rem;
-      width: 1rem;
     }
   </style>
 
