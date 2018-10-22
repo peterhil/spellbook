@@ -10,14 +10,15 @@
     <label for="category">Category</label>
     <div class="input-group category-search">
       <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder="Search by typing">
+      <input name="category" required type="hidden" value={selection.id}>
       <a class="clear-search btn btn-primary input-group-btn">
-        <i class="icon icon-search" if="{!selection.title}"></i>
-        <i class="icon icon-cross" if="{selection.title}"></i>
+        <i class="icon icon-search" if="{!selection.id}"></i>
+        <i class="icon icon-cross" if="{selection.id}"></i>
       </a>
     </div>
 
     <div class="categories">
-      <div class="{active: isDropdownVisible(), dropdown: true, category-dropdown: true}">
+      <div class="{active: isDropdownVisible(), dropdown: true}">
         <ul class="menu" aria-role="menu">
           <li class="menu-item" each="{categories}">
             <a class="category" data-id={id} data-title={title} tabindex="0">{title}</a>
@@ -37,10 +38,6 @@
           </li>
         </ul>
       </div>
-      <span if={selection.id} class="form-group">
-        <input name="categoryTitle" type="hidden" value={selection.title} class="form-input">
-        <input name="category" type="hidden" value={selection.id} class="form-input">
-      </span>
     </div>
   </div>
 
@@ -81,7 +78,7 @@
     import { inputEvent$ } from '../lib/util'
     import $ from 'zepto'
     const vm = this
-    var $dropdown = $('.category-dropdown')
+    var $dropdown = $('.categories .dropdown')
 
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
@@ -103,11 +100,34 @@
       event.preventDefault()
     }
 
+    const onKeydown = (event) => {
+      const keys = {
+        ENTER: 13,
+      }
+
+      switch (event.keyCode) {
+        case keys.ENTER: {
+          return onSelection(event)
+          break
+        }
+      }
+    }
+
+    const renewSearch = (event) => {
+      if (!vm.selection.id) {
+        console.debug('renewSearch')
+        return false
+      }
+
+      clearSelection(event)
+    }
+
     const init = () => {
       vm.categories = []
       vm.selection = {}
       vm.refs.search.focus()
     }
+
     const clearSelection = (event) => {
       init()
       vm.update()
@@ -116,6 +136,20 @@
 
     vm.isDropdownVisible = () => {
       return vm.categories.length > 0 && !vm.selection.id
+    }
+
+    const addEvents = () => {
+      $('.categories').on('click', '.category', onSelection)
+      $('.categories').on('keydown', '.category', onKeydown)
+      $(vm.refs.search).on('focus', renewSearch)
+      $('.category-search').on('click', '.clear-search', clearSelection)
+    }
+
+    const removeEvents = () => {
+      $('.categories').off('click', '.category', onSelection)
+      $('.categories').on('keydown', '.category', onKeydown)
+      $(vm.refs.search).off('focus', renewSearch)
+      $('.category-search').off('click', '.clear-search', clearSelection)
     }
 
     vm.on('mount', () => {
@@ -127,15 +161,10 @@
         .observe(updateCategories, console.error)
 
       init()
-
-      $('.categories').on('click', '.category', onSelection)
-      $('.category-search').on('click', '.clear-search', clearSelection)
+      addEvents()
     })
 
-    vm.on('unmount', () => {
-      $('.category-dropdown').off('click', '.category', onSelection)
-      $('.category-search').off('click', '.clear-search', clearSelection)
-    })
+    vm.on('unmount', removeEvents)
   </script>
 
 </popup-category-selector>
