@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Spellbook",
-  "version": "0.2.0",
+  "version": "0.3.0",
 
   "description": "Use thousands of bookmarks easily",
   "icons": {
