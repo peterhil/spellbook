@@ -23,7 +23,9 @@
       </div>
     </div>
 
-    <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
+    <div class="form-group">
+      <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
+    </div>
 
     <div class="form-group text-right">
       <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
