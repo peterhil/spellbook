@@ -10,7 +10,7 @@
   </a>
 
   <style>
-    :scope.btn-close {
+    .btn-close {
       position: absolute;
       right: 0.5rem;
       top: 0.5rem;
