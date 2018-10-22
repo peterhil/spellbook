@@ -17,28 +17,25 @@
         <i class="icon icon-cross"></i>
       </a>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div if="{categories}" class="categories">
-      <div class="dropdown category-dropdown">
-        <a href="#" class="btn btn-primary dropdown-toggle" tabindex="0">
-          Select a category <i class="icon icon-caret"></i>
-        </a>
-        <ul class="menu">
+    <div class="categories">
+      <div class="{active: isDropdownVisible(), dropdown: true, category-dropdown: true}">
+        <ul class="menu" aria-role="menu">
+          <li class="menu-item" each="{categories}">
+            <a class="category" data-id={id} data-title={title} tabindex="0">{title}</a>
+          </li>
+
+          <li class="divider" data-content="root categories">
+
           <li class="menu-item">
-            <a class="category" data-id="1" data-title="Bookmarks Bar">
+            <a class="category" data-id="1" data-title="Bookmarks Bar" tabindex="0">
               Bookmarks Bar
             </a>
           </li>
           <li class="menu-item">
-            <a class="category" data-id="2" data-title="Other Bookmarks">
+            <a class="category" data-id="2" data-title="Other Bookmarks" tabindex="0">
               Other Bookmarks
             </a>
-          </li>
-          <li class="divider" data-content="categories">
-          <li class="menu-item" each="{categories}">
-            <a class="category" data-id={id} data-title={title}>{title}</a>
           </li>
         </ul>
       </div>
@@ -88,9 +85,6 @@
     const vm = this
     var $dropdown = $('.category-dropdown')
 
-    vm.categories = []
-    vm.selection = {}
-
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
       vm.categories = categories
@@ -106,15 +100,24 @@
         title: selection.title,
       }
 
+      $dropdown.removeClass('active')
       vm.update()
-      $dropdown.toggleClass('active')
       event.preventDefault()
     }
 
-    const clearSelection = (event) => {
+    const init = () => {
+      vm.categories = []
       vm.selection = {}
+      vm.refs.search.focus()
+    }
+    const clearSelection = (event) => {
+      init()
       vm.update()
       event.preventDefault()
+    }
+
+    vm.isDropdownVisible = () => {
+      return vm.categories.length > 0 && !vm.selection.id
     }
 
     vm.on('mount', () => {
@@ -125,7 +128,7 @@
       categorySearch$
         .observe(updateCategories, console.error)
 
-      vm.refs.search.focus()
+      init()
 
       $('.categories').on('click', '.category', onSelection)
       $('.category-search').on('click', '.clear-search', clearSelection)
