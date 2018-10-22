@@ -122,7 +122,7 @@
       events.remove(vm.refs.submitButton, 'click', onSubmit)
     }
 
-    vm.on('mount', (opts) => {
+    vm.on('mount', () => {
       addEvents()
     })
 
