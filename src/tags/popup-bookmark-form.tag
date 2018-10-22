@@ -20,17 +20,7 @@
         <label for="url">Url</label>
         <div class="input-group">
           <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
-          <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{opts.bookmark.favIconUrl}" class="form-input">
-          <span class={input-group-addon: true, with-icon: opts.bookmark.favIconUrl}>
-            <img class="icon favicon"
-              if="{opts.bookmark.favIconUrl}"
-              src="{opts.bookmark.favIconUrl}"
-              alt="{opts.bookmark.favIconUrl}"
-              title="{opts.bookmark.favIconUrl}">
-            <i class="icon icon-bookmark"
-              if="{!opts.bookmark.favIconUrl}">
-            </i>
-          </span>
+          <popup-favicon favicon="{opts.bookmark.favIconUrl}"></popup-favicon>
         </div>
       </div>
 
@@ -59,26 +49,12 @@
     .form-group:last-child {
       margin-top: 1rem;
     }
-
-    .input-group-addon.with-icon {
-      padding: 0.15rem;
-    }
-
-    .icon.favicon {
-      height: auto;
-      width: 1.4rem;
-    }
-
-    .icon-bookmark {
-      vertical-align: text-top;
-      height: 1rem;
-      width: 1rem;
-    }
   </style>
 
   <script>
     import './close-button.tag'
     import './popup-category-selector.tag'
+    import './popup-favicon.tag'
     import { createBookmark } from '../lib/chrome/bookmarks'
     import { events } from '../lib/events'
     const vm = this
