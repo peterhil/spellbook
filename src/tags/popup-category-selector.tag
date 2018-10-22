@@ -10,7 +10,7 @@
     <label for="category">Category</label>
     <div class="input-group">
       <input name="search" ref="search" class="form-input" type="text" placeholder="Search by typing">
-      <button class="btn btn-primary input-group-btn">Filter</button>
+      <!-- <button class="btn btn-primary input-group-btn">Filter</button> -->
     </div>
 
     <div if="{categories}" class="categories">
@@ -52,6 +52,8 @@
 
       categorySearch$
         .observe(updateCategories, console.error)
+
+      vm.refs.search.focus()
     })
   </script>
 
