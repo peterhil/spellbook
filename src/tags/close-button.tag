@@ -20,18 +20,19 @@
 
   <script>
     import { events } from '../lib/events'
+    const vm = this
 
     const onClose = (event) => {
       event.preventDefault()
       window.close()
     }
 
-    this.on('mount', () => {
-      events.add(this.refs.closeButton, 'click', onClose)
+    vm.on('mount', () => {
+      events.add(vm.refs.closeButton, 'click', onClose)
     })
 
-    this.on('unmount', () => {
-      events.remove(this.refs.closeButton, 'click', onClose)
+    vm.on('unmount', () => {
+      events.remove(vm.refs.closeButton, 'click', onClose)
     })
   </script>
 </close-button>

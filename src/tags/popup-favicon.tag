@@ -37,6 +37,4 @@
       width: 1rem;
     }
   </style>
-
-  console.log('Favicon', this.opts.favicon)
 </popup-favicon>
