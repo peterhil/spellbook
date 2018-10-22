@@ -98,13 +98,8 @@
       events.remove(vm.refs.submitButton, 'click', onSubmit)
     }
 
-    vm.on('mount', () => {
-      addEvents()
-    })
-
-    vm.on('unmount', () => {
-      removeEvents()
-    })
+    vm.on('mount', addEvents)
+    vm.on('unmount', removeEvents)
   </script>
 
 </popup-bookmark-form>
