@@ -10,26 +10,24 @@
   <h1>{ popupHeader() }</h1>
 
   <form ref="form" model="{opts.bookmark}">
-    <fieldset>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input name="title" ref="title" value="{opts.bookmark.title}" class="form-input">
-      </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input name="title" ref="title" value="{opts.bookmark.title}" class="form-input">
+    </div>
 
-      <div class="form-group">
-        <label for="url">Url</label>
-        <div class="input-group">
-          <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
-          <popup-favicon favicon="{opts.bookmark.favIconUrl}"></popup-favicon>
-        </div>
+    <div class="form-group">
+      <label for="url">Url</label>
+      <div class="input-group">
+        <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
+        <popup-favicon favicon="{opts.bookmark.favIconUrl}"></popup-favicon>
       </div>
+    </div>
 
-      <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
+    <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
 
-      <div class="form-group text-right">
-        <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
-      </div>
-    </fieldset>
+    <div class="form-group text-right">
+      <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
+    </div>
   </form>
 
   <style>
