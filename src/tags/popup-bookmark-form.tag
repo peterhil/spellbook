@@ -42,12 +42,12 @@
       color: var(--riot-color);
     }
 
-    .btn:not(:last-child) {
-      margin-right: 0.4rem;
-    }
-
     .form-group:last-child {
       margin-top: 1rem;
+    }
+
+    .btn[type=submit] {
+      padding: .25rem .8rem;
     }
   </style>
 

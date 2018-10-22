@@ -14,11 +14,25 @@
     </div>
 
     <div if="{categories}" class="categories">
-      <select name="category" ref="category" class="form-select form-input">
+      <select name="category" ref="category" class="form-select form-input" tabindex="-1">
         <option value="1">Bookmarks Bar</option>
         <option value="2" selected>Other Bookmarks</option>
         <option each="{categories}" value="{id}">{title}</option>
       </select>
+
+      <div class="dropdown category-dropdown">
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary" tabindex="-1">Categories</a>
+          <a href="#" class="btn btn-primary dropdown-toggle" tabindex="0">
+            <i class="icon icon-caret"></i>
+          </a>
+          <ul class="menu">
+            <li each="{categories}" class="menu-item">
+              <a href="#" data-id="{id}">{title}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
