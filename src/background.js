@@ -38,7 +38,6 @@ chrome.runtime.onConnect.addListener(function(port) {
 })
 
 function onValue (tab) {
-  console.debug('onValue:', tab)
   currentPage = {
     ...tab
   }
