@@ -139,7 +139,7 @@
     }
 
     vm.on('mount', () => {
-      const categorySearch$ = inputEvent$(vm.refs.search)
+      const categorySearch$ = inputEvent$(vm.refs.search, 1)
         .flatMapLatest(bookmarkSearch)  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
 
