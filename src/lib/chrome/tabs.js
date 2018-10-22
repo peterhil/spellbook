@@ -10,9 +10,8 @@
 
 import F from 'fkit'
 import Kefir from 'kefir'
-import { fromEventPattern } from '../util/reactive'
 import { callbackToPromise } from '../util'
-import { withErrorChecking } from './apiHelpers'
+import { chromeEvent$, withErrorChecking } from './apiHelpers'
 
 const currentTabQuery = {
   active: true,
@@ -47,20 +46,11 @@ const getCurrentTab = () => {
   return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
 
-const onActivated$ = fromEventPattern(
-  chrome.tabs.onActivated.addListener.bind(chrome.tabs.onActivated),
-  chrome.tabs.onActivated.removeListener.bind(chrome.tabs.onActivated),
-)
+const onActivated$ = chromeEvent$(chrome.tabs.onActivated)
 
-export const onFocusChanged$ = fromEventPattern(
-  chrome.windows.onFocusChanged.addListener.bind(chrome.windows.onFocusChanged),
-  chrome.windows.onFocusChanged.removeListener.bind(chrome.windows.onFocusChanged),
-)
+const onFocusChanged$ = chromeEvent$(chrome.windows.onFocusChanged)
 
-const onRemoved$ = fromEventPattern(
-  chrome.tabs.onRemoved.addListener.bind(chrome.tabs.onRemoved),
-  chrome.tabs.onRemoved.removeListener.bind(chrome.tabs.onRemoved),
-)
+const onRemoved$ = chromeEvent$(chrome.tabs.onRemoved)
   .map((event) => {
     return {
       id: event[0],
@@ -69,10 +59,7 @@ const onRemoved$ = fromEventPattern(
     }
   })
 
-const onUpdated$ = fromEventPattern(
-  chrome.tabs.onUpdated.addListener.bind(chrome.tabs.onUpdated),
-  chrome.tabs.onUpdated.removeListener.bind(chrome.tabs.onUpdated),
-)
+const onUpdated$ = chromeEvent$(chrome.tabs.onUpdated)
   .map((event) => {
     return {
       id: event[0],

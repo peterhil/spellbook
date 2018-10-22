@@ -6,7 +6,15 @@
 
 /* global chrome */
 
+import { fromEventPattern } from '../util/reactive'
 import F from 'fkit'
+
+export const chromeEvent$ = (eventType) => {
+  return fromEventPattern(
+    eventType.addListener.bind(eventType),
+    eventType.removeListener.bind(eventType),
+  )
+}
 
 export const withErrorChecking = (chromeAsyncFn) => {
   return function wrappedAsyncChromeFn (...args) {
