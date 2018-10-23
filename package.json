@@ -7,7 +7,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "dev": "rollup -cw",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "version": "echo $npm_package_version"
   },
   "dependencies": {
     "fkit": "^1.4.0",
