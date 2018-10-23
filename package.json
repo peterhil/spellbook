@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "rollup -cw",
     "build": "rollup -c",
-    "version": "echo $npm_package_version"
+    "version": "echo $npm_package_version",
+    "test": "ava",
+    "test:watch": "ava --watch"
   },
   "dependencies": {
     "fkit": "^1.4.0",
@@ -19,6 +21,7 @@
     "zepto": "^1.2.0"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "caniuse-lite": "^1.0.3",
     "eslint": "^5.7.0",
     "eslint-config-standard": "^12.0.0",
