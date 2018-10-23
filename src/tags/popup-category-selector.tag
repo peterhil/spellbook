@@ -19,7 +19,10 @@
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu">
       <li class="menu-item" each="{categories}">
-        <a class="category" data-id={id} data-title={title} tabindex="0">{title}</a>
+        <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
+          <div>{title}</div>
+          <bookmark-path bookmark={ asBookmark(id, title, parentId) }></bookmark-path>
+        </a>
       </li>
 
       <li class="divider" data-content="root categories"></li>
@@ -58,16 +61,18 @@
   </style>
 
   <script>
-    import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
-    import { inputEvent$, propertyCompare } from '../lib/util'
+    import './bookmark-path.tag'
     import $ from 'zepto'
     import F from 'fkit'
+    import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
+    import { inputEvent$, propertyCompare } from '../lib/util'
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
     vm.selection = {
       title: null,
       id: null,
+      parentId: null,
     }
 
     vm.isDropdownVisible = () => {
@@ -75,11 +80,16 @@
              (vm.selection && !vm.selection.id)
     }
 
+    vm.asBookmark = (id, title, parentId) => {
+      return { id, title, parentId }
+    }
+
     const init = () => {
       vm.categories = []
       vm.selection = {
         title: null,
         id: null,
+        parentId: null,
       }
       vm.refs.search.focus()
     }
@@ -98,11 +108,12 @@
 
     const onSelection = (event) => {
       const selection = { ...event.target.dataset }
-      console.debug('Category selection:', selection, selection.id, selection.title)
+      console.debug('Category selection:', selection, selection.id, selection.title, selection.parentId)
 
       vm.selection = {
         id: selection.id,
         title: selection.title,
+        parentId: selection.parentId,
       }
 
       $dropdown.removeClass('active')

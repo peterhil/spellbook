@@ -8,7 +8,6 @@
 
 /* global chrome */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../util'
 import { withErrorChecking } from './apiHelpers'
@@ -34,4 +33,39 @@ export function bookmarkSearch (query) {
 
 export function createBookmark (params, callback) {
   chrome.bookmarks.create(params, callback)
+}
+
+export const getBookmark = (...args) => {
+  return callbackToPromise(chrome.bookmarks.get, ...args)
+}
+
+const pathToString = (parents) => {
+  return parents.map(parent => parent.title).join(' < ')
+}
+
+export async function getParents (bookmark) {
+  let parents = []
+  let current = bookmark
+
+  while (isBookmarkNode(current) && current.parentId !== '0') {
+    try {
+      let result = await getBookmark(current.parentId)
+      parents.push(result[0])
+      current = result[0]
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  return parents
+}
+
+export async function getParentPath (bookmark) {
+  let parents = []
+  try {
+    parents = await getParents(bookmark)
+    return pathToString(parents)
+  } catch (err) {
+    console.error(err)
+  }
 }

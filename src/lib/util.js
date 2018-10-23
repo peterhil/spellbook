@@ -6,6 +6,7 @@
 
 // Utility functions
 
+import F from 'fkit'
 import Kefir from 'kefir'
 
 export const isFunction = fn => {
