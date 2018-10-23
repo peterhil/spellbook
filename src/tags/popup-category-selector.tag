@@ -107,8 +107,8 @@
     }
 
     const onSelection = (event) => {
-      const selection = { ...event.target.dataset }
-      console.debug('Category selection:', selection, selection.id, selection.title, selection.parentId)
+      const selection = { ...event.currentTarget.dataset }
+      console.debug('Category selection:', selection.id, selection.title, selection.parentId)
 
       vm.selection = {
         id: selection.id,
