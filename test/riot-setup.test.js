@@ -6,12 +6,9 @@
 
 import riot from '../dist/external/riot+compiler.js'
 import test from 'ava'
-
-let $q = document.querySelector.bind(document)
-let $createElement = document.createElement.bind(document)
+import { $createElement, $q } from './utils/dom'
 
 test.before(t => {
-
   riot.tag2('test-tag', '<p>{ opts.message }</p>')
 })
 
