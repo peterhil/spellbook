@@ -18,6 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use existing bookmark data on the popup if an URL is found on the bookmarks
 
+## [0.3.2] – 2018-10-25 – Translations
+
+### Added
+
+- English and Finnish localizations
+
+**Technical:**
+
+- Started writing a test suite with [Ava](https://github.com/avajs/ava)
+
 ## [0.3.1] – 2018-10-23 – Ancestry
 
 Discern between duplicate categories by showing the parent category paths. Duplicate categories have the same name.
@@ -98,11 +108,13 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/peterhil/spellbook/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/peterhil/spellbook/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/peterhil/spellbook/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/peterhil/spellbook/compare/59dab6c...v0.2.0
 
+[Ava]: https://github.com/avajs/ava
 [Bublé]: https://buble.surge.sh/guide/
 [Element UI]: https://element.eleme.io/#/en-US
 [Kefir.js]: https://kefirjs.github.io/kefir/
