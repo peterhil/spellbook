@@ -6,9 +6,9 @@
    -->
 <popup-category-selector>
 
-  <label for="category">Category</label>
+  <label for="category">{ t('category') }</label>
   <div class="input-group category-search">
-    <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder="Search by typing">
+    <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder={ t('search_placeholder') }>
     <input name="category" required type="hidden" value={selection.id}>
     <a class="clear-search btn btn-primary input-group-btn">
       <i class="icon icon-search" if="{!selection.id}"></i>
@@ -25,16 +25,16 @@
         </a>
       </li>
 
-      <li class="divider" data-content="root categories"></li>
+      <li class="divider" data-content="{ t('root_categories') }"></li>
 
       <li class="menu-item">
         <a class="category" data-id="1" data-title="Bookmarks Bar" tabindex="0">
-          Bookmarks Bar
+          { t('bookmarks_bar') }
         </a>
       </li>
       <li class="menu-item">
         <a class="category" data-id="2" data-title="Other Bookmarks" tabindex="0">
-          Other Bookmarks
+          { t('other_bookmarks') }
         </a>
       </li>
     </ul>
@@ -61,14 +61,16 @@
   </style>
 
   <script>
-    import './bookmark-path.tag'
     import $ from 'zepto'
+    import './bookmark-path.tag'
     import F from 'fkit'
     import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
     import { inputEvent$, propertyCompare } from '../lib/util'
+    import { t } from '../lib/translate'
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
+    vm.t = t
     vm.selection = {
       title: null,
       id: null,

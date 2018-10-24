@@ -3,7 +3,8 @@
   "name": "Spellbook",
   "version": "0.3.1",
 
-  "description": "Use thousands of bookmarks easily",
+  "default_locale": "en",
+  "description": "__MSG_meta_description__",
   "icons": {
     "32": "icon_32.png",
     "64": "icon_64.png"
@@ -25,7 +26,7 @@
         "default": "Ctrl+Shift+D",
         "mac": "MacCtrl+D"
       },
-      "description": "Add to bookmarks"
+      "description": "__MSG_execute_browser_action__"
     }
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",

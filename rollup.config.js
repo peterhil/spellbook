@@ -117,7 +117,8 @@ export default [
         { files: 'src/icon*.png', dest: 'dist' },
         { files: 'src/manifest.json', dest: 'dist' },
         { files: 'src/popup.html', dest: 'dist' },
-        // { files: 'src/tags', dest: 'dist' },
+        { files: 'src/_locales/en/messages.json', dest: 'dist/_locales/en/' },
+        { files: 'src/_locales/fi/messages.json', dest: 'dist/_locales/fi/' },
       ], copyOptions)
     )
   }

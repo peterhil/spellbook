@@ -11,12 +11,12 @@
 
   <form ref="form" model="{opts.bookmark}">
     <div class="form-group">
-      <label for="title">Title</label>
+      <label for="title">{ t('title') }</label>
       <input name="title" ref="title" value="{opts.bookmark.title}" class="form-input">
     </div>
 
     <div class="form-group">
-      <label for="url">Url</label>
+      <label for="url">{ t('url') }</label>
       <div class="input-group">
         <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
         <popup-favicon favicon="{opts.bookmark.favIconUrl}"></popup-favicon>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group text-right">
-      <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
+      <button type="submit" ref="submitButton" class="btn btn-primary">{ t('buttons_add') }</button>
     </div>
   </form>
 
@@ -57,12 +57,14 @@
     import './popup-favicon.tag'
     import { createBookmark } from '../lib/chrome/bookmarks'
     import { events } from '../lib/events'
+    import { t } from '../lib/translate'
     const vm = this
 
+    vm.t = t
     vm.popupHeader = () => {
       return vm.opts.bookmark.saved
-           ? 'Bookmark added'
-           : 'Add bookmark'
+           ? t('saved_bookmark')
+           : t('add_bookmark')
     }
 
     const onSubmit = (event) => {
