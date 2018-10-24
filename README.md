@@ -29,7 +29,21 @@ yarn
 rollup -c
 ```
 
-Then add the `dist` directory as unpacked extension to Chrome or compatible browser.
+Then add the `dist` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
+
+## Development
+
+### Running tests
+
+Run all tests:
+
+`ava` or `yarn test`
+
+Run a single test:
+
+`ava test/riot-setup.test.js`
+
+All commands accept `--verbose`, `-v`, `--watch`, and `-w` flags.
 
 ## Licensing
 
