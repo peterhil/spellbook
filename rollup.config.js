@@ -34,8 +34,11 @@ const plugins = [
     module: true,  // default: true
     jsnext: true,  // default: false
     main: true,  // default: true
-    browser: false,  // default: false
-    modulesOnly: false,  // default: false
+    browser: true,  // default: false
+    modulesOnly: true,  // default: false
+    customResolveOptions: {
+        moduleDirectory: './node_modules/',
+    },
   }),
   eslint({
     exclude: [
@@ -49,6 +52,12 @@ const plugins = [
   }),
   commonjs(),
   buble({
+    target: {
+      chrome: 52,
+    },
+    transforms: {
+      modules: true,
+    },
     objectAssign: 'Object.assign',
   }),
 ]
