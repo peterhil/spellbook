@@ -7,24 +7,27 @@
 import riot from '../dist/external/riot+compiler.js'
 import test from 'ava'
 
+let $q = document.querySelector.bind(document)
+let $createElement = document.createElement.bind(document)
+
 test.before(t => {
+
   riot.tag2('test-tag', '<p>{ opts.message }</p>')
 })
 
 test.after.always(t => {
-  const body = document.querySelector('body')
+  const body = ('body')
   while (body.firstChild) {
     body.removeChild(body.firstChild)
   }
 })
 
 test('Mounting a riot tag should work', t => {
-  document.querySelector('body')
-    .appendChild(document.createElement('test-tag'))
+  $q('body').appendChild($createElement('test-tag'))
 
   riot.mount('test-tag')
 
-  const elem = document.querySelector('test-tag,[data-is="test-tag"] > p')
+  const elem = $q('test-tag > p')
   t.truthy(elem)
 })
 
@@ -32,7 +35,7 @@ test('Mounting a riot tag into body should work', t => {
 
   riot.mount('body', 'test-tag', {message: 'Ciao!'})
 
-  const elem = document.querySelector('test-tag,[data-is="test-tag"] > p')
+  const elem = $q('test-tag,[data-is="test-tag"] > p')
   t.truthy(elem)
   t.is(elem.textContent, 'Ciao!', 'Wrong message')
 })
