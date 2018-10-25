@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import { fromEventPattern } from '../util/reactive'
+import { fromEventPattern } from '../rxjs'
 import F from 'fkit'
 
 export const chromeEvent$ = (eventType) => {

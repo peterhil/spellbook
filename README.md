@@ -55,4 +55,4 @@ file, You can obtain one at [http://mozilla.org/MPL/2.0/](http://mozilla.org/MPL
 
 ### Other licenses
 
-- The [reactive.js](https://github.com/peterhil/spellbook/blob/master/src/lib/util/reactive.js) file implements `fromEventPattern` function from RxJS in Kefir and is licensed under [Apache Software License](http://www.apache.org/licenses/LICENSE-2.0).
+- The [lib/rxjs.js](https://github.com/peterhil/spellbook/blob/master/src/lib/rxjs.js) file implements `fromEventPattern` function from RxJS in Kefir and is licensed under [Apache Software License](http://www.apache.org/licenses/LICENSE-2.0).
