@@ -4,11 +4,11 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<popup-category-selector>
+<sp-category-selector>
 
-  <label for="category">Category</label>
+  <label for="category">{ t('category') }</label>
   <div class="input-group category-search">
-    <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder="Search by typing">
+    <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder={ t('search_placeholder') }>
     <input name="category" required type="hidden" value={selection.id}>
     <a class="clear-search btn btn-primary input-group-btn">
       <i class="icon icon-search" if="{!selection.id}"></i>
@@ -21,20 +21,20 @@
       <li class="menu-item" each="{categories}">
         <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
           <div>{title}</div>
-          <bookmark-path bookmark={ asBookmark(id, title, parentId) }></bookmark-path>
+          <sp-bookmark-path bookmark={ asBookmark(id, title, parentId) }></sp-bookmark-path>
         </a>
       </li>
 
-      <li class="divider" data-content="root categories"></li>
+      <li class="divider" data-content="{ t('root_categories') }"></li>
 
       <li class="menu-item">
         <a class="category" data-id="1" data-title="Bookmarks Bar" tabindex="0">
-          Bookmarks Bar
+          { t('bookmarks_bar') }
         </a>
       </li>
       <li class="menu-item">
         <a class="category" data-id="2" data-title="Other Bookmarks" tabindex="0">
-          Other Bookmarks
+          { t('other_bookmarks') }
         </a>
       </li>
     </ul>
@@ -61,14 +61,17 @@
   </style>
 
   <script>
-    import './bookmark-path.tag'
     import $ from 'zepto'
+    import './sp-bookmark-path.tag'
     import F from 'fkit'
-    import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
-    import { inputEvent$, propertyCompare } from '../lib/util'
+    import { bookmarkSearch, filterCategories } from '../platform/chrome/bookmarks.js'
+    import { propertyCompare } from '../lib/pure'
+    import { inputEvent$ } from '../lib/reactive'
+    import { t } from '../lib/translate'
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
+    vm.t = t
     vm.selection = {
       title: null,
       id: null,
@@ -166,4 +169,4 @@
     vm.on('unmount', removeEvents)
   </script>
 
-</popup-category-selector>
+</sp-category-selector>

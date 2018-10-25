@@ -4,7 +4,7 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<popup-favicon>
+<sp-favicon>
   <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{opts.favicon}" class="form-input">
   <span class={input-group-addon: true, with-icon: opts.favicon}>
     <img class="icon favicon"
@@ -18,7 +18,7 @@
   </span>
 
   <style>
-    popup-favicon {
+    sp-favicon {
       display: contents;
     }
 
@@ -37,4 +37,4 @@
       width: 1rem;
     }
   </style>
-</popup-favicon>
+</sp-favicon>

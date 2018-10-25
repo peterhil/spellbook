@@ -7,14 +7,14 @@
 const riot = require('riot')
 
 import test from 'ava'
-import '../../src/tags/popup-favicon.tag'
+import '../../src/tag/sp-favicon.tag'
 
 test('Render with placeholder icon', t => {
-  const html = riot.render('popup-favicon')
+  const html = riot.render('sp-favicon')
   t.snapshot(html)
 })
 
 test('Render with favicon', t => {
-  const html = riot.render('popup-favicon', {favicon: 'https://en.wikipedia.org/favicon.ico'})
+  const html = riot.render('sp-favicon', {favicon: 'https://en.wikipedia.org/favicon.ico'})
   t.snapshot(html)
 })

@@ -13,11 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-// Reactive utils
-
 import Kefir from 'kefir'
-import { isFunction } from '../util'
+import { isFunction } from './pure'
 
 // Adapted from RxJS function fromEventPattern
 // https://github.com/ReactiveX/rxjs/blob/6.3.2/src/internal/observable/fromEventPattern.ts#L135-L163

@@ -4,31 +4,31 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<popup-bookmark-form>
-  <close-button></close-button>
+<sp-popup-form>
+  <sp-close-button></sp-close-button>
 
   <h1>{ popupHeader() }</h1>
 
   <form ref="form" model="{opts.bookmark}">
     <div class="form-group">
-      <label for="title">Title</label>
+      <label for="title">{ t('title') }</label>
       <input name="title" ref="title" value="{opts.bookmark.title}" class="form-input">
     </div>
 
     <div class="form-group">
-      <label for="url">Url</label>
+      <label for="url">{ t('url') }</label>
       <div class="input-group">
         <input name="url" ref="url" type="url" value="{opts.bookmark.url}" class="form-input">
-        <popup-favicon favicon="{opts.bookmark.favIconUrl}"></popup-favicon>
+        <sp-favicon favicon="{opts.bookmark.favIconUrl}"></sp-favicon>
       </div>
     </div>
 
     <div class="form-group">
-      <popup-category-selector category="{opts.bookmark.category}"></popup-category-selector>
+      <sp-category-selector category="{opts.bookmark.category}"></sp-category-selector>
     </div>
 
     <div class="form-group text-right">
-      <button type="submit" ref="submitButton" class="btn btn-primary">Add</button>
+      <button type="submit" ref="submitButton" class="btn btn-primary">{ t('buttons_add') }</button>
     </div>
   </form>
 
@@ -52,17 +52,19 @@
   </style>
 
   <script>
-    import './close-button.tag'
-    import './popup-category-selector.tag'
-    import './popup-favicon.tag'
-    import { createBookmark } from '../lib/chrome/bookmarks'
+    import '../tag/sp-category-selector.tag'
+    import '../tag/sp-close-button.tag'
+    import '../tag/sp-favicon.tag'
+    import { createBookmark } from '../platform/chrome/bookmarks'
     import { events } from '../lib/events'
+    import { t } from '../lib/translate'
     const vm = this
 
+    vm.t = t
     vm.popupHeader = () => {
       return vm.opts.bookmark.saved
-           ? 'Bookmark added'
-           : 'Add bookmark'
+           ? t('saved_bookmark')
+           : t('add_bookmark')
     }
 
     const onSubmit = (event) => {
@@ -103,4 +105,4 @@
     vm.on('unmount', removeEvents)
   </script>
 
-</popup-bookmark-form>
+</sp-popup-form>
