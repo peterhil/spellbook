@@ -11,7 +11,7 @@
 import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../util'
-import { chromeEvent$, withErrorChecking } from './apiHelpers'
+import { chromeEvent$, withErrorChecking } from './helpers'
 
 const currentTabQuery = {
   active: true,

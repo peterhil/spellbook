@@ -10,7 +10,7 @@
 
 import Kefir from 'kefir'
 import { callbackToPromise } from '../util'
-import { withErrorChecking } from './apiHelpers'
+import { withErrorChecking } from './helpers'
 
 export function isCategory (bookmark) {
   return !bookmark.hasOwnProperty('url')
