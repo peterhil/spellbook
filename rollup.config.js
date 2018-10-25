@@ -90,9 +90,9 @@ export default [
     plugins: plugins
   },
   {
-    input: 'src/background.js',
+    input: 'src/background/background.js',
     output: {
-      file: 'dist/background.js',
+      file: 'dist/background/background.js',
       format: outputFormat,
       sourcemap: true,
       globals: {
@@ -113,7 +113,7 @@ export default [
         { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
         { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
-        { files: 'src/background.html', dest: 'dist' },
+        { files: 'src/background/background.html', dest: 'dist/background' },
         { files: 'src/asset/icon*.png', dest: 'dist/asset' },
         { files: 'src/manifest.json', dest: 'dist' },
         { files: 'src/popup.html', dest: 'dist' },

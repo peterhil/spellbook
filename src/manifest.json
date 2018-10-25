@@ -18,7 +18,7 @@
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
   "background": {
     "persistent": true,
-    "page": "background.html"
+    "page": "background/background.html"
   },
   "commands": {
     "_execute_browser_action": {
