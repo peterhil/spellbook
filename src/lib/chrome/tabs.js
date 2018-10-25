@@ -10,7 +10,7 @@
 
 import F from 'fkit'
 import Kefir from 'kefir'
-import { callbackToPromise } from '../util'
+import { callbackToPromise } from '../reactive'
 import { chromeEvent$, withErrorChecking } from './helpers'
 
 const currentTabQuery = {

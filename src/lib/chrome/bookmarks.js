@@ -9,7 +9,7 @@
 /* global chrome */
 
 import Kefir from 'kefir'
-import { callbackToPromise } from '../util'
+import { callbackToPromise } from '../reactive'
 import { withErrorChecking } from './helpers'
 
 export function isCategory (bookmark) {

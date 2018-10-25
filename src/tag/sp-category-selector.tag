@@ -65,7 +65,8 @@
     import './sp-bookmark-path.tag'
     import F from 'fkit'
     import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
-    import { inputEvent$, propertyCompare } from '../lib/util'
+    import { propertyCompare } from '../lib/pure'
+    import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
     const vm = this
     var $dropdown = $('.categories .dropdown')
