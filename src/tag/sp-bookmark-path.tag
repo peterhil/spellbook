@@ -10,7 +10,7 @@
   </div>
 
   <script>
-    import { getParentPath } from '../lib/chrome/bookmarks.js'
+    import { getParentPath } from '../platform/chrome/bookmarks.js'
     const vm = this
 
     vm.on('mount', () => {

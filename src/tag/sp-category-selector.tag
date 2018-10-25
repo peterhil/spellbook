@@ -64,7 +64,7 @@
     import $ from 'zepto'
     import './sp-bookmark-path.tag'
     import F from 'fkit'
-    import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
+    import { bookmarkSearch, filterCategories } from '../platform/chrome/bookmarks.js'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'

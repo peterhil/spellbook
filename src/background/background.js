@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import { closedTab$, closedWindow$, currentTab$ } from '../lib/chrome/tabs'
+import { closedTab$, closedWindow$, currentTab$ } from '../platform/chrome/tabs'
 import { disconnectionHandler } from '../lib/messaging'
 
 var currentPage = {
