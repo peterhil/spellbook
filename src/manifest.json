@@ -6,12 +6,12 @@
   "default_locale": "en",
   "description": "__MSG_meta_description__",
   "icons": {
-    "32": "icon_32.png",
-    "64": "icon_64.png"
+    "32": "asset/icon_32.png",
+    "64": "asset/icon_64.png"
   },
 
   "browser_action": {
-    "default_icon": "icon_32.png",
+    "default_icon": "asset/icon_32.png",
     "default_popup": "popup.html"
   },
 
