@@ -69,9 +69,9 @@ const copyOptions = {
 
 export default [
   {
-    input: 'src/popup.js',
+    input: 'src/popup/popup.js',
     output: {
-      file: 'dist/popup.js',
+      file: 'dist/popup/popup.js',
       format: outputFormat,
       sourcemap: true,
       globals: {
@@ -106,19 +106,19 @@ export default [
     ],
     plugins: plugins.push(
       copy([
-        { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
         { files: 'node_modules/fkit/dist/fkit.js', dest: 'dist/external' },
+        { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
         { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
-        { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
+        { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
         { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
-        { files: 'src/background/background.html', dest: 'dist/background' },
-        { files: 'src/asset/icon*.png', dest: 'dist/asset' },
-        { files: 'src/manifest.json', dest: 'dist' },
-        { files: 'src/popup.html', dest: 'dist' },
         { files: 'src/_locales/en/messages.json', dest: 'dist/_locales/en/' },
         { files: 'src/_locales/fi/messages.json', dest: 'dist/_locales/fi/' },
+        { files: 'src/asset/icon*.png', dest: 'dist/asset' },
+        { files: 'src/background/background.html', dest: 'dist/background' },
+        { files: 'src/manifest.json', dest: 'dist' },
+        { files: 'src/popup/popup.html', dest: 'dist/popup' },
       ], copyOptions)
     )
   }

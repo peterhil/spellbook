@@ -10,8 +10,8 @@ import riot from 'riot'
 import Kefir from 'kefir'
 
 import './popup.sass'
-import './tags/popup.tag'
-import { disconnectionHandler } from './lib/messaging'
+import './sp-popup.tag'
+import { disconnectionHandler } from '../lib/messaging'
 
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 var messages = riot.observable()
@@ -31,7 +31,7 @@ const messageHandler = function (response) {
 }
 
 function onPopup (event) {
-  riot.mount('popup', { messages })
+  riot.mount('sp-popup', { messages })
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)

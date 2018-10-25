@@ -4,7 +4,7 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<popup-category-selector>
+<sp-category-selector>
 
   <label for="category">{ t('category') }</label>
   <div class="input-group category-search">
@@ -21,7 +21,7 @@
       <li class="menu-item" each="{categories}">
         <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
           <div>{title}</div>
-          <bookmark-path bookmark={ asBookmark(id, title, parentId) }></bookmark-path>
+          <sp-bookmark-path bookmark={ asBookmark(id, title, parentId) }></sp-bookmark-path>
         </a>
       </li>
 
@@ -62,7 +62,7 @@
 
   <script>
     import $ from 'zepto'
-    import './bookmark-path.tag'
+    import './sp-bookmark-path.tag'
     import F from 'fkit'
     import { bookmarkSearch, filterCategories } from '../lib/chrome/bookmarks.js'
     import { inputEvent$, propertyCompare } from '../lib/util'
@@ -168,4 +168,4 @@
     vm.on('unmount', removeEvents)
   </script>
 
-</popup-category-selector>
+</sp-category-selector>

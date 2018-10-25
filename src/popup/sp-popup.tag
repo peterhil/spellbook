@@ -4,11 +4,11 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<popup>
-  <popup-bookmark-form bookmark="{bookmark}"></popup-bookmark-form>
+<sp-popup>
+  <sp-popup-form bookmark="{bookmark}"></sp-popup-form>
 
   <script>
-    import './popup-bookmark-form.tag'
+    import './sp-popup-form.tag'
     const vm = this
 
     vm.bookmark = {
@@ -32,4 +32,4 @@
       vm.opts.messages.off('currentTabInfo', onTabUpdate)
     })
   </script>
-</popup>
+</sp-popup>

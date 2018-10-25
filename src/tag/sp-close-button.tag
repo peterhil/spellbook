@@ -4,7 +4,7 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
-<close-button>
+<sp-close-button>
   <a ref="closeButton" class="btn btn-action btn-close btn-sm float-right">
     <i class="icon icon-cross"></i>
   </a>
@@ -35,4 +35,4 @@
       events.remove(vm.refs.closeButton, 'click', onClose)
     })
   </script>
-</close-button>
+</sp-close-button>
