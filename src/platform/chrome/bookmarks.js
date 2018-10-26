@@ -6,18 +6,40 @@
 
 // Chrome bookmarks
 
-/* global chrome */
+/* global browser, chrome */
 
+import $ from 'zepto'
+import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from './helpers'
 
+const parentIdProperty = $.browser.firefox
+      ? 'parentGuid'
+      : 'parentId'
+
+const rootCategoryId = $.browser.firefox
+      ? 'root________'
+      : '0'
+
+export const bookmarksBarCategoryId = $.browser.firefox
+      ? 'toolbar_____'
+      : '1'
+
+export const otherCategoryId = $.browser.firefox
+      ? 'unfiled_____'
+      : '2'
+
+export const menuCategoryId = $.browser.firefox
+      ? 'menu________'
+      : null
+
 export function isCategory (bookmark) {
-  return !bookmark.hasOwnProperty('url')
+  return !F.get('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export function isBookmarkNode (bookmark) {
-  return bookmark && bookmark.hasOwnProperty('parentId')
+  return !!F.get(parentIdProperty, bookmark)
 }
 
 export function filterCategories (bookmarks) {
@@ -25,10 +47,16 @@ export function filterCategories (bookmarks) {
 }
 
 export function bookmarkSearch (query) {
-  return Kefir.fromPromise(callbackToPromise(
-    withErrorChecking(chrome.bookmarks.search),
-    { query: query }
-  ))
+  if ($.browser.chrome) {
+    return Kefir.fromPromise(callbackToPromise(
+      withErrorChecking(chrome.bookmarks.search),
+      { query: query }
+    ))
+  } else if ($.browser.firefox) {
+    return Kefir.fromPromise(browser.bookmarks.search({ query: query }))
+  } else {
+    Kefir.constantError(new Error('Bookmark search not implemented for this browser: ' + navigator.userAgent))
+  }
 }
 
 export function createBookmark (params, callback) {
@@ -36,7 +64,13 @@ export function createBookmark (params, callback) {
 }
 
 export const getBookmark = (...args) => {
-  return callbackToPromise(chrome.bookmarks.get, ...args)
+  if ($.browser.chrome) {
+    return callbackToPromise(chrome.bookmarks.get, ...args)
+  } else if ($.browser.firefox) {
+    return browser.bookmarks.get(...args)
+  } else {
+    Kefir.constantError(new Error('Not implemented'))
+  }
 }
 
 const pathToString = (parents) => {
@@ -47,9 +81,9 @@ export async function getParents (bookmark) {
   let parents = []
   let current = bookmark
 
-  while (isBookmarkNode(current) && current.parentId !== '0') {
+  while (isBookmarkNode(current) && current[parentIdProperty] !== rootCategoryId) {
     try {
-      let result = await getBookmark(current.parentId)
+      let result = await getBookmark(current[parentIdProperty])
       parents.push(result[0])
       current = result[0]
     } catch (err) {
