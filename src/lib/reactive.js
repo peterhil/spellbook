@@ -18,7 +18,7 @@ export function callbackToPromise (fn, ...args) {
   })
 }
 
-export function inputEvent$ (element, minLength = 2, debounceTime = 250) {
+export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = { minLength: 2, debounceTime: 250 }) {
   return Kefir
     .fromEvents(element, 'input')
     .map(event => event.target.value)
