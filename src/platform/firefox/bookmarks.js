@@ -4,20 +4,15 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
+/* global browser */
 
 import F from 'fkit'
 import Kefir from 'kefir'
-import { callbackToPromise } from '../../lib/reactive'
-import { withErrorChecking } from './helpers'
 
 export function bookmarkSearch (query) {
-  return Kefir.fromPromise(callbackToPromise(
-    withErrorChecking(chrome.bookmarks.search),
-    { query: query }
-  ))
+  return Kefir.fromPromise(browser.bookmarks.search({ query: query }))
 }
 
 export const getBookmark = (...args) => {
-  return callbackToPromise(chrome.bookmarks.get, ...args)
+  return browser.bookmarks.get(...args)
 }

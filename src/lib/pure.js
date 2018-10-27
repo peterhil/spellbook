@@ -12,6 +12,10 @@ export const isFunction = fn => {
   return typeof fn === 'function'
 }
 
+export const strategy = F.curry((selection, options) => {
+  return options[selection] || options['default']
+})
+
 //
 // Use propertyComparator with F.sortBy or similar sort function like this:
 // F.sortBy(propertyCompare('title'), list)

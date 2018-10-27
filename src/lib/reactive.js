@@ -26,3 +26,7 @@ export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = { 
     .debounce(debounceTime)
     .skipDuplicates()
 }
+
+export const notImplemented$ = () => {
+  Kefir.constantError(new Error('Not implemented'))
+}
