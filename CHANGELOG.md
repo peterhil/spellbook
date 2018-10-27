@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Russian localisation
 - Add a new subcategory from the popup
 - Edit existing bookmark
 - Remove existing bookmark
@@ -29,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- English and Finnish localizations
+- English and Finnish localisations
 
 **Technical:**
 
