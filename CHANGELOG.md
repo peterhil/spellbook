@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use existing bookmark data on the popup if an URL is found on the bookmarks
 
+## [0.3.3] – 2018-10-27 – Firefox support
+
+### Added
+
+- Support for Firefox
+- Show message when no categories match the search
+
 ## [0.3.2] – 2018-10-25 – Translations
 
 ### Added
@@ -108,7 +115,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.3...HEAD
+[0.3.3]: https://github.com/peterhil/spellbook/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/peterhil/spellbook/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/peterhil/spellbook/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/peterhil/spellbook/compare/v0.2.0...v0.3.0
