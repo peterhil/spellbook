@@ -28,17 +28,21 @@
       <li class="divider" data-content="{ t('root_categories') }"></li>
 
       <li class="menu-item">
-        <a class="category" data-id="1" data-title="Bookmarks Bar" tabindex="0">
+        <a class="category" data-id="{ bookmarksBarCategoryId }" data-title="Bookmarks Bar" tabindex="0">
           { t('bookmarks_bar') }
         </a>
       </li>
       <li class="menu-item">
-        <a class="category" data-id="2" data-title="Other Bookmarks" tabindex="0">
+        <a class="category" data-id="{ otherCategoryId }" data-title="Other Bookmarks" tabindex="0">
           { t('other_bookmarks') }
         </a>
       </li>
     </ul>
   </div>
+
+  <small if="{ noCategoryResults() }">
+    No categories found
+  </small>
 
   <style>
     .categories {
@@ -64,23 +68,28 @@
     import $ from 'zepto'
     import './sp-bookmark-path.tag'
     import F from 'fkit'
-    import { bookmarkSearch, filterCategories } from '../platform/chrome/bookmarks.js'
+    import { bookmarkSearch, filterCategories, bookmarksBarCategoryId, otherCategoryId } from '../platform/common/bookmarks.js'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
+    vm.bookmarksBarCategoryId = bookmarksBarCategoryId
+    vm.otherCategoryId = otherCategoryId
+    vm.selection = { title: null, id: null, parentId: null }
     vm.t = t
-    vm.selection = {
-      title: null,
-      id: null,
-      parentId: null,
+
+    vm.isSearchActive = () => {
+      return !F.empty(vm.refs.search.value)
     }
 
     vm.isDropdownVisible = () => {
-      return (vm.categories && vm.categories.length > 0) &&
-             (vm.selection && !vm.selection.id)
+      return vm.isSearchActive() && !F.empty(vm.categories) && !F.get('id', vm.selection)
+    }
+
+    vm.noCategoryResults = () => {
+      return vm.isSearchActive() && F.empty(vm.categories)
     }
 
     vm.asBookmark = (id, title, parentId) => {
@@ -100,6 +109,10 @@
     const clearSelection = (event) => {
       init()
       vm.update()
+    }
+
+    const onClearSelection = (event) => {
+      clearSelection()
       event.preventDefault()
     }
 
@@ -136,31 +149,37 @@
       if (!vm.selection.id) {
         return false
       }
-      clearSelection(event)
+      onClearSelection(event)
     }
 
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
       $(vm.refs.search).on('focus', renewSearch)
-      $('.category-search').on('click', '.clear-search', clearSelection)
+      $('.category-search').on('click', '.clear-search', onClearSelection)
     }
 
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
       $(vm.refs.search).off('focus', renewSearch)
-      $('.category-search').off('click', '.clear-search', clearSelection)
+      $('.category-search').off('click', '.clear-search', onClearSelection)
     }
 
     vm.on('mount', () => {
-      const categorySearch$ = inputEvent$(vm.refs.search, 1)
+      const categorySearch$ = inputEvent$(vm.refs.search, { minLength: 1 })
         .flatMapLatest(bookmarkSearch)  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
         .map(F.sortBy(propertyCompare('title', false)))
 
       categorySearch$
         .observe(updateCategories, console.error)
+
+      const emptySearch$ = inputEvent$(vm.refs.search, { minLength: 0 })
+        .filter(search => search.length <= 1)
+
+      emptySearch$
+        .observe(clearSelection, console.error)
 
       init()
       addEvents()

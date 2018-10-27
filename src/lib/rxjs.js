@@ -35,7 +35,7 @@ export function fromEventPattern (addHandler, removeHandler) {
       return
     }
 
-    if(!isFunction(removeHandler)) {
+    if (!isFunction(removeHandler)) {
       return
     }
 

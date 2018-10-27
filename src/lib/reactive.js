@@ -18,11 +18,15 @@ export function callbackToPromise (fn, ...args) {
   })
 }
 
-export function inputEvent$ (element, minLength = 2, debounceTime = 250) {
+export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = { minLength: 2, debounceTime: 250 }) {
   return Kefir
     .fromEvents(element, 'input')
     .map(event => event.target.value)
-    .filter(query => query && query.length >= minLength)
+    .filter(query => query.length >= minLength)
     .debounce(debounceTime)
     .skipDuplicates()
+}
+
+export const notImplemented$ = () => {
+  Kefir.constantError(new Error('Not implemented'))
 }

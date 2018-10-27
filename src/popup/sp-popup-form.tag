@@ -55,7 +55,7 @@
     import '../tag/sp-category-selector.tag'
     import '../tag/sp-close-button.tag'
     import '../tag/sp-favicon.tag'
-    import { createBookmark } from '../platform/chrome/bookmarks'
+    import { createBookmark } from '../platform/common/bookmarks'
     import { events } from '../lib/events'
     import { t } from '../lib/translate'
     const vm = this

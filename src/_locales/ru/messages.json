@@ -1,0 +1,15 @@
+{
+  "add_bookmark": { "message": "Добавить в закладки" },
+  "bookmarks_bar": { "message": "Панель закладок" },
+  "buttons_add": { "message": "Добавить" },
+  "category": { "message": "Категория" },
+  "edit_bookmark":  { "message": "Изменить закладку" },
+  "execute_browser_action": { "message": "Добавить в закладки" },
+  "meta_description": { "message": "Используйте тысячи закладок с лёгкостью" },
+  "other_bookmarks": { "message": "Другие закладки" },
+  "root_categories": { "message": "корневые категории" },
+  "saved_bookmark":  { "message": "Закладка сохранена" },
+  "search_placeholder": { "message": "Введите поисковый запрос" },
+  "title": { "message": "Название" },
+  "url": { "message": "Ссылка" }
+}
