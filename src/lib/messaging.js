@@ -18,3 +18,11 @@ export function disconnectionHandler (port) {
     console.log('Other end disconnected - wonder why?')
   }
 }
+
+export const sendMessage = F.curry((port, type, data) => {
+  port.postMessage({ type, data })
+})
+
+export const unhandledMessage = (response) => {
+  console.warn('Unhandled message:', response)
+}

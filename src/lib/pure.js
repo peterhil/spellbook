@@ -12,7 +12,7 @@ export const isFunction = fn => {
   return typeof fn === 'function'
 }
 
-export const strategy = F.curry((selection, options) => {
+export const choice = F.curry((selection, options) => {
   return options[selection] || options['default']
 })
 

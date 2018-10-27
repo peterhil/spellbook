@@ -6,8 +6,9 @@
 
 /* global chrome */
 
+import { choice } from '../lib/pure'
 import { closedTab$, closedWindow$, currentTab$ } from '../platform/chrome/tabs'
-import { disconnectionHandler } from '../lib/messaging'
+import { disconnectionHandler, sendMessage, unhandledMessage } from '../lib/messaging'
 
 var currentPage = {
   title: '',
@@ -22,13 +23,12 @@ const messageHandler = function(port) {
     console.log('Connected with:', port.name)
     console.debug('Background got message:', response.type, response.data, response)
 
-    switch (response.type) {
-    case 'popupOpen':
-      port.postMessage({ type: 'currentTabInfo', data: currentPage })
-      break
-    default:
-      console.warn('Unhandled message:', response)
-    }
+    const action = choice(response.type, {
+      popupOpen: () => sendMessage(port, 'currentTabInfo', currentPage),
+      default: unhandledMessage,
+    })
+
+    action(response)
   }
 }
 

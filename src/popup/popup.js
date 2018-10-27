@@ -11,23 +11,24 @@ import Kefir from 'kefir'
 
 import './popup.sass'
 import './sp-popup.tag'
-import { disconnectionHandler } from '../lib/messaging'
+import { choice } from '../lib/pure'
+import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
 
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 var messages = riot.observable()
 
 const messageHandler = function (response) {
-  console.log('Popup got message:', response.type, response.data, response)
+  console.debug('Popup got message:', response.type, response.data, response)
 
-  switch (response.type) {
-  case 'currentTabInfo':
-    // Update the form
-    console.log('messageHandler: Current tab changed', response.data)
-    messages.trigger(response.type, response.data)
-    break
-  default:
-    console.warn('Unhandled message:', response)
-  }
+  const action = choice(response.type, {
+    currentTabInfo: () => {
+      console.debug('messageHandler: Current tab changed', response.data)
+      messages.trigger(response.type, response.data)
+    },
+    default: unhandledMessage,
+  })
+
+  action(response)
 }
 
 function onPopup (event) {

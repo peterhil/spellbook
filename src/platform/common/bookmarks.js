@@ -11,7 +11,7 @@ import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
 import F from 'fkit'
 import { notImplemented$ } from '../../lib/reactive'
-import { strategy } from '../../lib/pure'
+import { choice } from '../../lib/pure'
 
 const platform = (
   $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
@@ -49,7 +49,7 @@ export function filterCategories (bookmarks) {
   return bookmarks.filter(isCategory)
 }
 
-export const bookmarkSearch = strategy(platform, {
+export const bookmarkSearch = choice(platform, {
   chrome: chromeBookmarks.bookmarkSearch,
   firefox: firefoxBookmarks.bookmarkSearch,
   default: notImplemented$,
@@ -59,7 +59,7 @@ export function createBookmark (params, callback) {
   chrome.bookmarks.create(params, callback)
 }
 
-export const getBookmark = strategy(platform, {
+export const getBookmark = choice(platform, {
   chrome: chromeBookmarks.getBookmark,
   firefox: firefoxBookmarks.getBookmark,
   default: notImplemented$,
