@@ -5,15 +5,15 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-favicon>
-  <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{opts.favicon}" class="form-input">
-  <span class={input-group-addon: true, with-icon: opts.favicon}>
+  <input name="favIconUrl" ref="favIconUrl" type="hidden" value="{ opts.favicon }" class="form-input">
+  <span class={ input-group-addon: true, with-icon: opts.favicon }>
     <img class="icon favicon"
-      if="{opts.favicon}"
-      src="{opts.favicon}"
-      alt="{opts.favicon}"
-      title="{opts.favicon}">
+      if="{ opts.favicon }"
+      src="{ opts.favicon }"
+      alt="{ opts.favicon }"
+      title="{ opts.favicon }">
     <i class="icon icon-bookmark"
-      if="{!opts.favicon}">
+      if="{ !opts.favicon }">
     </i>
   </span>
 

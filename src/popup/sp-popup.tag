@@ -5,7 +5,7 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-popup>
-  <sp-popup-form bookmark="{bookmark}"></sp-popup-form>
+  <sp-popup-form bookmark="{ bookmark }"></sp-popup-form>
 
   <script>
     import './sp-popup-form.tag'
