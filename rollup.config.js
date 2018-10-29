@@ -98,11 +98,13 @@ export default [
       globals: {
         'kefir': 'Kefir',
         'fkit': 'F',
+        'zepto': '$',
       },
     },
     external: [
       'kefir',
       'fkit',
+      'zepto',
     ],
     plugins: plugins.push(
       copy([
