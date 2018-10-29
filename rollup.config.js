@@ -119,7 +119,7 @@ export default [
       copy({
         files: [
           '_locales/**/*.json',
-          'asset',
+          'asset/icon*.png',
           'background/background.html',
           'manifest.json',
           'popup/popup.html',
