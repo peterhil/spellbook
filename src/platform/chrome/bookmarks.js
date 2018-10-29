@@ -6,7 +6,6 @@
 
 /* global chrome */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from './helpers'

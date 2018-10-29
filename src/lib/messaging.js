@@ -6,6 +6,8 @@
 
 /* global chrome */
 
+import F from 'fkit'
+
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {
     console.error('Connection error:', chrome.runtime.lastError)

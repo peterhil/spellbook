@@ -6,7 +6,6 @@
 
 /* global browser */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 
 export function bookmarkSearch (query) {
