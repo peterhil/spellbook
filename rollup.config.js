@@ -2,7 +2,7 @@
 
 import buble from 'rollup-plugin-buble'
 import commonjs from 'rollup-plugin-commonjs'
-import copy from 'rollup-plugin-copy-glob'
+import copy from 'rollup-plugin-cpy'
 import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'postcss'
 import postcssCssnext from 'postcss-cssnext'
@@ -62,9 +62,9 @@ const plugins = [
   }),
 ]
 const copyOptions = {
+  cwd: 'src',
+  parents: true,
   verbose: true,
-  watch: true,
-  exclude: '**/*.tag'
 }
 
 export default [
@@ -113,14 +113,18 @@ export default [
         { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
         { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
         { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
-        { files: 'src/_locales/en/messages.json', dest: 'dist/_locales/en/' },
-        { files: 'src/_locales/fi/messages.json', dest: 'dist/_locales/fi/' },
-        { files: 'src/_locales/ru/messages.json', dest: 'dist/_locales/ru/' },
-        { files: 'src/asset/icon*.png', dest: 'dist/asset' },
-        { files: 'src/background/background.html', dest: 'dist/background' },
-        { files: 'src/manifest.json', dest: 'dist' },
-        { files: 'src/popup/popup.html', dest: 'dist/popup' },
-      ], copyOptions)
+      ], copyOptions),
+      copy({
+        files: [
+          '_locales/**/*.json',
+          'asset',
+          'background/background.html',
+          'manifest.json',
+          'popup/popup.html',
+        ],
+        dest: '../dist',
+        options: copyOptions,
+      }),
     )
   }
 ]
