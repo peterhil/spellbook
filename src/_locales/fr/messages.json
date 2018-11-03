@@ -1,0 +1,15 @@
+{
+  "add_bookmark": { "message": "Ajouter un favori" },
+  "bookmarks_bar": { "message": "Barre de favoris" },
+  "buttons_add": { "message": "Ajouter" },
+  "category": { "message": "Catégorie" },
+  "edit_bookmark":  { "message": "Modifier le favori" },
+  "execute_browser_action": { "message": "Ajouter aux favoris" },
+  "meta_description": { "message": "Utilisez un millier de favoris facilement" },
+  "other_bookmarks": { "message": "Autres favoris" },
+  "root_categories": { "message": "catégories racines" },
+  "saved_bookmark":  { "message": "Favori sauvegardé" },
+  "search_placeholder": { "message": "Tapez pour cherchert" },
+  "title": { "message": "Titre" },
+  "url": { "message": "Url" }
+}
