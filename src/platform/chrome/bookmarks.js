@@ -10,10 +10,10 @@ import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from './helpers'
 
-export function bookmarkSearch (query) {
+export function bookmarkSearch (queryObject) {
   return Kefir.fromPromise(callbackToPromise(
     withErrorChecking(chrome.bookmarks.search),
-    { query: query }
+    queryObject
   ))
 }
 

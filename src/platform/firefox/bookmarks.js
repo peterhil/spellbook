@@ -8,8 +8,8 @@
 
 import Kefir from 'kefir'
 
-export function bookmarkSearch (query) {
-  return Kefir.fromPromise(browser.bookmarks.search({ query: query }))
+export function bookmarkSearch (queryObject) {
+  return Kefir.fromPromise(browser.bookmarks.search(queryObject))
 }
 
 export const getBookmark = (...args) => {
