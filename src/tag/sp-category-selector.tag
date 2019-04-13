@@ -17,7 +17,7 @@
   </div>
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
-    <ul class="menu" aria-role="menu">
+    <ul class="menu" aria-role="menu" tabindex="-1">
       <li class="menu-item" each="{categories}">
         <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
           <div>{title}</div>
