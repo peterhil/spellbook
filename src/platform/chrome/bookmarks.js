@@ -9,7 +9,7 @@
 import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
-import { withErrorChecking } from './helpers'
+import { withErrorChecking } from '../common/helpers'
 
 export function bookmarkSearch (query) {
   return Kefir.fromPromise(callbackToPromise(
