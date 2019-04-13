@@ -115,6 +115,7 @@ export default [
         { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
         { files: 'src/_locales/en/messages.json', dest: 'dist/_locales/en/' },
         { files: 'src/_locales/fi/messages.json', dest: 'dist/_locales/fi/' },
+        { files: 'src/_locales/fr/messages.json', dest: 'dist/_locales/fr/' },
         { files: 'src/_locales/ru/messages.json', dest: 'dist/_locales/ru/' },
         { files: 'src/asset/icon*.png', dest: 'dist/asset' },
         { files: 'src/background/background.html', dest: 'dist/background' },
