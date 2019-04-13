@@ -9,6 +9,7 @@
   "other_bookmarks": { "message": "Other Bookmarks" },
   "root_categories": { "message": "root categories" },
   "saved_bookmark":  { "message": "Bookmark saved" },
+  "search": { "message": "Search" },
   "search_placeholder": { "message": "Search by typing" },
   "title": { "message": "Title" },
   "url": { "message": "Url" }

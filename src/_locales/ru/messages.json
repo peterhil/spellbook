@@ -9,6 +9,7 @@
   "other_bookmarks": { "message": "Другие закладки" },
   "root_categories": { "message": "корневые категории" },
   "saved_bookmark":  { "message": "Закладка сохранена" },
+  "search": { "message": "Поиск" },
   "search_placeholder": { "message": "Введите поисковый запрос" },
   "title": { "message": "Название" },
   "url": { "message": "Ссылка" }
