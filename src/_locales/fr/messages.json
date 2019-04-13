@@ -9,6 +9,7 @@
   "other_bookmarks": { "message": "Autres favoris" },
   "root_categories": { "message": "catégories racines" },
   "saved_bookmark":  { "message": "Favori sauvegardé" },
+  "search": { "message": "Recherché" },
   "search_placeholder": { "message": "Tapez pour cherchert" },
   "title": { "message": "Titre" },
   "url": { "message": "Url" }
