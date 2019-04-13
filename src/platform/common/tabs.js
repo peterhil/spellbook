@@ -11,7 +11,7 @@
 import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
-import { chromeEvent$, withErrorChecking } from './helpers'
+import { browserEvent$, withErrorChecking } from './helpers'
 
 const currentTabQuery = {
   active: true,
@@ -52,11 +52,11 @@ const getCurrentTab = () => {
   return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
 
-const onActivated$ = chromeEvent$(chrome.tabs.onActivated)
+const onActivated$ = browserEvent$(chrome.tabs.onActivated)
 
-const onFocusChanged$ = chromeEvent$(chrome.windows.onFocusChanged)
+const onFocusChanged$ = browserEvent$(chrome.windows.onFocusChanged)
 
-const onRemoved$ = chromeEvent$(chrome.tabs.onRemoved)
+const onRemoved$ = browserEvent$(chrome.tabs.onRemoved)
   .map((event) => {
     return {
       id: event[0],
@@ -65,7 +65,7 @@ const onRemoved$ = chromeEvent$(chrome.tabs.onRemoved)
     }
   })
 
-const onUpdated$ = chromeEvent$(chrome.tabs.onUpdated)
+const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
   .map((event) => {
     return {
       id: event[0],
