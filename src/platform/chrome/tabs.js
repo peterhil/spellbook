@@ -45,6 +45,7 @@ const getTab = (id) => {
 const getActiveTabOnWindow = (windowId) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.query), {windowId, active: true}))
     .map(F.head)
+    .filter()
 }
 
 const getCurrentTab = () => {
