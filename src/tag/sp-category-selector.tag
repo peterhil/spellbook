@@ -55,8 +55,7 @@
     }
 
     .dropdown.active .menu,
-    .dropdown .dropdown-toggle:focus + .menu,
-    .dropdown .menu:hover {
+    .dropdown .dropdown-toggle:focus + .menu {
       display: block;
       position: relative;
       white-space: nowrap;
