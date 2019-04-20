@@ -17,7 +17,7 @@ const platform = (
   $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
 )
 
-const parentIdProperty = $.browser.firefox
+const parentIdProperty = ($.browser.firefox && $.browser.version < 64)
       ? 'parentGuid'
       : 'parentId'
 
@@ -88,10 +88,12 @@ export async function getParents (bookmark) {
 
 export async function getParentPath (bookmark) {
   let parents = []
+
   try {
     parents = await getParents(bookmark)
-    return pathToString(parents)
   } catch (err) {
     console.error(err)
   }
+
+  return pathToString(parents)
 }

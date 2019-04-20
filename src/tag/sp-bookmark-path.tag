@@ -9,6 +9,13 @@
     <small>{ path }</small>
   </div>
 
+  <style>
+    .bookmark-path {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+
   <script>
     import { getParentPath } from '../platform/common/bookmarks.js'
     const vm = this

@@ -7,17 +7,18 @@
 <sp-category-selector>
 
   <label for="category">{ t('category') }</label>
+  <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
   <div class="input-group category-search">
     <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder={ t('search_placeholder') }>
     <input name="category" required type="hidden" value={selection.id}>
     <a class="clear-search btn btn-primary input-group-btn">
-      <i class="icon icon-search" if="{!selection.id}"></i>
-      <i class="icon icon-cross" if="{selection.id}"></i>
+      <i class="icon icon-search" if="{ !lastSearch }"></i>
+      <i class="icon icon-cross" if="{ lastSearch }"></i>
     </a>
   </div>
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
-    <ul class="menu" aria-role="menu">
+    <ul class="menu" aria-role="menu" tabindex="-1">
       <li class="menu-item" each="{categories}">
         <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
           <div>{title}</div>
@@ -40,6 +41,8 @@
     </ul>
   </div>
 
+  <sp-bookmark-path bookmark={ asBookmark(selection.id, selection.title, selection.parentId) }></sp-bookmark-path>
+
   <small if="{ noCategoryResults() }">
     No categories found
   </small>
@@ -55,8 +58,7 @@
     }
 
     .dropdown.active .menu,
-    .dropdown .dropdown-toggle:focus + .menu,
-    .dropdown .menu:hover {
+    .dropdown .dropdown-toggle:focus + .menu {
       display: block;
       position: relative;
       white-space: nowrap;
@@ -77,6 +79,8 @@
 
     vm.bookmarksBarCategoryId = bookmarksBarCategoryId
     vm.otherCategoryId = otherCategoryId
+    vm.lastSearch = null
+    vm.showDropdown = false
     vm.selection = { title: null, id: null, parentId: null }
     vm.t = t
 
@@ -85,11 +89,23 @@
     }
 
     vm.isDropdownVisible = () => {
-      return vm.isSearchActive() && !F.empty(vm.categories) && !F.get('id', vm.selection)
+      return vm.showDropdown || vm.isSearchActive() && vm.noSelection() && vm.categoriesFound()
+    }
+
+    vm.categoriesFound = () => {
+      return !F.empty(vm.categories)
+    }
+
+    vm.noSelection = () => {
+      return !F.get('id', vm.selection)
     }
 
     vm.noCategoryResults = () => {
       return vm.isSearchActive() && F.empty(vm.categories)
+    }
+
+    vm.getLastSearch = () => {
+      return vm.lastSearch
     }
 
     vm.asBookmark = (id, title, parentId) => {
@@ -103,6 +119,7 @@
         id: null,
         parentId: null,
       }
+      vm.lastSearch = null
       vm.refs.search.focus()
     }
 
@@ -112,12 +129,14 @@
     }
 
     const onClearSelection = (event) => {
+      vm.showDropdown = false
       clearSelection()
       event.preventDefault()
     }
 
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
+      vm.lastSearch = vm.refs.search.value
       vm.categories = categories
       vm.update()
     }
@@ -145,24 +164,34 @@
       }
     }
 
-    const renewSearch = (event) => {
+    const onSearchFocus = (event) => {
       if (!vm.selection.id) {
         return false
+      } else {
+        vm.showDropdown = true
       }
-      onClearSelection(event)
+      vm.update()
+      return false
+    }
+
+    const onSearchBlur = (event) => {
+      vm.showDropdown = false
+      return false
     }
 
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
-      $(vm.refs.search).on('focus', renewSearch)
+      $(vm.refs.search).on('focus', onSearchFocus)
+      $(vm.refs.search).on('blur', onSearchBlur)
       $('.category-search').on('click', '.clear-search', onClearSelection)
     }
 
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
-      $(vm.refs.search).off('focus', renewSearch)
+      $(vm.refs.search).off('focus', onSearchFocus)
+      $(vm.refs.search).off('blur', onSearchBlur)
       $('.category-search').off('click', '.clear-search', onClearSelection)
     }
 
