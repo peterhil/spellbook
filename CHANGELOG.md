@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use existing bookmark data on the popup if an URL is found on the bookmarks
 
 
-## [0.3.4] – 2018-04-13 – Localisations and usability improvements
+## [0.3.4] – 2018-04-21 – Localisations and usability improvements
 
 ### Added
 
@@ -38,7 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Issue #1: Wrong page information shown on popup
 - Fix TypeError on Firefox by filtering out falsy values on getActiveTabOnWindow
+- Fix getting bookmark paths on the popup with Firefox v64 and newer
 
 
 ## [0.3.3] – 2018-10-27 – Firefox support
