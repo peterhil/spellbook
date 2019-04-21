@@ -19,13 +19,12 @@
   <script>
     import { getParentPath } from '../platform/common/bookmarks.js'
     const vm = this
+    const getPath = async function () {
+      vm.path = await getParentPath(opts.bookmark)
+      vm.update()
+    }
 
     vm.on('mount', () => {
-      const getPath = async function () {
-        vm.path = await getParentPath(opts.bookmark)
-        vm.update()
-      }
-
       getPath()
     })
   </script>

@@ -8,6 +8,7 @@
 
   <label for="category">{ t('category') }</label>
   <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
+
   <div class="input-group category-search">
     <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder={ t('search_placeholder') }>
     <input name="category" required type="hidden" value={selection.id}>
@@ -117,12 +118,6 @@
       vm.update()
     }
 
-    const onClearSelection = (event) => {
-      vm.showDropdown = false
-      clearSelection()
-      event.preventDefault()
-    }
-
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
       vm.lastSearch = vm.refs.search.value
@@ -138,6 +133,12 @@
 
       $dropdown.removeClass('active')
       vm.update()
+      event.preventDefault()
+    }
+
+    const onClearSelection = (event) => {
+      vm.showDropdown = false
+      clearSelection()
       event.preventDefault()
     }
 
@@ -186,15 +187,11 @@
         .map(filterCategories)
         .map(F.sortBy(propertyCompare('title', false)))
 
-      categorySearch$
-        .observe(updateCategories, console.error)
-
       const emptySearch$ = inputEvent$(vm.refs.search, { minLength: 0 })
         .filter(search => search.length <= 1)
 
-      emptySearch$
-        .observe(clearSelection, console.error)
-
+      categorySearch$.observe(updateCategories, console.error)
+      emptySearch$.observe(clearSelection, console.error)
       init()
       addEvents()
     })
