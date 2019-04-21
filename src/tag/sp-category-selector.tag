@@ -19,12 +19,7 @@
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu" tabindex="-1">
-      <li class="menu-item" each="{categories}">
-        <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
-          <div>{title}</div>
-          <sp-bookmark-path bookmark={ asBookmark(id, title, parentId) }></sp-bookmark-path>
-        </a>
-      </li>
+      <sp-category-list categories="{ categories }"></sp-category-list>
 
       <li class="divider" data-content="{ t('root_categories') }"></li>
 
@@ -41,7 +36,7 @@
     </ul>
   </div>
 
-  <sp-bookmark-path bookmark={ asBookmark(selection.id, selection.title, selection.parentId) }></sp-bookmark-path>
+  <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
 
   <small if="{ noCategoryResults() }">
     No categories found
@@ -69,6 +64,7 @@
   <script>
     import $ from 'zepto'
     import './sp-bookmark-path.tag'
+    import './sp-category-list.tag'
     import F from 'fkit'
     import { bookmarkSearch, filterCategories, bookmarksBarCategoryId, otherCategoryId } from '../platform/common/bookmarks.js'
     import { propertyCompare } from '../lib/pure'
@@ -106,10 +102,6 @@
 
     vm.getLastSearch = () => {
       return vm.lastSearch
-    }
-
-    vm.asBookmark = (id, title, parentId) => {
-      return { id, title, parentId }
     }
 
     const init = () => {
