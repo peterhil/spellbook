@@ -71,13 +71,14 @@
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
     const vm = this
+    const emptySelection = { title: null, id: null, parentId: null }
     var $dropdown = $('.categories .dropdown')
 
     vm.bookmarksBarCategoryId = bookmarksBarCategoryId
     vm.otherCategoryId = otherCategoryId
     vm.lastSearch = null
     vm.showDropdown = false
-    vm.selection = { title: null, id: null, parentId: null }
+    vm.selection = emptySelection
     vm.t = t
 
     vm.isSearchActive = () => {
@@ -106,11 +107,7 @@
 
     const init = () => {
       vm.categories = []
-      vm.selection = {
-        title: null,
-        id: null,
-        parentId: null,
-      }
+      vm.selection = emptySelection
       vm.lastSearch = null
       vm.refs.search.focus()
     }
@@ -135,13 +132,9 @@
 
     const onSelection = (event) => {
       const selection = { ...event.currentTarget.dataset }
-      console.debug('Category selection:', selection.id, selection.title, selection.parentId)
+      console.debug('Category selection:', selection)
 
-      vm.selection = {
-        id: selection.id,
-        title: selection.title,
-        parentId: selection.parentId,
-      }
+      vm.selection = selection
 
       $dropdown.removeClass('active')
       vm.update()
