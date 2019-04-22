@@ -20,13 +20,16 @@
             <sp-category-list categories="{ categories }"></sp-category-list>
           </ul>
         </div>
-        <div class="panel-footer">
-        </div>
       </div>
 
       <div class="panel right-pane">
         <div class="panel-header">
           <div class="panel-title">Bookmarks</div>
+        </div>
+        <div class="panel-body">
+          <ul class="menu" aria-role="menu" tabindex="-1">
+            <sp-category-list categories="{ bookmarks }"></sp-category-list>
+          </ul>
         </div>
       </div>
     </div>
@@ -51,11 +54,13 @@
     .left-pane {
       overflow: scroll;
       resize: horizontal;
+      flex: 25%;
+      min-width: 240px;
     }
 
     .right-pane {
       width: auto;
-      flex: auto;
+      flex: 75%;
     }
 
     .panel {
@@ -85,7 +90,7 @@
     import Kefir from 'kefir'
     import { propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
-    import { getBookmark, getTree, filterCategories, flattenTree } from '../platform/common/bookmarks.js'
+    import { getTree, filterBookmarks, filterCategories, flattenTree } from '../platform/common/bookmarks.js'
     import '../tag/sp-category-list.tag'
     import '../tag/sp-main-categories.tag'
     import './sp-directory-header.tag'
@@ -93,21 +98,37 @@
 
     vm.t = t
 
-    const categories$ = Kefir
+    const allBookmarks$ = Kefir
       .fromPromise(getTree())
       .map(flattenTree)
+
+    const categories$ = allBookmarks$
       .map(filterCategories)
       .map(F.sortBy(propertyCompare('title', false)))
       .spy('Directory tag: categories$')
+
+    const bookmarks$ = allBookmarks$
+      .map(filterBookmarks)
+      .map(F.sortBy(propertyCompare('title', false)))
+      .spy('Directory tag: bookmarks$')
 
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
       vm.categories = categories
       vm.update()
+      console.debug('Categories updated')
+    }
+
+    const updateBookmarks = (bookmarks) => {
+      console.debug('updateBookmarks:', bookmarks)
+      vm.bookmarks = bookmarks
+      vm.update()
+      console.debug('Bookmarks updated')
     }
 
     vm.on('mount', () => {
       categories$.observe(updateCategories, console.error)
+      bookmarks$.observe(updateBookmarks, console.error)
     })
   </script>
 </sp-directory>

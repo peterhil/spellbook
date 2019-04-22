@@ -41,12 +41,20 @@ export function isCategory (bookmark) {
   return !F.get('url', bookmark) && bookmark.id !== 'tags________'
 }
 
+export function isBookmark (bookmark) {
+  return !!F.get('url', bookmark) && bookmark.id !== 'tags________'
+}
+
 export function isBookmarkNode (bookmark) {
   return !!F.get(parentIdProperty, bookmark)
 }
 
 export function filterCategories (bookmarks) {
   return bookmarks.filter(isCategory)
+}
+
+export function filterBookmarks (bookmarks) {
+  return bookmarks.filter(isBookmark)
 }
 
 export const bookmarkSearch = strategy(platform, {
