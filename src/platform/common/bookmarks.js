@@ -18,24 +18,24 @@ const platform = (
 )
 
 const parentIdProperty = ($.browser.firefox && $.browser.version < 64)
-      ? 'parentGuid'
-      : 'parentId'
+  ? 'parentGuid'
+  : 'parentId'
 
 const rootCategoryId = $.browser.firefox
-      ? 'root________'
-      : '0'
+  ? 'root________'
+  : '0'
 
 export const bookmarksBarCategoryId = $.browser.firefox
-      ? 'toolbar_____'
-      : '1'
+  ? 'toolbar_____'
+  : '1'
 
 export const otherCategoryId = $.browser.firefox
-      ? 'unfiled_____'
-      : '2'
+  ? 'unfiled_____'
+  : '2'
 
 export const menuCategoryId = $.browser.firefox
-      ? 'menu________'
-      : null
+  ? 'menu________'
+  : null
 
 export function isCategory (bookmark) {
   return !F.get('url', bookmark) && bookmark.id !== 'tags________'
@@ -75,9 +75,9 @@ export function flattenTree (tree) {
   let bookmarks = []
 
   tree.map((bookmark) => {
-    let children = isCategory(bookmark) ?
-        flattenTree(bookmark.children) :
-        []
+    let children = isCategory(bookmark)
+      ? flattenTree(bookmark.children)
+      : []
 
     bookmarks.push(...[bookmark].concat(children))
   })
