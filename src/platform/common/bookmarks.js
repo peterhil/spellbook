@@ -50,8 +50,8 @@ export function filterCategories (bookmarks) {
 }
 
 export const bookmarkSearch = strategy(platform, {
-  chrome: chromeBookmarks.bookmarkSearch,
-  firefox: firefoxBookmarks.bookmarkSearch,
+  chrome: chromeBookmarks.search,
+  firefox: firefoxBookmarks.search,
   default: notImplemented$,
 })
 
@@ -60,8 +60,14 @@ export function createBookmark (params, callback) {
 }
 
 export const getBookmark = strategy(platform, {
-  chrome: chromeBookmarks.getBookmark,
-  firefox: firefoxBookmarks.getBookmark,
+  chrome: chromeBookmarks.get,
+  firefox: firefoxBookmarks.get,
+  default: notImplemented$,
+})
+
+export const getTree = strategy(platform, {
+  chrome: chromeBookmarks.getTree,
+  firefox: firefoxBookmarks.getTree,
   default: notImplemented$,
 })
 

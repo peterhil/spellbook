@@ -9,10 +9,14 @@
 import F from 'fkit'
 import Kefir from 'kefir'
 
-export function bookmarkSearch (query) {
+export function search (query) {
   return Kefir.fromPromise(browser.bookmarks.search({ query: query }))
 }
 
-export const getBookmark = (...args) => {
+export const get = (...args) => {
   return browser.bookmarks.get(...args)
+}
+
+export const getTree = () => {
+  return browser.bookmarks.getTree()
 }
