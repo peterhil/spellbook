@@ -71,6 +71,20 @@ export const getTree = strategy(platform, {
   default: notImplemented$,
 })
 
+export function flattenTree (tree) {
+  let bookmarks = []
+
+  tree.map((bookmark) => {
+    let children = isCategory(bookmark) ?
+        flattenTree(bookmark.children) :
+        []
+
+    bookmarks.push(...[bookmark].concat(children))
+  })
+
+  return bookmarks
+}
+
 const pathToString = (parents) => {
   return parents.map(parent => parent.title).join(' < ')
 }
