@@ -19,6 +19,17 @@
     <sp-bookmark-path bookmark={ opts.bookmark }></sp-bookmark-path>
   </a>
 
+  <style>
+    .bookmark {
+      word-break: break-word;
+
+      &:hover {
+        border-bottom: 2px solid #4b48d6;
+        margin-bottom: -2px;
+      }
+    }
+  </style>
+
   <script>
     import { getParentId } from '../platform/common/bookmarks.js'
     const vm = this

@@ -63,6 +63,8 @@
     .right-pane {
       width: auto;
       flex: 75%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     .panel {
