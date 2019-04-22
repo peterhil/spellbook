@@ -29,7 +29,7 @@
         <div class="panel-body">
           <ul class="menu" aria-role="menu" tabindex="-1">
             <li class="menu-item" each="{ bookmark in bookmarks }" no-reorder
-              data-is="sp-category" category="{ bookmark }">
+              data-is="sp-bookmark" bookmark="{ bookmark }">
             </li>
           </ul>
         </div>
@@ -93,6 +93,7 @@
     import { propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
     import { getTree, filterBookmarks, filterCategories, flattenTree } from '../platform/common/bookmarks.js'
+    import '../tag/sp-bookmark.tag'
     import '../tag/sp-category.tag'
     import '../tag/sp-category-list.tag'
     import '../tag/sp-main-categories.tag'
