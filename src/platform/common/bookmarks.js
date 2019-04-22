@@ -91,13 +91,17 @@ const pathToString = (parents) => {
   return parents.map(parent => parent.title).join(' < ')
 }
 
+export function getParentId (bookmark) {
+  return F.get(parentIdProperty, bookmark)
+}
+
 export async function getParents (bookmark) {
   let parents = []
   let current = F.pick(parentPathProperties, bookmark)
 
-  while (isBookmarkNode(current) && current[parentIdProperty] !== rootCategoryId) {
+  while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
     try {
-      let result = await getBookmark(current[parentIdProperty])
+      let result = await getBookmark(getParentId(current))
       current = F.pick(parentPathProperties, result[0])
       parents.push(current)
     } catch (err) {
