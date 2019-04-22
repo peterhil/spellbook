@@ -15,11 +15,12 @@
       --border-color: #4b48d6;
     }
 
-    header {
+    .navbar {
       padding: 15px;
       color: var(--primary-text);
-      background-color: var(--primary-color);
       border-bottom: 1px solid var(--border-color);
+      background-color: var(--primary-color);
+      background: no-repeat 0 38% / cover url(/asset/spellbook-bg.jpg);
     }
 
     h1 {
