@@ -5,12 +5,10 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-bookmark-path>
-  <div class="bookmark-path">
-    <small>{ path }</small>
-  </div>
+  <small class="parents">{ path }</small>
 
   <style>
-    .bookmark-path {
+    .parents {
       overflow: hidden;
       text-overflow: ellipsis;
     }

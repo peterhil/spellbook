@@ -85,18 +85,20 @@ export function flattenTree (tree) {
   return bookmarks
 }
 
+const parentPathProperties = ['id', parentIdProperty, 'title']
+
 const pathToString = (parents) => {
   return parents.map(parent => parent.title).join(' < ')
 }
 
 export async function getParents (bookmark) {
   let parents = []
-  let current = bookmark
+  let current = F.pick(parentPathProperties, bookmark)
 
   while (isBookmarkNode(current) && current[parentIdProperty] !== rootCategoryId) {
     try {
       let result = await getBookmark(current[parentIdProperty])
-      current = result[0]
+      current = F.pick(parentPathProperties, result[0])
       parents.push(current)
     } catch (err) {
       console.error(err)
