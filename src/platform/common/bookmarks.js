@@ -96,8 +96,8 @@ export async function getParents (bookmark) {
   while (isBookmarkNode(current) && current[parentIdProperty] !== rootCategoryId) {
     try {
       let result = await getBookmark(current[parentIdProperty])
-      parents.push(result[0])
       current = result[0]
+      parents.push(current)
     } catch (err) {
       console.error(err)
     }
