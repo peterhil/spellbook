@@ -21,19 +21,8 @@
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu" tabindex="-1">
       <sp-category-list categories="{ categories }"></sp-category-list>
-
       <li class="divider" data-content="{ t('root_categories') }"></li>
-
-      <li class="menu-item">
-        <a class="category" data-id="{ bookmarksBarCategoryId }" data-title="Bookmarks Bar" tabindex="0">
-          { t('bookmarks_bar') }
-        </a>
-      </li>
-      <li class="menu-item">
-        <a class="category" data-id="{ otherCategoryId }" data-title="Other Bookmarks" tabindex="0">
-          { t('other_bookmarks') }
-        </a>
-      </li>
+      <sp-main-categories></sp-main-categories>
     </ul>
   </div>
 
@@ -64,19 +53,17 @@
 
   <script>
     import $ from 'zepto'
-    import './sp-bookmark-path.tag'
-    import './sp-category-list.tag'
     import F from 'fkit'
-    import { bookmarkSearch, filterCategories, bookmarksBarCategoryId, otherCategoryId } from '../platform/common/bookmarks.js'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
-    const vm = this
+    import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
+    import './sp-bookmark-path.tag'
+    import './sp-category-list.tag'
     const emptySelection = { title: null, id: null, parentId: null }
+    const vm = this
     var $dropdown = $('.categories .dropdown')
 
-    vm.bookmarksBarCategoryId = bookmarksBarCategoryId
-    vm.otherCategoryId = otherCategoryId
     vm.lastSearch = null
     vm.showDropdown = false
     vm.selection = emptySelection
