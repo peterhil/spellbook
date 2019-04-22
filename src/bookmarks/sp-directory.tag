@@ -69,6 +69,7 @@
 
     .panel {
       border: none;
+      border-radius: 0;
     }
 
     .panel-header {

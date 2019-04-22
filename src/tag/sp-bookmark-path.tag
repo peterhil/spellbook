@@ -9,6 +9,7 @@
 
   <style>
     .parents {
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
     }

@@ -7,9 +7,15 @@
 <sp-category>
 
   <a class="category" data-id={ opts.category.id } data-title={ opts.category.title } data-parent-id={ getParentId(opts.category) } tabindex="0">
-    <div>{ opts.category.title }</div>
+    <div class="title">{ opts.category.title }</div>
     <sp-bookmark-path bookmark={ opts.category }></sp-bookmark-path>
   </a>
+
+  <style>
+    .category .title {
+      font-weight: bolder;
+    }
+  </style>
 
   <script>
     import { getParentId } from '../platform/common/bookmarks.js'

@@ -14,9 +14,11 @@
     data-url={ opts.bookmark.url }}
     tabindex="0"
   >
-    <div>{ opts.bookmark.title }</div>
-    <small class="url">{ opts.bookmark.url }</small>
-    <sp-bookmark-path bookmark={ opts.bookmark }></sp-bookmark-path>
+    <div class="title">{ opts.bookmark.title }</div>
+    <div class="url">{ opts.bookmark.url }</div>
+    <div class="label label-secondary">
+      <sp-bookmark-path bookmark={ opts.bookmark }></sp-bookmark-path>
+    </div>
   </a>
 
   <style>
@@ -27,6 +29,15 @@
         border-bottom: 2px solid #4b48d6;
         margin-bottom: -2px;
       }
+    }
+
+    .bookmark .title {
+      font-weight: bolder;
+    }
+
+    .url {
+      font-size: 80%;
+      font-weight: 400;
     }
   </style>
 
