@@ -13,6 +13,7 @@
 
   <script>
     import { getParentId } from '../platform/common/bookmarks.js'
+    import './sp-bookmark-path.tag'
     const vm = this
 
     vm.getParentId = getParentId
