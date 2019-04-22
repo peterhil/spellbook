@@ -13,7 +13,7 @@
         <div class="panel-header">
           <div class="panel-title">{ t('category') }</div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
             <sp-main-categories></sp-main-categories>
             <li class="divider"></li>
@@ -26,7 +26,7 @@
         <div class="panel-header">
           <div class="panel-title">Bookmarks</div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
             <li class="menu-item" each="{ bookmark in bookmarks }" no-reorder
               data-is="sp-bookmark" bookmark="{ bookmark }">
