@@ -6,18 +6,12 @@
 -->
 <sp-category-list>
 
-  <li class="menu-item" each="{ category in opts.categories }" no-reorder>
-    <a class="category" data-id={ category.id } data-title={ category.title } data-parent-id={ getParentId(category) } tabindex="0">
-      <div>{ category.title }</div>
-      <sp-bookmark-path bookmark={ category }></sp-bookmark-path>
-    </a>
+  <li class="menu-item" each="{ category in opts.categories }" no-reorder
+    data-is="sp-category" category="{ category }">
   </li>
 
   <script>
-    import { getParentId } from '../platform/common/bookmarks.js'
-    const vm = this
-
-    vm.getParentId = getParentId
+    import './sp-category.tag'
   </script>
 
 </sp-category-list>

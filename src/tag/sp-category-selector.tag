@@ -20,7 +20,9 @@
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu" tabindex="-1">
-      <sp-category-list categories="{ categories }"></sp-category-list>
+      <li class="menu-item" each="{ category in categories }" no-reorder
+        data-is="sp-category" category="{ category }">
+      </li>
       <li class="divider" data-content="{ t('root_categories') }"></li>
       <sp-main-categories></sp-main-categories>
     </ul>
@@ -59,7 +61,7 @@
     import { t } from '../lib/translate'
     import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
     import './sp-bookmark-path.tag'
-    import './sp-category-list.tag'
+    import './sp-category.tag'
     const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
     var $dropdown = $('.categories .dropdown')
