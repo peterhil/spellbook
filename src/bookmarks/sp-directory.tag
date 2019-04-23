@@ -11,26 +11,33 @@
     <div class="directory">
       <div class="panel left-pane">
         <div class="panel-header">
-          <div class="panel-title">{ t('category') }</div>
+          <div class="panel-title">{ t('categories') }</div>
         </div>
         <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
             <sp-main-categories></sp-main-categories>
             <li class="divider"></li>
-            <sp-category-list categories="{ categories }"></sp-category-list>
+            <sp-category-list categories={ categories }></sp-category-list>
           </ul>
         </div>
       </div>
 
       <div class="panel right-pane">
         <div class="panel-header">
-          <div class="panel-title">Bookmarks</div>
+          <div class="panel-title">{ t('bookmarks') }</div>
         </div>
         <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
+            <li class="divider" if={ !F.empty(subcategories) } data-content={ t('subcategories') }></li>
             <li
-              class="menu-item" each="{ bookmark in bookmarks }"
-              data-is="sp-bookmark" bookmark="{ bookmark }"
+              class="menu-item" each={ category in subcategories }
+              data-is="sp-category" category={ category }
+            >
+            </li>
+            <li class="divider" if={ !F.empty(bookmarks) } data-content={ t('bookmarks') }></li>
+            <li
+              class="menu-item" each={ bookmark in bookmarks }
+              data-is="sp-bookmark" bookmark={ bookmark }
             >
             </li>
           </ul>
@@ -97,7 +104,15 @@
     import Kefir from 'kefir'
     import { propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
-    import { getTree, getSubTree, filterCategories, flattenTree, bookmarksBarCategoryId } from '../platform/common/bookmarks.js'
+    import {
+      bookmarksBarCategoryId,
+      filterCategories,
+      flattenTree,
+      getSubTree,
+      getTree,
+      isBookmark,
+      isCategory,
+    } from '../platform/common/bookmarks.js'
     import '../tag/sp-bookmark.tag'
     import '../tag/sp-category.tag'
     import '../tag/sp-category-list.tag'
@@ -135,7 +150,8 @@
 
     const updateBookmarks = (bookmarks) => {
       console.debug('updateBookmarks:', bookmarks)
-      vm.bookmarks = bookmarks
+      vm.bookmarks = F.filter(isBookmark, bookmarks)
+      vm.subcategories = F.filter(isCategory, bookmarks)
       vm.update()
       console.debug('Bookmarks updated')
     }

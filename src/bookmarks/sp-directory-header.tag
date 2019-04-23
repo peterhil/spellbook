@@ -1,10 +1,11 @@
 <sp-directory-header>
+
   <header class="navbar">
     <section class="navbar-section">
       <h1>Spellbook</h1>
     </section>
     <section class="navbar-section">
-      <input type="text" placeholder="Search"></input>
+      <input type="text" placeholder={ t('search') }></input>
     </section>
   </header>
 
@@ -28,4 +29,11 @@
       padding: 0;
     }
   </style>
+
+  <script>
+    import { t } from '../lib/translate'
+    const vm = this
+    vm.t = t
+  </script>
+
 </sp-directory-header>
