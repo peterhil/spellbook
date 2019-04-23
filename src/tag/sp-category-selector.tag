@@ -20,8 +20,10 @@
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu" tabindex="-1">
-      <li class="menu-item" each="{ category in categories }" no-reorder
-        data-is="sp-category" category="{ category }">
+      <li
+        class="menu-item" each="{ category in categories }"
+        data-is="sp-category" category="{ category }"
+      >
       </li>
       <li class="divider" data-content="{ t('root_categories') }"></li>
       <sp-main-categories></sp-main-categories>

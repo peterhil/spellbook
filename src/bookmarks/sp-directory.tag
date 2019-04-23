@@ -28,8 +28,10 @@
         </div>
         <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
-            <li class="menu-item" each="{ bookmark in bookmarks }" no-reorder
-              data-is="sp-bookmark" bookmark="{ bookmark }">
+            <li
+              class="menu-item" each="{ bookmark in bookmarks }"
+              data-is="sp-bookmark" bookmark="{ bookmark }"
+            >
             </li>
           </ul>
         </div>

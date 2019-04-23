@@ -6,8 +6,10 @@
 -->
 <sp-category-list>
 
-  <li class="menu-item" each="{ category in opts.categories }" no-reorder
-    data-is="sp-category" category="{ category }">
+  <li
+    class="menu-item" each="{ category in opts.categories }"
+    data-is="sp-category" category="{ category }"
+  >
   </li>
 
   <script>
