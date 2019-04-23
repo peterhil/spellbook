@@ -79,6 +79,12 @@ export const getTree = strategy(platform, {
   default: notImplemented$,
 })
 
+export const getSubTree = strategy(platform, {
+  chrome: chromeBookmarks.getSubTree,
+  firefox: firefoxBookmarks.getSubTree,
+  default: notImplemented$,
+})
+
 export function flattenTree (tree) {
   let bookmarks = []
 

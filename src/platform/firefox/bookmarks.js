@@ -6,7 +6,6 @@
 
 /* global browser */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 
 export function search (query) {
@@ -19,4 +18,8 @@ export const get = (...args) => {
 
 export const getTree = () => {
   return browser.bookmarks.getTree()
+}
+
+export const getSubTree = (id) => {
+  return browser.bookmarks.getSubTree(id)
 }

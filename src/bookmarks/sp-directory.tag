@@ -97,7 +97,7 @@
     import Kefir from 'kefir'
     import { propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
-    import { getTree, filterBookmarks, filterCategories, flattenTree } from '../platform/common/bookmarks.js'
+    import { getTree, getSubTree, filterCategories, flattenTree, bookmarksBarCategoryId } from '../platform/common/bookmarks.js'
     import '../tag/sp-bookmark.tag'
     import '../tag/sp-category.tag'
     import '../tag/sp-category-list.tag'
@@ -106,6 +106,7 @@
     const vm = this
 
     vm.t = t
+    vm.selectedCategory = bookmarksBarCategoryId
 
     const allBookmarks$ = Kefir
       .fromPromise(getTree())
@@ -116,17 +117,21 @@
       .map(F.sortBy(propertyCompare('title', false)))
       .spy('Directory tag: categories$')
 
-    const bookmarks$ = allBookmarks$
-      .map(filterBookmarks)
-      .map(F.sortBy(propertyCompare('title', false)))
-      .spy('Directory tag: bookmarks$')
-
     const updateCategories = (categories) => {
       console.debug('updateCategories:', categories)
       vm.categories = categories
       vm.update()
       console.debug('Categories updated')
     }
+
+    const selectedBookmarks$ = Kefir
+      .fromPromise(getSubTree(vm.selectedCategory))
+      .map(F.head)  // TODO Fix this API madness on the bookmarks adapter!
+      .map(F.get('children'))
+
+    const bookmarks$ = selectedBookmarks$
+      .map(F.sortBy(propertyCompare('title', false)))
+      .spy('Directory tag: bookmarks$')
 
     const updateBookmarks = (bookmarks) => {
       console.debug('updateBookmarks:', bookmarks)

@@ -6,7 +6,6 @@
 
 /* global chrome */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from '../common/helpers'
@@ -24,4 +23,8 @@ export const get = (...args) => {
 
 export const getTree = () => {
   return callbackToPromise(chrome.bookmarks.getTree)
+}
+
+export const getSubTree = (id) => {
+  return callbackToPromise(chrome.bookmarks.getSubTree, id)
 }
