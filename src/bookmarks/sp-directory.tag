@@ -28,13 +28,13 @@
         </div>
         <div class="panel-body" tabindex="-1">
           <ul class="menu" aria-role="menu" tabindex="-1">
-            <li class="divider" if={ !F.empty(subcategories) } data-content={ t('subcategories') }></li>
+            <li class="divider" if={ hasItems(subcategories) } data-content={ t('subcategories') }></li>
             <li
               class="menu-item" each={ category in subcategories }
               data-is="sp-category" category={ category }
             >
             </li>
-            <li class="divider" if={ !F.empty(bookmarks) } data-content={ t('bookmarks') }></li>
+            <li class="divider" if={ hasItems(bookmarks) } data-content={ t('bookmarks') }></li>
             <li
               class="menu-item" each={ bookmark in bookmarks }
               data-is="sp-bookmark" bookmark={ bookmark }
@@ -102,7 +102,7 @@
   <script>
     import F from 'fkit'
     import Kefir from 'kefir'
-    import { propertyCompare } from '../lib/pure'
+    import { hasItems, propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
     import {
       bookmarksBarCategoryId,
@@ -121,6 +121,7 @@
     const vm = this
 
     vm.t = t
+    vm.hasItems = hasItems
     vm.selectedCategory = bookmarksBarCategoryId
 
     const allBookmarks$ = Kefir
