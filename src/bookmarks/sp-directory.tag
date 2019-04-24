@@ -56,7 +56,7 @@
     .directory {
       position: absolute;
       display: flex;
-      top: 60px;
+      top: var(--navbar-height);
       bottom: 0;
       left: 0;
       right: 0;

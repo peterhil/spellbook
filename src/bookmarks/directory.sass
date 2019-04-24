@@ -6,9 +6,24 @@
 
 @charset 'utf-8'
 
+:scope
+  --border-color: #4b48d6
+  --navbar-height: 60px
+  --primary-color: #5755d9
+  --primary-text: white
+
 html, body
   font-size: inherit
+
+body
+  overflow: hidden
 
 h1
   padding: 15px
   font-size: 0.9rem
+
+.navbar
+    height: var(--navbar-height)
+
+.directory
+    top: var(--navbar-height)

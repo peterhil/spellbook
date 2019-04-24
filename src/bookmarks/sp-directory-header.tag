@@ -5,28 +5,33 @@
       <h1>Spellbook</h1>
     </section>
     <section class="navbar-section">
-      <input type="text" placeholder={ t('search') }></input>
+      <input class="search" type="text" placeholder={ t('search') }></input>
     </section>
   </header>
 
   <style>
-    :scope {
-      --primary-text: white;
-      --primary-color: #5755d9;
-      --border-color: #4b48d6;
-    }
-
     .navbar {
-      padding: 15px;
+      padding: 0 0.8rem;
+      border: none;
       color: var(--primary-text);
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--primary-color);
-      background: no-repeat 0 38% / cover url(/asset/spellbook-bg.jpg);
+      background: no-repeat 0 38% / cover url('/asset/spellbook-bg.jpg') var(--primary-color);
+
+      & > * {
+        line-height: 30px;
+      }
     }
 
     h1 {
       margin: 0;
       padding: 0;
+      font-size: 20px;
+    }
+
+    .search {
+      border: 1px solid #555;
+      padding: 0px 0.4rem;
+      line-height: 28px;
+      font-size: 14px;
     }
   </style>
 
