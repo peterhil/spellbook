@@ -98,6 +98,13 @@
       box-shadow: none;
     }
 
+    .menu,
+    .panel {
+      &:focus {
+        outline: none;
+      }
+    }
+
     .category .title {
       font-weight: bolder;
     }
