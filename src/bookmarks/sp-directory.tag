@@ -97,6 +97,10 @@
       padding: 0;
       box-shadow: none;
     }
+
+    .category .title {
+      font-weight: bolder;
+    }
   </style>
 
   <script>

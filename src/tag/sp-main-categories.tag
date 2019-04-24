@@ -8,12 +8,12 @@
 
   <li class="menu-item">
     <a class="category" data-id="{ bookmarksBarCategoryId }" data-title="Bookmarks Bar" tabindex="0">
-      { t('bookmarks_bar') }
+      <div class="title">{ t('bookmarks_bar') }</div>
     </a>
   </li>
   <li class="menu-item">
     <a class="category" data-id="{ otherCategoryId }" data-title="Other Bookmarks" tabindex="0">
-      { t('other_bookmarks') }
+      <div class="title">{ t('other_bookmarks') }</div>
     </a>
   </li>
 
