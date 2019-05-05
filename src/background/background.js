@@ -6,24 +6,15 @@
 
 /* global chrome */
 
-import { disconnectionHandler } from '../lib/messaging'
+import { disconnectionHandler, messageServer } from '../lib/messaging'
 import { popupController } from './popup-controller'
 
-const messageServer = function (message, port) {
-  console.debug('[background] Message from', port.name + ':', message.type, message)
-
-  switch (port.name) {
-  case 'popup':
-    popupController(message, port)
-    break
-  default:
-    console.error('Unknown port:', port.name)
-    port.disconnect()
-  }
+const controllers = {
+  'popup': popupController,
 }
 
 chrome.runtime.onConnect.addListener(function(port) {
   console.debug('[background] Connected with:', port.name, port.sender)
-  port.onMessage.addListener(messageServer)
+  port.onMessage.addListener(messageServer(controllers))
   port.onDisconnect.addListener(disconnectionHandler)
 })
