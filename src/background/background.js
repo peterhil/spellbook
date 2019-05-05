@@ -9,42 +9,51 @@
 import { closedTab$, closedWindow$, currentTab$ } from '../platform/common/tabs'
 import { disconnectionHandler } from '../lib/messaging'
 
-var currentPage = {
+var currentTab = {
   title: '',
   url: '',
   favIconUrl: '',
   category: '',
 }
 
-const messageHandler = function(port) {
-  return function messageHandlerWithPort (response) {
-    console.assert(port.name === 'popup')  // Handle differently?
-    console.log('Connected with:', port.name)
-    console.debug('Background got message:', response.type, response.data, response)
+function onCurrentTab (tab) {
+  currentTab = {
+    ...tab
+  }
+}
 
-    switch (response.type) {
-    case 'popupOpen':
-      port.postMessage({ type: 'currentTabInfo', data: currentPage })
-      break
-    default:
-      console.warn('Unhandled message:', response)
-    }
+const popupController = function (message, port) {
+  switch (message.type) {
+  case 'getCurrentTab':
+    port.postMessage({ type: 'currentTabInfo', data: currentTab })
+    break
+  default:
+    console.error('Unhandled message:', message)
+    port.disconnect()
+  }
+}
+
+const messageServer = function (message, port) {
+  console.debug('[background] Message from', port.name + ':', message.type, message)
+
+  switch (port.name) {
+  case 'popup':
+    popupController(message, port)
+    break
+  default:
+    console.error('Unknown port:', port.name)
+    port.disconnect()
   }
 }
 
 chrome.runtime.onConnect.addListener(function(port) {
-  port.onMessage.addListener(messageHandler(port))
+  console.debug('[background] Connected with:', port.name, port.sender)
+  port.onMessage.addListener(messageServer)
   port.onDisconnect.addListener(disconnectionHandler)
 })
-
-function onValue (tab) {
-  currentPage = {
-    ...tab
-  }
-}
 
 closedWindow$.log('closedWindow$')
 closedTab$.log('closedTab$')
 currentTab$
   .spy('currentTab$')
-  .observe(onValue, console.error)
+  .observe(onCurrentTab, console.error)

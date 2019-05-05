@@ -16,17 +16,16 @@ import { disconnectionHandler } from '../lib/messaging'
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 var messages = riot.observable()
 
-const messageHandler = function (response) {
-  console.log('Popup got message:', response.type, response.data, response)
+const messageHandler = function (message) {
+  console.debug('[popup] Got message:', message.type, message)
 
-  switch (response.type) {
+  switch (message.type) {
   case 'currentTabInfo':
-    // Update the form
-    console.log('messageHandler: Current tab changed', response.data)
-    messages.trigger(response.type, response.data)
+    console.log('[popup] Current tab info:', message.data)
+    messages.trigger(message.type, message.data)
     break
   default:
-    console.warn('Unhandled message:', response)
+    console.warn('Unhandled message type:', message.type)
   }
 }
 
@@ -37,7 +36,7 @@ function onPopup (event) {
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
-  port.postMessage({ type: 'popupOpen' })
+  port.postMessage({ type: 'getCurrentTab' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)
