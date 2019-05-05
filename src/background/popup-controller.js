@@ -19,7 +19,7 @@ function onCurrentTab (tab) {
   }
 }
 
-const popupController = function (message, port) {
+export const popupController = function (message, port) {
   switch (message.type) {
   case 'getCurrentTab':
     port.postMessage({ type: 'currentTabInfo', data: currentTab })
