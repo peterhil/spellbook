@@ -7,9 +7,11 @@
 /* global chrome */
 
 import { disconnectionHandler, messageServer } from '../lib/messaging'
+import { directoryController } from './directory-controller'
 import { popupController } from './popup-controller'
 
 const controllers = {
+  'directory': directoryController,
   'popup': popupController,
 }
 

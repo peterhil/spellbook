@@ -120,7 +120,6 @@
       filterCategories,
       flattenTree,
       getSubTree,
-      getTree,
       isBookmark,
       isCategory,
     } from '../platform/common/bookmarks.js'
@@ -136,10 +135,10 @@
     vm.selectedCategory = bookmarksBarCategoryId
 
     const allBookmarks$ = Kefir
-      .fromPromise(getTree())
-      .map(flattenTree)
+      .fromEvents(vm.opts.messages, 'allBookmarksTree')
 
     const categories$ = allBookmarks$
+      .map(flattenTree)
       .map(filterCategories)
       .map(F.sortBy(propertyCompare('title', false)))
       .spy('Directory tag: categories$')

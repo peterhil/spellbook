@@ -117,13 +117,15 @@ export default [
       format: outputFormat,
       sourcemap: true,
       globals: {
-        'kefir': 'Kefir',
         'fkit': 'F',
+        'kefir': 'Kefir',
+        'zepto': '$',
       },
     },
     external: [
-      'kefir',
       'fkit',
+      'kefir',
+      'zepto',
     ],
     plugins: plugins.push(
       copy([
