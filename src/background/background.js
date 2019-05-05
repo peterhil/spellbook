@@ -6,32 +6,8 @@
 
 /* global chrome */
 
-import { closedTab$, closedWindow$, currentTab$ } from '../platform/common/tabs'
 import { disconnectionHandler } from '../lib/messaging'
-
-var currentTab = {
-  title: '',
-  url: '',
-  favIconUrl: '',
-  category: '',
-}
-
-function onCurrentTab (tab) {
-  currentTab = {
-    ...tab
-  }
-}
-
-const popupController = function (message, port) {
-  switch (message.type) {
-  case 'getCurrentTab':
-    port.postMessage({ type: 'currentTabInfo', data: currentTab })
-    break
-  default:
-    console.error('Unhandled message:', message)
-    port.disconnect()
-  }
-}
+import { popupController } from './popup-controller'
 
 const messageServer = function (message, port) {
   console.debug('[background] Message from', port.name + ':', message.type, message)
@@ -51,9 +27,3 @@ chrome.runtime.onConnect.addListener(function(port) {
   port.onMessage.addListener(messageServer)
   port.onDisconnect.addListener(disconnectionHandler)
 })
-
-closedWindow$.log('closedWindow$')
-closedTab$.log('closedTab$')
-currentTab$
-  .spy('currentTab$')
-  .observe(onCurrentTab, console.error)
