@@ -18,14 +18,16 @@ const onBookmarksUpdated = function (updatedBookmarks) {
   bookmarks = updatedBookmarks
 }
 
-export const directoryController = function (message, port) {
-  switch (message.type) {
-  case 'getAllBookmarks':
-    port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
-    break
-  default:
-    console.error('Unhandled message:', message)
-    port.disconnect()
+export const directoryController = {
+  action: function (message, port) {
+    switch (message.type) {
+    case 'getAllBookmarks':
+      port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
+      break
+    default:
+      console.error('Unhandled message:', message)
+      port.disconnect()
+    }
   }
 }
 

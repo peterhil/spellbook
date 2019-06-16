@@ -21,13 +21,15 @@ function onCurrentTab (tab) {
   }
 }
 
-export const popupController = function (message, port) {
-  const action = choice(message.type, {
-    getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
-    default: unhandledMessage,
-  })
+export const popupController = {
+  action: function (message, port) {
+    const action = choice(message.type, {
+      getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
+      default: unhandledMessage,
+    })
 
-  action(message)
+    action(message)
+  }
 }
 
 closedWindow$.log('closedWindow$')
