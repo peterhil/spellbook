@@ -9,7 +9,7 @@
 import { fromEventPattern } from '../../lib/rxjs'
 import F from 'fkit'
 
-export const chromeEvent$ = (eventType) => {
+export const browserEvent$ = (eventType) => {
   return fromEventPattern(
     eventType.addListener.bind(eventType),
     eventType.removeListener.bind(eventType),

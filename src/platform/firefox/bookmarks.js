@@ -12,6 +12,14 @@ export function bookmarkSearch (queryObject) {
   return Kefir.fromPromise(browser.bookmarks.search(queryObject))
 }
 
-export const getBookmark = (...args) => {
+export const get = (...args) => {
   return browser.bookmarks.get(...args)
+}
+
+export const getTree = () => {
+  return browser.bookmarks.getTree()
+}
+
+export const getSubTree = (id) => {
+  return browser.bookmarks.getSubTree(id)
 }

@@ -19,7 +19,6 @@
     }
 
     const onTabUpdate = (tab) => {
-      console.log('currentTabInfo from background on popup:', tab)
       vm.bookmark = tab
       vm.update()
     }

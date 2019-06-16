@@ -6,45 +6,17 @@
 
 /* global chrome */
 
-import { choice } from '../lib/pure'
-import { closedTab$, closedWindow$, currentTab$ } from '../platform/chrome/tabs'
-import { disconnectionHandler, sendMessage, unhandledMessage } from '../lib/messaging'
+import { disconnectionHandler, messageServer } from '../lib/messaging'
+import { directoryController } from './directory-controller'
+import { popupController } from './popup-controller'
 
-var currentPage = {
-  title: '',
-  url: '',
-  favIconUrl: '',
-  category: '',
-}
-
-const messageHandler = function(port) {
-  return function messageHandlerWithPort (response) {
-    console.assert(port.name === 'popup')  // Handle differently?
-    console.log('Connected with:', port.name)
-    console.debug('Background got message:', response.type, response.data, response)
-
-    const action = choice(response.type, {
-      popupOpen: () => sendMessage(port, 'currentTabInfo', currentPage),
-      default: unhandledMessage,
-    })
-
-    action(response)
-  }
+const controllers = {
+  'directory': directoryController,
+  'popup': popupController,
 }
 
 chrome.runtime.onConnect.addListener(function(port) {
-  port.onMessage.addListener(messageHandler(port))
+  console.debug('[background] Connected with:', port.name, port.sender)
+  port.onMessage.addListener(messageServer(controllers))
   port.onDisconnect.addListener(disconnectionHandler)
 })
-
-function onValue (tab) {
-  currentPage = {
-    ...tab
-  }
-}
-
-closedWindow$.log('closedWindow$')
-closedTab$.log('closedTab$')
-currentTab$
-  .spy('currentTab$')
-  .observe(onValue, console.error)

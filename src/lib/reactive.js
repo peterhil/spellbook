@@ -20,8 +20,7 @@ export function callbackToPromise (fn, ...args) {
 
 export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = { minLength: 2, debounceTime: 250 }) {
   return Kefir
-    .fromEvents(element, 'input')
-    .map(event => event.target.value)
+    .fromEvents(element, 'input', event => event.target.value)
     .filter(query => query.length >= minLength)
     .debounce(debounceTime)
     .skipDuplicates()

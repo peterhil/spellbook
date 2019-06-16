@@ -90,20 +90,41 @@ export default [
     plugins: plugins
   },
   {
+    input: 'src/bookmarks/directory.js',
+    output: {
+      file: 'dist/bookmarks/directory.js',
+      format: outputFormat,
+      sourcemap: true,
+      globals: {
+        'fkit': 'F',
+        'kefir': 'Kefir',
+        'riot': 'riot',
+        'zepto': '$',
+      },
+    },
+    external: [
+      'fkit',
+      'kefir',
+      'riot',
+      'zepto',
+    ],
+    plugins: plugins
+  },
+  {
     input: 'src/background/background.js',
     output: {
       file: 'dist/background/background.js',
       format: outputFormat,
       sourcemap: true,
       globals: {
-        'kefir': 'Kefir',
         'fkit': 'F',
+        'kefir': 'Kefir',
         'zepto': '$',
       },
     },
     external: [
-      'kefir',
       'fkit',
+      'kefir',
       'zepto',
     ],
     plugins: plugins.push(
@@ -120,7 +141,9 @@ export default [
         files: [
           '_locales/**/*.json',
           'asset/icon*.png',
+          'asset/spellbook-bg.jpg',
           'background/background.html',
+          'bookmarks/directory.html',
           'manifest.json',
           'popup/popup.html',
         ],

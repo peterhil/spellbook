@@ -28,3 +28,17 @@ export const sendMessage = F.curry((port, type, data) => {
 export const unhandledMessage = (response) => {
   console.warn('Unhandled message:', response)
 }
+
+export function messageServer (controllers) {
+  return function messageDispatcher (message, port) {
+    console.debug('[background] Message from', port.name + ':', message.type, message)
+    const controller = controllers[port.name] || notFound
+
+    controller(message, port)
+  }
+}
+
+export function notFound (message, port) {
+  console.error('Unknown port:', port.name)
+  port.disconnect()
+}

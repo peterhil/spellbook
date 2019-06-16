@@ -1,7 +1,9 @@
 {
   "add_bookmark": { "message": "Lisää kirjanmerkki" },
+  "bookmarks": { "message": "Kirjanmerkit" },
   "bookmarks_bar": { "message": "Kirjanmerkkipalkki" },
   "buttons_add": { "message": "Lisää" },
+  "categories": { "message": "Kategoriat" },
   "category": { "message": "Kategoria" },
   "edit_bookmark":  { "message": "Muokkaa kirjanmerkkiä" },
   "execute_browser_action": { "message": "Lisää kirjanmerkkeihin" },
@@ -9,7 +11,9 @@
   "other_bookmarks": { "message": "Muut kirjanmerkit" },
   "root_categories": { "message": "pääkategoriat" },
   "saved_bookmark":  { "message": "Kirjanmerkki lisättiin" },
+  "search": { "message": "Haku" },
   "search_placeholder": { "message": "Etsi kirjoittamalla" },
+  "subcategories": { "message": "Alakategoriat" },
   "title": { "message": "Nimi" },
   "url": { "message": "Osoite" }
 }

@@ -1,0 +1,19 @@
+{
+  "add_bookmark": { "message": "Ajouter un signet" },
+  "bookmarks": { "message": "Signets" },
+  "bookmarks_bar": { "message": "Barre de signets" },
+  "buttons_add": { "message": "Ajouter" },
+  "categories": { "message": "Catégories" },
+  "category": { "message": "Catégorie" },
+  "edit_bookmark":  { "message": "Modifier le signet" },
+  "execute_browser_action": { "message": "Ajouter aux signets" },
+  "meta_description": { "message": "Utilisez un millier de signets facilement" },
+  "other_bookmarks": { "message": "Autres signets" },
+  "root_categories": { "message": "catégories racines" },
+  "saved_bookmark":  { "message": "Signet sauvegardé" },
+  "search": { "message": "Recherché" },
+  "search_placeholder": { "message": "Tapez pour cherchert" },
+  "subcategories": { "message": "Sous-catégories" },
+  "title": { "message": "Titre" },
+  "url": { "message": "Url" }
+}

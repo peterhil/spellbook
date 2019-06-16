@@ -8,7 +8,7 @@
 
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
-import { withErrorChecking } from './helpers'
+import { withErrorChecking } from '../common/helpers'
 
 export function bookmarkSearch (queryObject) {
   return Kefir.fromPromise(callbackToPromise(
@@ -17,6 +17,14 @@ export function bookmarkSearch (queryObject) {
   ))
 }
 
-export const getBookmark = (...args) => {
+export const get = (...args) => {
   return callbackToPromise(chrome.bookmarks.get, ...args)
+}
+
+export const getTree = () => {
+  return callbackToPromise(chrome.bookmarks.getTree)
+}
+
+export const getSubTree = (id) => {
+  return callbackToPromise(chrome.bookmarks.getSubTree, id)
 }

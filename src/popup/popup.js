@@ -17,28 +17,28 @@ import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
 const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
 var messages = riot.observable()
 
-const messageHandler = function (response) {
-  console.debug('Popup got message:', response.type, response.data, response)
+const messageHandler = function (message) {
+  console.debug('[popup] Got message:', message.type, message)
 
-  const action = choice(response.type, {
+  const action = choice(message.type, {
     currentTabInfo: () => {
-      console.debug('messageHandler: Current tab changed', response.data)
-      messages.trigger(response.type, response.data)
+      console.log('[popup] Current tab info:', message.data)
+      messages.trigger(message.type, message.data)
     },
     default: unhandledMessage,
   })
 
-  action(response)
+  action(message)
 }
 
-function onPopup (event) {
+function onLoad (event) {
   riot.mount('sp-popup', { messages })
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
-  port.postMessage({ type: 'popupOpen' })
+  port.postMessage({ type: 'getCurrentTab' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)
@@ -46,16 +46,15 @@ function onPopup (event) {
   return true
 }
 
-domStream.onValue(onPopup)
-  .log()
-
-// Cleanup
-
 function onUnload (event) {
-  domStream.offValue(onPopup)
+  domStream.offValue(onLoad)
   window.removeEventListener('beforeunload', onUnload)
 }
 
+domStream.onValue(onLoad)
+
+// Cleanup
+//
 // Note! This prevents browsers from using in-memory page navigation caches,
 // see: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
 window.addEventListener('beforeunload', onUnload)

@@ -8,6 +8,10 @@
 
 import F from 'fkit'
 
+export const hasItems = array => {
+  return array && !F.empty(array)
+}
+
 export const isFunction = fn => {
   return typeof fn === 'function'
 }
@@ -23,8 +27,8 @@ export const choice = F.curry((selection, options) => {
 //
 export const propertyCompare = (property, caseSensitive = true) => {
   const prop = caseSensitive
-        ? F.get(property)
-        : F.curry((item) => F.toLower(F.get(property, item)))
+    ? F.get(property)
+    : F.curry((item) => F.toLower(F.get(property, item)))
 
   return function comparator (a, b) {
     return prop(a) < prop(b) ? -1 : (prop(a) > prop(b) ? 1 : 0)
