@@ -8,6 +8,7 @@
 
   <label for="category">{ t('category') }</label>
   <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
+
   <div class="input-group category-search">
     <input name="search" ref="search" class="form-input" type="text" value={selection.title} placeholder={ t('search_placeholder') }>
     <input name="category" required type="hidden" value={selection.id}>
@@ -19,29 +20,17 @@
 
   <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
     <ul class="menu" aria-role="menu" tabindex="-1">
-      <li class="menu-item" each="{categories}">
-        <a class="category" data-id={id} data-title={title} data-parent-id={parentId} tabindex="0">
-          <div>{title}</div>
-          <sp-bookmark-path bookmark={ asBookmark(id, title, parentId) }></sp-bookmark-path>
-        </a>
+      <li
+        class="menu-item" each="{ category in categories }"
+        data-is="sp-category" category="{ category }"
+      >
       </li>
-
       <li class="divider" data-content="{ t('root_categories') }"></li>
-
-      <li class="menu-item">
-        <a class="category" data-id="{ bookmarksBarCategoryId }" data-title="Bookmarks Bar" tabindex="0">
-          { t('bookmarks_bar') }
-        </a>
-      </li>
-      <li class="menu-item">
-        <a class="category" data-id="{ otherCategoryId }" data-title="Other Bookmarks" tabindex="0">
-          { t('other_bookmarks') }
-        </a>
-      </li>
+      <sp-main-categories></sp-main-categories>
     </ul>
   </div>
 
-  <sp-bookmark-path bookmark={ asBookmark(selection.id, selection.title, selection.parentId) }></sp-bookmark-path>
+  <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
 
   <small if="{ noCategoryResults() }">
     No categories found
@@ -68,20 +57,20 @@
 
   <script>
     import $ from 'zepto'
-    import './sp-bookmark-path.tag'
     import F from 'fkit'
-    import { bookmarkSearch, filterCategories, bookmarksBarCategoryId, otherCategoryId } from '../platform/common/bookmarks.js'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
+    import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
+    import './sp-bookmark-path.tag'
+    import './sp-category.tag'
+    const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
     var $dropdown = $('.categories .dropdown')
 
-    vm.bookmarksBarCategoryId = bookmarksBarCategoryId
-    vm.otherCategoryId = otherCategoryId
     vm.lastSearch = null
     vm.showDropdown = false
-    vm.selection = { title: null, id: null, parentId: null }
+    vm.selection = emptySelection
     vm.t = t
 
     vm.isSearchActive = () => {
@@ -108,17 +97,9 @@
       return vm.lastSearch
     }
 
-    vm.asBookmark = (id, title, parentId) => {
-      return { id, title, parentId }
-    }
-
     const init = () => {
       vm.categories = []
-      vm.selection = {
-        title: null,
-        id: null,
-        parentId: null,
-      }
+      vm.selection = emptySelection
       vm.lastSearch = null
       vm.refs.search.focus()
     }
@@ -126,12 +107,6 @@
     const clearSelection = (event) => {
       init()
       vm.update()
-    }
-
-    const onClearSelection = (event) => {
-      vm.showDropdown = false
-      clearSelection()
-      event.preventDefault()
     }
 
     const updateCategories = (categories) => {
@@ -143,16 +118,18 @@
 
     const onSelection = (event) => {
       const selection = { ...event.currentTarget.dataset }
-      console.debug('Category selection:', selection.id, selection.title, selection.parentId)
+      console.debug('Category selection:', selection)
 
-      vm.selection = {
-        id: selection.id,
-        title: selection.title,
-        parentId: selection.parentId,
-      }
+      vm.selection = selection
 
       $dropdown.removeClass('active')
       vm.update()
+      event.preventDefault()
+    }
+
+    const onClearSelection = (event) => {
+      vm.showDropdown = false
+      clearSelection()
       event.preventDefault()
     }
 
@@ -201,15 +178,11 @@
         .map(filterCategories)
         .map(F.sortBy(propertyCompare('title', false)))
 
-      categorySearch$
-        .observe(updateCategories, console.error)
-
       const emptySearch$ = inputEvent$(vm.refs.search, { minLength: 0 })
         .filter(search => search.length <= 1)
 
-      emptySearch$
-        .observe(clearSelection, console.error)
-
+      categorySearch$.observe(updateCategories, console.error)
+      emptySearch$.observe(clearSelection, console.error)
       init()
       addEvents()
     })

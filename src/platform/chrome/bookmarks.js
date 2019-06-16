@@ -6,18 +6,25 @@
 
 /* global chrome */
 
-import F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from '../common/helpers'
 
-export function bookmarkSearch (query) {
+export function search (query) {
   return Kefir.fromPromise(callbackToPromise(
     withErrorChecking(chrome.bookmarks.search),
     { query: query }
   ))
 }
 
-export const getBookmark = (...args) => {
+export const get = (...args) => {
   return callbackToPromise(chrome.bookmarks.get, ...args)
+}
+
+export const getTree = () => {
+  return callbackToPromise(chrome.bookmarks.getTree)
+}
+
+export const getSubTree = (id) => {
+  return callbackToPromise(chrome.bookmarks.getSubTree, id)
 }

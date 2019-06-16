@@ -1,7 +1,9 @@
 {
   "add_bookmark": { "message": "Add bookmark" },
+  "bookmarks": { "message": "Bookmarks" },
   "bookmarks_bar": { "message": "Bookmarks Bar" },
   "buttons_add": { "message": "Add" },
+  "categories": { "message": "Categories" },
   "category": { "message": "Category" },
   "edit_bookmark":  { "message": "Edit bookmark" },
   "execute_browser_action": { "message": "Add to bookmarks" },
@@ -11,6 +13,7 @@
   "saved_bookmark":  { "message": "Bookmark saved" },
   "search": { "message": "Search" },
   "search_placeholder": { "message": "Search by typing" },
+  "subcategories": { "message": "Subcategories" },
   "title": { "message": "Title" },
   "url": { "message": "Url" }
 }

@@ -5,12 +5,11 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-bookmark-path>
-  <div class="bookmark-path">
-    <small>{ path }</small>
-  </div>
+  <small class="parents">{ path }</small>
 
   <style>
-    .bookmark-path {
+    .parents {
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -19,13 +18,12 @@
   <script>
     import { getParentPath } from '../platform/common/bookmarks.js'
     const vm = this
+    const getPath = async function () {
+      vm.path = await getParentPath(opts.bookmark)
+      vm.update()
+    }
 
     vm.on('mount', () => {
-      const getPath = async function () {
-        vm.path = await getParentPath(opts.bookmark)
-        vm.update()
-      }
-
       getPath()
     })
   </script>

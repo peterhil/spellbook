@@ -90,19 +90,42 @@ export default [
     plugins: plugins
   },
   {
+    input: 'src/bookmarks/directory.js',
+    output: {
+      file: 'dist/bookmarks/directory.js',
+      format: outputFormat,
+      sourcemap: true,
+      globals: {
+        'fkit': 'F',
+        'kefir': 'Kefir',
+        'riot': 'riot',
+        'zepto': '$',
+      },
+    },
+    external: [
+      'fkit',
+      'kefir',
+      'riot',
+      'zepto',
+    ],
+    plugins: plugins
+  },
+  {
     input: 'src/background/background.js',
     output: {
       file: 'dist/background/background.js',
       format: outputFormat,
       sourcemap: true,
       globals: {
-        'kefir': 'Kefir',
         'fkit': 'F',
+        'kefir': 'Kefir',
+        'zepto': '$',
       },
     },
     external: [
-      'kefir',
       'fkit',
+      'kefir',
+      'zepto',
     ],
     plugins: plugins.push(
       copy([
@@ -118,7 +141,9 @@ export default [
         { files: 'src/_locales/fr/messages.json', dest: 'dist/_locales/fr/' },
         { files: 'src/_locales/ru/messages.json', dest: 'dist/_locales/ru/' },
         { files: 'src/asset/icon*.png', dest: 'dist/asset' },
+        { files: 'src/asset/spellbook-bg.jpg', dest: 'dist/asset' },
         { files: 'src/background/background.html', dest: 'dist/background' },
+        { files: 'src/bookmarks/directory.html', dest: 'dist/bookmarks' },
         { files: 'src/manifest.json', dest: 'dist' },
         { files: 'src/popup/popup.html', dest: 'dist/popup' },
       ], copyOptions)

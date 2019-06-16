@@ -18,27 +18,31 @@ const platform = (
 )
 
 const parentIdProperty = ($.browser.firefox && $.browser.version < 64)
-      ? 'parentGuid'
-      : 'parentId'
+  ? 'parentGuid'
+  : 'parentId'
 
 const rootCategoryId = $.browser.firefox
-      ? 'root________'
-      : '0'
+  ? 'root________'
+  : '0'
 
 export const bookmarksBarCategoryId = $.browser.firefox
-      ? 'toolbar_____'
-      : '1'
+  ? 'toolbar_____'
+  : '1'
 
 export const otherCategoryId = $.browser.firefox
-      ? 'unfiled_____'
-      : '2'
+  ? 'unfiled_____'
+  : '2'
 
 export const menuCategoryId = $.browser.firefox
-      ? 'menu________'
-      : null
+  ? 'menu________'
+  : null
 
 export function isCategory (bookmark) {
   return !F.get('url', bookmark) && bookmark.id !== 'tags________'
+}
+
+export function isBookmark (bookmark) {
+  return !!F.get('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export function isBookmarkNode (bookmark) {
@@ -49,9 +53,13 @@ export function filterCategories (bookmarks) {
   return bookmarks.filter(isCategory)
 }
 
+export function filterBookmarks (bookmarks) {
+  return bookmarks.filter(isBookmark)
+}
+
 export const bookmarkSearch = strategy(platform, {
-  chrome: chromeBookmarks.bookmarkSearch,
-  firefox: firefoxBookmarks.bookmarkSearch,
+  chrome: chromeBookmarks.search,
+  firefox: firefoxBookmarks.search,
   default: notImplemented$,
 })
 
@@ -60,24 +68,56 @@ export function createBookmark (params, callback) {
 }
 
 export const getBookmark = strategy(platform, {
-  chrome: chromeBookmarks.getBookmark,
-  firefox: firefoxBookmarks.getBookmark,
+  chrome: chromeBookmarks.get,
+  firefox: firefoxBookmarks.get,
   default: notImplemented$,
 })
+
+export const getTree = strategy(platform, {
+  chrome: chromeBookmarks.getTree,
+  firefox: firefoxBookmarks.getTree,
+  default: notImplemented$,
+})
+
+export const getSubTree = strategy(platform, {
+  chrome: chromeBookmarks.getSubTree,
+  firefox: firefoxBookmarks.getSubTree,
+  default: notImplemented$,
+})
+
+export function flattenTree (tree) {
+  let bookmarks = []
+
+  tree.map((bookmark) => {
+    let children = isCategory(bookmark)
+      ? flattenTree(bookmark.children)
+      : []
+
+    bookmarks.push(...[bookmark].concat(children))
+  })
+
+  return bookmarks
+}
+
+const parentPathProperties = ['id', parentIdProperty, 'title']
 
 const pathToString = (parents) => {
   return parents.map(parent => parent.title).join(' < ')
 }
 
+export function getParentId (bookmark) {
+  return F.get(parentIdProperty, bookmark)
+}
+
 export async function getParents (bookmark) {
   let parents = []
-  let current = bookmark
+  let current = F.pick(parentPathProperties, bookmark)
 
-  while (isBookmarkNode(current) && current[parentIdProperty] !== rootCategoryId) {
+  while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
     try {
-      let result = await getBookmark(current[parentIdProperty])
-      parents.push(result[0])
-      current = result[0]
+      let result = await getBookmark(getParentId(current))
+      current = F.pick(parentPathProperties, result[0])
+      parents.push(current)
     } catch (err) {
       console.error(err)
     }
