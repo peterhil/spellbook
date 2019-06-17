@@ -47,10 +47,15 @@ currentTab$
   .spy('Bookmarks found:')
   .observe(onBookmarkSearch, console.error)
 
-Kefir.merge([
-  bookmarkCreated$,
-  bookmarkRemoved$,
-  bookmarkChanged$,
-  bookmarkMoved$,
-])
-  .log('Bookmarks changed:')
+bookmarkCreated$
+  .map(F.get(1))
+  .spy('Bookmark created:')
+  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .observe(onBookmarkSearch, console.error)
+
+bookmarkRemoved$
+  .map(F.get(1))
+  .spy('Bookmark removed:')
+  .map(F.get('node'))
+  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .observe(onBookmarkSearch, console.error)
