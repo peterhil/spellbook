@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/* global chrome */
+
 import Kefir from 'kefir'
 import {
   bookmarkChanged$,
@@ -17,9 +19,16 @@ import { currentTab$ } from '../platform/common/tabs'
 var bookmarked = []
 
 function onBookmarkSearch (bookmarks) {
-  // Search with tab URL and put results to bookarked array
-  console.log('Bookmarks found:', bookmarks)
+  var icon;
+
   bookmarked = bookmarks
+  icon = (
+    (bookmarked.length > 0)
+      ? '../asset/icon_64.png'
+      : '../asset/icon_32.png'
+  )
+
+  chrome.browserAction.setIcon({path: icon})
 }
 
 export const bookmarksController = {
