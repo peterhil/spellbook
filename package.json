@@ -9,6 +9,7 @@
     "dev": "rollup -cw",
     "build": "rollup -c",
     "firefox": "web-ext -s dist",
+    "firefox:build": "web-ext -s dist build",
     "firefox:dev": "web-ext -s dist run",
     "firefox:lint": "web-ext -s dist lint",
     "version": "echo $npm_package_version",
