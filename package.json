@@ -1,6 +1,6 @@
 {
   "name": "spellbook",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Spellbook bookmark manager",
   "main": "src/popup.js",
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",

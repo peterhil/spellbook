@@ -5,19 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
 
-### Added
+# Released versions:
 
-- Add a new subcategory from the popup
-- Edit existing bookmark
-- Remove existing bookmark
-- Indicate when the bookmark is already saved
+## [0.3.5] – 2019-06-17 – Security and improved code
 
 ### Changed
 
-- Use existing bookmark data on the popup if an URL is found on the bookmarks
+- Use rollup-plugin-cpy for packaging instead of rollup-plugin-copy-glob
+- Improved message passing and code organization
+
+### Security
+
+- Updated `js-yaml` to version 3.13.1 because of vulnerabilities
 
 
 ## [0.3.4] – 2018-04-21 – Localisations and usability improvements
@@ -147,6 +148,7 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 
 [Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.4...HEAD
+[0.3.5]: https://github.com/peterhil/spellbook/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/peterhil/spellbook/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/peterhil/spellbook/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/peterhil/spellbook/compare/v0.3.1...v0.3.2
