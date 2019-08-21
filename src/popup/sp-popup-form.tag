@@ -9,28 +9,28 @@
 
   <h1>{ popupHeader() }</h1>
 
-  <form ref="form" model="{ opts.bookmark }">
+  <form ref="form" model={ opts.bookmark }>
     <div class="form-group">
       <label for="title">{ t('title') }</label>
-      <input name="title" ref="title" required value="{ opts.bookmark.title }" class="form-input">
+      <input name="title" ref="title" required value={ opts.bookmark.title } class="form-input">
     </div>
 
     <div class="form-group">
       <label for="url">{ t('url') }</label>
       <div class="input-group">
-        <input name="url" ref="url" type="url" required value="{ opts.bookmark.url }" class="form-input">
-        <sp-favicon favicon="{ opts.bookmark.favIconUrl }"></sp-favicon>
+        <input name="url" ref="url" type="url" required value={ opts.bookmark.url } class="form-input">
+        <sp-favicon favicon={ opts.bookmark.favIconUrl }></sp-favicon>
       </div>
     </div>
 
     <div class="form-group">
-      <sp-category-selector category="{ opts.bookmark.category }"></sp-category-selector>
+      <sp-category-selector category={ opts.bookmark.category }></sp-category-selector>
     </div>
 
     <div class="form-group">
       <label for="subcategory">{ t('add_subcategory') }</label>
       <div class="input-group subcategory">
-        <input name="subcategory" ref="subcategory" value="{ opts.bookmark.subcategory }" class="form-input">
+        <input name="subcategory" ref="subcategory" value={ opts.bookmark.subcategory } class="form-input">
         <a class="btn btn-primary input-group-btn">
           <i class="icon icon-plus"></i>
         </a>
