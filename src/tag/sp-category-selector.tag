@@ -44,6 +44,7 @@
     .categories .menu {
       max-height: 9.6rem;
       overflow-y: scroll;
+      overflow-x: hidden;
     }
 
     .dropdown.active .menu,
