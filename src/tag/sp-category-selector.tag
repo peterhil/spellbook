@@ -10,8 +10,8 @@
   <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
 
   <div class="input-group category-search">
-    <input name="search" ref="search" class="form-input" type="text" value={ selection.title } placeholder={ t('search_placeholder') }>
-    <input name="category" required type="hidden" value={ selection.id }>
+    <input name="search" required ref="search" class="form-input" type="text" value={ selection.title } placeholder={ t('search_placeholder') }>
+    <input name="category" type="hidden" value={ selection.id }>
     <a class="clear-search btn btn-primary input-group-btn">
       <i class="icon icon-search" if="{ !lastSearch }"></i>
       <i class="icon icon-cross" if="{ lastSearch }"></i>
