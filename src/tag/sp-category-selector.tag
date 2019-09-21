@@ -17,9 +17,8 @@
            placeholder="{ t('search_placeholder') }"
            autocomplete="off">
     <input name="category" type="hidden" value={ selection.id }>
-    <a class="clear-search btn btn-primary input-group-btn">
-      <i class="icon icon-search" if="{ !lastSearch }"></i>
-      <i class="icon icon-cross" if="{ lastSearch }"></i>
+    <a class="btn btn-primary input-group-btn">
+      <i class="icon icon-search"></i>
     </a>
   </div>
 
@@ -108,6 +107,7 @@
       vm.selection = emptySelection
       vm.lastSearch = null
       vm.refs.search.focus()
+      vm.showDropdown = false
     }
 
     const clearSelection = (event) => {
@@ -130,12 +130,6 @@
 
       $dropdown.removeClass('active')
       vm.update()
-      event.preventDefault()
-    }
-
-    const onClearSelection = (event) => {
-      vm.showDropdown = false
-      clearSelection()
       event.preventDefault()
     }
 
@@ -167,7 +161,6 @@
       $('.categories').on('keydown', '.category', onKeydown)
       $(vm.refs.search).on('focus', onSearchFocus)
       $(vm.refs.search).on('blur', onSearchBlur)
-      $('.category-search').on('click', '.clear-search', onClearSelection)
     }
 
     const removeEvents = () => {
@@ -175,7 +168,6 @@
       $('.categories').on('keydown', '.category', onKeydown)
       $(vm.refs.search).off('focus', onSearchFocus)
       $(vm.refs.search).off('blur', onSearchBlur)
-      $('.category-search').off('click', '.clear-search', onClearSelection)
     }
 
     vm.on('mount', () => {
