@@ -1,5 +1,6 @@
 {
   "add_bookmark": { "message": "Add bookmark" },
+  "add_subcategory": { "message": "Add subcategory" },
   "bookmarks": { "message": "Bookmarks" },
   "bookmarks_bar": { "message": "Bookmarks Bar" },
   "buttons_add": { "message": "Add" },

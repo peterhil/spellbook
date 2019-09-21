@@ -5,9 +5,9 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-close-button>
-  <a ref="closeButton" class="btn btn-action btn-close btn-sm float-right">
+  <button ref="closeButton" class="btn btn-action btn-close btn-sm float-right" tabindex="0">
     <i class="icon icon-cross"></i>
-  </a>
+  </button>
 
   <style>
     .btn-close {
@@ -22,9 +22,9 @@
     import { events } from '../lib/events'
     const vm = this
 
-    const onClose = (event) => {
-      event.preventDefault()
+    const onClose = () => {
       window.close()
+      return false
     }
 
     vm.on('mount', () => {
