@@ -23,37 +23,20 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <sp-category-selector category={ opts.bookmark.category }></sp-category-selector>
-    </div>
+    <sp-category-selector category={ opts.bookmark.category }></sp-category-selector>
 
-    <div class="form-group">
-      <label for="subcategory">{ t('add_subcategory') }</label>
-      <div class="input-group subcategory">
-        <input name="subcategory" ref="subcategory" value={ opts.bookmark.subcategory } class="form-input" autocomplete="off">
-        <a class="btn btn-primary input-group-btn">
-          <i class="icon icon-plus"></i>
-        </a>
-      </div>
-    </div>
-
-    <div class="form-group text-right">
+    <div class="form-group text-right buttons-row">
       <button type="submit" ref="submitButton" class="btn btn-primary">{ t('buttons_add') }</button>
     </div>
   </form>
 
   <style>
     :scope {
-      --riot-color: #333;
       display: block;
     }
 
     h1 {
-      color: var(--riot-color);
-    }
-
-    .form-group:last-child {
-      margin-top: 1rem;
+      color: #333;
     }
 
     .btn[type=submit] {

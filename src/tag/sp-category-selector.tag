@@ -6,39 +6,51 @@
    -->
 <sp-category-selector>
 
-  <label for="category">{ t('category') }</label>
-  <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
+  <div class="form-group">
+    <label for="category">{ t('category') }</label>
+    <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
 
-  <div class="input-group category-search">
-    <input name="search" ref="search" required
-           class="form-input"
-           type="text"
-           value="{ selection.title }"
-           placeholder="{ t('search_placeholder') }"
-           autocomplete="off">
-    <input name="category" type="hidden" value={ selection.id }>
-    <a class="btn btn-primary input-group-btn">
-      <i class="icon icon-search"></i>
-    </a>
+    <div class="input-group category-search">
+      <input name="search" ref="search" required
+             class="form-input"
+             type="text"
+             value="{ selection.title }"
+             placeholder="{ t('search_placeholder') }"
+             autocomplete="off">
+      <input name="category" type="hidden" value={ selection.id }>
+      <a class="btn btn-primary input-group-btn">
+        <i class="icon icon-plus"></i>
+      </a>
+    </div>
+
+    <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
+      <ul class="menu" aria-role="menu" tabindex="-1">
+        <li
+          class="menu-item" each="{ category in categories }"
+          data-is="sp-category" category="{ category }"
+          >
+        </li>
+        <li class="divider" data-content="{ t('root_categories') }"></li>
+        <sp-main-categories></sp-main-categories>
+      </ul>
+    </div>
+
+    <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
+
+    <small if="{ noCategoryResults() }">
+      No categories found
+    </small>
   </div>
 
-  <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
-    <ul class="menu" aria-role="menu" tabindex="-1">
-      <li
-        class="menu-item" each="{ category in categories }"
-        data-is="sp-category" category="{ category }"
-      >
-      </li>
-      <li class="divider" data-content="{ t('root_categories') }"></li>
-      <sp-main-categories></sp-main-categories>
-    </ul>
+  <div class="form-group">
+    <label for="subcategory">{ t('add_subcategory') }</label>
+    <div class="input-group subcategory">
+      <input name="subcategory" ref="subcategory" class="form-input" autocomplete="off">
+      <a class="btn btn-primary input-group-btn">
+        <i class="icon icon-cross"></i>
+      </a>
+    </div>
   </div>
-
-  <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
-
-  <small if="{ noCategoryResults() }">
-    No categories found
-  </small>
 
   <style>
     .categories {
