@@ -9,41 +9,34 @@
 
   <h1>{ popupHeader() }</h1>
 
-  <form ref="form" model="{ opts.bookmark }">
+  <form ref="form" model={ opts.bookmark }>
     <div class="form-group">
       <label for="title">{ t('title') }</label>
-      <input name="title" ref="title" value="{ opts.bookmark.title }" class="form-input">
+      <input name="title" ref="title" required value={ opts.bookmark.title } class="form-input">
     </div>
 
     <div class="form-group">
       <label for="url">{ t('url') }</label>
       <div class="input-group">
-        <input name="url" ref="url" type="url" value="{ opts.bookmark.url }" class="form-input">
-        <sp-favicon favicon="{ opts.bookmark.favIconUrl }"></sp-favicon>
+        <input name="url" ref="url" type="url" required value={ opts.bookmark.url } class="form-input">
+        <sp-favicon favicon={ opts.bookmark.favIconUrl }></sp-favicon>
       </div>
     </div>
 
-    <div class="form-group">
-      <sp-category-selector category="{ opts.bookmark.category }"></sp-category-selector>
-    </div>
+    <sp-category-selector category={ opts.bookmark.category }></sp-category-selector>
 
-    <div class="form-group text-right">
+    <div class="form-group text-right buttons-row">
       <button type="submit" ref="submitButton" class="btn btn-primary">{ t('buttons_add') }</button>
     </div>
   </form>
 
   <style>
     :scope {
-      --riot-color: #333;
       display: block;
     }
 
     h1 {
-      color: var(--riot-color);
-    }
-
-    .form-group:last-child {
-      margin-top: 1rem;
+      color: #333;
     }
 
     .btn[type=submit] {
@@ -75,16 +68,29 @@
         title: form.title.value,
         url: form.url.value,
       }
+      const subcategory = form.subcategory.value
 
-      console.debug('Bookmark form submitted:', params)
+      console.debug('Bookmark form submitted:', params, subcategory)
 
       if (!valid) {
         return
       }
 
-      createBookmark(params, () => {
-        vm.opts.bookmark.saved = true
-      })
+      if (subcategory) {
+        createBookmark({
+          parentId: params.parentId,
+          title: subcategory,
+        }, (subcategory) => {
+          params.parentId = subcategory.id
+          createBookmark(params, () => {
+            vm.opts.bookmark.saved = true
+          })
+        })
+      } else {
+        createBookmark(params, () => {
+          vm.opts.bookmark.saved = true
+        })
+      }
 
       vm.update()
       event.preventDefault()

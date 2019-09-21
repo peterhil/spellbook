@@ -6,35 +6,52 @@
    -->
 <sp-category-selector>
 
-  <label for="category">{ t('category') }</label>
-  <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
+  <div class="form-group">
+    <label for="category">{ t('category') }</label>
+    <small if="{ !!lastSearch }" class="float-right">{ t('search') }: { lastSearch }</small>
 
-  <div class="input-group category-search">
-    <input name="search" ref="search" class="form-input" type="text" value={ selection.title } placeholder={ t('search_placeholder') }>
-    <input name="category" required type="hidden" value={ selection.id }>
-    <a class="clear-search btn btn-primary input-group-btn">
-      <i class="icon icon-search" if="{ !lastSearch }"></i>
-      <i class="icon icon-cross" if="{ lastSearch }"></i>
-    </a>
+    <div class="input-group category-search">
+      <input name="search" ref="search" required
+             class="form-input"
+             type="text"
+             value="{ selection.title }"
+             placeholder="{ t('search_placeholder') }"
+             autocomplete="off">
+      <input name="category" type="hidden" value={ selection.id }>
+      <button class="toggle-subcategory btn btn-primary input-group-btn"
+         if="{ !noSelection() }" tabindex="0">
+        <i class="icon icon-plus"></i>
+      </button>
+    </div>
+
+    <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
+      <ul class="menu" aria-role="menu" tabindex="-1">
+        <li
+          class="menu-item" each="{ category in categories }"
+          data-is="sp-category" category="{ category }"
+          >
+        </li>
+        <li class="divider" data-content="{ t('root_categories') }"></li>
+        <sp-main-categories></sp-main-categories>
+      </ul>
+    </div>
+
+    <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
+
+    <small if="{ noCategoryResults() }">
+      No categories found
+    </small>
   </div>
 
-  <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
-    <ul class="menu" aria-role="menu" tabindex="-1">
-      <li
-        class="menu-item" each="{ category in categories }"
-        data-is="sp-category" category="{ category }"
-      >
-      </li>
-      <li class="divider" data-content="{ t('root_categories') }"></li>
-      <sp-main-categories></sp-main-categories>
-    </ul>
+  <div class="form-group" if="{ showSubcategory }">
+    <label for="subcategory">{ t('add_subcategory') }</label>
+    <div class="input-group subcategory">
+      <input name="subcategory" ref="subcategory" class="form-input" autocomplete="off">
+      <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0">
+        <i class="icon icon-cross"></i>
+      </button>
+    </div>
   </div>
-
-  <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
-
-  <small if="{ noCategoryResults() }">
-    No categories found
-  </small>
 
   <style>
     .categories {
@@ -44,6 +61,7 @@
     .categories .menu {
       max-height: 9.6rem;
       overflow-y: scroll;
+      overflow-x: hidden;
     }
 
     .dropdown.active .menu,
@@ -70,6 +88,7 @@
 
     vm.lastSearch = null
     vm.showDropdown = false
+    vm.showSubcategory = false
     vm.selection = emptySelection
     vm.t = t
 
@@ -101,6 +120,7 @@
       vm.categories = []
       vm.selection = emptySelection
       vm.lastSearch = null
+      vm.showDropdown = false
       vm.refs.search.focus()
     }
 
@@ -127,12 +147,6 @@
       event.preventDefault()
     }
 
-    const onClearSelection = (event) => {
-      vm.showDropdown = false
-      clearSelection()
-      event.preventDefault()
-    }
-
     const onKeydown = (event) => {
       const keys = { ENTER: 13 }
 
@@ -156,20 +170,26 @@
       return false
     }
 
+    const onToggleSubcategory = () => {
+      vm.showSubcategory = !vm.showSubcategory
+      vm.update()
+      return false
+    }
+
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
+      $(document.body).on('click', '.toggle-subcategory', onToggleSubcategory)
       $(vm.refs.search).on('focus', onSearchFocus)
       $(vm.refs.search).on('blur', onSearchBlur)
-      $('.category-search').on('click', '.clear-search', onClearSelection)
     }
 
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
-      $('.categories').on('keydown', '.category', onKeydown)
+      $('.categories').off('keydown', '.category', onKeydown)
+      $(document.body).off('click', '.toggle-subcategory', onToggleSubcategory)
       $(vm.refs.search).off('focus', onSearchFocus)
       $(vm.refs.search).off('blur', onSearchBlur)
-      $('.category-search').off('click', '.clear-search', onClearSelection)
     }
 
     vm.on('mount', () => {
