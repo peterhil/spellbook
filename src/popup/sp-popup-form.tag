@@ -85,16 +85,29 @@
         title: form.title.value,
         url: form.url.value,
       }
+      const subcategory = form.subcategory.value
 
-      console.debug('Bookmark form submitted:', params)
+      console.debug('Bookmark form submitted:', params, subcategory)
 
       if (!valid) {
         return
       }
 
-      createBookmark(params, () => {
-        vm.opts.bookmark.saved = true
-      })
+      if (subcategory) {
+        createBookmark({
+          parentId: params.parentId,
+          title: subcategory,
+        }, (subcategory) => {
+          params.parentId = subcategory.id
+          createBookmark(params, () => {
+            vm.opts.bookmark.saved = true
+          })
+        })
+      } else {
+        createBookmark(params, () => {
+          vm.opts.bookmark.saved = true
+        })
+      }
 
       vm.update()
       event.preventDefault()
