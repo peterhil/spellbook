@@ -18,10 +18,10 @@
              placeholder="{ t('search_placeholder') }"
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
-      <a class="toggle-subcategory btn btn-primary input-group-btn"
-         if="{ !noSelection() }">
+      <button class="toggle-subcategory btn btn-primary input-group-btn"
+         if="{ !noSelection() }" tabindex="0">
         <i class="icon icon-plus"></i>
-      </a>
+      </button>
     </div>
 
     <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
@@ -47,9 +47,9 @@
     <label for="subcategory">{ t('add_subcategory') }</label>
     <div class="input-group subcategory">
       <input name="subcategory" ref="subcategory" class="form-input" autocomplete="off">
-      <a class="toggle-subcategory btn btn-primary input-group-btn">
+      <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0">
         <i class="icon icon-cross"></i>
-      </a>
+      </button>
     </div>
   </div>
 
@@ -173,6 +173,7 @@
     const onToggleSubcategory = () => {
       vm.showSubcategory = !vm.showSubcategory
       vm.update()
+      return false
     }
 
     const addEvents = () => {
