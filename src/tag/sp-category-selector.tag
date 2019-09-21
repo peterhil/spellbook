@@ -18,7 +18,7 @@
              placeholder="{ t('search_placeholder') }"
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
-      <a class="btn btn-primary input-group-btn">
+      <a class="toggle-subcategory btn btn-primary input-group-btn">
         <i class="icon icon-plus"></i>
       </a>
     </div>
@@ -42,7 +42,7 @@
     </small>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" if="{ showSubcategory }">
     <label for="subcategory">{ t('add_subcategory') }</label>
     <div class="input-group subcategory">
       <input name="subcategory" ref="subcategory" class="form-input" autocomplete="off">
@@ -87,6 +87,7 @@
 
     vm.lastSearch = null
     vm.showDropdown = false
+    vm.showSubcategory = false
     vm.selection = emptySelection
     vm.t = t
 
@@ -118,8 +119,8 @@
       vm.categories = []
       vm.selection = emptySelection
       vm.lastSearch = null
-      vm.refs.search.focus()
       vm.showDropdown = false
+      vm.refs.search.focus()
     }
 
     const clearSelection = (event) => {
@@ -168,9 +169,15 @@
       return false
     }
 
+    const onToggleSubcategory = () => {
+      vm.showSubcategory = !vm.showSubcategory
+      vm.update()
+    }
+
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
+      $('.toggle-subcategory').on('click', onToggleSubcategory)
       $(vm.refs.search).on('focus', onSearchFocus)
       $(vm.refs.search).on('blur', onSearchBlur)
     }
@@ -178,6 +185,7 @@
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
+      $('.toggle-subcategory').off('click', onToggleSubcategory)
       $(vm.refs.search).off('focus', onSearchFocus)
       $(vm.refs.search).off('blur', onSearchBlur)
     }
