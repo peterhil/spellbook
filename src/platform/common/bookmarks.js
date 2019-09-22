@@ -10,8 +10,9 @@ import $ from 'zepto'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
 import F from 'fkit'
-import { notImplemented$ } from '../../lib/reactive'
+import { browserEvent$ } from './helpers'
 import { choice } from '../../lib/pure'
+import { notImplemented$ } from '../../lib/reactive'
 
 const platform = (
   $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
@@ -137,3 +138,8 @@ export async function getParentPath (bookmark) {
 
   return pathToString(parents)
 }
+
+export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
+export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
+export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
+export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)

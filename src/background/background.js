@@ -8,6 +8,7 @@
 
 import { disconnectionHandler, messageServer } from '../lib/messaging'
 import { directoryController } from './directory-controller'
+import { bookmarksController } from './bookmarks-controller'
 import { popupController } from './popup-controller'
 
 const controllers = {

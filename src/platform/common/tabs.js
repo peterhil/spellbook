@@ -75,6 +75,8 @@ const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
   })
 
 export const tabUpdate$ = onUpdated$
+  .filter(event => isCurrent(event.tab) && isUrlChange(event))
+  .spy('tabUpdate')
   .map(F.get('tab'))
 
 export const tabActivation$ = onActivated$
