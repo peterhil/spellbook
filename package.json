@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "rollup -cw",
     "build": "rollup -c",
+    "release": "VERSION=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && cd dist && zip -r9v ../web-ext-artifacts/spellbook-$VERSION-chrome.zip * && cd -",
     "firefox": "web-ext -s dist",
     "firefox:build": "web-ext -s dist build",
     "firefox:dev": "web-ext -s dist run",
