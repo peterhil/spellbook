@@ -24,8 +24,8 @@ function onBookmarkSearch (bookmarks) {
   bookmarked = bookmarks
   icon = (
     (bookmarked.length > 0)
-      ? '../asset/icon_64.png'
-      : '../asset/icon_32.png'
+      ? '../asset/spellbook_icon_bookmarked.png'
+      : '../asset/spellbook_icon.png'
   )
 
   chrome.browserAction.setIcon({path: icon})
