@@ -9,6 +9,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Released versions:
 
+## [0.3.6] – 2019-09-23 – Add subcategories
+
+### Added
+
+- Ability to add bookmark into a new subcategory
+- Show different icon when the current URL has been bookmarked
+- Make keyboard tab focus work accross all elements on popup
+
+### Changed
+
+- New icon for the browser extension
+
+### Fixed
+
+- Fix a bug that caused favicon changes to show wrong info on popup
+- Validate that title, url and category are not empty
+- Prevent category menu from scrolling sideways
+- Disable autocomplete on category and subcategory fields
+
+### Removed
+
+- Removed the button to clear the selection and search
+
+
 ## [0.3.5] – 2019-06-17 – Security and improved code
 
 ### Changed
@@ -147,7 +171,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.6...HEAD
+[0.3.6]: https://github.com/peterhil/spellbook/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/peterhil/spellbook/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/peterhil/spellbook/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/peterhil/spellbook/compare/v0.3.2...v0.3.3
