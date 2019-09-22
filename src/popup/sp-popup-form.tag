@@ -68,7 +68,7 @@
         title: form.title.value,
         url: form.url.value,
       }
-      const subcategory = form.subcategory.value
+      const subcategory = form.subcategory && form.subcategory.value
 
       console.debug('Bookmark form submitted:', params, subcategory)
 
