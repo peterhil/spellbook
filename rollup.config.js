@@ -140,7 +140,7 @@ export default [
       copy({
         files: [
           '_locales/**/*.json',
-          'asset/icon*.png',
+          'asset/spellbook_icon*.png',
           'asset/spellbook-bg.jpg',
           'background/background.html',
           'bookmarks/directory.html',
