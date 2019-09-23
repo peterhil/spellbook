@@ -6,6 +6,7 @@
 
 /* global chrome */
 
+import * as F from 'fkit'
 import Kefir from 'kefir'
 import {
   bookmarkChanged$,

@@ -75,7 +75,7 @@
 
   <script>
     import $ from 'zepto'
-    import F from 'fkit'
+    import * as F from 'fkit'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'

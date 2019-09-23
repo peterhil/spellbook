@@ -8,7 +8,7 @@
 
 /* global chrome */
 
-import F from 'fkit'
+import * as F from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
@@ -19,11 +19,11 @@ const currentTabQuery = {
 }
 
 const isUrlChange = function (info) {
-  return !!F.getIn(['change', 'url'], info)
+  return !!F.get('url', info.change)
 }
 
 const isComplete = function (info) {
-  return F.getIn(['change', 'status'], info) === 'complete'
+  return F.get('status', info.change) === 'complete'
 }
 
 const is = F.get

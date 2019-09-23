@@ -6,7 +6,7 @@
 
 // Pure utility functions
 
-import F from 'fkit'
+import * as F from 'fkit'
 
 export const hasItems = array => {
   return array && !F.empty(array)

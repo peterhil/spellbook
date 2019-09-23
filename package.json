@@ -18,7 +18,7 @@
     "test:watch": "ava --watch"
   },
   "dependencies": {
-    "fkit": "~1.4.0",
+    "fkit": "~3.4.0",
     "kefir": "~3.8.5",
     "riot": "~3.13.0",
     "spectre.css": "~0.5.3",

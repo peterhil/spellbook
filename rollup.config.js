@@ -63,14 +63,12 @@ export default [
       format: outputFormat,
       sourcemap: true,
       globals: {
-        'fkit': 'F',
         'kefir': 'Kefir',
         'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
-      'fkit',
       'kefir',
       'riot',
       'zepto',
@@ -84,14 +82,12 @@ export default [
       format: outputFormat,
       sourcemap: true,
       globals: {
-        'fkit': 'F',
         'kefir': 'Kefir',
         'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
-      'fkit',
       'kefir',
       'riot',
       'zepto',
@@ -117,7 +113,7 @@ export default [
     ],
     plugins: plugins.push(
       copy([
-        { files: 'node_modules/fkit/dist/fkit.js', dest: 'dist/external' },
+        { files: 'node_modules/fkit/dist/fkit.min.js', dest: 'dist/external' },
         { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
         { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
         { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },

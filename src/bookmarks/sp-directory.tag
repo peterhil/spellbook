@@ -111,7 +111,7 @@
   </style>
 
   <script>
-    import F from 'fkit'
+    import * as F from 'fkit'
     import Kefir from 'kefir'
     import { hasItems, propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'

@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import F from 'fkit'
+import * as F from 'fkit'
 
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {

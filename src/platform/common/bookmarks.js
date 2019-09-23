@@ -9,7 +9,7 @@
 import $ from 'zepto'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
-import F from 'fkit'
+import * as F from 'fkit'
 import { browserEvent$ } from './helpers'
 import { choice } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
