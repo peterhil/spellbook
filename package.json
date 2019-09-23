@@ -21,7 +21,6 @@
     "fkit": "~1.4.0",
     "kefir": "~3.8.5",
     "riot": "~3.13.0",
-    "riotgear": "~3.5.0",
     "spectre.css": "~0.5.3",
     "zepto": "~1.2.0"
   },
@@ -39,7 +38,7 @@
     "eslint-plugin-standard": "~4.0.0",
     "postcss": "~7.0.5",
     "require-from-string": "~2.0.2",
-    "riot-compiler": "~3.3.0",
+    "riot-compiler": "^3.6.0",
     "rollup": "~0.66.5",
     "rollup-plugin-buble": "~0.19.4",
     "rollup-plugin-commonjs": "~9.2.0",
