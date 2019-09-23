@@ -56,6 +56,7 @@ const plugins = [
       chrome: 52,
     },
     transforms: {
+      asyncAwait: false,
       modules: true,
     },
     objectAssign: 'Object.assign',
