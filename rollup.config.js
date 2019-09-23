@@ -19,9 +19,6 @@ const plugins = [
     },
   }),
   resolve({
-    module: true,  // default: true
-    jsnext: true,  // default: false
-    main: true,  // default: true
     browser: true,  // default: false
     modulesOnly: true,  // default: false
     customResolveOptions: {
