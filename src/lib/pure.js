@@ -17,7 +17,7 @@ export const isFunction = fn => {
 }
 
 export const choice = F.curry((selection, options) => {
-  return options[selection] || options['default']
+  return options[selection] || options.default
 })
 
 //

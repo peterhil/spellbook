@@ -12,7 +12,7 @@ import F from 'fkit'
 export const browserEvent$ = (eventType) => {
   return fromEventPattern(
     eventType.addListener.bind(eventType),
-    eventType.removeListener.bind(eventType),
+    eventType.removeListener.bind(eventType)
   )
 }
 
