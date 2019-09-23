@@ -54,6 +54,7 @@ const plugins = [
   buble({
     target: {
       chrome: 52,
+      firefox: 56,
     },
     transforms: {
       asyncAwait: false,
