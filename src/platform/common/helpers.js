@@ -7,7 +7,7 @@
 /* global chrome */
 
 import { fromEventPattern } from '../../lib/rxjs'
-import * as F from 'fkit'
+import { init, last } from 'fkit'
 
 export const browserEvent$ = (eventType) => {
   return fromEventPattern(
@@ -18,8 +18,8 @@ export const browserEvent$ = (eventType) => {
 
 export const withErrorChecking = (chromeAsyncFn) => {
   return function wrappedAsyncChromeFn (...args) {
-    const originalCallback = F.last(args)
-    const fnArgs = F.init(args)
+    const originalCallback = last(args)
+    const fnArgs = init(args)
     const callbackWithErrorCheck = (...resultArgs) => {
       if (chrome.runtime.lastError) {
         throw new Error(chrome.runtime.lastError.message)

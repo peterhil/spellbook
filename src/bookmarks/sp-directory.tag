@@ -111,7 +111,7 @@
   </style>
 
   <script>
-    import * as F from 'fkit'
+    import { get, head, filter, sortBy } from 'fkit'
     import Kefir from 'kefir'
     import { hasItems, propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
@@ -140,7 +140,7 @@
     const categories$ = allBookmarks$
       .map(flattenTree)
       .map(filterCategories)
-      .map(F.sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', false)))
       .spy('Directory tag: categories$')
 
     const updateCategories = (categories) => {
@@ -152,17 +152,17 @@
 
     const selectedBookmarks$ = Kefir
       .fromPromise(getSubTree(vm.selectedCategory))
-      .map(F.head)  // TODO Fix this API madness on the bookmarks adapter!
-      .map(F.get('children'))
+      .map(head)  // TODO Fix this API madness on the bookmarks adapter!
+      .map(get('children'))
 
     const bookmarks$ = selectedBookmarks$
-      .map(F.sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', false)))
       .spy('Directory tag: bookmarks$')
 
     const updateBookmarks = (bookmarks) => {
       console.debug('updateBookmarks:', bookmarks)
-      vm.bookmarks = F.filter(isBookmark, bookmarks)
-      vm.subcategories = F.filter(isCategory, bookmarks)
+      vm.bookmarks = filter(isBookmark, bookmarks)
+      vm.subcategories = filter(isCategory, bookmarks)
       vm.update()
       console.debug('Bookmarks updated')
     }
