@@ -46,17 +46,44 @@ const plugins = [
     objectAssign: 'Object.assign',
   }),
 ]
+
 const copyOptions = {
   cwd: 'src',
   parents: true,
   verbose: true,
 }
 
+const pluginsWithcopy = plugins.concat([
+  copy([
+    { files: 'node_modules/fkit/dist/fkit.min.js', dest: 'dist/external' },
+    { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
+    { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
+    { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
+    { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
+    { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
+    { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
+  ], copyOptions),
+  copy({
+    files: [
+      '_locales/**/*.json',
+      'asset/spellbook_icon*.png',
+      'asset/spellbook-bg.jpg',
+      'background/background.html',
+      'bookmarks/directory.html',
+      'manifest.json',
+      'popup/popup.html',
+    ],
+    dest: '../dist',
+    options: copyOptions,
+  }),
+])
+
+
 export default [
   {
-    input: 'src/popup/popup.js',
+    input: { popup: 'src/popup/popup.js' },
     output: {
-      file: 'dist/popup/popup.js',
+      dir: 'dist/popup',
       format: outputFormat,
       sourcemap: true,
       globals: {
@@ -73,9 +100,9 @@ export default [
     plugins: plugins
   },
   {
-    input: 'src/bookmarks/directory.js',
+    input: { directory: 'src/bookmarks/directory.js' },
     output: {
-      file: 'dist/bookmarks/directory.js',
+      dir: 'dist/bookmarks',
       format: outputFormat,
       sourcemap: true,
       globals: {
@@ -92,9 +119,9 @@ export default [
     plugins: plugins
   },
   {
-    input: 'src/background/background.js',
+    input: { background: 'src/background/background.js' },
     output: {
-      file: 'dist/background/background.js',
+      dir: 'dist/background',
       format: outputFormat,
       sourcemap: true,
       globals: {
@@ -108,29 +135,6 @@ export default [
       'kefir',
       'zepto',
     ],
-    plugins: plugins.push(
-      copy([
-        { files: 'node_modules/fkit/dist/fkit.min.js', dest: 'dist/external' },
-        { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
-        { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
-        { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
-        { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
-        { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
-        { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
-      ], copyOptions),
-      copy({
-        files: [
-          '_locales/**/*.json',
-          'asset/spellbook_icon*.png',
-          'asset/spellbook-bg.jpg',
-          'background/background.html',
-          'bookmarks/directory.html',
-          'manifest.json',
-          'popup/popup.html',
-        ],
-        dest: '../dist',
-        options: copyOptions,
-      }),
-    )
+    plugins: pluginsWithcopy
   }
 ]
