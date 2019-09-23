@@ -4,33 +4,19 @@ import buble from 'rollup-plugin-buble'
 import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
 import resolve from 'rollup-plugin-node-resolve'
-import postcss from 'postcss'
-import postcssCssnext from 'postcss-cssnext'
+import postcss from 'rollup-plugin-postcss'
 import riot from 'rollup-plugin-riot'
-import sass from 'rollup-plugin-sass'
 import { eslint } from 'rollup-plugin-eslint'
-
-/**
- * Transforms new CSS specs into more compatible CSS
- */
-function cssnext (tagName, css) {
-  // A small hack: it passes :scope as :root to PostCSS.
-  // This make it easy to use css variables inside tags.
-  css = css.replace(/:scope/g, ':root')
-  css = postcss([postcssCssnext]).process(css).css
-  css = css.replace(/:root/g, ':scope')
-  return css
-}
 
 const outputFormat = 'iife'
 const plugins = [
   riot({
     compact: true,
     esm: true,
-    style: 'cssnext',
+    style: 'css',
     parsers: {
-      css: { cssnext }
-    }
+      css: { postcss }
+    },
   }),
   resolve({
     module: true,  // default: true
@@ -47,10 +33,8 @@ const plugins = [
       'src/**/*.{css,sass}',
     ]
   }),
-  sass({
-    // output: true,
-    // output: 'popup.css',
-    insert: true
+  postcss({
+    extensions: ['css', 'sass'],
   }),
   commonjs(),
   buble({

@@ -38,7 +38,6 @@
     "eslint-plugin-riot": "~0.1.8",
     "eslint-plugin-standard": "~4.0.0",
     "postcss": "~7.0.5",
-    "postcss-cssnext": "~3.1.0",
     "require-from-string": "~2.0.2",
     "riot-compiler": "~3.3.0",
     "rollup": "~0.66.5",
@@ -47,6 +46,7 @@
     "rollup-plugin-cpy": "~1.1.0",
     "rollup-plugin-eslint": "~5.0.0",
     "rollup-plugin-node-resolve": "~3.4.0",
+    "rollup-plugin-postcss": "~2.0.3",
     "rollup-plugin-riot": "~2.0.0",
     "rollup-plugin-sass": "~0.9.2",
     "web-ext": "~2.9.1"
@@ -69,5 +69,12 @@
       "./test/utils/browser-env",
       "./test/utils/node-extensions"
     ]
-  }
+  },
+  "browserslist": [
+    "Chrome >= 52",
+    "Firefox >= 56",
+    "FirefoxAndroid >= 56",
+    "Firefox ESR",
+    "since 2015 and not safari > 0 and not ios_saf > 0 and not ie > 0 and not edge > 0"
+  ]
 }
