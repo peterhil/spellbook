@@ -18,12 +18,12 @@ const messageHandler = function (message) {
   console.debug('[directory] Got message:', message.type, message)
 
   switch (message.type) {
-  case 'allBookmarksTree':
-    console.log('[directory] All bookmarks tree:', message.data)
-    messages.trigger(message.type, message.data)
-    break
-  default:
-    console.warn('Unhandled message type:', message.type)
+    case 'allBookmarksTree':
+      console.log('[directory] All bookmarks tree:', message.data)
+      messages.trigger(message.type, message.data)
+      break
+    default:
+      console.warn('Unhandled message type:', message.type)
   }
 }
 

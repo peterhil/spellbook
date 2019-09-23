@@ -18,13 +18,13 @@ export const browserEvent$ = (eventType) => {
 
 export const withErrorChecking = (chromeAsyncFn) => {
   return function wrappedAsyncChromeFn (...args) {
-    const callback = F.last(args)
+    const originalCallback = F.last(args)
     const fnArgs = F.init(args)
     const callbackWithErrorCheck = (...resultArgs) => {
       if (chrome.runtime.lastError) {
         throw new Error(chrome.runtime.lastError.message)
       }
-      callback(...resultArgs)
+      originalCallback(...resultArgs)
     }
 
     chromeAsyncFn(...fnArgs, callbackWithErrorCheck)
