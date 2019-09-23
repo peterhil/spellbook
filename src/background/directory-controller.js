@@ -8,11 +8,11 @@ import Kefir from 'kefir'
 import {
   getTree,
 } from '../platform/common/bookmarks'
+import { choice } from '../lib/pure'
 
 var bookmarks = []
 
-const allBookmarksTree$ = Kefir
-  .fromPromise(getTree())
+const allBookmarksTree$ = Kefir.fromPromise(getTree())
 
 const onBookmarksUpdated = function (updatedBookmarks) {
   bookmarks = updatedBookmarks
@@ -20,14 +20,17 @@ const onBookmarksUpdated = function (updatedBookmarks) {
 
 export const directoryController = {
   action: function (message, port) {
-    switch (message.type) {
-    case 'getAllBookmarks':
-      port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
-      break
-    default:
-      console.error('Unhandled message:', message)
-      port.disconnect()
-    }
+    const action = choice(message.type, {
+      getAllBookmarks: (_, port) => {
+        port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
+      },
+      default: (message, port) => {
+        console.error('Unhandled message:', message)
+        port.disconnect()
+      }
+    })
+
+    action(message, port)
   }
 }
 

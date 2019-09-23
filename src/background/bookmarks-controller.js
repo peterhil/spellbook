@@ -4,9 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
+/* global chrome, F */
 
-import Kefir from 'kefir'
 import {
   bookmarkChanged$,
   bookmarkCreated$,
@@ -14,12 +13,14 @@ import {
   bookmarkRemoved$,
   bookmarkSearch,
 } from '../platform/common/bookmarks'
+import { sendMessage, unhandledMessage } from '../lib/messaging'
+import { choice } from '../lib/pure'
 import { currentTab$ } from '../platform/common/tabs'
 
 var bookmarked = []
 
 function onBookmarkSearch (bookmarks) {
-  var icon;
+  var icon
 
   bookmarked = bookmarks
   icon = (
@@ -28,7 +29,7 @@ function onBookmarkSearch (bookmarks) {
       : '../asset/spellbook_icon.png'
   )
 
-  chrome.browserAction.setIcon({path: icon})
+  chrome.browserAction.setIcon({ path: icon })
 }
 
 export const bookmarksController = {
@@ -50,6 +51,18 @@ currentTab$
 bookmarkCreated$
   .map(F.get(1))
   .spy('Bookmark created:')
+  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .observe(onBookmarkSearch, console.error)
+
+bookmarkChanged$
+  .map(F.get(1))
+  .spy('Bookmark changed:')
+  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .observe(onBookmarkSearch, console.error)
+
+bookmarkMoved$
+  .map(F.get(1))
+  .spy('Bookmark moved:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
   .observe(onBookmarkSearch, console.error)
 
