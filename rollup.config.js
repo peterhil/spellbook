@@ -25,6 +25,8 @@ function cssnext (tagName, css) {
 const outputFormat = 'iife'
 const plugins = [
   riot({
+    compact: true,
+    esm: true,
     style: 'cssnext',
     parsers: {
       css: { cssnext }
