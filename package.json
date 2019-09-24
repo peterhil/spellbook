@@ -18,37 +18,37 @@
     "test:watch": "ava --watch"
   },
   "dependencies": {
-    "fkit": "^1.4.0",
-    "kefir": "^3.8.5",
-    "riot": "^3.13.0",
-    "riotgear": "^3.5.0",
-    "spectre.css": "^0.5.3",
-    "zepto": "^1.2.0"
+    "fkit": "~3.4.0",
+    "kefir": "~3.8.5",
+    "riot": "~3.13.0",
+    "spectre.css": "~0.5.3",
+    "zepto": "~1.2.0"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "browser-env": "^3.2.5",
-    "buble-register": "^1.0.1",
-    "caniuse-lite": "^1.0.3",
-    "eslint": "^5.7.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "postcss": "^7.0.5",
-    "postcss-cssnext": "^3.1.0",
-    "require-from-string": "^2.0.2",
-    "riot-compiler": "^3.3.0",
-    "rollup": "^0.66.5",
-    "rollup-plugin-buble": "^0.19.4",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-cpy": "^1.1.0",
-    "rollup-plugin-eslint": "^5.0.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-riot": "^2.0.0",
-    "rollup-plugin-sass": "^0.9.2",
-    "web-ext": "^2.9.1"
+    "ava": "^2.4.0",
+    "browser-env": "~3.2.5",
+    "buble-register": "~1.0.1",
+    "caniuse-lite": "~1.0.3",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-riot": "~0.1.8",
+    "eslint-plugin-standard": "~4.0.0",
+    "postcss": "~7.0.5",
+    "require-from-string": "~2.0.2",
+    "riot-compiler": "^3.6.0",
+    "rollup": "~1.21.4",
+    "rollup-plugin-buble": "~0.19.4",
+    "rollup-plugin-commonjs": "~10.1.0",
+    "rollup-plugin-cpy": "~2.0.1",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-resolve": "~5.2.0",
+    "rollup-plugin-postcss": "~2.0.3",
+    "rollup-plugin-riot": "^2.1.0",
+    "rollup-plugin-sass": "~1.2.2",
+    "web-ext": "~2.9.1"
   },
   "ava": {
     "cache": true,
@@ -68,5 +68,12 @@
       "./test/utils/browser-env",
       "./test/utils/node-extensions"
     ]
-  }
+  },
+  "browserslist": [
+    "Chrome >= 52",
+    "Firefox >= 56",
+    "FirefoxAndroid >= 56",
+    "Firefox ESR",
+    "since 2015 and not safari > 0 and not ios_saf > 0 and not ie > 0 and not edge > 0"
+  ]
 }

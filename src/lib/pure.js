@@ -6,29 +6,29 @@
 
 // Pure utility functions
 
-import F from 'fkit'
+import { curry, empty, get, toLower } from 'fkit'
 
 export const hasItems = array => {
-  return array && !F.empty(array)
+  return array && !empty(array)
 }
 
 export const isFunction = fn => {
   return typeof fn === 'function'
 }
 
-export const choice = F.curry((selection, options) => {
-  return options[selection] || options['default']
+export const choice = curry((selection, options) => {
+  return options[selection] || options.default
 })
 
 //
-// Use propertyComparator with F.sortBy or similar sort function like this:
-// F.sortBy(propertyCompare('title'), list)
+// Use propertyComparator with sortBy or similar sort function like this:
+// sortBy(propertyCompare('title'), list)
 // This function is curried.
 //
 export const propertyCompare = (property, caseSensitive = true) => {
   const prop = caseSensitive
-    ? F.get(property)
-    : F.curry((item) => F.toLower(F.get(property, item)))
+    ? get(property)
+    : curry((item) => toLower(get(property, item)))
 
   return function comparator (a, b) {
     return prop(a) < prop(b) ? -1 : (prop(a) > prop(b) ? 1 : 0)

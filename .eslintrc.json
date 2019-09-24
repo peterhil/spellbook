@@ -21,5 +21,13 @@
         ]
       }
     }
-  ]
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedstrict": false
+    }
+  },
+  "plugins": ["riot"]
 }

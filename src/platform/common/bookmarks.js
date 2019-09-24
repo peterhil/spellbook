@@ -9,7 +9,7 @@
 import $ from 'zepto'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
-import F from 'fkit'
+import { get, pick } from 'fkit'
 import { browserEvent$ } from './helpers'
 import { choice } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
@@ -39,15 +39,15 @@ export const menuCategoryId = $.browser.firefox
   : null
 
 export function isCategory (bookmark) {
-  return !F.get('url', bookmark) && bookmark.id !== 'tags________'
+  return !get('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export function isBookmark (bookmark) {
-  return !!F.get('url', bookmark) && bookmark.id !== 'tags________'
+  return !!get('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export function isBookmarkNode (bookmark) {
-  return !!F.get(parentIdProperty, bookmark)
+  return !!get(parentIdProperty, bookmark)
 }
 
 export function filterCategories (bookmarks) {
@@ -107,17 +107,17 @@ const pathToString = (parents) => {
 }
 
 export function getParentId (bookmark) {
-  return F.get(parentIdProperty, bookmark)
+  return get(parentIdProperty, bookmark)
 }
 
 export async function getParents (bookmark) {
   let parents = []
-  let current = F.pick(parentPathProperties, bookmark)
+  let current = pick(parentPathProperties, bookmark)
 
   while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
     try {
       let result = await getBookmark(getParentId(current))
-      current = F.pick(parentPathProperties, result[0])
+      current = pick(parentPathProperties, result[0])
       parents.push(current)
     } catch (err) {
       console.error(err)
