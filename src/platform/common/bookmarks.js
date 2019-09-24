@@ -88,10 +88,10 @@ export const getSubTree = choice(platform, {
 })
 
 export function flattenTree (tree) {
-  let bookmarks = []
+  var bookmarks = []
 
   tree.map((bookmark) => {
-    let children = isCategory(bookmark)
+    var children = isCategory(bookmark)
       ? flattenTree(bookmark.children)
       : []
 
@@ -112,12 +112,12 @@ export function getParentId (bookmark) {
 }
 
 export async function getParents (bookmark) {
-  let parents = []
+  var parents = []
   let current = pick(parentPathProperties, bookmark)
 
   while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
     try {
-      let result = await getBookmark(getParentId(current))
+      var result = await getBookmark(getParentId(current))
       current = pick(parentPathProperties, result[0])
       parents.push(current)
     } catch (err) {

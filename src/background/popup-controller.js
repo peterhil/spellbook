@@ -6,7 +6,7 @@
 
 import { choice } from '../lib/pure'
 import { closedTab$, closedWindow$, currentTab$ } from '../platform/common/tabs'
-import { disconnectionHandler, sendMessage, unhandledMessage } from '../lib/messaging'
+import { sendMessage, unhandledMessage } from '../lib/messaging'
 
 var currentTab = {
   title: '',
