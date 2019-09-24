@@ -10,29 +10,35 @@ import riot from 'riot'
 
 import './directory.sass'
 import './sp-directory.tag'
-import { disconnectionHandler } from '../lib/messaging'
+import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
+import { choice } from '../lib/pure'
 
 var messages = riot.observable()
 
 const messageHandler = function (message) {
   console.debug('[directory] Got message:', message.type, message)
 
-  switch (message.type) {
-    case 'allBookmarksTree':
+  const action = choice(message.type, {
+    allBookmarksTree: () => {
       console.log('[directory] All bookmarks tree:', message.data)
       messages.trigger(message.type, message.data)
-      break
-    default:
-      console.warn('Unhandled message type:', message.type)
-  }
+    },
+    default: unhandledMessage,
+  })
+
+  action(message)
 }
 
 function onLoad (event) {
   const port = chrome.runtime.connect({ name: 'directory' })
 
-  port.onMessage.addListener(messageHandler)
   port.onDisconnect.addListener(disconnectionHandler)
+
+  // Send a message
   port.postMessage({ type: 'getAllBookmarks' })
+
+  // Receive messages
+  port.onMessage.addListener(messageHandler)
 }
 
 riot.mount('sp-directory', { messages })
