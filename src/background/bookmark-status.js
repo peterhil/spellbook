@@ -31,6 +31,10 @@ export const bookmarkStatus = {
   }
 }
 
+function searchWithBookmark (bookmark) {
+  return bookmarkSearch({ url: bookmark.url })
+}
+
 function onCheckBookmarkStatus (bookmarks) {
   var icon
 
@@ -45,31 +49,31 @@ function onCheckBookmarkStatus (bookmarks) {
 }
 
 currentTab$
-  .flatMapLatest(tab => bookmarkSearch({ url: tab.url }))
+  .flatMapLatest(searchWithBookmark)
   .spy('Bookmarks found:')
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkCreated$
   .map(get(1))
   .spy('Bookmark created:')
-  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkChanged$
   .map(get(1))
   .spy('Bookmark changed:')
-  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkMoved$
   .map(get(1))
   .spy('Bookmark moved:')
-  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkRemoved$
   .map(get(1))
   .spy('Bookmark removed:')
   .map(get('node'))
-  .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
+  .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
