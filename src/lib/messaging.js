@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import F from 'fkit'
+import { curry } from 'fkit'
 
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {
@@ -21,7 +21,7 @@ export function disconnectionHandler (port) {
   }
 }
 
-export const sendMessage = F.curry((port, type, data) => {
+export const sendMessage = curry((port, type, data) => {
   port.postMessage({ type, data })
 })
 

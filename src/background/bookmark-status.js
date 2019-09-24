@@ -6,6 +6,8 @@
 
 /* global chrome, F */
 
+import { get } from 'fkit'
+import Kefir from 'kefir'
 import {
   bookmarkChanged$,
   bookmarkCreated$,
@@ -49,7 +51,7 @@ currentTab$
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkCreated$
-  .map(F.get(1))
+  .map(get(1))
   .spy('Bookmark created:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
   .observe(onCheckBookmarkStatus, console.error)
@@ -67,8 +69,8 @@ bookmarkMoved$
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkRemoved$
-  .map(F.get(1))
+  .map(get(1))
   .spy('Bookmark removed:')
-  .map(F.get('node'))
+  .map(get('node'))
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
   .observe(onCheckBookmarkStatus, console.error)

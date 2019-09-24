@@ -75,7 +75,7 @@
 
   <script>
     import $ from 'zepto'
-    import F from 'fkit'
+    import { empty, get, sortBy } from 'fkit'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
@@ -93,7 +93,7 @@
     vm.t = t
 
     vm.isSearchActive = () => {
-      return !F.empty(vm.refs.search.value)
+      return !empty(vm.refs.search.value)
     }
 
     vm.isDropdownVisible = () => {
@@ -101,15 +101,15 @@
     }
 
     vm.categoriesFound = () => {
-      return !F.empty(vm.categories)
+      return !empty(vm.categories)
     }
 
     vm.noSelection = () => {
-      return !F.get('id', vm.selection)
+      return !get('id', vm.selection)
     }
 
     vm.noCategoryResults = () => {
-      return vm.isSearchActive() && F.empty(vm.categories)
+      return vm.isSearchActive() && empty(vm.categories)
     }
 
     vm.getLastSearch = () => {
@@ -196,7 +196,7 @@
       const categorySearch$ = inputEvent$(vm.refs.search, { minLength: 1 })
         .flatMapLatest(query => bookmarkSearch({ query }))  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
-        .map(F.sortBy(propertyCompare('title', false)))
+        .map(sortBy(propertyCompare('title', false)))
 
       const emptySearch$ = inputEvent$(vm.refs.search, { minLength: 0 })
         .filter(search => search.length <= 1)

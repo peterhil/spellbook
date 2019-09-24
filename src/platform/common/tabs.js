@@ -8,7 +8,7 @@
 
 /* global chrome */
 
-import F from 'fkit'
+import { difference, empty, get, head, pick, values } from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
@@ -19,14 +19,14 @@ const currentTabQuery = {
 }
 
 const isUrlChange = function (info) {
-  return !!F.getIn(['change', 'url'], info)
+  return !!get('url', info.change)
 }
 
 const isComplete = function (info) {
-  return F.getIn(['change', 'status'], info) === 'complete'
+  return get('status', info.change) === 'complete'
 }
 
-const is = F.get
+const is = get
 const isActive = is('active')
 const isSelected = is('selected')
 
@@ -35,7 +35,7 @@ const isCurrent = (tab) => {
 }
 
 const tabsAreEqual = (a, b) => {
-  return F.empty(F.difference(F.values(a), F.values(b)))
+  return empty(difference(values(a), values(b)))
 }
 
 const getTab = (id) => {
@@ -44,7 +44,7 @@ const getTab = (id) => {
 
 const getActiveTabOnWindow = (windowId) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.query), {windowId, active: true}))
-    .map(F.head)
+    .map(head)
     .filter()
 }
 
@@ -77,10 +77,10 @@ const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
 export const tabUpdate$ = onUpdated$
   .filter(event => isCurrent(event.tab) && isUrlChange(event))
   .spy('tabUpdate')
-  .map(F.get('tab'))
+  .map(get('tab'))
 
 export const tabActivation$ = onActivated$
-  .map(F.get('tabId'))
+  .map(get('tabId'))
   .flatMapLatest(getTab)
 
 export const tabFocusChanged$ = onFocusChanged$
@@ -88,7 +88,7 @@ export const tabFocusChanged$ = onFocusChanged$
 
 export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$, tabFocusChanged$])
   .filter(isActive)
-  .map(F.pick([
+  .map(pick([
     // 'active',
     'id',
     'favIconUrl',
@@ -103,6 +103,6 @@ export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$, tabFocusChan
 export const closedTab$ = onRemoved$
 
 export const closedWindow$ = onRemoved$
-  .filter(F.get('isWindowClosing'))
-  .map(F.get('windowId'))
+  .filter(get('isWindowClosing'))
+  .map(get('windowId'))
   .skipDuplicates()
