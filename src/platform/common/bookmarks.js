@@ -139,7 +139,7 @@ export async function getParentPath (bookmark) {
   return pathToString(parents)
 }
 
-export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
-export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
-export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
-export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
+export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated).map(get(1))
+export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved).map(get(1))
+export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged).map(get(1))
+export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved).map(get(1))

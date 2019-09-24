@@ -54,25 +54,21 @@ currentTab$
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkCreated$
-  .map(get(1))
   .spy('Bookmark created:')
   .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkChanged$
-  .map(get(1))
   .spy('Bookmark changed:')
   .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkMoved$
-  .map(get(1))
   .spy('Bookmark moved:')
   .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkRemoved$
-  .map(get(1))
   .spy('Bookmark removed:')
   .map(get('node'))
   .flatMapLatest(searchWithBookmark)
