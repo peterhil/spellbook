@@ -3,6 +3,7 @@
 import buble from 'rollup-plugin-buble'
 import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
+import sass from 'rollup-plugin-sass'
 import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import riot from 'rollup-plugin-riot'
@@ -30,8 +31,10 @@ const plugins = [
       'src/**/*.{css,sass}',
     ]
   }),
-  postcss({
-    extensions: ['css', 'sass'],
+  sass({
+    // output: true,
+    // output: 'popup.css',
+    insert: true
   }),
   commonjs(),
   buble({
