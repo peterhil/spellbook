@@ -13,9 +13,7 @@ import { choice } from '../lib/pure'
 
 var bookmarks = []
 
-const allBookmarksTree$ = Kefir.fromPromise(getTree())
-
-const onBookmarksUpdated = function (updatedBookmarks) {
+const updateBookmarks = function (updatedBookmarks) {
   bookmarks = updatedBookmarks
 }
 
@@ -35,9 +33,11 @@ export const directoryController = {
   }
 }
 
+const allBookmarksTree$ = Kefir.fromPromise(getTree())
+
 allBookmarksTree$
   .spy('allBookmarksTree$')
-  .observe(onBookmarksUpdated, console.error)
+  .observe(updateBookmarks, console.error)
 
 bookmarksModified$
   .log('Bookmarks modified')
