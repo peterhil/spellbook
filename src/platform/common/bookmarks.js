@@ -6,13 +6,14 @@
 
 /* global chrome */
 
-import $ from 'zepto'
-import * as chromeBookmarks from '../chrome/bookmarks'
-import * as firefoxBookmarks from '../firefox/bookmarks'
 import { get, pick } from 'fkit'
-import { browserEvent$ } from './helpers'
+import Kefir from 'kefir'
+import $ from 'zepto'
 import { choice } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
+import * as chromeBookmarks from '../chrome/bookmarks'
+import * as firefoxBookmarks from '../firefox/bookmarks'
+import { browserEvent$ } from './helpers'
 
 const platform = (
   $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
@@ -143,3 +144,9 @@ export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated).map(ge
 export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved).map(get(1))
 export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged).map(get(1))
 export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved).map(get(1))
+export const bookmarksModified$ = Kefir.merge([
+  bookmarkChanged$,
+  bookmarkCreated$,
+  bookmarkRemoved$,
+  bookmarkMoved$,
+])

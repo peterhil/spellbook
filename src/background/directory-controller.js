@@ -7,6 +7,7 @@
 import Kefir from 'kefir'
 import {
   getTree,
+  bookmarksModified$
 } from '../platform/common/bookmarks'
 import { choice } from '../lib/pure'
 
@@ -37,3 +38,6 @@ export const directoryController = {
 allBookmarksTree$
   .spy('allBookmarksTree$')
   .observe(onBookmarksUpdated, console.error)
+
+bookmarksModified$
+  .log('Bookmarks modified')
