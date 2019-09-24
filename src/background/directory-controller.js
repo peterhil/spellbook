@@ -9,6 +9,7 @@ import {
   getTree,
   bookmarksModified$
 } from '../platform/common/bookmarks'
+import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
 
 var bookmarks = []
@@ -33,11 +34,16 @@ export const directoryController = {
   }
 }
 
-const allBookmarksTree$ = Kefir.fromPromise(getTree())
+const getAllBookmarksTree$ = () => {
+  return Kefir.fromPromise(getTree())
+}
 
-allBookmarksTree$
-  .spy('allBookmarksTree$')
+domLoaded$
+  .flatMapLatest(getAllBookmarksTree$)
+  .spy('All bookmarks as tree')
   .observe(updateBookmarks, console.error)
 
 bookmarksModified$
-  .log('Bookmarks modified')
+  .flatMapLatest(getAllBookmarksTree$)
+  .spy('Bookmarks modified')
+  .observe(updateBookmarks, console.error)
