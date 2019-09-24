@@ -19,7 +19,18 @@ import { currentTab$ } from '../platform/common/tabs'
 
 var bookmarked = []
 
-function onBookmarkSearch (bookmarks) {
+export const bookmarksController = {
+  action: function (message, port) {
+    const action = choice(message.type, {
+      getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
+      default: unhandledMessage,
+    })
+
+    action(message)
+  }
+}
+
+function onCheckBookmarkStatus (bookmarks) {
   var icon
 
   bookmarked = bookmarks
@@ -32,43 +43,32 @@ function onBookmarkSearch (bookmarks) {
   chrome.browserAction.setIcon({ path: icon })
 }
 
-export const bookmarksController = {
-  action: function (message, port) {
-    const action = choice(message.type, {
-      getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
-      default: unhandledMessage,
-    })
-
-    action(message)
-  }
-}
-
 currentTab$
   .flatMapLatest(tab => bookmarkSearch({ url: tab.url }))
   .spy('Bookmarks found:')
-  .observe(onBookmarkSearch, console.error)
+  .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkCreated$
   .map(F.get(1))
   .spy('Bookmark created:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
-  .observe(onBookmarkSearch, console.error)
+  .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkChanged$
   .map(F.get(1))
   .spy('Bookmark changed:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
-  .observe(onBookmarkSearch, console.error)
+  .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkMoved$
   .map(F.get(1))
   .spy('Bookmark moved:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
-  .observe(onBookmarkSearch, console.error)
+  .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkRemoved$
   .map(F.get(1))
   .spy('Bookmark removed:')
   .map(F.get('node'))
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
-  .observe(onBookmarkSearch, console.error)
+  .observe(onCheckBookmarkStatus, console.error)
