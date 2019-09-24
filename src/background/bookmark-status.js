@@ -19,7 +19,7 @@ import { currentTab$ } from '../platform/common/tabs'
 
 var bookmarked = []
 
-export const bookmarksController = {
+export const bookmarkStatus = {
   action: function (message, port) {
     const action = choice(message.type, {
       getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
