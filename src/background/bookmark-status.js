@@ -4,10 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome, F */
+/* global chrome */
 
 import { get } from 'fkit'
-import Kefir from 'kefir'
 import {
   bookmarkChanged$,
   bookmarkCreated$,
@@ -57,13 +56,13 @@ bookmarkCreated$
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkChanged$
-  .map(F.get(1))
+  .map(get(1))
   .spy('Bookmark changed:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
   .observe(onCheckBookmarkStatus, console.error)
 
 bookmarkMoved$
-  .map(F.get(1))
+  .map(get(1))
   .spy('Bookmark moved:')
   .flatMapLatest(bookmark => bookmarkSearch({ url: bookmark.url }))
   .observe(onCheckBookmarkStatus, console.error)
