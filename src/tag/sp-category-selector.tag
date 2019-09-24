@@ -82,6 +82,8 @@
     import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
     import './sp-bookmark-path.tag'
     import './sp-category.tag'
+    import './sp-main-categories.tag'
+
     const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
     var $dropdown = $('.categories .dropdown')
