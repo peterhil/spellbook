@@ -18,6 +18,9 @@
              placeholder="{ t('search_placeholder') }"
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
+      <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0">
+        <i class="icon icon-caret"></i>
+      </button>
       <button class="toggle-subcategory btn btn-primary input-group-btn"
          if="{ !noSelection() }" tabindex="0">
         <i class="icon icon-plus"></i>
@@ -41,6 +44,8 @@
     <small if="{ noCategoryResults() }">
       No categories found
     </small>
+
+    <sp-recent-categories></sp-recent-categories>
   </div>
 
   <div class="form-group" if="{ showSubcategory }">
@@ -63,6 +68,7 @@
     import './sp-bookmark-path.tag'
     import './sp-category.tag'
     import './sp-main-categories.tag'
+    import '../tag/sp-recent-categories.tag'
 
     const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
