@@ -81,6 +81,10 @@ export const getTree = choice(platform, {
   default: notImplemented$,
 })
 
+export const getTree$ = () => {
+  return Kefir.fromPromise(getTree())
+}
+
 export const getSubTree = choice(platform, {
   chrome: chromeBookmarks.getSubTree,
   firefox: firefoxBookmarks.getSubTree,

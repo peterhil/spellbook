@@ -5,10 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Kefir from 'kefir'
-import {
-  getTree,
-  bookmarksModified$
-} from '../platform/common/bookmarks'
+import { getTree$, bookmarksModified$ } from '../platform/common/bookmarks'
 import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
 
@@ -34,16 +31,12 @@ export const directoryController = {
   }
 }
 
-const getAllBookmarksTree$ = () => {
-  return Kefir.fromPromise(getTree())
-}
-
 domLoaded$
-  .flatMapLatest(getAllBookmarksTree$)
+  .flatMapLatest(getTree$)
   .spy('All bookmarks as tree')
   .observe(updateBookmarks, console.error)
 
 bookmarksModified$
-  .flatMapLatest(getAllBookmarksTree$)
+  .flatMapLatest(getTree$)
   .spy('Bookmarks modified')
   .observe(updateBookmarks, console.error)
