@@ -6,8 +6,21 @@ import copy from 'rollup-plugin-cpy'
 import sass from 'rollup-plugin-sass'
 import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import postcssPresetEnv from 'postcss-preset-env'
 import riot from 'rollup-plugin-riot'
 import { eslint } from 'rollup-plugin-eslint'
+
+/**
+ * Transforms new CSS specs into more compatible CSS
+ */
+function cssnext (tagName, css) {
+  // A small hack: it passes :scope as :root to PostCSS.
+  // This make it easy to use css variables inside tags.
+  css = css.replace(/:scope/g, ':root')
+  css = postcss([postcssPresetEnv]).process(css).css
+  css = css.replace(/:root/g, ':scope')
+  return css
+}
 
 const outputFormat = 'iife'
 const plugins = [
@@ -16,7 +29,7 @@ const plugins = [
     esm: true,
     style: 'css',
     parsers: {
-      css: { postcss }
+      css: { cssnext },
     },
   }),
   resolve({
