@@ -155,15 +155,15 @@ export const bookmarksModified$ = Kefir.merge([
   bookmarkMoved$,
 ])
 
-const recentCategories$ = bookmarksModified$
-      .flatMapLatest(getTree$)
-      .map(flattenTree)
-      .map(filterBookmarks)
-      .map(compose(reverse([
-        sortBy(propertyCompare('dateAdded')),
-        reverse,
-        take(10), // TODO Move hardcoded value into options
-        map(getParentId),
-        getBookmark,
-      ])))
-      .log('Recent categories')
+export const recentCategories$ = bookmarksModified$
+  .flatMapLatest(getTree$)
+  .map(flattenTree)
+  .map(filterBookmarks)
+  .map(compose(reverse([
+    sortBy(propertyCompare('dateAdded')),
+    reverse,
+    take(10), // TODO Move hardcoded value into options
+    map(getParentId),
+    getBookmark,
+  ])))
+  .log('Recent categories')
