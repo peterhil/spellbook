@@ -6,10 +6,10 @@
 
 /* global chrome */
 
-import { get, pick } from 'fkit'
+import { compose, get, map, pick, reverse, sortBy, take } from 'fkit'
 import Kefir from 'kefir'
 import $ from 'zepto'
-import { choice } from '../../lib/pure'
+import { choice, propertyCompare } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
@@ -154,3 +154,16 @@ export const bookmarksModified$ = Kefir.merge([
   bookmarkRemoved$,
   bookmarkMoved$,
 ])
+
+const recentCategories$ = bookmarksModified$
+      .flatMapLatest(getTree$)
+      .map(flattenTree)
+      .map(filterBookmarks)
+      .map(compose(reverse([
+        sortBy(propertyCompare('dateAdded')),
+        reverse,
+        take(10), // TODO Move hardcoded value into options
+        map(getParentId),
+        getBookmark,
+      ])))
+      .log('Recent categories')
