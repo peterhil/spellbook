@@ -140,7 +140,7 @@
     const categories$ = allBookmarks$
       .map(flattenTree)
       .map(filterCategories)
-      .map(sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', true)))
       .spy('Directory tag: categories$')
 
     const updateCategories = (categories) => {
@@ -156,7 +156,7 @@
       .map(get('children'))
 
     const bookmarks$ = selectedBookmarks$
-      .map(sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', true)))
       .spy('Directory tag: bookmarks$')
 
     const updateBookmarks = (bookmarks) => {

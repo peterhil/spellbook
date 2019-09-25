@@ -198,7 +198,7 @@
       const categorySearch$ = inputEvent$(vm.refs.search, { minLength: 1 })
         .flatMapLatest(query => bookmarkSearch({ query }))  // TODO See how RxJS.switchMap cancel the previous observable
         .map(filterCategories)
-        .map(sortBy(propertyCompare('title', false)))
+        .map(sortBy(propertyCompare('title', true)))
 
       const emptySearch$ = inputEvent$(vm.refs.search, { minLength: 0 })
         .filter(search => search.length <= 1)
