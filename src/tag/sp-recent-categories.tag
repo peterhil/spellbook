@@ -14,7 +14,6 @@
   </ul>
 
   <script>
-    import $ from 'zepto'
     import './sp-category.tag'
     import { messages } from '../lib/messaging'
 
