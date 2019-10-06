@@ -16,9 +16,8 @@
   <script>
     import $ from 'zepto'
     import './sp-category.tag'
-    import { recentCategories$ } from '../platform/common/bookmarks'
+    import { messages } from '../lib/messaging'
 
-    const $dropdown = $('.categories.dropdown')
     const vm = this
 
     vm.categories = []
@@ -30,9 +29,11 @@
     }
 
     vm.on('mount', () => {
-      recentCategories$
-        .spy('recentCategories$')
-        .observe(updateRecentCategories, console.error)
+      messages.on('recentCategories', updateRecentCategories)
+    })
+
+    vm.on('unmount', () => {
+      messages.off('recentCategories', updateRecentCategories)
     })
 </script>
 </sp-recent-categories>
