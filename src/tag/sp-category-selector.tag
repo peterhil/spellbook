@@ -18,12 +18,12 @@
              placeholder="{ t('search_placeholder') }"
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
-      <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0">
-        <i class="icon icon-caret"></i>
-      </button>
       <button class="toggle-subcategory btn btn-primary input-group-btn"
          if="{ !noSelection() }" tabindex="0">
         <i class="icon icon-plus"></i>
+      </button>
+      <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0">
+        <i class="icon icon-caret"></i>
       </button>
     </div>
 
