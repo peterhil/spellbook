@@ -172,4 +172,4 @@ export const recentCategories$ = Kefir.merge([
     take(5)
   ])))
   .flatMap(id => Kefir.fromPromise(getBookmark(id)))
-  .log('Recent categories')
+  .spy('Recent categories')
