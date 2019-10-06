@@ -27,7 +27,7 @@
       </button>
     </div>
 
-    <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
+    <div class="categories dropdown { active: isDropdownVisible() }">
       <ul class="menu" aria-role="menu" tabindex="-1">
         <li
           class="menu-item" each="{ category in categories }"
