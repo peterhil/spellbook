@@ -5,34 +5,34 @@
      file, You can obtain one at http://mozilla.org/MPL/2.0/.
    -->
 <sp-recent-categories>
-  <div class="form-group">
-    <div class="{categories: true, dropdown: true, active: isDropdownVisible()}">
-      <ul class="menu" aria-role="menu" tabindex="-1">
-        <li
-          class="menu-item" each="{ category in categories }"
-          data-is="sp-category" category="{ category }"
-          >
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ul class="menu" aria-role="menu" tabindex="-1">
+    <li
+      class="menu-item" each="{ category in categories }"
+      data-is="sp-category" category="{ category }"
+      >
+    </li>
+  </ul>
 
   <script>
+    import $ from 'zepto'
     import './sp-category.tag'
+    import { recentCategories$ } from '../platform/common/bookmarks'
 
+    const $dropdown = $('.categories.dropdown')
     const vm = this
 
-    vm.categories = [
-    ]
-    vm.showDropdown = false
-
-    vm.isDropdownVisible = () => {
-      return vm.showDropdown
-    }
+    vm.categories = []
 
     const updateRecentCategories = (categories) => {
+      console.debug('updateRecentCategories:', categories)
       vm.categories = categories
       vm.update()
     }
+
+    vm.on('mount', () => {
+      recentCategories$
+        .spy('recentCategories$')
+        .observe(updateRecentCategories, console.error)
+    })
 </script>
 </sp-recent-categories>

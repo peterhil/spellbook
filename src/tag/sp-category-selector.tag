@@ -45,7 +45,9 @@
       No categories found
     </small>
 
-    <sp-recent-categories></sp-recent-categories>
+    <div class="form-group">
+      <sp-recent-categories class="categories dropdown { active: isRecentVisible() }"></sp-recent-categories>
+    </div>
   </div>
 
   <div class="form-group" if="{ showSubcategory }">
@@ -60,7 +62,7 @@
 
   <script>
     import $ from 'zepto'
-    import { empty, get, sortBy } from 'fkit'
+    import { empty, get, not, sortBy } from 'fkit'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
     import { t } from '../lib/translate'
@@ -72,28 +74,32 @@
 
     const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
-    var $dropdown = $('.categories .dropdown')
 
     vm.lastSearch = null
     vm.showDropdown = false
+    vm.showRecent = false
     vm.showSubcategory = false
     vm.selection = emptySelection
     vm.t = t
 
     vm.isSearchActive = () => {
-      return !empty(vm.refs.search.value)
+      return vm.lastSearch && not(vm.showRecent)
     }
 
     vm.isDropdownVisible = () => {
       return vm.showDropdown || vm.isSearchActive() && vm.noSelection() && vm.categoriesFound()
     }
 
+    vm.isRecentVisible = () => {
+      return vm.showRecent
+    }
+
     vm.categoriesFound = () => {
-      return !empty(vm.categories)
+      return not(empty(vm.categories))
     }
 
     vm.noSelection = () => {
-      return !get('id', vm.selection)
+      return not(get('id', vm.selection))
     }
 
     vm.noCategoryResults = () => {
@@ -109,6 +115,7 @@
       vm.selection = emptySelection
       vm.lastSearch = null
       vm.showDropdown = false
+      vm.showRecent = false
       vm.refs.search.focus()
     }
 
@@ -130,7 +137,7 @@
 
       vm.selection = selection
 
-      $dropdown.removeClass('active')
+      $('.categories.dropdown').removeClass('active')
       vm.update()
       event.preventDefault()
     }
@@ -148,6 +155,7 @@
         return false
       } else {
         vm.showDropdown = true
+        vm.showRecent = false
       }
       vm.update()
       return false
@@ -159,7 +167,13 @@
     }
 
     const onToggleSubcategory = () => {
-      vm.showSubcategory = !vm.showSubcategory
+      vm.showSubcategory = not(vm.showSubcategory)
+      vm.update()
+      return false
+    }
+
+    const onToggleRecent = () => {
+      vm.showRecent = not(vm.showRecent)
       vm.update()
       return false
     }
@@ -168,6 +182,7 @@
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
       $(document.body).on('click', '.toggle-subcategory', onToggleSubcategory)
+      $(document.body).on('click', '.toggle-recent', onToggleRecent)
       $(vm.refs.search).on('focus', onSearchFocus)
       $(vm.refs.search).on('blur', onSearchBlur)
     }
@@ -176,6 +191,7 @@
       $('.categories').off('click', '.category', onSelection)
       $('.categories').off('keydown', '.category', onKeydown)
       $(document.body).off('click', '.toggle-subcategory', onToggleSubcategory)
+      $(document.body).off('click', '.toggle-recent', onToggleRecent)
       $(vm.refs.search).off('focus', onSearchFocus)
       $(vm.refs.search).off('blur', onSearchBlur)
     }

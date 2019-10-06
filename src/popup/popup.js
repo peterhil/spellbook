@@ -23,6 +23,10 @@ const messageHandler = function (message) {
       console.log('[popup] Current tab info:', message.data)
       messages.trigger(message.type, message.data)
     },
+    recentCategories: () => {
+      console.log('[popup] Recent categories:', message.data)
+      messages.trigger(message.type, message.data)
+    },
     default: unhandledMessage,
   })
 
@@ -37,6 +41,7 @@ function onLoad (event) {
 
   // Send a message
   port.postMessage({ type: 'getCurrentTab' })
+  port.postMessage({ type: 'getRecentCategories' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)
