@@ -4,9 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
+/* global chrome, riot */
 
+import { observable } from 'riot'
 import { curry } from 'fkit'
+
+export const messages = observable()
 
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {

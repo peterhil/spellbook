@@ -11,9 +11,7 @@ import './popup.sass'
 import './sp-popup.tag'
 import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
-import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
-
-var messages = riot.observable()
+import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
 
 const messageHandler = function (message) {
   console.debug('[popup] Got message:', message.type, message)
@@ -34,7 +32,7 @@ const messageHandler = function (message) {
 }
 
 function onLoad (event) {
-  riot.mount('sp-popup', { messages })
+  riot.mount('sp-popup')
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)

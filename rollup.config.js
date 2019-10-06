@@ -143,12 +143,14 @@ export default [
       globals: {
         'fkit': 'F',
         'kefir': 'Kefir',
+        'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
       'fkit',
       'kefir',
+      'riot',
       'zepto',
     ],
     plugins: pluginsWithcopy

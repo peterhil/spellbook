@@ -10,10 +10,8 @@ import riot from 'riot'
 
 import './directory.sass'
 import './sp-directory.tag'
-import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
+import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
-
-var messages = riot.observable()
 
 const messageHandler = function (message) {
   console.debug('[directory] Got message:', message.type, message)
@@ -41,6 +39,6 @@ function onLoad (event) {
   port.onMessage.addListener(messageHandler)
 }
 
-riot.mount('sp-directory', { messages })
+riot.mount('sp-directory')
 
 document.addEventListener('DOMContentLoaded', onLoad)
