@@ -15,12 +15,6 @@
     <sp-bookmark-path bookmark={ opts.category }></sp-bookmark-path>
   </a>
 
-  <style>
-    .category .title {
-      font-weight: bolder;
-    }
-  </style>
-
   <script>
     import { getParentId } from '../platform/common/bookmarks.js'
     import './sp-bookmark-path.tag'
