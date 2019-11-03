@@ -19,7 +19,7 @@
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
       <button class="toggle-subcategory btn btn-primary input-group-btn"
-         if="{ !noSelection() }" tabindex="0">
+         if="{ hasSelection() }" tabindex="0">
         <i class="icon icon-plus"></i>
       </button>
       <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0">
@@ -86,7 +86,7 @@
     }
 
     vm.isDropdownVisible = () => {
-      return vm.showDropdown || vm.isSearchActive() && vm.noSelection() && vm.categoriesFound()
+      return vm.showDropdown || vm.isSearchActive() && !vm.hasSelection() && vm.categoriesFound()
     }
 
     vm.isRecentVisible = () => {
@@ -97,8 +97,8 @@
       return not(empty(vm.categories))
     }
 
-    vm.noSelection = () => {
-      return not(get('id', vm.selection))
+    vm.hasSelection = () => {
+      return get('id', vm.selection)
     }
 
     vm.noCategoryResults = () => {
