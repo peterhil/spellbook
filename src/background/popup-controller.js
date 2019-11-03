@@ -44,9 +44,7 @@ closedWindow$.log('closedWindow$')
 closedTab$.log('closedTab$')
 
 currentTab$
-  .spy('currentTab$')
   .observe(onCurrentTab, console.error)
 
 recentCategories$
-  .spy('recentCategories$')
   .observe(updateRecentCategories, console.error)
