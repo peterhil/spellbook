@@ -8,16 +8,19 @@
 
 import { disconnectionHandler, messageServer } from '../lib/messaging'
 import { directoryController } from './directory-controller'
-import { bookmarksController } from './bookmarks-controller'
+import { bookmarkStatus } from './bookmark-status'
 import { popupController } from './popup-controller'
 
 const controllers = {
-  'directory': directoryController,
-  'popup': popupController,
+  directory: directoryController,
+  popup: popupController,
+  status: bookmarkStatus,
 }
 
-chrome.runtime.onConnect.addListener(function(port) {
+function onConnect (port) {
   console.debug('[background] Connected with:', port.name, port.sender)
   port.onMessage.addListener(messageServer(controllers))
   port.onDisconnect.addListener(disconnectionHandler)
-})
+}
+
+chrome.runtime.onConnect.addListener(onConnect)

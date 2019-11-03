@@ -6,7 +6,8 @@
 
 import { choice } from '../lib/pure'
 import { closedTab$, closedWindow$, currentTab$ } from '../platform/common/tabs'
-import { disconnectionHandler, sendMessage, unhandledMessage } from '../lib/messaging'
+import { recentCategories$ } from '../platform/common/bookmarks'
+import { sendMessage, unhandledMessage } from '../lib/messaging'
 
 var currentTab = {
   title: '',
@@ -14,6 +15,7 @@ var currentTab = {
   favIconUrl: '',
   category: '',
 }
+var recentCategories = []
 
 function onCurrentTab (tab) {
   currentTab = {
@@ -21,10 +23,16 @@ function onCurrentTab (tab) {
   }
 }
 
+function updateRecentCategories (categories) {
+  console.debug('[popup controller] updateRecentCategories:', categories)
+  recentCategories = categories
+}
+
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
       getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
+      getRecentCategories: () => sendMessage(port, 'recentCategories', recentCategories),
       default: unhandledMessage,
     })
 
@@ -34,6 +42,11 @@ export const popupController = {
 
 closedWindow$.log('closedWindow$')
 closedTab$.log('closedTab$')
+
 currentTab$
   .spy('currentTab$')
   .observe(onCurrentTab, console.error)
+
+recentCategories$
+  .spy('recentCategories$')
+  .observe(updateRecentCategories, console.error)

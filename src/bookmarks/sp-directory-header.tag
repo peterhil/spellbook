@@ -9,7 +9,7 @@
     </section>
   </header>
 
-  <style>
+  <style type="scss">
     .navbar {
       padding: 0 0.8rem;
       border: none;

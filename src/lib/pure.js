@@ -25,8 +25,8 @@ export const choice = curry((selection, options) => {
 // sortBy(propertyCompare('title'), list)
 // This function is curried.
 //
-export const propertyCompare = (property, caseSensitive = true) => {
-  const prop = caseSensitive
+export const propertyCompare = (property, caseInsensitive = false) => {
+  const prop = (caseInsensitive === false)
     ? get(property)
     : curry((item) => toLower(get(property, item)))
 

@@ -22,7 +22,7 @@ const isUrlChange = function (info) {
   return !!get('url', info.change)
 }
 
-const isComplete = function (info) {
+export const isComplete = function (info) {
   return get('status', info.change) === 'complete'
 }
 
@@ -43,12 +43,17 @@ const getTab = (id) => {
 }
 
 const getActiveTabOnWindow = (windowId) => {
-  return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.query), {windowId, active: true}))
+  return Kefir.fromPromise(
+    callbackToPromise(
+      withErrorChecking(chrome.tabs.query),
+      { windowId, active: true }
+    )
+  )
     .map(head)
     .filter()
 }
 
-const getCurrentTab = () => {
+export const getCurrentTab = () => {
   return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
 

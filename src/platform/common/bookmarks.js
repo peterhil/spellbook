@@ -6,13 +6,15 @@
 
 /* global chrome */
 
+import { compose, get, map, nub, pick, reverse, sortBy, take } from 'fkit'
+import Kefir from 'kefir'
 import $ from 'zepto'
+import { domLoaded$ } from '../../lib/events'
+import { choice, propertyCompare } from '../../lib/pure'
+import { notImplemented$ } from '../../lib/reactive'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
-import { get, pick } from 'fkit'
 import { browserEvent$ } from './helpers'
-import { choice } from '../../lib/pure'
-import { notImplemented$ } from '../../lib/reactive'
 
 const platform = (
   $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
@@ -80,6 +82,10 @@ export const getTree = choice(platform, {
   default: notImplemented$,
 })
 
+export const getTree$ = () => {
+  return Kefir.fromPromise(getTree())
+}
+
 export const getSubTree = choice(platform, {
   chrome: chromeBookmarks.getSubTree,
   firefox: firefoxBookmarks.getSubTree,
@@ -87,10 +93,10 @@ export const getSubTree = choice(platform, {
 })
 
 export function flattenTree (tree) {
-  let bookmarks = []
+  var bookmarks = []
 
   tree.map((bookmark) => {
-    let children = isCategory(bookmark)
+    var children = isCategory(bookmark)
       ? flattenTree(bookmark.children)
       : []
 
@@ -111,12 +117,12 @@ export function getParentId (bookmark) {
 }
 
 export async function getParents (bookmark) {
-  let parents = []
+  var parents = []
   let current = pick(parentPathProperties, bookmark)
 
   while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
     try {
-      let result = await getBookmark(getParentId(current))
+      var result = await getBookmark(getParentId(current))
       current = pick(parentPathProperties, result[0])
       parents.push(current)
     } catch (err) {
@@ -139,7 +145,31 @@ export async function getParentPath (bookmark) {
   return pathToString(parents)
 }
 
-export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
-export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
-export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
-export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
+export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated).map(get(1))
+export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved).map(get(1))
+export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged).map(get(1))
+export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved).map(get(1))
+export const bookmarksModified$ = Kefir.merge([
+  bookmarkChanged$,
+  bookmarkCreated$,
+  bookmarkRemoved$,
+  bookmarkMoved$,
+])
+
+export const recentCategories$ = Kefir.merge([
+  bookmarksModified$,
+  domLoaded$,
+])
+  .flatMapLatest(getTree$)
+  .map(flattenTree)
+  .map(filterBookmarks)
+  .map(compose(reverse([
+    sortBy(propertyCompare('dateAdded')),
+    reverse,
+    take(20), // TODO Move hardcoded value into options
+    map(getParentId),
+    nub,
+    take(5)
+  ])))
+  .flatMap(id => Kefir.fromPromise(getBookmark(id)))
+  .spy('Recent categories')
