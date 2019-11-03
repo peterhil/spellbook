@@ -23,3 +23,7 @@ export const getTree = () => {
 export const getSubTree = (id) => {
   return browser.bookmarks.getSubTree(id)
 }
+
+export const getChildren = (id) => {
+  return browser.bookmarks.getChildren(id)
+}

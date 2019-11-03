@@ -92,6 +92,12 @@ export const getSubTree = choice(platform, {
   default: notImplemented$,
 })
 
+export const getChildren = choice(platform, {
+  chrome: chromeBookmarks.getChildren,
+  firefox: firefoxBookmarks.getChildren,
+  default: notImplemented$,
+})
+
 export function flattenTree (tree) {
   var bookmarks = []
 
