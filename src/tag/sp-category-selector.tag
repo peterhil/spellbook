@@ -90,7 +90,7 @@
     vm.t = t
 
     vm.isSearchActive = () => {
-      return vm.lastSearch && not(vm.showRecent)
+      return vm.lastSearch
     }
 
     vm.isDropdownVisible = () => {
@@ -167,7 +167,6 @@
         return false
       } else {
         vm.showDropdown = true
-        vm.showRecent = false
       }
       vm.update()
       return false

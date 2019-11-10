@@ -20,10 +20,6 @@ const currentTabQuery = {
   currentWindow: true,
 }
 
-const isUrlChange = function (info) {
-  return !!get('url', info.change)
-}
-
 export const isComplete = function (info) {
   return get('status', info.change) === 'complete'
 }
@@ -99,7 +95,7 @@ export const tabActivation$ = onActivated$
 export const tabFocusChanged$ = onFocusChanged$
   .spy('tabFocusChanged$')
   .filter(id => id >= 0)
-  .onValue(id => currentWindowId = id)
+  .onValue(id => { currentWindowId = id; return id })
   .flatMapLatest(getActiveTabOnWindow)
 
 export const activeTab$ = Kefir.merge([tabActivation$, tabFocusChanged$])
