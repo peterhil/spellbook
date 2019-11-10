@@ -18,6 +18,10 @@
              placeholder="{ t('search_placeholder') }"
              autocomplete="off">
       <input name="category" type="hidden" value={ selection.id }>
+      <button class="toggle-children btn btn-primary input-group-btn"
+         if="{ hasSelection() }" tabindex="0">
+        <i class="icon icon-minus"></i>
+      </button>
       <button class="toggle-subcategory btn btn-primary input-group-btn"
          if="{ hasSelection() }" tabindex="0">
         <i class="icon icon-plus"></i>
@@ -45,6 +49,7 @@
     </small>
 
     <div class="form-group">
+      <sp-child-categories category="{ selection }" class="categories dropdown { active: isChildrenVisible() }"></sp-child-categories>
       <sp-recent-categories class="categories dropdown { active: isRecentVisible() }"></sp-recent-categories>
     </div>
   </div>
@@ -64,10 +69,12 @@
     import { empty, get, not, sortBy } from 'fkit'
     import { propertyCompare } from '../lib/pure'
     import { inputEvent$ } from '../lib/reactive'
+    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
     import './sp-bookmark-path.tag'
     import './sp-category.tag'
+    import './sp-child-categories.tag'
     import './sp-main-categories.tag'
     import '../tag/sp-recent-categories.tag'
 
@@ -75,6 +82,7 @@
     const vm = this
 
     vm.lastSearch = null
+    vm.showChildren = false
     vm.showDropdown = false
     vm.showRecent = false
     vm.showSubcategory = false
@@ -87,6 +95,10 @@
 
     vm.isDropdownVisible = () => {
       return vm.showDropdown || vm.isSearchActive() && !vm.hasSelection() && vm.categoriesFound()
+    }
+
+    vm.isChildrenVisible = () => {
+      return vm.showChildren
     }
 
     vm.isRecentVisible = () => {
@@ -132,9 +144,10 @@
 
     const onSelection = (event) => {
       const selection = { ...event.currentTarget.dataset }
-      console.debug('Category selection:', selection)
 
+      console.debug('Category selection:', selection)
       vm.selection = selection
+      messages.trigger('categorySelection', selection)
 
       $('.categories.dropdown').removeClass('active')
       vm.update()
@@ -165,14 +178,26 @@
       return false
     }
 
+    const onToggleChildren = () => {
+      vm.showChildren = not(vm.showChildren)
+      vm.showRecent = false
+      vm.showSubcategory = false
+      vm.update()
+      return false
+    }
+
     const onToggleSubcategory = () => {
+      vm.showChildren = false
+      vm.showRecent = false
       vm.showSubcategory = not(vm.showSubcategory)
       vm.update()
       return false
     }
 
     const onToggleRecent = () => {
+      vm.showChildren = false
       vm.showRecent = not(vm.showRecent)
+      vm.showSubcategory = false
       vm.update()
       return false
     }
@@ -180,6 +205,7 @@
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
+      $(document.body).on('click', '.toggle-children', onToggleChildren)
       $(document.body).on('click', '.toggle-subcategory', onToggleSubcategory)
       $(document.body).on('click', '.toggle-recent', onToggleRecent)
       $(vm.refs.search).on('focus', onSearchFocus)
@@ -189,6 +215,7 @@
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
       $('.categories').off('keydown', '.category', onKeydown)
+      $(document.body).off('click', '.toggle-children', onToggleChildren)
       $(document.body).off('click', '.toggle-subcategory', onToggleSubcategory)
       $(document.body).off('click', '.toggle-recent', onToggleRecent)
       $(vm.refs.search).off('focus', onSearchFocus)
