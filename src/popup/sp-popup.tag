@@ -9,6 +9,7 @@
 
   <script>
     import './sp-popup-form.tag'
+    import { messages } from '../lib/messaging'
     const vm = this
 
     vm.bookmark = {
@@ -24,11 +25,11 @@
     }
 
     vm.on('mount', () => {
-      vm.opts.messages.on('currentTabInfo', onTabUpdate)
+      messages.on('currentTabInfo', onTabUpdate)
     })
 
     vm.on('unmount', () => {
-      vm.opts.messages.off('currentTabInfo', onTabUpdate)
+      messages.off('currentTabInfo', onTabUpdate)
     })
   </script>
 </sp-popup>

@@ -32,3 +32,21 @@ label
 
 .buttons-row
   margin-top: 1rem
+
+.categories
+  display: contents
+
+.categories .menu
+  max-height: 14.35rem
+  overflow-y: scroll
+  overflow-x: hidden
+
+.dropdown.active .menu,
+.dropdown .dropdown-toggle:focus + .menu
+  display: block
+  position: relative
+  white-space: nowrap
+  text-overflow: ellipsis
+
+.category .title
+  font-weight: bolder

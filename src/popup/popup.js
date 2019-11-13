@@ -4,18 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome, document, window */
+/* global chrome, window */
 
 import riot from 'riot'
-import Kefir from 'kefir'
-
 import './popup.sass'
 import './sp-popup.tag'
+import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
-import { disconnectionHandler, unhandledMessage } from '../lib/messaging'
-
-const domStream = Kefir.fromEvents(document, 'DOMContentLoaded')
-var messages = riot.observable()
+import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
 
 const messageHandler = function (message) {
   console.debug('[popup] Got message:', message.type, message)
@@ -25,6 +21,10 @@ const messageHandler = function (message) {
       console.log('[popup] Current tab info:', message.data)
       messages.trigger(message.type, message.data)
     },
+    recentCategories: () => {
+      console.log('[popup] Recent categories:', message.data)
+      messages.trigger(message.type, message.data)
+    },
     default: unhandledMessage,
   })
 
@@ -32,13 +32,14 @@ const messageHandler = function (message) {
 }
 
 function onLoad (event) {
-  riot.mount('sp-popup', { messages })
+  riot.mount('sp-popup')
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
   port.postMessage({ type: 'getCurrentTab' })
+  port.postMessage({ type: 'getRecentCategories' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)
@@ -47,11 +48,11 @@ function onLoad (event) {
 }
 
 function onUnload (event) {
-  domStream.offValue(onLoad)
+  domLoaded$.offValue(onLoad)
   window.removeEventListener('beforeunload', onUnload)
 }
 
-domStream.onValue(onLoad)
+domLoaded$.onValue(onLoad)
 
 // Cleanup
 //

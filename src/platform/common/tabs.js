@@ -13,16 +13,14 @@ import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
 
+var currentWindowId = -1
+
 const currentTabQuery = {
   active: true,
   currentWindow: true,
 }
 
-const isUrlChange = function (info) {
-  return !!get('url', info.change)
-}
-
-const isComplete = function (info) {
+export const isComplete = function (info) {
   return get('status', info.change) === 'complete'
 }
 
@@ -30,8 +28,12 @@ const is = get
 const isActive = is('active')
 const isSelected = is('selected')
 
+const isCurrentWindow = (tab) => {
+  return tab.windowId === currentWindowId
+}
+
 const isCurrent = (tab) => {
-  return isActive(tab) && isSelected(tab)
+  return isActive(tab) && isSelected(tab) && isCurrentWindow(tab)
 }
 
 const tabsAreEqual = (a, b) => {
@@ -43,12 +45,17 @@ const getTab = (id) => {
 }
 
 const getActiveTabOnWindow = (windowId) => {
-  return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.query), {windowId, active: true}))
+  return Kefir.fromPromise(
+    callbackToPromise(
+      withErrorChecking(chrome.tabs.query),
+      { windowId, active: true }
+    )
+  )
     .map(head)
     .filter()
 }
 
-const getCurrentTab = () => {
+export const getCurrentTab = () => {
   return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
 }
 
@@ -75,19 +82,27 @@ const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
   })
 
 export const tabUpdate$ = onUpdated$
-  .filter(event => isCurrent(event.tab) && isUrlChange(event))
-  .spy('tabUpdate')
+  .spy('tabUpdate$')
+  .filter(event => isCurrent(event.tab))
+  .spy('tabUpdate is current')
   .map(get('tab'))
 
 export const tabActivation$ = onActivated$
+  .spy('tabActivation$')
   .map(get('tabId'))
   .flatMapLatest(getTab)
 
 export const tabFocusChanged$ = onFocusChanged$
+  .spy('tabFocusChanged$')
+  .filter(id => id >= 0)
+  .onValue(id => { currentWindowId = id; return id })
   .flatMapLatest(getActiveTabOnWindow)
 
-export const currentTab$ = Kefir.merge([tabUpdate$, tabActivation$, tabFocusChanged$])
+export const activeTab$ = Kefir.merge([tabActivation$, tabFocusChanged$])
+
+export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
   .filter(isActive)
+  .spy('currentTab$')
   .map(pick([
     // 'active',
     'id',

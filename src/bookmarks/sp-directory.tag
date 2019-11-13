@@ -113,6 +113,7 @@
   <script>
     import { get, head, filter, sortBy } from 'fkit'
     import Kefir from 'kefir'
+    import { messages } from '../lib/messaging'
     import { hasItems, propertyCompare } from '../lib/pure'
     import { t } from '../lib/translate'
     import {
@@ -135,12 +136,12 @@
     vm.selectedCategory = bookmarksBarCategoryId
 
     const allBookmarks$ = Kefir
-      .fromEvents(vm.opts.messages, 'allBookmarksTree')
+      .fromEvents(messages, 'allBookmarksTree')
 
     const categories$ = allBookmarks$
       .map(flattenTree)
       .map(filterCategories)
-      .map(sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', true)))
       .spy('Directory tag: categories$')
 
     const updateCategories = (categories) => {
@@ -156,7 +157,7 @@
       .map(get('children'))
 
     const bookmarks$ = selectedBookmarks$
-      .map(sortBy(propertyCompare('title', false)))
+      .map(sortBy(propertyCompare('title', true)))
       .spy('Directory tag: bookmarks$')
 
     const updateBookmarks = (bookmarks) => {

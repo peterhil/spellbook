@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Released versions:
 
+## [0.3.7] – 2019-11-13 – Show recent and child categories
+
+### Added
+
+- Show recently added categories on dropdown menu
+- Show child categories on dropdown menu
+
+### Changed
+
+- Replace the deprecated postcss-cssnext with rollup-plugin-postcss
+- Updated dependencies
+
+### Fixed
+
+- Ignore tab updates on background windows
+- Fixed ESlint warnings
+- Lots of small code improvements
+
+### Removed
+
+- Removed unused riotgear from dependencies
+
+
 ## [0.3.6] – 2019-09-23 – Add subcategories
 
 ### Added
@@ -171,7 +194,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.6...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.7...HEAD
+[0.3.7]: https://github.com/peterhil/spellbook/compare/v0.3.6...v0.3.7
 [0.3.6]: https://github.com/peterhil/spellbook/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/peterhil/spellbook/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/peterhil/spellbook/compare/v0.3.3...v0.3.4

@@ -1,6 +1,6 @@
 {
   "name": "spellbook",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Spellbook bookmark manager",
   "main": "src/popup.js",
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
@@ -36,7 +36,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-riot": "~0.1.8",
     "eslint-plugin-standard": "~4.0.0",
+    "node-sass": "~4.12.0",
     "postcss": "~7.0.5",
+    "postcss-preset-env": "~6.7.0",
     "require-from-string": "~2.0.2",
     "riot-compiler": "^3.6.0",
     "rollup": "~1.21.4",

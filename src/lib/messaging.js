@@ -6,7 +6,10 @@
 
 /* global chrome */
 
+import { observable } from 'riot'
 import { curry } from 'fkit'
+
+export const messages = observable()
 
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {
