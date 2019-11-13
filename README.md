@@ -1,6 +1,8 @@
 # Spellbook
 
-Spellbook is a bookmark manager extension for Chrome.
+Spellbook is a bookmark manager extension for Chrome and Firefox web browsers.
+
+Get it now from [Chrome Web Store](https://chrome.google.com/webstore/detail/spellbook/mpngjgnmljpfedcllnndbeeponjdjcnk) or [Mozilla Addons](https://addons.mozilla.org/fi/firefox/addon/spellbook-riot/).
 
 It is still in early development phase, but the motivation is to make a really
 usable extension that enables the user to easily manage thousands of bookmarks
