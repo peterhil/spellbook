@@ -1,5 +1,7 @@
 # Spellbook
 
+![](src/asset/spellbook_icon_bookmarked.png)
+
 Spellbook is a bookmark manager extension for Chrome and Firefox web browsers.
 
 Get it now from [Chrome Web Store](https://chrome.google.com/webstore/detail/spellbook/mpngjgnmljpfedcllnndbeeponjdjcnk) or [Mozilla Addons](https://addons.mozilla.org/fi/firefox/addon/spellbook-riot/).
