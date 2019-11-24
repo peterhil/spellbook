@@ -42,7 +42,6 @@
         <sp-main-categories></sp-main-categories>
       </ul>
     </div>
-    <sp-bookmark-path bookmark={ selection }></sp-bookmark-path>
 
     <small if="{ noCategoryResults() }">
       No categories found
@@ -72,7 +71,6 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
-    import './sp-bookmark-path.tag'
     import './sp-category.tag'
     import './sp-child-categories.tag'
     import './sp-main-categories.tag'
