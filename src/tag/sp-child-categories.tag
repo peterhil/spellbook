@@ -1,14 +1,10 @@
 <sp-child-categories>
-  <ul class="menu" aria-role="menu" tabindex="-1">
-    <li
-      class="menu-item" each="{ category in children }"
-      data-is="sp-category" category="{ category }"
-      >
-    </li>
+  <ul class="menu" aria-role="menu" tabindex="-1"
+    data-is="sp-category-list" categories="{ children }">
   </ul>
 
   <script>
-    import './sp-category.tag'
+    import './sp-category-list.tag'
     import { filter, sortBy } from 'fkit'
     import { propertyCompare } from '../lib/pure'
     import { getChildren, isCategory } from '../platform/common/bookmarks'
