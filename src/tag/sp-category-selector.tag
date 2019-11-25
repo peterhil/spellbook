@@ -48,12 +48,12 @@
     </small>
 
     <div class="form-group">
-      <sp-child-categories category="{ selection }" class="categories dropdown { active: isChildrenVisible() }"></sp-child-categories>
-      <sp-recent-categories class="categories dropdown { active: isRecentVisible() }"></sp-recent-categories>
+      <sp-child-categories category="{ selection }" class="categories dropdown { active: isVisible('children') }"></sp-child-categories>
+      <sp-recent-categories class="categories dropdown { active: isVisible('recent') }"></sp-recent-categories>
     </div>
   </div>
 
-  <div class="form-group" if="{ showSubcategory }">
+  <div class="form-group" if="{ isVisible('subcategory') }">
     <label for="subcategory">{ t('add_subcategory') }</label>
     <div class="input-group subcategory">
       <input name="subcategory" ref="subcategory" class="form-input" autocomplete="off">
@@ -80,10 +80,7 @@
     const vm = this
 
     vm.lastSearch = null
-    vm.showChildren = false
-    vm.showDropdown = false
-    vm.showRecent = false
-    vm.showSubcategory = false
+    vm.showDropdown = null
     vm.selection = emptySelection
     vm.t = t
 
@@ -92,15 +89,19 @@
     }
 
     vm.isSearchVisible = () => {
-      return vm.showDropdown || vm.isSearchActive() && !vm.hasSelection() && vm.categoriesFound()
+      return vm.showDropdown === 'search' || vm.isSearchActive() && !vm.hasSelection() && vm.categoriesFound()
     }
 
     vm.isChildrenVisible = () => {
-      return vm.showChildren
+      return vm.showDropdown === 'children'
     }
 
     vm.isRecentVisible = () => {
-      return vm.showRecent
+      return vm.showDropdown === 'recent'
+    }
+
+    vm.isVisible = (dropdown) => {
+      return vm.showDropdown === dropdown
     }
 
     vm.categoriesFound = () => {
@@ -123,8 +124,7 @@
       vm.categories = []
       vm.selection = emptySelection
       vm.lastSearch = null
-      vm.showDropdown = false
-      vm.showRecent = false
+      vm.showDropdown = null
       vm.refs.search.focus()
     }
 
@@ -147,9 +147,9 @@
       vm.selection = selection
       messages.trigger('categorySelection', selection)
 
-      $('.categories.dropdown').removeClass('active')
+      vm.showDropdown = null
       vm.update()
-      event.preventDefault()
+      return false
     }
 
     const onKeydown = (event) => {
@@ -164,37 +164,41 @@
       if (!vm.selection.id) {
         return false
       } else {
-        vm.showDropdown = true
+        vm.showDropdown = 'search'
       }
       vm.update()
       return false
     }
 
     const onSearchBlur = (event) => {
-      vm.showDropdown = false
+      if (vm.showDropdown === 'search') {
+        vm.showDropdown = null
+      }
       return false
     }
 
+    const toggleDropdown = (dropdown) => {
+      if (vm.isVisible(dropdown)) {
+        vm.showDropdown = null
+      } else {
+        vm.showDropdown = dropdown
+      }
+    }
+
     const onToggleChildren = () => {
-      vm.showChildren = not(vm.showChildren)
-      vm.showRecent = false
-      vm.showSubcategory = false
+      toggleDropdown('children')
       vm.update()
       return false
     }
 
     const onToggleSubcategory = () => {
-      vm.showChildren = false
-      vm.showRecent = false
-      vm.showSubcategory = not(vm.showSubcategory)
+      toggleDropdown('subcategory')
       vm.update()
       return false
     }
 
     const onToggleRecent = () => {
-      vm.showChildren = false
-      vm.showRecent = not(vm.showRecent)
-      vm.showSubcategory = false
+      toggleDropdown('recent')
       vm.update()
       return false
     }
