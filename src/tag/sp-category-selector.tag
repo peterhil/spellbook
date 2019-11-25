@@ -31,8 +31,8 @@
       </button>
     </div>
 
-    <div class="categories dropdown { active: isSearchVisible() }">
-      <ul class="menu" aria-role="menu" tabindex="-1">
+    <div class="categories dropdown { active: isVisible('search') }">
+      <ul class="menu" aria-role="menu" tabindex="-1" if="{ categoriesFound() }">
         <li
           class="menu-item" each="{ category in categories }"
           data-is="sp-category" category="{ category }"
@@ -41,11 +41,10 @@
         <li class="divider" data-content="{ t('root_categories') }"></li>
         <sp-main-categories></sp-main-categories>
       </ul>
+      <small if="{ isVisible('search') && isSearchActive() && noCategoryResults() }">
+        No categories found
+      </small>
     </div>
-
-    <small if="{ noCategoryResults() }">
-      No categories found
-    </small>
 
     <div class="form-group">
       <sp-child-categories category="{ selection }" class="categories dropdown { active: isVisible('children') }"></sp-child-categories>
@@ -79,6 +78,7 @@
     const emptySelection = { title: null, id: null, parentId: null }
     const vm = this
 
+    vm.categories = []
     vm.lastSearch = null
     vm.showDropdown = null
     vm.selection = emptySelection
@@ -86,18 +86,6 @@
 
     vm.isSearchActive = () => {
       return vm.lastSearch
-    }
-
-    vm.isSearchVisible = () => {
-      return vm.showDropdown === 'search' || vm.isSearchActive() && !vm.hasSelection() && vm.categoriesFound()
-    }
-
-    vm.isChildrenVisible = () => {
-      return vm.showDropdown === 'children'
-    }
-
-    vm.isRecentVisible = () => {
-      return vm.showDropdown === 'recent'
     }
 
     vm.isVisible = (dropdown) => {
@@ -113,7 +101,7 @@
     }
 
     vm.noCategoryResults = () => {
-      return vm.isSearchActive() && empty(vm.categories)
+      return empty(vm.categories)
     }
 
     vm.getLastSearch = () => {
@@ -122,8 +110,8 @@
 
     const init = () => {
       vm.categories = []
-      vm.selection = emptySelection
       vm.lastSearch = null
+      vm.selection = emptySelection
       vm.showDropdown = null
       vm.refs.search.focus()
     }
@@ -161,11 +149,7 @@
     }
 
     const onSearchFocus = (event) => {
-      if (!vm.selection.id) {
-        return false
-      } else {
-        vm.showDropdown = 'search'
-      }
+      vm.showDropdown = 'search'
       vm.update()
       return false
     }
