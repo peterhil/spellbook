@@ -41,7 +41,7 @@
         <li class="divider" data-content="{ t('root_categories') }"></li>
         <sp-main-categories></sp-main-categories>
       </ul>
-      <small if="{ isVisible('search') && isSearchActive() && noCategoryResults() }">
+      <small if="{ isVisible('search') && isSearchActive() && !categoriesFound() }">
         No categories found
       </small>
     </div>
@@ -98,14 +98,6 @@
 
     vm.hasSelection = () => {
       return get('id', vm.selection)
-    }
-
-    vm.noCategoryResults = () => {
-      return empty(vm.categories)
-    }
-
-    vm.getLastSearch = () => {
-      return vm.lastSearch
     }
 
     const init = () => {
