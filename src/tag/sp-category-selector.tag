@@ -161,30 +161,20 @@
       }
     }
 
-    const onToggleChildren = () => {
-      toggleDropdown('children')
-      vm.update()
-      return false
-    }
-
-    const onToggleSubcategory = () => {
-      toggleDropdown('subcategory')
-      vm.update()
-      return false
-    }
-
-    const onToggleRecent = () => {
-      toggleDropdown('recent')
-      vm.update()
-      return false
+    const onToggle = (dropdown) => {
+      return () => {
+        toggleDropdown(dropdown)
+        vm.update()
+        return false
+      }
     }
 
     const addEvents = () => {
       $('.categories').on('click', '.category', onSelection)
       $('.categories').on('keydown', '.category', onKeydown)
-      $(document.body).on('click', '.toggle-children', onToggleChildren)
-      $(document.body).on('click', '.toggle-subcategory', onToggleSubcategory)
-      $(document.body).on('click', '.toggle-recent', onToggleRecent)
+      $(document.body).on('click', '.toggle-children', onToggle('children'))
+      $(document.body).on('click', '.toggle-subcategory', onToggle('subcategory'))
+      $(document.body).on('click', '.toggle-recent', onToggle('recent'))
       $(vm.refs.search).on('focus', onSearchFocus)
       $(vm.refs.search).on('blur', onSearchBlur)
     }
@@ -192,9 +182,9 @@
     const removeEvents = () => {
       $('.categories').off('click', '.category', onSelection)
       $('.categories').off('keydown', '.category', onKeydown)
-      $(document.body).off('click', '.toggle-children', onToggleChildren)
-      $(document.body).off('click', '.toggle-subcategory', onToggleSubcategory)
-      $(document.body).off('click', '.toggle-recent', onToggleRecent)
+      $(document.body).off('click', '.toggle-children', onToggle('children'))
+      $(document.body).off('click', '.toggle-subcategory', onToggle('subcategory'))
+      $(document.body).off('click', '.toggle-recent', onToggle('recent'))
       $(vm.refs.search).off('focus', onSearchFocus)
       $(vm.refs.search).off('blur', onSearchBlur)
     }
