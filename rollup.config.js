@@ -9,6 +9,9 @@ import postcss from 'rollup-plugin-postcss'
 import postcssPresetEnv from 'postcss-preset-env'
 import riot from 'rollup-plugin-riot'
 import { eslint } from 'rollup-plugin-eslint'
+import { terser } from 'rollup-plugin-terser'
+
+const production = !process.env.ROLLUP_WATCH;
 
 /**
  * Transforms new CSS specs into more compatible CSS
@@ -61,6 +64,9 @@ const plugins = [
     },
     objectAssign: 'Object.assign',
   }),
+
+  // Minify on production
+	production && terser(),
 ]
 
 const copyOptions = {

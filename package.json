@@ -50,6 +50,7 @@
     "rollup-plugin-postcss": "~2.0.3",
     "rollup-plugin-riot": "^2.1.0",
     "rollup-plugin-sass": "~1.2.2",
+    "rollup-plugin-terser": "~5.1.2",
     "web-ext": "~2.9.1"
   },
   "ava": {
