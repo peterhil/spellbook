@@ -1,6 +1,5 @@
 // Rollup config
 
-import buble from 'rollup-plugin-buble'
 import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
 import sass from 'rollup-plugin-sass'
@@ -44,18 +43,6 @@ const plugins = [
     // output: true,
     // output: 'popup.css',
     insert: true
-  }),
-
-  buble({
-    target: {
-      chrome: 52,
-      firefox: 56,
-    },
-    transforms: {
-      asyncAwait: false,
-      modules: true,
-    },
-    objectAssign: 'Object.assign',
   }),
 
   // Convert CommonJS libraries to ES6
