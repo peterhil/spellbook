@@ -59,37 +59,6 @@ const plugins = [
 	production && terser(),
 ]
 
-const copyOptions = {
-  cwd: 'src',
-  parents: true,
-  verbose: true,
-}
-
-const copying = [
-  copy([
-    { files: 'node_modules/fkit/dist/fkit.min.js', dest: 'dist/external' },
-    { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
-    { files: 'node_modules/riot/riot+compiler.js', dest: 'dist/external' },
-    { files: 'node_modules/spectre.css/dist/spectre-icons.css', dest: 'dist/external/spectre' },
-    { files: 'node_modules/spectre.css/dist/spectre.css', dest: 'dist/external/spectre' },
-    { files: 'node_modules/zepto/dist/zepto.js', dest: 'dist/external' },
-    { files: 'node_modules/zepto/src/detect.js', dest: 'dist/external/zepto' },
-  ], copyOptions),
-  copy({
-    files: [
-      '_locales/**/*.json',
-      'asset/spellbook_icon*.png',
-      'asset/spellbook-bg.jpg',
-      'background/background.html',
-      'bookmarks/directory.html',
-      'manifest.json',
-      'popup/popup.html',
-    ],
-    dest: '../dist',
-    options: copyOptions,
-  }),
-]
-
 export default [
   {
     input: { popup: 'src/popup/popup.js' },
@@ -148,6 +117,41 @@ export default [
       'riot',
       'zepto',
     ],
-    plugins: plugins.concat(copying)
+    plugins: plugins.concat([
+      copy({
+        files: [
+          '_locales/**/*.json',
+          'asset/spellbook_icon*.png',
+          'asset/spellbook-bg.jpg',
+          'background/background.html',
+          'bookmarks/directory.html',
+          'manifest.json',
+          'popup/popup.html',
+        ],
+        dest: '../dist',
+        options: {
+          cwd: 'src',
+          parents: true,
+          verbose: true,
+        },
+      }),
+      copy({
+        files: [
+          'node_modules/fkit/dist/fkit.min.js',
+          'node_modules/kefir/dist/kefir.js',
+          'node_modules/riot/riot+compiler.js',
+          'node_modules/spectre.css/dist/spectre-icons.css',
+          'node_modules/spectre.css/dist/spectre.css',
+          'node_modules/zepto/dist/zepto.js',
+          'node_modules/zepto/src/detect.js',
+        ],
+        dest: 'dist/ext',
+        options: {
+          cwd: '.',
+          parents: false,
+          verbose: true,
+        },
+      }),
+    ])
   }
 ]

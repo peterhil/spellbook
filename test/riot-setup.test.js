@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import riot from '../dist/external/riot+compiler.js'
+import riot from '../dist/ext/riot+compiler.js'
 import test from 'ava'
 import { $createElement, $q } from './utils/dom'
 
