@@ -13,9 +13,7 @@ import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH;
 
-/**
- * Transforms new CSS specs into more compatible CSS
- */
+// Transform new CSS specs into more compatible CSS
 function cssnext (tagName, css) {
   // A small hack: it passes :scope as :root to PostCSS.
   // This make it easy to use css variables inside tags.
@@ -35,24 +33,19 @@ const plugins = [
       css: { cssnext },
     },
   }),
-  resolve({
-    browser: true,  // default: false
-    modulesOnly: true,  // default: false
-    customResolveOptions: {
-        moduleDirectory: './node_modules/',
-    },
-  }),
+
   eslint({
     exclude: [
       'src/**/*.{css,sass}',
     ]
   }),
+
   sass({
     // output: true,
     // output: 'popup.css',
     insert: true
   }),
-  commonjs(),
+
   buble({
     target: {
       chrome: 52,
@@ -65,6 +58,16 @@ const plugins = [
     objectAssign: 'Object.assign',
   }),
 
+  // Convert CommonJS libraries to ES6
+  resolve({
+    browser: true,  // default: false
+    modulesOnly: true,  // default: false
+    customResolveOptions: {
+        moduleDirectory: './node_modules/',
+    },
+  }),
+  commonjs(),
+
   // Minify on production
 	production && terser(),
 ]
@@ -75,7 +78,7 @@ const copyOptions = {
   verbose: true,
 }
 
-const pluginsWithcopy = plugins.concat([
+const copying = [
   copy([
     { files: 'node_modules/fkit/dist/fkit.min.js', dest: 'dist/external' },
     { files: 'node_modules/kefir/dist/kefir.js', dest: 'dist/external' },
@@ -98,8 +101,7 @@ const pluginsWithcopy = plugins.concat([
     dest: '../dist',
     options: copyOptions,
   }),
-])
-
+]
 
 export default [
   {
@@ -159,6 +161,6 @@ export default [
       'riot',
       'zepto',
     ],
-    plugins: pluginsWithcopy
+    plugins: plugins.concat(copying)
   }
 ]
