@@ -1,33 +1,30 @@
-{
-  "extends": "standard",
-  "rules": {
-    "comma-dangle": [
-      "off",
-      "always"
-    ],
-    "no-console": [
-      "off",
-      "always"
-    ]
+module.exports = {
+  'extends': 'standard',
+
+  parserOptions: {
+    ecmaVersion: 9,
+    sourceType: 'module',
+    ecmaFeatures: {
+      impliedstrict: false,
+    }
   },
-  "overrides": [
+
+  plugins: [
+    'riot',
+  ],
+
+  overrides: [
     {
-      "files": [ "*.tag" ],
-      "excludedFiles": [],
-      "rules": {
-        "indent": [
-          "off",
-          "always"
-        ]
+      files: ['*.tag'],
+      excludedFiles: [],
+      rules: {
+        indent: ['off', 'always'],
       }
     }
   ],
-  "parserOptions": {
-    "ecmaVersion": 9,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "impliedstrict": false
-    }
+
+  rules: {
+    'comma-dangle': ['off', 'always'],
+    'no-console': ['off', 'always'],
   },
-  "plugins": ["riot"]
 }
