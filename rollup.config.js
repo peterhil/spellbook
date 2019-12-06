@@ -77,7 +77,7 @@ export default [
     output: {
       dir: 'dist/popup',
       format: outputFormat,
-      sourcemap: true,
+      sourcemap: !production,
       globals: {
         'riot': 'riot',
         'zepto': '$',
@@ -94,7 +94,7 @@ export default [
     output: {
       dir: 'dist/bookmarks',
       format: outputFormat,
-      sourcemap: true,
+      sourcemap: !production,
       globals: {
         'riot': 'riot',
         'zepto': '$',
@@ -111,7 +111,7 @@ export default [
     output: {
       dir: 'dist/background',
       format: outputFormat,
-      sourcemap: true,
+      sourcemap: !production,
       globals: {
         'riot': 'riot',
         'zepto': '$',
