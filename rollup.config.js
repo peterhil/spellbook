@@ -1,17 +1,17 @@
-// Rollup config
-
 import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
-import sass from 'rollup-plugin-sass'
-import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import postcssPresetEnv from 'postcss-preset-env'
+import resolve from 'rollup-plugin-node-resolve'
 import riot from 'rollup-plugin-riot'
+import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte';
 import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH;
+const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
+const outputFormat = 'iife'
 
 // Transform new CSS specs into more compatible CSS
 function cssnext (tagName, css) {
@@ -23,7 +23,6 @@ function cssnext (tagName, css) {
   return css
 }
 
-const outputFormat = 'iife'
 const plugins = [
   riot({
     compact: true,
@@ -40,7 +39,7 @@ const plugins = [
     // we'll extract any component CSS out into
     // a separate file — better for performance
     css: css => {
-      css.write('dist/spellbook.css');
+      css.write(outputDir('spellbook.css'));
     }
   }),
 
@@ -75,7 +74,7 @@ export default [
   {
     input: { popup: 'src/popup/popup.js' },
     output: {
-      dir: 'dist/popup',
+      dir: outputDir('popup'),
       format: outputFormat,
       sourcemap: !production,
       globals: {
@@ -92,7 +91,7 @@ export default [
   {
     input: { directory: 'src/bookmarks/directory.js' },
     output: {
-      dir: 'dist/bookmarks',
+      dir: outputDir('bookmarks'),
       format: outputFormat,
       sourcemap: !production,
       globals: {
@@ -109,7 +108,7 @@ export default [
   {
     input: { background: 'src/background/background.js' },
     output: {
-      dir: 'dist/background',
+      dir: outputDir('background'),
       format: outputFormat,
       sourcemap: !production,
       globals: {
@@ -132,7 +131,7 @@ export default [
           'manifest.json',
           'popup/popup.html',
         ],
-        dest: '../dist',
+        dest: '../' + outputDir(),
         options: {
           cwd: 'src',
           parents: true,
@@ -147,7 +146,7 @@ export default [
           'node_modules/zepto/dist/zepto.js',
           'node_modules/zepto/src/detect.js',
         ],
-        dest: 'dist/ext',
+        dest: outputDir('ext'),
         options: {
           cwd: '.',
           parents: false,
