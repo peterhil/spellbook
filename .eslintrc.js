@@ -16,6 +16,7 @@ module.exports = {
 
   plugins: [
     'riot',
+    'svelte3',
   ],
 
   overrides: [
@@ -25,7 +26,11 @@ module.exports = {
       rules: {
         indent: ['off', 'always'],
       }
-    }
+    },
+    {
+      files: ['**/*.svelte'],
+      processor: 'svelte3/svelte3'
+    },
   ],
 
   rules: {
