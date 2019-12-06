@@ -13,6 +13,12 @@ const production = !process.env.ROLLUP_WATCH;
 const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
 const outputFormat = 'iife'
 const plugins = [
+  eslint({
+    exclude: [
+      'src/**/*.{css,sass}',
+    ]
+  }),
+
   riot({
     compact: true,
     esm: true,
@@ -30,12 +36,6 @@ const plugins = [
     css: css => {
       css.write(outputDir('spellbook.css'));
     }
-  }),
-
-  eslint({
-    exclude: [
-      'src/**/*.{css,sass}',
-    ]
   }),
 
   sass({

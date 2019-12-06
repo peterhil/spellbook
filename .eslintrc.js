@@ -5,8 +5,13 @@ module.exports = {
     ecmaVersion: 9,
     sourceType: 'module',
     ecmaFeatures: {
-      impliedstrict: false,
+      impliedstrict: true,
     }
+  },
+
+  env: {
+    es6: true,
+    browser: true,
   },
 
   plugins: [
@@ -15,7 +20,7 @@ module.exports = {
 
   overrides: [
     {
-      files: ['*.tag'],
+      files: ['**/*.tag'],
       excludedFiles: [],
       rules: {
         indent: ['off', 'always'],
