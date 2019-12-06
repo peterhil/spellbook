@@ -7,6 +7,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import postcssPresetEnv from 'postcss-preset-env'
 import riot from 'rollup-plugin-riot'
+import svelte from 'rollup-plugin-svelte';
 import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
@@ -33,6 +34,16 @@ const plugins = [
     },
   }),
 
+  svelte({
+    // enable run-time checks when not in production
+    dev: !production,
+    // we'll extract any component CSS out into
+    // a separate file — better for performance
+    css: css => {
+      css.write('dist/spellbook.css');
+    }
+  }),
+
   eslint({
     exclude: [
       'src/**/*.{css,sass}',
@@ -48,7 +59,8 @@ const plugins = [
   // Convert CommonJS libraries to ES6
   resolve({
     browser: true,  // default: false
-    modulesOnly: true,  // default: false
+    modulesOnly: false,  // default: false
+    dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
     customResolveOptions: {
         moduleDirectory: './node_modules/',
     },
@@ -56,7 +68,7 @@ const plugins = [
   commonjs(),
 
   // Minify on production
-	production && terser(),
+  production && terser(),
 ]
 
 export default [
@@ -142,6 +154,9 @@ export default [
           verbose: true,
         },
       }),
-    ])
-  }
+    ]),
+    watch: {
+      clearScreen: false
+    },
+  },
 ]
