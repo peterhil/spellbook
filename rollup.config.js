@@ -12,24 +12,13 @@ import { terser } from 'rollup-plugin-terser'
 const production = !process.env.ROLLUP_WATCH;
 const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
 const outputFormat = 'iife'
-
-// Transform new CSS specs into more compatible CSS
-function cssnext (tagName, css) {
-  // A small hack: it passes :scope as :root to PostCSS.
-  // This make it easy to use css variables inside tags.
-  css = css.replace(/:scope/g, ':root')
-  css = postcss([postcssPresetEnv]).process(css).css
-  css = css.replace(/:root/g, ':scope')
-  return css
-}
-
 const plugins = [
   riot({
     compact: true,
     esm: true,
     style: 'css',
     parsers: {
-      css: { cssnext },
+      css: postcss([postcssPresetEnv]),
     },
   }),
 
