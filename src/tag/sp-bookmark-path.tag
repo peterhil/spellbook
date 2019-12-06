@@ -19,7 +19,7 @@
     import { getParentPath } from '../platform/common/bookmarks.js'
     const vm = this
     const getPath = async function () {
-      vm.path = await getParentPath(opts.bookmark)
+      vm.path = await getParentPath(vm.opts.bookmark)
       vm.update()
     }
 

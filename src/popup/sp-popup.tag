@@ -13,10 +13,10 @@
     const vm = this
 
     vm.bookmark = {
-      'title': '',
-      'url': '',
-      'favIconUrl': '',
-      'category': '',
+      title: '',
+      url: '',
+      favIconUrl: '',
+      category: '',
     }
 
     const onTabUpdate = (tab) => {

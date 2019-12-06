@@ -153,7 +153,7 @@
 
     const selectedBookmarks$ = Kefir
       .fromPromise(getSubTree(vm.selectedCategory))
-      .map(head)  // TODO Fix this API madness on the bookmarks adapter!
+      .map(head) // TODO Fix this API madness on the bookmarks adapter!
       .map(get('children'))
 
     const bookmarks$ = selectedBookmarks$
