@@ -145,7 +145,10 @@ export default [
       }),
     ]),
     watch: {
-      clearScreen: false
+      chokidar: false,
+      clearScreen: true,
+      exclude: ['node_modules/**'],
+      include: ['src/**/*'],
     },
   },
 ]
