@@ -10,14 +10,10 @@
   <script>
     import './sp-popup-form.tag'
     import { messages } from '../lib/messaging'
+    import { emptyBookmark } from '../lib/stores'
     const vm = this
 
-    vm.bookmark = {
-      title: '',
-      url: '',
-      favIconUrl: '',
-      category: '',
-    }
+    vm.bookmark = emptyBookmark
 
     const onTabUpdate = (tab) => {
       vm.bookmark = tab

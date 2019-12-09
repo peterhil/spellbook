@@ -9,6 +9,7 @@
 import riot from 'riot'
 import './popup.sass'
 import './sp-popup.tag'
+import Popup from '../components/Popup.svelte'
 import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
 import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
@@ -32,7 +33,12 @@ const messageHandler = function (message) {
 }
 
 function onLoad (event) {
-  riot.mount('sp-popup')
+  // riot.mount('sp-popup')
+
+  const popup = new Popup({
+    target: document.getElementById('popup'),
+    props: {},
+  })
 
   const port = chrome.runtime.connect({ name: 'popup' })
   port.onDisconnect.addListener(disconnectionHandler)
