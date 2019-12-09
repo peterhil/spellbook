@@ -362,6 +362,11 @@
     "@nodelib/fs.scandir" "2.1.2"
     fastq "^1.6.0"
 
+"@riotjs/observable@~4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@riotjs/observable/-/observable-4.0.4.tgz#c721a99dc452e87bbc6487f9f2f7c7aef73d19dc"
+  integrity sha512-IscZSGID7UL0YLdRL49elEk8hCCENVp8LJH2fyxXCf4tofJa1toF9zl9vKZEk5Eje60ETBMxSzqHJbAC+5j2OQ==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

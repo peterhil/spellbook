@@ -18,6 +18,7 @@
     "test:watch": "ava --watch"
   },
   "dependencies": {
+    "@riotjs/observable": "~4.0.4",
     "fkit": "~3.4.0",
     "kefir": "~3.8.5",
     "riot": "~3.13.0",
