@@ -6,10 +6,7 @@
 
 /* global chrome */
 
-// import riot from 'riot'
-
 import './directory.sass'
-import './sp-directory.tag'
 import Directory from '../components/Directory.svelte'
 import { choice } from '../lib/pure'
 import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
@@ -40,7 +37,6 @@ function onLoad (event) {
   port.onMessage.addListener(messageHandler)
 }
 
-// riot.mount('sp-directory')
 new Directory({ // eslint-disable-line no-new
   target: document.getElementById('directory'),
   props: {},
