@@ -126,7 +126,7 @@ export default [
       }),
     ]),
     watch: {
-      chokidar: false,
+      chokidar: true,
       clearScreen: true,
       exclude: ['node_modules/**'],
       include: ['src/**/*'],

@@ -28,6 +28,7 @@
     "ava": "^2.4.0",
     "browser-env": "~3.2.5",
     "caniuse-lite": "~1.0.3",
+    "chokidar": "~3.3.0",
     "eslint": "^6.4.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
