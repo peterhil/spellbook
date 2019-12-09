@@ -78,9 +78,9 @@ export default [
     plugins: plugins
   },
   {
-    input: { directory: 'src/bookmarks/directory.js' },
+    input: { directory: 'src/directory/directory.js' },
     output: {
-      dir: outputDir('bookmarks'),
+      dir: outputDir('directory'),
       format: outputFormat,
       sourcemap: !production,
       globals: {
@@ -116,7 +116,7 @@ export default [
           'asset/spellbook_icon*.png',
           'asset/spellbook-bg.jpg',
           'background/background.html',
-          'bookmarks/directory.html',
+          'directory/directory.html',
           'manifest.json',
           'popup/popup.html',
         ],
