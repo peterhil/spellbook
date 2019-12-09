@@ -7,6 +7,8 @@ import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH;
+const minify = production
+const sourceMaps = !production
 const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
 const outputFormat = 'iife'
 const plugins = [
@@ -44,7 +46,7 @@ const plugins = [
   commonjs(),
 
   // Minify on production
-  production && terser(),
+  minify && terser(),
 ]
 
 export default [
@@ -53,7 +55,7 @@ export default [
     output: {
       dir: outputDir('popup'),
       format: outputFormat,
-      sourcemap: !production,
+      sourcemap: sourceMaps,
       globals: {
         'zepto': '$',
       },
@@ -69,7 +71,7 @@ export default [
       dir: outputDir('directory'),
       name: 'directory',
       format: outputFormat,
-      sourcemap: !production,
+      sourcemap: sourceMaps,
       globals: {
         'zepto': '$',
       },
@@ -84,7 +86,7 @@ export default [
     output: {
       dir: outputDir('background'),
       format: outputFormat,
-      sourcemap: !production,
+      sourcemap: sourceMaps,
       globals: {
         'zepto': '$',
       },
