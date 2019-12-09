@@ -3,6 +3,7 @@
   export let name
 
   export const isVisible = (value) => {
+    console.debug('Dropdown isVisible:', value, name === value, $dropdown)
     return name === value
   }
 </script>
