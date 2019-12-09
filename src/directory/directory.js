@@ -6,7 +6,6 @@
 
 /* global chrome */
 
-import './directory.sass'
 import Directory from '../components/Directory.svelte'
 import { choice } from '../lib/pure'
 import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'

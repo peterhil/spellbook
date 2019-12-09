@@ -11,6 +11,7 @@ const minify = production
 const sourceMaps = !production
 const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
 const outputFormat = 'iife'
+
 const plugins = [
   eslint({
     exclude: [
@@ -29,9 +30,7 @@ const plugins = [
   }),
 
   sass({
-    // output: true,
-    // output: 'popup.css',
-    insert: true
+    output: true,
   }),
 
   // Convert CommonJS libraries to ES6
@@ -51,6 +50,32 @@ const plugins = [
 
 export default [
   {
+    input: 'src/popup/popup.sass',
+    output: {
+      dir: outputDir('popup'),
+      name: 'popup.sass',
+      format: outputFormat,
+    },
+    plugins: [
+      sass({
+        output: outputDir('popup/popup.css'),
+      })
+    ],
+  },
+  {
+    input: 'src/directory/directory.sass',
+    output: {
+      dir: outputDir('directory'),
+      name: 'directory.sass',
+      format: outputFormat,
+    },
+    plugins: [
+      sass({
+        output: outputDir('directory/directory.css'),
+      })
+    ],
+  },
+  {
     input: { popup: 'src/popup/popup.js' },
     output: {
       dir: outputDir('popup'),
@@ -63,7 +88,7 @@ export default [
     external: [
       'zepto',
     ],
-    plugins: plugins
+    plugins: plugins,
   },
   {
     input: { directory: 'src/directory/directory.js' },

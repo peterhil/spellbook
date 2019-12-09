@@ -6,7 +6,6 @@
 
 /* global chrome, window */
 
-import './popup.sass'
 import Popup from '../components/Popup.svelte'
 import { domLoaded$ } from '../lib/events'
 import { choice } from '../lib/pure'
