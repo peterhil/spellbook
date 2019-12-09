@@ -6,7 +6,7 @@
 
 /* global chrome, window */
 
-import riot from 'riot'
+// import riot from 'riot'
 import './popup.sass'
 import './sp-popup.tag'
 import Popup from '../components/Popup.svelte'
@@ -35,7 +35,7 @@ const messageHandler = function (message) {
 function onLoad (event) {
   // riot.mount('sp-popup')
 
-  const popup = new Popup({
+  new Popup({ // eslint-disable-line no-new
     target: document.getElementById('popup'),
     props: {},
   })
