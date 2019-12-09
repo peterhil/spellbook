@@ -28,7 +28,6 @@
       "description": "__MSG_execute_browser_action__"
     }
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "homepage_url": "https://github.com/peterhil/spellbook",
   "permissions": [
     "activeTab",
