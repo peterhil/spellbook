@@ -81,6 +81,7 @@ export default [
     input: { directory: 'src/directory/directory.js' },
     output: {
       dir: outputDir('directory'),
+      name: 'directory',
       format: outputFormat,
       sourcemap: !production,
       globals: {
