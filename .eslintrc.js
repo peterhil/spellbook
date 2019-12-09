@@ -15,18 +15,10 @@ module.exports = {
   },
 
   plugins: [
-    'riot',
     'svelte3',
   ],
 
   overrides: [
-    {
-      files: ['**/*.tag'],
-      excludedFiles: [],
-      rules: {
-        indent: ['off', 'always'],
-      },
-    },
     {
       files: ['**/*.svelte'],
       processor: 'svelte3/svelte3',

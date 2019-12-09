@@ -1,9 +1,6 @@
 import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
-import postcss from 'rollup-plugin-postcss'
-import postcssPresetEnv from 'postcss-preset-env'
 import resolve from 'rollup-plugin-node-resolve'
-import riot from 'rollup-plugin-riot'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte';
 import { eslint } from 'rollup-plugin-eslint'
@@ -17,15 +14,6 @@ const plugins = [
     exclude: [
       'src/**/*.{css,sass}',
     ]
-  }),
-
-  riot({
-    compact: true,
-    esm: true,
-    style: 'css',
-    parsers: {
-      css: postcss([postcssPresetEnv]),
-    },
   }),
 
   svelte({
@@ -67,12 +55,10 @@ export default [
       format: outputFormat,
       sourcemap: !production,
       globals: {
-        'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
-      'riot',
       'zepto',
     ],
     plugins: plugins
@@ -85,12 +71,10 @@ export default [
       format: outputFormat,
       sourcemap: !production,
       globals: {
-        'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
-      'riot',
       'zepto',
     ],
     plugins: plugins
@@ -102,12 +86,10 @@ export default [
       format: outputFormat,
       sourcemap: !production,
       globals: {
-        'riot': 'riot',
         'zepto': '$',
       },
     },
     external: [
-      'riot',
       'zepto',
     ],
     plugins: plugins.concat([
@@ -130,7 +112,6 @@ export default [
       }),
       copy({
         files: [
-          'node_modules/riot/riot+compiler.js',
           'node_modules/spectre.css/dist/spectre-icons.css',
           'node_modules/spectre.css/dist/spectre.css',
           'node_modules/zepto/dist/zepto.js',
