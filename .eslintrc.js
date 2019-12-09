@@ -2,7 +2,7 @@ module.exports = {
   'extends': 'standard',
 
   parserOptions: {
-    ecmaVersion: 9,
+    ecmaVersion: 2019,
     sourceType: 'module',
     ecmaFeatures: {
       impliedstrict: true,
@@ -25,7 +25,7 @@ module.exports = {
       excludedFiles: [],
       rules: {
         indent: ['off', 'always'],
-      }
+      },
     },
     {
       files: ['**/*.svelte'],
