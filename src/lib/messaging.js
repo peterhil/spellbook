@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import observable from 'riot-observable'
+import observable from '@riotjs/observable'
 import { curry } from 'fkit'
 
 export const messages = observable()
