@@ -82,11 +82,9 @@ export default [
       format: outputFormat,
       sourcemap: sourceMaps,
       globals: {
-        'zepto': '$',
       },
     },
     external: [
-      'zepto',
     ],
     plugins: plugins,
   },
@@ -98,11 +96,9 @@ export default [
       format: outputFormat,
       sourcemap: sourceMaps,
       globals: {
-        'zepto': '$',
       },
     },
     external: [
-      'zepto',
     ],
     plugins: plugins
   },
@@ -113,11 +109,9 @@ export default [
       format: outputFormat,
       sourcemap: sourceMaps,
       globals: {
-        'zepto': '$',
       },
     },
     external: [
-      'zepto',
     ],
     plugins: plugins.concat([
       copy({
@@ -141,8 +135,6 @@ export default [
         files: [
           'node_modules/spectre.css/dist/spectre-icons.css',
           'node_modules/spectre.css/dist/spectre.css',
-          'node_modules/zepto/dist/zepto.js',
-          'node_modules/zepto/src/detect.js',
         ],
         dest: outputDir('ext'),
         options: {

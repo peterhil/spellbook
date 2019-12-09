@@ -8,7 +8,7 @@
 
 import { compose, get, map, nub, pick, reverse, sortBy, take } from 'fkit'
 import Kefir from 'kefir'
-import $ from 'zepto'
+import zd from 'zepto-detect'
 import { domLoaded$ } from '../../lib/events'
 import { choice, propertyCompare } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
@@ -17,26 +17,26 @@ import * as firefoxBookmarks from '../firefox/bookmarks'
 import { browserEvent$ } from './helpers'
 
 const platform = (
-  $.browser.firefox ? 'firefox' : ($.browser.chrome ? 'chrome' : null)
+  zd.browser.firefox ? 'firefox' : (zd.browser.chrome ? 'chrome' : null)
 )
 
-const parentIdProperty = ($.browser.firefox && $.browser.version < 64)
+const parentIdProperty = (zd.browser.firefox && zd.browser.version < 64)
   ? 'parentGuid'
   : 'parentId'
 
-const rootCategoryId = $.browser.firefox
+const rootCategoryId = zd.browser.firefox
   ? 'root________'
   : '0'
 
-export const bookmarksBarCategoryId = $.browser.firefox
+export const bookmarksBarCategoryId = zd.browser.firefox
   ? 'toolbar_____'
   : '1'
 
-export const otherCategoryId = $.browser.firefox
+export const otherCategoryId = zd.browser.firefox
   ? 'unfiled_____'
   : '2'
 
-export const menuCategoryId = $.browser.firefox
+export const menuCategoryId = zd.browser.firefox
   ? 'menu________'
   : null
 

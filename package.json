@@ -22,7 +22,7 @@
     "fkit": "~3.4.0",
     "kefir": "~3.8.5",
     "spectre.css": "~0.5.3",
-    "zepto": "~1.2.0"
+    "zepto-detect": "~0.0.0"
   },
   "devDependencies": {
     "ava": "^2.4.0",
