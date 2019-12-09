@@ -101,7 +101,7 @@
     </div>
   </div>
 
-  <CategorySelector category={$bookmark.category} />
+  <CategorySelector />
 
   <div class="form-group text-right buttons-row">
     <button type="submit" bind:this={submitButton} class="btn btn-primary">{ t('buttons_add') }</button>

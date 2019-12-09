@@ -16,7 +16,6 @@
   import RecentCategories from './RecentCategories.svelte'
   import Dropdown from './Dropdown.svelte'
 
-  export let category
   export let lastSearch = null
   export let search = ''
   export let searchResults = []
@@ -169,7 +168,7 @@
   </Dropdown>
 
   <Dropdown name={'children'}>
-    <ChildCategories category={selection} />
+    <ChildCategories />
   </Dropdown>
 
   <Dropdown name={'recent'}>

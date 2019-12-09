@@ -6,7 +6,6 @@
   import { propertyCompare } from '../lib/pure'
   import CategoryList from './CategoryList.svelte'
 
-  export let category
   export let children = []
 
   async function updateChildren (category) {
