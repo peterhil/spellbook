@@ -14,6 +14,12 @@
   }
 </script>
 
+<style>
+  .title {
+    font-weight: bolder;
+  }
+</style>
+
 <a href="#{category.id}" class="category" tabindex="0"
    bind:this={elem}
    on:click={onClick}
