@@ -67,13 +67,6 @@
     return false
   }
 
-  const onSearchBlur = (event) => {
-    if (isVisible('search')) {
-      $showDropdown = null
-    }
-    return false
-  }
-
   const toggleDropdown = (dropdown) => {
     if (isVisible(dropdown)) {
       $showDropdown = null
@@ -132,7 +125,6 @@
            class="form-input"
            bind:this={search}
            bind:value={selection.title}
-           on:blur={onSearchBlur}
            on:focus={onSearchFocus}
            placeholder={ t('search_placeholder') }
            autocomplete="off">
@@ -154,16 +146,16 @@
   </div>
 
   <Dropdown name={'search'}>
+    {#if isVisible('search') && lastSearch }
     {#if not(empty(searchResults)) }
     <ul class="menu" tabindex="-1">
       <CategoryList categories={searchResults} />
       <li class="divider" data-content={ t('root_categories') }></li>
       <MainCategories />
     </ul>
-    {/if}
-
-    {#if empty(searchResults) && isVisible('search') && lastSearch }
+    {:else}
     <small>No categories found</small>
+    {/if}
     {/if}
   </Dropdown>
 
