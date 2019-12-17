@@ -4,54 +4,49 @@
 
 Spellbook is a bookmark manager extension for Chrome and Firefox web browsers.
 
-Get it now from [Chrome Web Store](https://chrome.google.com/webstore/detail/spellbook/mpngjgnmljpfedcllnndbeeponjdjcnk) or [Mozilla Addons](https://addons.mozilla.org/fi/firefox/addon/spellbook-riot/).
+Get it now from
+[Chrome Web Store](https://chrome.google.com/webstore/detail/spellbook/mpngjgnmljpfedcllnndbeeponjdjcnk)
+or
+[Mozilla Addons](https://addons.mozilla.org/fi/firefox/addon/spellbook-peterhil/).
 
-It is still in early development phase, but the motivation is to make a really
-usable extension that enables the user to easily manage thousands of bookmarks
-with novel UI innovations.
-
-## Technology stack
-
-Currently I am to only use libraries that are well written and most importantly
-extremely small in size.
-
-For now the stack is:
-
-- [Riot.js — Simple and elegant component-based UI library](https://riot.js.org/)
-- [Kefir.js — fast and light Reactive Programming library for JavaScript inspired by Bacon.js and RxJS](https://kefirjs.github.io/kefir/)
-- [nullobject/fkit: A functional programming toolkit for JavaScript](https://github.com/nullobject/fkit) – [FKit API documentation](https://nullobject.github.io/fkit/api.html)
-- [Spectre.css - A Lightweight, Responsive and Modern CSS Framework](https://picturepan2.github.io/spectre/)
-- [ESLint - Pluggable JavaScript linter](https://eslint.org/)
-- [Bublé – the blazing fast, batteries-included ES2015 compiler](https://buble.surge.sh/guide/)
-- [PostCSS - a tool for transforming CSS with JavaScript](https://postcss.org/)
-- [rollup.js](https://rollupjs.org/guide/en)
+My motivation is to make a really usable browser extension for
+easily managing thousands of bookmarks with novel UI innovations.
 
 ## Installation
 
 ```
-yarn
-rollup -c
+yarn install
+yarn run build
 ```
 
 Then add the `dist` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
 
 ## Development
 
-### Running tests
+```
+yarn install
+yarn run dev
+```
 
-Run all tests:
+Then add the `dev` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
 
-`ava` or `yarn test`
+## Technology stack
 
-Run a single test:
+Currently I am using libraries that are well written and most importantly
+extremely small in size.
 
-`ava test/riot-setup.test.js`
+For now the stack is:
 
-All commands accept `--verbose`, `-v`, `--watch`, and `-w` flags.
+- [Svelte • Cybernetically enhanced web apps](https://svelte.dev/)
+- [Kefir.js — fast and light Reactive Programming library for JavaScript inspired by Bacon.js and RxJS](https://kefirjs.github.io/kefir/)
+- [nullobject/fkit: A functional programming toolkit for JavaScript](https://github.com/nullobject/fkit) – [FKit API documentation](https://nullobject.github.io/fkit/api.html)
+- [Spectre.css - A Lightweight, Responsive and Modern CSS Framework](https://picturepan2.github.io/spectre/)
+- [ESLint - Pluggable JavaScript linter](https://eslint.org/)
+- [rollup.js](https://rollupjs.org/guide/en)
 
 ## Licensing
 
-Copyright © 2018 Peter Hillerström and contributors
+Copyright © 2018–2019 Peter Hillerström and contributors
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a [copy of the MPL](https://github.com/peterhil/spellbook/blob/master/LICENSE.txt) was not distributed with this
