@@ -9,6 +9,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Released versions:
 
+## [0.4.0] – 2019-12-17 – Use [Svelte] instead of Riot.js
+
+### Added
+
+- Minify assets on production builds, and use source maps on development
+
+### Changed
+
+- Replace all [Riot.js] components with [Svelte] components
+- Fix Mozilla extension by removing unsafe-eval from content security policy
+- Increase max-height of dropdown menus
+- Make dropdown menu animation faster
+- Make the popup styles work better on mobile
+
+**Technical:**
+
+- Use separate directories for development and production builds
+- Add separate bundles for the sass files
+- Import [Kefir] and [fkit] using modules and remove them from globals and externals
+- Simplify [Rollup] config and copy plugin usage
+
+### Fixed
+
+- All Mozilla web-exts errors and warnings
+- All ESlint errors and warnings
+- Fix when to show "No category results"
+- Fix showing dropdowns so that only one of them is ever visible
+
+### Removed
+
+- Remove Zepto from dependencies
+- Remove rollup-plugin-buble from dependencies
+
+
 ## [0.3.7] – 2019-11-13 – Show recent and child categories
 
 ### Added
@@ -194,7 +228,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.3.7...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/peterhil/spellbook/compare/v0.3.7...v0.4.0
 [0.3.7]: https://github.com/peterhil/spellbook/compare/v0.3.6...v0.3.7
 [0.3.6]: https://github.com/peterhil/spellbook/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/peterhil/spellbook/compare/v0.3.4...v0.3.5
@@ -215,5 +250,6 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 [RxJS]: https://rxjs-dev.firebaseapp.com/guide/overview
 [Semantic UI]: https://semantic-ui.com/
 [Spectre.css]: https://picturepan2.github.io/spectre/
+[Svelte]: https://svelte.dev/
 [Vue.js]: https://vuejs.org/
 [Webpack]: https://webpack.js.org/
