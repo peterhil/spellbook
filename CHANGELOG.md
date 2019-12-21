@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Released versions:
 
+## [0.4.1] – 2019-12-22 – Fix bookmark paths
+
+### Fixed
+
+- Fix bookmark paths to update reactively
+- Fix popup styles to avoid extra scroll bars on popup
+
 ## [0.4.0] – 2019-12-17 – Use [Svelte] instead of Riot.js
 
 ### Added
@@ -228,7 +235,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/peterhil/spellbook/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/peterhil/spellbook/compare/v0.3.7...v0.4.0
 [0.3.7]: https://github.com/peterhil/spellbook/compare/v0.3.6...v0.3.7
 [0.3.6]: https://github.com/peterhil/spellbook/compare/v0.3.5...v0.3.6
