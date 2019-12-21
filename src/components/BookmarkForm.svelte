@@ -72,10 +72,6 @@
     color: #333;
   }
 
-  input {
-    height: 2rem;
-  }
-
   .btn[type=submit] {
     padding: .25rem .8rem
   }

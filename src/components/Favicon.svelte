@@ -8,12 +8,12 @@
   }
 
   .input-group-addon.with-icon {
-    padding: 0.15rem;
+    padding: 0.2rem;
   }
 
   .icon.favicon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 
   .icon-bookmark {
