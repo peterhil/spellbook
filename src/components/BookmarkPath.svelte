@@ -1,14 +1,12 @@
 <script>
-  import { onMount } from 'svelte'
   import { getParentPath } from '../platform/common/bookmarks.js'
-  export let path = ''
   export let bookmark
 
   const getPath = async function () {
     path = await getParentPath(bookmark)
   }
 
-  onMount(getPath)
+  $: path = getPath(bookmark)
 </script>
 
 <style>
