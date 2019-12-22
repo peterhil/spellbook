@@ -44,7 +44,6 @@ function onCheckBookmarkStatus (bookmarked) {
     : '../asset/spellbook_icon.png'
 
   chrome.browserAction.setIcon({ path: icon })
-  chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
   chrome.browserAction.setBadgeText({ text: badgeText })
 }
 

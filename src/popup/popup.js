@@ -30,12 +30,15 @@ const messageHandler = function (message) {
 }
 
 function onLoad (event) {
+  const port = chrome.runtime.connect({ name: 'popup' })
+
   new Popup({ // eslint-disable-line no-new
     target: document.getElementById('popup'),
     props: {},
   })
 
-  const port = chrome.runtime.connect({ name: 'popup' })
+  chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
