@@ -35,16 +35,18 @@ function searchWithBookmark (bookmark) {
   return bookmarkSearch({ url: bookmark.url })
 }
 
-function onCheckBookmarkStatus (bookmarked) {
-  var badgeText = bookmarked.length > 1
-    ? bookmarked.length.toString()
+function onCheckBookmarkStatus (bookmarks) {
+  var badgeText = bookmarks.length > 1
+    ? bookmarks.length.toString()
     : ''
-  var icon = bookmarked.length > 0
+  var icon = bookmarks.length > 0
     ? '../asset/spellbook_icon_bookmarked.png'
     : '../asset/spellbook_icon.png'
 
   chrome.browserAction.setIcon({ path: icon })
   chrome.browserAction.setBadgeText({ text: badgeText })
+
+  bookmarked = bookmarks
 }
 
 currentTab$
