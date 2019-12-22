@@ -35,17 +35,17 @@ function searchWithBookmark (bookmark) {
   return bookmarkSearch({ url: bookmark.url })
 }
 
-function onCheckBookmarkStatus (bookmarks) {
-  var icon
-
-  bookmarked = bookmarks
-  icon = (
-    (bookmarked.length > 0)
-      ? '../asset/spellbook_icon_bookmarked.png'
-      : '../asset/spellbook_icon.png'
-  )
+function onCheckBookmarkStatus (bookmarked) {
+  var badgeText = bookmarked.length > 1
+    ? bookmarked.length.toString()
+    : ''
+  var icon = bookmarked.length > 0
+    ? '../asset/spellbook_icon_bookmarked.png'
+    : '../asset/spellbook_icon.png'
 
   chrome.browserAction.setIcon({ path: icon })
+  chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+  chrome.browserAction.setBadgeText({ text: badgeText })
 }
 
 currentTab$
