@@ -1,5 +1,5 @@
 <script>
-  import { getParentId } from '../platform/bookmarks.js'
+  import { getParentId } from '../api/bookmarks.js'
   import BookmarkPath from './BookmarkPath.svelte'
   export let bookmark
 </script>

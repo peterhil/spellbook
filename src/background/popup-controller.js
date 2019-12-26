@@ -14,8 +14,8 @@ import {
   bookmarksModified$,
   recentCategories$,
   searchWithBookmark,
-} from '../platform/bookmarks'
-import { currentTab$ } from '../platform/tabs'
+} from '../api/bookmarks'
+import { currentTab$ } from '../api/tabs'
 
 var bookmarked = []
 var currentTab = emptyBookmark

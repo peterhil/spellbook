@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount } from 'svelte'
   import { bookmarkStore as bookmark } from '../lib/stores'
-  import { createBookmark } from '../platform/bookmarks'
+  import { createBookmark } from '../api/bookmarks'
   import { messages } from '../lib/messaging'
   import { t as translate } from '../lib/translate'
   import BookmarkCount from './BookmarkCount.svelte'

@@ -9,7 +9,7 @@
     emptySelection,
   } from '../lib/stores'
   import { t as translate } from '../lib/translate'
-  import { bookmarkSearch, isCategory } from '../platform/bookmarks.js'
+  import { bookmarkSearch, isCategory } from '../api/bookmarks.js'
   import CategoryList from './CategoryList.svelte'
   import ChildCategories from './ChildCategories.svelte'
   import MainCategories from './MainCategories.svelte'
