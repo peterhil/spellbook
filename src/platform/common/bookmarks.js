@@ -52,6 +52,10 @@ export function isBookmarkNode (bookmark) {
   return !!get(parentIdProperty, bookmark)
 }
 
+export function isTopLevelCategory (bookmark) {
+  return getParentId(bookmark) === rootCategoryId
+}
+
 export const bookmarkSearch = choice(platform, {
   chrome: chromeBookmarks.bookmarkSearch,
   firefox: firefoxBookmarks.bookmarkSearch,
@@ -111,21 +115,16 @@ export function flattenTree (tree) {
   return bookmarks
 }
 
-const parentPathProperties = ['id', parentIdProperty, 'title']
-
-const pathToString = (parents) => {
-  return parents.map(parent => parent.title).join(' < ')
-}
-
 export function getParentId (bookmark) {
   return get(parentIdProperty, bookmark)
 }
 
 export async function getParents (bookmark) {
-  var parents = []
+  const parentPathProperties = ['id', parentIdProperty, 'title']
   let current = pick(parentPathProperties, bookmark)
+  var parents = []
 
-  while (isBookmarkNode(current) && getParentId(current) !== rootCategoryId) {
+  while (isBookmarkNode(current) && !isTopLevelCategory(current)) {
     try {
       var result = await getBookmark(getParentId(current))
       current = pick(parentPathProperties, result[0])
@@ -147,7 +146,7 @@ export async function getParentPath (bookmark) {
     console.error(err)
   }
 
-  return pathToString(parents)
+  return parents.map(parent => parent.title).join(' < ')
 }
 
 export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
