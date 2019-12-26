@@ -1,6 +1,6 @@
 <script>
   import { messages } from '../lib/messaging'
-  import { getParentId } from '../platform/common/bookmarks.js'
+  import { getParentId } from '../platform/bookmarks.js'
   import BookmarkPath from './BookmarkPath.svelte'
 
   export let category

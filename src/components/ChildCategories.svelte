@@ -1,7 +1,7 @@
 <script>
   import { filter, sortBy } from 'fkit'
   import { onDestroy, onMount } from 'svelte'
-  import { getChildren, isCategory } from '../platform/common/bookmarks'
+  import { getChildren, isCategory } from '../platform/bookmarks'
   import { messages } from '../lib/messaging'
   import { propertyCompare } from '../lib/pure'
   import CategoryList from './CategoryList.svelte'

@@ -9,11 +9,11 @@
 import { compose, get, map, nub, pick, reverse, sortBy, take } from 'fkit'
 import Kefir from 'kefir'
 import zd from 'zepto-detect'
-import { domLoaded$ } from '../../lib/events'
-import { choice, filterBy, propertyCompare } from '../../lib/pure'
-import { notImplemented$ } from '../../lib/reactive'
-import * as chromeBookmarks from '../chrome/bookmarks'
-import * as firefoxBookmarks from '../firefox/bookmarks'
+import { domLoaded$ } from '../lib/events'
+import { choice, filterBy, propertyCompare } from '../lib/pure'
+import { notImplemented$ } from '../lib/reactive'
+import * as chromeBookmarks from './chrome/bookmarks'
+import * as firefoxBookmarks from './firefox/bookmarks'
 import { browserEvent$ } from './helpers'
 
 const platform = (

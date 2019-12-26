@@ -11,7 +11,7 @@
     getSubTree,
     isBookmark,
     isCategory,
-  } from '../platform/common/bookmarks.js'
+  } from '../platform/bookmarks.js'
   import Bookmark from './Bookmark.svelte'
   import Category from './Category.svelte'
   import CategoryList from './CategoryList.svelte'

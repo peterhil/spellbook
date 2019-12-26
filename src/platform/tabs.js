@@ -10,7 +10,7 @@
 
 import { difference, empty, get, head, pick, values } from 'fkit'
 import Kefir from 'kefir'
-import { callbackToPromise } from '../../lib/reactive'
+import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
 
 var currentWindowId = -1

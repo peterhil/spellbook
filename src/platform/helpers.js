@@ -6,7 +6,7 @@
 
 /* global chrome */
 
-import { fromEventPattern } from '../../lib/rxjs'
+import { fromEventPattern } from '../lib/rxjs'
 import { init, last } from 'fkit'
 
 export const browserEvent$ = (eventType) => {

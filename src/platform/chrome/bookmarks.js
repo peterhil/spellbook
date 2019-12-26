@@ -8,7 +8,7 @@
 
 import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
-import { withErrorChecking } from '../common/helpers'
+import { withErrorChecking } from '../helpers'
 
 export function bookmarkSearch (queryObject) {
   return Kefir.fromPromise(callbackToPromise(

@@ -1,5 +1,5 @@
 <script>
-  import { getParentPath } from '../platform/common/bookmarks.js'
+  import { getParentPath } from '../platform/bookmarks.js'
   export let bookmark
 
   const getPath = async function () {
