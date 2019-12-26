@@ -12,7 +12,7 @@ import {
   bookmarkCreated$,
   bookmarkMoved$,
   bookmarkRemoved$,
-  bookmarkSearch,
+  searchWithBookmark,
 } from '../platform/common/bookmarks'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
@@ -29,13 +29,6 @@ export const bookmarkStatus = {
 
     action(message)
   }
-}
-
-function searchWithBookmark (bookmark) {
-  if (!(bookmark && bookmark.url)) {
-    return []
-  }
-  return bookmarkSearch({ url: bookmark.url })
 }
 
 function onCheckBookmarkStatus (bookmarks) {

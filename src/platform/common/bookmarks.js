@@ -66,6 +66,13 @@ export const bookmarkSearch = choice(platform, {
   default: notImplemented$,
 })
 
+export function searchWithBookmark (bookmark) {
+  if (!(bookmark && bookmark.url)) {
+    return []
+  }
+  return bookmarkSearch({ url: bookmark.url })
+}
+
 export function createBookmark (params, callback) {
   chrome.bookmarks.create(params, callback)
 }
