@@ -45,19 +45,23 @@ label
   display: contents
 
 .dropdown .menu
+  position: relative
+  max-width: 640px
   max-height: 266px
   overflow-y: auto
   overflow-x: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
 
 .dropdown.active .menu,
 .dropdown .dropdown-toggle:focus + .menu
   display: block
   position: relative
-  white-space: nowrap
-  text-overflow: ellipsis
 
 .category.dropdown
   display: block
 
 .category .title
+  overflow: hidden
+  text-overflow: ellipsis
   font-weight: bolder
