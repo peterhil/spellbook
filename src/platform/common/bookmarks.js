@@ -10,7 +10,7 @@ import { compose, get, map, nub, pick, reverse, sortBy, take } from 'fkit'
 import Kefir from 'kefir'
 import zd from 'zepto-detect'
 import { domLoaded$ } from '../../lib/events'
-import { choice, propertyCompare } from '../../lib/pure'
+import { choice, filterBy, propertyCompare } from '../../lib/pure'
 import { notImplemented$ } from '../../lib/reactive'
 import * as chromeBookmarks from '../chrome/bookmarks'
 import * as firefoxBookmarks from '../firefox/bookmarks'
@@ -50,14 +50,6 @@ export function isBookmark (bookmark) {
 
 export function isBookmarkNode (bookmark) {
   return !!get(parentIdProperty, bookmark)
-}
-
-export function filterCategories (bookmarks) {
-  return bookmarks.filter(isCategory)
-}
-
-export function filterBookmarks (bookmarks) {
-  return bookmarks.filter(isBookmark)
 }
 
 export const bookmarkSearch = choice(platform, {
@@ -186,7 +178,7 @@ export const recentCategories$ = Kefir.merge([
 ])
   .flatMapLatest(getTree$)
   .map(flattenTree)
-  .map(filterBookmarks)
+  .map(filterBy(isBookmark))
   .map(compose(reverse([
     sortBy(propertyCompare('dateAdded')),
     reverse,

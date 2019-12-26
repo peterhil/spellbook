@@ -2,14 +2,14 @@
   import { empty, get, not, sortBy } from 'fkit'
   import { onDestroy, onMount } from 'svelte'
   import { messages } from '../lib/messaging'
-  import { propertyCompare } from '../lib/pure'
+  import { filterBy, propertyCompare } from '../lib/pure'
   import { inputEvent$ } from '../lib/reactive'
   import {
     dropdownStore as showDropdown,
     emptySelection,
   } from '../lib/stores'
   import { t as translate } from '../lib/translate'
-  import { bookmarkSearch, filterCategories } from '../platform/common/bookmarks.js'
+  import { bookmarkSearch, isCategory } from '../platform/common/bookmarks.js'
   import CategoryList from './CategoryList.svelte'
   import ChildCategories from './ChildCategories.svelte'
   import MainCategories from './MainCategories.svelte'
@@ -86,7 +86,7 @@
   onMount(() => {
     const categorySearch$ = inputEvent$(search, { minLength: 1 })
       .flatMapLatest(query => bookmarkSearch({ query })) // TODO See how RxJS.switchMap cancel the previous observable
-      .map(filterCategories)
+      .map(filterBy(isCategory))
       .map(sortBy(propertyCompare('title', true)))
 
     const emptySearch$ = inputEvent$(search, { minLength: 0 })

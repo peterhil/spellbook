@@ -20,6 +20,10 @@ export const choice = curry((selection, options) => {
   return options[selection] || options.default
 })
 
+export const filterBy = curry((fn, items) => {
+  return items.filter(fn)
+})
+
 //
 // Use propertyComparator with sortBy or similar sort function like this:
 // sortBy(propertyCompare('title'), list)
