@@ -116,8 +116,10 @@ export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
   .spy('currentTab$')
 
 export const closedTab$ = onRemoved$
+  .log('closedTab$')
 
 export const closedWindow$ = onRemoved$
   .filter(get('isWindowClosing'))
   .map(get('windowId'))
   .skipDuplicates()
+  .log('closedWindow$')

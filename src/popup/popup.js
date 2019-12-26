@@ -12,9 +12,11 @@ import { choice } from '../lib/pure'
 import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
 
 const messageHandler = function (message) {
-  console.debug('[popup] Got message:', message.type, message)
-
   const action = choice(message.type, {
+    bookmarkStatus: () => {
+      console.log('[popup] Bookmark status:', message.data)
+      messages.trigger(message.type, message.data)
+    },
     currentTabInfo: () => {
       console.log('[popup] Current tab info:', message.data)
       messages.trigger(message.type, message.data)
@@ -44,6 +46,7 @@ function onLoad (event) {
   // Send a message
   port.postMessage({ type: 'getCurrentTab' })
   port.postMessage({ type: 'getRecentCategories' })
+  port.postMessage({ type: 'getBookmarkStatus' })
 
   // Receive messages
   port.onMessage.addListener(messageHandler)

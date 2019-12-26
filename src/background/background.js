@@ -8,13 +8,11 @@
 
 import { disconnectionHandler, messageServer } from '../lib/messaging'
 import { directoryController } from './directory-controller'
-import { bookmarkStatus } from './bookmark-status'
 import { popupController } from './popup-controller'
 
 const controllers = {
   directory: directoryController,
   popup: popupController,
-  status: bookmarkStatus,
 }
 
 function onConnect (port) {
