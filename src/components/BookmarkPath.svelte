@@ -1,5 +1,5 @@
 <script>
-  import { getParentPath } from '../api/bookmarks.js'
+  import { getParentPath } from '../api/categories.js'
   export let bookmark
 
   const getPath = async function () {

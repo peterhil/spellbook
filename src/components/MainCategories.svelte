@@ -1,5 +1,5 @@
 <script>
-  import { bookmarksBarCategoryId, otherCategoryId } from '../api/bookmarks.js'
+  import { bookmarksBarCategoryId, otherCategoryId } from '../api/categories.js'
   import { t as translate } from '../lib/translate'
 
   export let t = translate

@@ -5,13 +5,12 @@
   import { messages } from '../lib/messaging'
   import { filterBy, hasItems, propertyCompare } from '../lib/pure'
   import { t } from '../lib/translate'
+  import { isBookmark, isCategory } from '../api/helpers.js'
   import {
     bookmarksBarCategoryId,
     flattenTree,
     getSubTree,
-    isBookmark,
-    isCategory,
-  } from '../api/bookmarks.js'
+  } from '../api/categories.js'
   import Bookmark from './Bookmark.svelte'
   import Category from './Category.svelte'
   import CategoryList from './CategoryList.svelte'

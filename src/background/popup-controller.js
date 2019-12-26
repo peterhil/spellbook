@@ -10,11 +10,8 @@ import Kefir from 'kefir'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { emptyBookmark } from '../lib/stores'
-import {
-  bookmarksModified$,
-  recentCategories$,
-  searchWithBookmark,
-} from '../api/bookmarks'
+import { searchWithBookmark } from '../api/bookmarks'
+import { bookmarksModified$, recentCategories$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
 var bookmarked = []

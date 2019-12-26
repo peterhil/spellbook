@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Peter Hillerström and contributors
+// Copyright (c) 2018-2019 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6,8 +6,21 @@
 
 /* global chrome */
 
+import zd from 'zepto-detect'
+import { get, init, last } from 'fkit'
 import { fromEventPattern } from '../lib/rxjs'
-import { init, last } from 'fkit'
+
+export const platform = (
+  zd.browser.firefox ? 'firefox' : (zd.browser.chrome ? 'chrome' : null)
+)
+
+export function isBookmark (bookmark) {
+  return !!get('url', bookmark) && bookmark.id !== 'tags________'
+}
+
+export function isCategory (bookmark) {
+  return !get('url', bookmark) && bookmark.id !== 'tags________'
+}
 
 export const browserEvent$ = (eventType) => {
   return fromEventPattern(
