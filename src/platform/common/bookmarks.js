@@ -158,15 +158,26 @@ export async function getParentPath (bookmark) {
   return pathToString(parents)
 }
 
-export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated).map(get(1))
-export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved).map(get(1))
-export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged).map(get(1))
-export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved).map(get(1))
+export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
+  .map(get(1))
+  .spy('Bookmark created:')
+export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
+  .map(get(1))
+  .spy('Bookmark removed:')
+
+export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
+  .map(get(1))
+  .spy('Bookmark changed:')
+
+export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
+  .map(get(1))
+  .spy('Bookmark moved:')
+
 export const bookmarksModified$ = Kefir.merge([
   bookmarkChanged$,
   bookmarkCreated$,
-  bookmarkRemoved$,
   bookmarkMoved$,
+  bookmarkRemoved$.map(get('node')),
 ])
 
 export const recentCategories$ = Kefir.merge([

@@ -6,12 +6,9 @@
 
 /* global chrome */
 
-import { get } from 'fkit'
+import Kefir from 'kefir'
 import {
-  bookmarkChanged$,
-  bookmarkCreated$,
-  bookmarkMoved$,
-  bookmarkRemoved$,
+  bookmarksModified$,
   searchWithBookmark,
 } from '../platform/common/bookmarks'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
@@ -45,28 +42,10 @@ function onCheckBookmarkStatus (bookmarks) {
   bookmarked = bookmarks
 }
 
-currentTab$
+Kefir.merge([
+  bookmarksModified$,
+  currentTab$,
+])
   .flatMapLatest(searchWithBookmark)
   .spy('Bookmarks found:')
-  .observe(onCheckBookmarkStatus, console.error)
-
-bookmarkCreated$
-  .spy('Bookmark created:')
-  .flatMapLatest(searchWithBookmark)
-  .observe(onCheckBookmarkStatus, console.error)
-
-bookmarkChanged$
-  .spy('Bookmark changed:')
-  .flatMapLatest(searchWithBookmark)
-  .observe(onCheckBookmarkStatus, console.error)
-
-bookmarkMoved$
-  .spy('Bookmark moved:')
-  .flatMapLatest(searchWithBookmark)
-  .observe(onCheckBookmarkStatus, console.error)
-
-bookmarkRemoved$
-  .spy('Bookmark removed:')
-  .map(get('node'))
-  .flatMapLatest(searchWithBookmark)
   .observe(onCheckBookmarkStatus, console.error)

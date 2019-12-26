@@ -102,7 +102,6 @@ export const activeTab$ = Kefir.merge([tabActivation$, tabFocusChanged$])
 
 export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
   .filter(isActive)
-  .spy('currentTab$')
   .map(pick([
     // 'active',
     'id',
@@ -114,6 +113,7 @@ export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
     'windowId',
   ]))
   .skipDuplicates(tabsAreEqual)
+  .spy('currentTab$')
 
 export const closedTab$ = onRemoved$
 
