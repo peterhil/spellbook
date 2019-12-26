@@ -9,6 +9,7 @@
 import Kefir from 'kefir'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
+import { emptyBookmark } from '../lib/stores'
 import {
   bookmarksModified$,
   recentCategories$,
@@ -17,12 +18,7 @@ import {
 import { currentTab$ } from '../platform/common/tabs'
 
 var bookmarked = []
-var currentTab = {
-  title: '',
-  url: '',
-  favIconUrl: '',
-  category: '',
-}
+var currentTab = emptyBookmark
 var recentCategories = []
 
 export const popupController = {
