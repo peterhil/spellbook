@@ -32,6 +32,9 @@ export const bookmarkStatus = {
 }
 
 function searchWithBookmark (bookmark) {
+  if (!(bookmark && bookmark.url)) {
+    return []
+  }
   return bookmarkSearch({ url: bookmark.url })
 }
 
