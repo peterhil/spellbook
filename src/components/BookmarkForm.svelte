@@ -4,6 +4,7 @@
   import { createBookmark } from '../platform/common/bookmarks'
   import { messages } from '../lib/messaging'
   import { t as translate } from '../lib/translate'
+  import BookmarkCount from './BookmarkCount.svelte'
   import CategorySelector from './CategorySelector.svelte'
   import Favicon from './Favicon.svelte'
 
@@ -77,7 +78,7 @@
   }
 </style>
 
-<h1>{ popupHeader() }</h1>
+<h1>{ popupHeader() } <BookmarkCount /></h1>
 
 <form bind:this={form} on:submit|preventDefault={onSubmit}>
   <div class="form-group">
