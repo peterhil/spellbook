@@ -1,5 +1,8 @@
 <script>
-  export const onClose = window.close
+  export function onClose (event) {
+    window.close()
+    return false
+  }
 </script>
 
 <button on:click|preventDefault="{onClose}" class="btn btn-action btn-close btn-sm float-right" tabindex="0">
