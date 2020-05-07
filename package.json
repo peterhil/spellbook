@@ -15,7 +15,8 @@
     "firefox:lint": "yarn run build && web-ext -s dist lint",
     "version": "echo $npm_package_version",
     "test": "ava",
-    "test:watch": "ava --watch"
+    "test:watch": "ava --watch",
+    "test:puppeteer": "mocha test/test.js"
   },
   "dependencies": {
     "@riotjs/observable": "~4.0.4",
