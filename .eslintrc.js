@@ -25,6 +25,10 @@ module.exports = {
       rules: {
         "import/first": ['off', 'always'],
       },
+      files: ['*spec.js'],
+      rules: {
+        "no-unused-expressions": "off",
+      },
     },
   ],
 

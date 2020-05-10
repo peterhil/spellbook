@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/* global Cypress */
+
+const addExtensionCommands = require('cypress-browser-extension-plugin/commands')
+addExtensionCommands(Cypress)
