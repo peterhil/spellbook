@@ -1,7 +1,8 @@
 // test.js
 
-const puppeteer = require('puppeteer')
-const assert = require('assert')
+import puppeteer from 'puppeteer'
+import assert from 'assert'
+import { t } from './utils/i18n.js'
 
 const extensionPath = 'dev'
 const lang = 'en-US'
@@ -18,7 +19,7 @@ describe('Popup', function() {
   describe('Search', async function() {
     it('Searching without a match', async function() {
       const inputElement = await extensionPage.$('input[name=search]')
-      assert.ok(inputElement, 'Etsi kirjoittamalla')
+      assert.equal(inputElement, t("search_placeholder"))
 
       await extensionPage.type('input[name=search]', "Nonexisting\n")
       await extensionPage.waitFor(2000)

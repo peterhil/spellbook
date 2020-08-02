@@ -5,6 +5,7 @@
   "main": "src/popup.js",
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
   "license": "MPL-2.0",
+  "type": "module",
   "scripts": {
     "dev": "rm -rf dev/* && rollup -cw",
     "build": "rm -rf dist/* && rollup -c",
