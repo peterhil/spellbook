@@ -7,12 +7,10 @@ export default {
   ],
   "ignoredByWatcher": [
     "!{dev,dist}/**/*",
-    "**/*.{js,svelte}",
     "*.config.js",
     "package.json",
   ],
   "require": [
-    "./test/utils/browser-env",
-    "./test/utils/node-extensions",
+    "./test/_setup.js",
   ],
 }
