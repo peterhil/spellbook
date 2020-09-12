@@ -14,8 +14,8 @@
     "firefox:dev": "yarn run dev && web-ext -s dev run",
     "firefox:lint": "yarn run build && web-ext -s dist lint",
     "version": "echo $npm_package_version",
-    "test": "ava",
-    "test:watch": "ava --watch"
+    "test": "jest",
+    "test:watch": "jest -- --watch"
   },
   "dependencies": {
     "events": "^3.2.0",
