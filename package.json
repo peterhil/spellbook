@@ -20,23 +20,23 @@
   "dependencies": {
     "@riotjs/observable": "~4.0.4",
     "fkit": "~3.4.0",
-    "kefir": "~3.8.5",
-    "spectre.css": "~0.5.3",
+    "kefir": "~3.8.7",
+    "spectre.css": "~0.5.9",
     "zepto-detect": "~0.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "ava": "^2.4.0",
-    "browser-env": "~3.2.5",
-    "caniuse-lite": "~1.0.3",
-    "chokidar": "~3.3.0",
-    "eslint": "^6.4.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
+    "browser-env": "~3.2.6",
+    "caniuse-lite": "~1.0.30001125",
+    "chokidar": "~3.3.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "~4.0.0",
+    "eslint-plugin-standard": "~4.0.1",
     "eslint-plugin-svelte3": "~2.7.3",
     "node-sass": "~4.12.0",
     "require-from-string": "~2.0.2",
@@ -46,8 +46,8 @@
     "rollup-plugin-sass": "~1.2.2",
     "rollup-plugin-svelte": "~5.1.1",
     "rollup-plugin-terser": "5.1.3",
-    "svelte": "~3.16.0",
-    "web-ext": "~2.9.1"
+    "svelte": "~3.16.7",
+    "web-ext": "~2.9.3"
   },
   "ava": {
     "cache": true,
