@@ -1,6 +1,6 @@
-import commonjs from 'rollup-plugin-commonjs'
+import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
-import resolve from 'rollup-plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte';
 import { eslint } from 'rollup-plugin-eslint'
