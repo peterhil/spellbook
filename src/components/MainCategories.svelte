@@ -6,14 +6,14 @@
 </script>
 
 <li class="menu-item">
-  <a data-title="Bookmarks Bar" data-id={bookmarksBarCategoryId}
+  <a data-title="Bookmarks Bar" data-id={bookmarksBarCategoryId} data-testid="main-category-bookmarks-bar"
      href="#{bookmarksBarCategoryId}" class="category"
      tabindex="0">
     <div class="title">{ t('bookmarks_bar') }</div>
   </a>
 </li>
 <li class="menu-item">
-  <a data-title="Other Bookmarks" data-id={otherCategoryId}
+  <a data-title="Other Bookmarks" data-id={otherCategoryId} data-testid="main-category-other-bookmarks"
      href="#{otherCategoryId}" class="category"
      tabindex="0">
     <div class="title">{ t('other_bookmarks') }</div>
