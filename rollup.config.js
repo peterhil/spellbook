@@ -41,6 +41,7 @@ const plugins = [
     customResolveOptions: {
         moduleDirectory: './node_modules/',
     },
+    preferBuiltins: false,
   }),
   commonjs(),
 

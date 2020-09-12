@@ -16,7 +16,7 @@ const messageHandler = function (message) {
   const action = choice(message.type, {
     allBookmarksTree: () => {
       console.log('[directory] All bookmarks tree:', message.data)
-      messages.trigger(message.type, message.data)
+      messages.emit(message.type, message.data)
     },
     default: unhandledMessage,
   })

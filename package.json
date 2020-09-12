@@ -18,7 +18,7 @@
     "test:watch": "ava --watch"
   },
   "dependencies": {
-    "@riotjs/observable": "~4.0.4",
+    "events": "^3.2.0",
     "fkit": "~3.4.0",
     "kefir": "~3.8.7",
     "spectre.css": "~0.5.9",

@@ -1,5 +1,5 @@
 dependencies:
-  '@riotjs/observable': 4.0.4
+  events: 3.2.0
   fkit: 3.4.0
   kefir: 3.8.7
   spectre.css: 0.5.9
@@ -418,10 +418,6 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-1V9XOY4rDW0rehzbrcqAmHnz8e7SKvX27gh8Gt2WgB0+pdzdiLV83p72kZPU+jvMbS1qU5mauP2iOvO8rhmurQ==
-  /@riotjs/observable/4.0.4:
-    dev: false
-    resolution:
-      integrity: sha512-IscZSGID7UL0YLdRL49elEk8hCCENVp8LJH2fyxXCf4tofJa1toF9zl9vKZEk5Eje60ETBMxSzqHJbAC+5j2OQ==
   /@rollup/plugin-commonjs/15.0.0_rollup@2.26.11:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.26.11
@@ -2766,6 +2762,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-S4TxF3K28l93Uvx02XFTGsb1tiY=
+  /events/3.2.0:
+    dev: false
+    engines:
+      node: '>=0.8.x'
+    resolution:
+      integrity: sha512-/46HWwbfCX2xTawVfkKLGxMifJYQBWMwY1mjywRtb4c9x8l5NP3KoJtnIOiL1hfdRkIuYhETxQlo62IF8tcnlg==
   /execa/0.7.0:
     dependencies:
       cross-spawn: 5.1.0
@@ -7875,7 +7877,6 @@ packages:
     resolution:
       integrity: sha1-qLxF9MG0lpnGuQGYuqyqzbzUugQ=
 specifiers:
-  '@riotjs/observable': ~4.0.4
   '@rollup/plugin-commonjs': ^15.0.0
   '@rollup/plugin-node-resolve': ^9.0.0
   ava: ^2.4.0
@@ -7889,6 +7890,7 @@ specifiers:
   eslint-plugin-promise: ^4.2.1
   eslint-plugin-standard: ~4.0.1
   eslint-plugin-svelte3: ~2.7.3
+  events: ^3.2.0
   fkit: ~3.4.0
   kefir: ~3.8.7
   node-sass: ~4.12.0

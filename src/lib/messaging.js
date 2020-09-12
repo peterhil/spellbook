@@ -6,10 +6,10 @@
 
 /* global chrome */
 
-import observable from '@riotjs/observable'
+import EventEmitter from 'events'
 import { curry } from 'fkit'
 
-export const messages = observable()
+export const messages = new EventEmitter()
 
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {

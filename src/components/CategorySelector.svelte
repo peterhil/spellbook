@@ -57,7 +57,7 @@
   export const onSelection = (value) => {
     selection = value
     console.debug('Category selection:', value, selection)
-    messages.trigger('categorySelection', selection)
+    messages.emit('categorySelection', selection)
     $showDropdown = null
     return false
   }
