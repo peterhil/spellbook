@@ -24,6 +24,7 @@ module.exports = {
       processor: 'svelte3/svelte3',
       rules: {
         "import/first": ['off', 'always'],
+        'no-multiple-empty-lines': ['error', {'max': 2}],
       },
     },
   ],
@@ -31,5 +32,7 @@ module.exports = {
   rules: {
     'comma-dangle': ['off', 'always'],
     'no-console': ['off', 'always'],
+    // 'no-console': ['warn', {}],
+    'no-multiple-empty-lines': ['error', {'max': 1, 'maxBOF': 0, 'maxEOF': 0}],
   },
 }
