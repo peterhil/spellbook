@@ -27,7 +27,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "ava": "^2.4.0",
+    "ava": "^3.12.1",
     "browser-env": "~3.2.6",
     "caniuse-lite": "~1.0.30001125",
     "chokidar": "~3.3.1",
@@ -56,7 +56,7 @@
       "./test/**/*.spec.js",
       "./test/**/*.test.js"
     ],
-    "sources": [
+    "ignoredByWatcher": [
       "!dist/**/*",
       "**/*.{js,svelte}",
       "*.config.js",
