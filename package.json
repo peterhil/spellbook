@@ -50,24 +50,6 @@
     "svelte": "~3.16.7",
     "web-ext": "^5.0.0"
   },
-  "ava": {
-    "cache": true,
-    "concurrency": 8,
-    "files": [
-      "./test/**/*.spec.js",
-      "./test/**/*.test.js"
-    ],
-    "ignoredByWatcher": [
-      "!dist/**/*",
-      "**/*.{js,svelte}",
-      "*.config.js",
-      "package.json"
-    ],
-    "require": [
-      "./test/utils/browser-env",
-      "./test/utils/node-extensions"
-    ]
-  },
   "browserslist": [
     "Chrome >= 52",
     "Firefox >= 56",
