@@ -174,7 +174,7 @@
   <div class="input-group">
     <input name="subcategory" class="form-input" autocomplete="off">
     <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0"
-            on:click={onToggle('subcategory')}>
+            on:click|preventDefault={onToggle('subcategory')}>
       <i class="icon icon-cross"></i>
     </button>
   </div>
