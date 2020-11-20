@@ -3,7 +3,7 @@
   import { t as translate } from '../lib/translate'
   import BookmarkCount from './BookmarkCount.svelte'
   import BookmarkForm from '../components/BookmarkForm.svelte'
-  import CloseButton from '../components/CloseButton.svelte'
+  import ButtonClose from '../components/ButtonClose.svelte'
 
   export let t = translate
 
@@ -20,7 +20,7 @@
   }
 </style>
 
-<CloseButton />
+<ButtonClose />
 
 <h1>{ popupHeader() } <BookmarkCount /></h1>
 
