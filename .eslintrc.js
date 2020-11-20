@@ -25,6 +25,9 @@ module.exports = {
       },
     },
   ],
+  globals: {
+    "chrome": "readonly",
+  },
   rules: {
     'comma-dangle': ['off', 'always'],
     'no-console': ['off', 'always'],

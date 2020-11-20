@@ -4,8 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
-
 import Directory from '../components/Directory.svelte'
 import { choice } from '../lib/pure'
 import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
