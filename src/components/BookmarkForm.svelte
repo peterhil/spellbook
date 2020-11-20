@@ -4,19 +4,12 @@
   import { createBookmark } from '../api/bookmarks'
   import { messages } from '../lib/messaging'
   import { t as translate } from '../lib/translate'
-  import BookmarkCount from './BookmarkCount.svelte'
   import CategorySelector from './CategorySelector.svelte'
   import Favicon from './Favicon.svelte'
 
   export let t = translate
   let form
   let submitButton
-
-  const popupHeader = () => {
-    return $bookmark.saved
-      ? t('saved_bookmark')
-      : t('add_bookmark')
-  }
 
   const onSubmit = (event) => {
     const valid = form.reportValidity()
@@ -65,20 +58,10 @@
 </script>
 
 <style>
-  :scope {
-    display: block;
-  }
-
-  h1 {
-    color: #333;
-  }
-
   .btn[type=submit] {
     padding: .25rem .8rem
   }
 </style>
-
-<h1>{ popupHeader() } <BookmarkCount /></h1>
 
 <form bind:this={form} on:submit|preventDefault={onSubmit}>
   <div class="form-group">
