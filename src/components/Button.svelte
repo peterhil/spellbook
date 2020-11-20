@@ -2,6 +2,7 @@
   import { messages } from '../lib/messaging'
 
   export let classes
+  export let kind = 'primary'
   export let name
 
   export function onClick (event) {
@@ -11,6 +12,6 @@
   }
 </script>
 
-<button on:click|preventDefault="{onClick}" class="btn btn-primary {$$props.classes}" tabindex="0">
+<button on:click|preventDefault="{onClick}" class="btn btn-{kind} {classes}" tabindex="0">
   <slot />
 </button>
