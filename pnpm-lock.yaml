@@ -13,7 +13,7 @@ devDependencies:
   caniuse-lite: 1.0.30001159
   chokidar: 3.4.3
   eslint: 7.13.0
-  eslint-config-standard: 16.0.2_1ebed8346196ff7bde7431d183a61a72
+  eslint-config-standard: 14.1.1_000bd98fccde270e05f286286bcdd84b
   eslint-plugin-ava: 11.0.0_eslint@7.13.0
   eslint-plugin-import: 2.22.1_eslint@7.13.0
   eslint-plugin-node: 11.1.0_eslint@7.13.0
@@ -2259,20 +2259,22 @@ packages:
       source-map: 0.6.1
     resolution:
       integrity: sha512-qFcX0XJkdg+PB3xjZZG/wKSuT1PnQWx57+TVSjIMmILd2yC/6ByYElPwJnslDsuWuSAp4AwJGumarAAmJch5Kw==
-  /eslint-config-standard/16.0.2_1ebed8346196ff7bde7431d183a61a72:
+  /eslint-config-standard/14.1.1_000bd98fccde270e05f286286bcdd84b:
     dependencies:
       eslint: 7.13.0
       eslint-plugin-import: 2.22.1_eslint@7.13.0
       eslint-plugin-node: 11.1.0_eslint@7.13.0
       eslint-plugin-promise: 4.2.1
+      eslint-plugin-standard: 4.1.0_eslint@7.13.0
     dev: true
     peerDependencies:
-      eslint: ^7.12.1
-      eslint-plugin-import: ^2.22.1
-      eslint-plugin-node: ^11.1.0
-      eslint-plugin-promise: ^4.2.1
+      eslint: '>=6.2.2'
+      eslint-plugin-import: '>=2.18.0'
+      eslint-plugin-node: '>=9.1.0'
+      eslint-plugin-promise: '>=4.2.1'
+      eslint-plugin-standard: '>=4.0.0'
     resolution:
-      integrity: sha512-fx3f1rJDsl9bY7qzyX8SAtP8GBSk6MfXFaTfaGgk12aAYW4gJSyRm7dM790L6cbXv63fvjY4XeSzXnb4WM+SKw==
+      integrity: sha512-Z9B+VR+JIXRxz21udPTL9HpFMyoMUEeX1G251EQ6e05WD9aPVtVBn09XUmZ259wCMlCDmYDSZG62Hhm+ZTJcUg==
   /eslint-import-resolver-node/0.3.4:
     dependencies:
       debug: 2.6.9
@@ -7492,7 +7494,7 @@ specifiers:
   caniuse-lite: ~1.0.30001159
   chokidar: ^3.4.3
   eslint: ^7.13.0
-  eslint-config-standard: '16'
+  eslint-config-standard: ^14.1.1
   eslint-plugin-ava: ^11.0.0
   eslint-plugin-import: ^2.22.1
   eslint-plugin-node: '11'
