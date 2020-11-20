@@ -29,7 +29,6 @@
     "@rollup/plugin-node-resolve": "10",
     "@testing-library/svelte": "^3.0.0",
     "ava": "^3.12.1",
-    "browser-env": "^3.3.0",
     "caniuse-lite": "~1.0.30001159",
     "chokidar": "^3.4.3",
     "eslint": "^7.13.0",
