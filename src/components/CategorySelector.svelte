@@ -11,8 +11,10 @@
   import { t as translate } from '../lib/translate'
   import { bookmarkSearch } from '../api/bookmarks.js'
   import { isCategory } from '../api/helpers'
+  import Button from './Button.svelte'
   import CategoryList from './CategoryList.svelte'
   import ChildCategories from './ChildCategories.svelte'
+  import Icon from './Icon.svelte'
   import MainCategories from './MainCategories.svelte'
   import RecentCategories from './RecentCategories.svelte'
   import Dropdown from './Dropdown.svelte'
@@ -95,7 +97,12 @@
 
     categorySearch$.observe(updateCategories, console.error)
     emptySearch$.observe(clearSelection, console.error)
+
     messages.on('categorySelected', onSelection)
+    messages.on('button:toggleChildren', onToggle('children'))
+    messages.on('button:toggleSubcategory', onToggle('subcategory'))
+    messages.on('button:toggleRecent', onToggle('recent'))
+
     init()
   })
 
@@ -131,19 +138,16 @@
            autocomplete="off">
     <input name="category" type="hidden" bind:value={selection.id}>
     {#if hasSelection() }
-    <button class="toggle-children btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('children')}>
-      <i class="icon icon-minus"></i>
-    </button>
-    <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('subcategory')}>
-      <i class="icon icon-plus"></i>
-    </button>
+    <Button name="toggleChildren" classes="input-group-btn">
+      <Icon icon="minus" />
+    </Button>
+    <Button name="toggleSubcategory" classes="input-group-btn">
+      <Icon icon="plus" />
+    </Button>
     {/if}
-    <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('recent')}>
-      <i class="icon icon-caret"></i>
-    </button>
+    <Button name="toggleRecent" classes="input-group-btn">
+      <Icon icon="caret" />
+    </Button>
   </div>
 
   <Dropdown name={'search'}>
@@ -173,9 +177,8 @@
   <label for="subcategory">{ t('add_subcategory') }</label>
   <div class="input-group">
     <input name="subcategory" class="form-input" autocomplete="off">
-    <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('subcategory')}>
-      <i class="icon icon-cross"></i>
-    </button>
+    <Button name="toggleSubcategory" classes="input-group-btn">
+      <Icon icon="cross" />
+    </Button>
   </div>
 </div>
