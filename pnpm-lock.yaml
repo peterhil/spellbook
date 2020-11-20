@@ -9,16 +9,16 @@ devDependencies:
   '@rollup/plugin-node-resolve': 9.0.0_rollup@2.33.3
   '@testing-library/svelte': 3.0.0_svelte@3.16.7
   ava: 3.13.0
-  browser-env: 3.2.6
+  browser-env: 3.3.0
   caniuse-lite: 1.0.30001159
   chokidar: 3.3.1
   eslint: 7.13.0
-  eslint-config-standard: 14.1.1_0910183d922d502c54baf2ffebd481c5
+  eslint-config-standard: 14.1.1_cd904c535fd5617743434fec41171296
   eslint-plugin-ava: 11.0.0_eslint@7.13.0
   eslint-plugin-import: 2.22.1_eslint@7.13.0
   eslint-plugin-node: 10.0.0_eslint@7.13.0
   eslint-plugin-promise: 4.2.1
-  eslint-plugin-standard: 4.0.1_eslint@7.13.0
+  eslint-plugin-standard: 4.1.0_eslint@7.13.0
   eslint-plugin-svelte3: 2.7.3_eslint@7.13.0+svelte@3.16.7
   node-sass: 4.14.1
   require-from-string: 2.0.2
@@ -385,7 +385,7 @@ packages:
       integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
   /acorn-globals/4.3.4:
     dependencies:
-      acorn: 6.4.1
+      acorn: 6.4.2
       acorn-walk: 6.2.0
     dev: true
     resolution:
@@ -410,13 +410,13 @@ packages:
       node: '>=0.4.0'
     resolution:
       integrity: sha512-oZRad/3SMOI/pxbbmqyurIx7jHw1wZDcR9G44L8pUVFEomX/0dH89SrM1KaDXuv1NpzAXz6Op/Xu/Qd5XXzdEA==
-  /acorn/6.4.1:
+  /acorn/6.4.2:
     dev: true
     engines:
       node: '>=0.4.0'
     hasBin: true
     resolution:
-      integrity: sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
+      integrity: sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==
   /acorn/7.4.0:
     dev: true
     engines:
@@ -929,10 +929,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
-  /aws4/1.10.1:
+  /aws4/1.11.0:
     dev: true
     resolution:
-      integrity: sha512-zg7Hz2k5lI8kb7U32998pRRFin7zJlkfezGJjUc2heaD4Pw2wObakCDVzkKztTm/Ln7eiVvYsjqak0Ed4LkMDA==
+      integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
   /babel-runtime/6.26.0:
     dependencies:
       core-js: 2.6.11
@@ -1062,14 +1062,14 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
-  /browser-env/3.2.6:
+  /browser-env/3.3.0:
     dependencies:
       window: 4.2.6
     dev: true
     engines:
       node: '>=4'
     resolution:
-      integrity: sha512-FJ1dwr5gWEP2Igv1/acvLaMPUTwIqdBJsAL3prDfcjRG9G5/y70WN6M8uCNIyITHC+mMj0W9RkkCz9DFE5s4MQ==
+      integrity: sha512-XO+rbi2f9DtuoYgnN/Um80Qz/m033C3fKdUxKbbNs+jCshezRENMlG+QGT9qZyZE4b/KYTwUu6RNMCavGhPdEQ==
   /browser-process-hrtime/1.0.0:
     dev: true
     resolution:
@@ -2247,13 +2247,13 @@ packages:
       source-map: 0.6.1
     resolution:
       integrity: sha512-qFcX0XJkdg+PB3xjZZG/wKSuT1PnQWx57+TVSjIMmILd2yC/6ByYElPwJnslDsuWuSAp4AwJGumarAAmJch5Kw==
-  /eslint-config-standard/14.1.1_0910183d922d502c54baf2ffebd481c5:
+  /eslint-config-standard/14.1.1_cd904c535fd5617743434fec41171296:
     dependencies:
       eslint: 7.13.0
       eslint-plugin-import: 2.22.1_eslint@7.13.0
       eslint-plugin-node: 10.0.0_eslint@7.13.0
       eslint-plugin-promise: 4.2.1
-      eslint-plugin-standard: 4.0.1_eslint@7.13.0
+      eslint-plugin-standard: 4.1.0_eslint@7.13.0
     dev: true
     peerDependencies:
       eslint: '>=6.2.2'
@@ -2363,14 +2363,14 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-VoM09vT7bfA7D+upt+FjeBO5eHIJQBUWki1aPvB+vbNiHS3+oGIJGIeyBtKQTME6UPXXy3vV07OL1tHd3ANuDw==
-  /eslint-plugin-standard/4.0.1_eslint@7.13.0:
+  /eslint-plugin-standard/4.1.0_eslint@7.13.0:
     dependencies:
       eslint: 7.13.0
     dev: true
     peerDependencies:
       eslint: '>=5.0.0'
     resolution:
-      integrity: sha512-v/KBnfyaOMPmZc/dmc6ozOdWqekGp7bBGq4jLAecEfPGmfKiWS4sA8sC0LqiV9w5qmXAtXVn4M3p1jSyhY85SQ==
+      integrity: sha512-ZL7+QRixjTR6/528YNGyDotyffm5OQst/sGxKDwGb9Uqs4In5Egi4+jbobhqJoyoCM6/7v/1A5fhQ7ScMtDjaQ==
   /eslint-plugin-svelte3/2.7.3_eslint@7.13.0+svelte@3.16.7:
     dependencies:
       eslint: 7.13.0
@@ -3976,7 +3976,7 @@ packages:
   /jsdom/13.2.0:
     dependencies:
       abab: 2.0.5
-      acorn: 6.4.1
+      acorn: 6.4.2
       acorn-globals: 4.3.4
       array-equal: 1.0.0
       cssom: 0.3.8
@@ -5759,7 +5759,7 @@ packages:
   /request/2.88.2:
     dependencies:
       aws-sign2: 0.7.0
-      aws4: 1.10.1
+      aws4: 1.11.0
       caseless: 0.12.0
       combined-stream: 1.0.8
       extend: 3.0.2
@@ -7469,7 +7469,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^9.0.0
   '@testing-library/svelte': ^3.0.0
   ava: ^3.12.1
-  browser-env: ~3.2.6
+  browser-env: ^3.3.0
   caniuse-lite: ~1.0.30001159
   chokidar: ~3.3.1
   eslint: ^7.8.1
@@ -7478,7 +7478,7 @@ specifiers:
   eslint-plugin-import: ^2.22.1
   eslint-plugin-node: ^10.0.0
   eslint-plugin-promise: ^4.2.1
-  eslint-plugin-standard: ~4.0.1
+  eslint-plugin-standard: ^4.1.0
   eslint-plugin-svelte3: ~2.7.3
   events: ^3.2.0
   fkit: ~3.4.0
