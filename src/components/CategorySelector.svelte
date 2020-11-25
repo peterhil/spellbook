@@ -1,5 +1,5 @@
 <script>
-  import { empty, get, not, sortBy } from 'fkit'
+  import { get, sortBy } from 'fkit'
   import { onDestroy, onMount } from 'svelte'
   import { messages } from '../lib/messaging'
   import { filterBy, propertyCompare } from '../lib/pure'
@@ -12,12 +12,11 @@
   import { bookmarkSearch } from '../api/bookmarks.js'
   import { isCategory } from '../api/helpers'
   import Button from './Button.svelte'
-  import CategoryList from './CategoryList.svelte'
   import ChildCategories from './ChildCategories.svelte'
-  import Icon from './Icon.svelte'
-  import MainCategories from './MainCategories.svelte'
-  import RecentCategories from './RecentCategories.svelte'
   import Dropdown from './Dropdown.svelte'
+  import Icon from './Icon.svelte'
+  import RecentCategories from './RecentCategories.svelte'
+  import SearchResults from './SearchResults.svelte'
 
   export let lastSearch = null
   export let search = ''
@@ -152,15 +151,7 @@
 
   <Dropdown name={'search'}>
     {#if isVisible('search') && lastSearch }
-    {#if not(empty(searchResults)) }
-    <ul class="menu" tabindex="-1">
-      <CategoryList categories={searchResults} />
-      <li class="divider" data-content={ t('root_categories') }></li>
-      <MainCategories />
-    </ul>
-    {:else}
-    <small>No categories found</small>
-    {/if}
+      <SearchResults categories={searchResults} />
     {/if}
   </Dropdown>
 
