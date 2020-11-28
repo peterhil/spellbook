@@ -8,28 +8,7 @@
 
 import Popup from '../components/Popup.svelte'
 import { domLoaded$ } from '../lib/events'
-import { choice } from '../lib/pure'
-import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
-
-const messageHandler = function (message) {
-  const action = choice(message.type, {
-    bookmarkStatus: () => {
-      console.log('[popup] Bookmark status:', message.data)
-      messages.emit(message.type, message.data)
-    },
-    currentTabInfo: () => {
-      console.log('[popup] Current tab info:', message.data)
-      messages.emit(message.type, message.data)
-    },
-    recentCategories: () => {
-      console.log('[popup] Recent categories:', message.data)
-      messages.emit(message.type, message.data)
-    },
-    default: unhandledMessage,
-  })
-
-  action(message)
-}
+import { disconnectionHandler, messageBridge } from '../lib/messaging'
 
 function onLoad (event) {
   const port = chrome.runtime.connect({ name: 'popup' })
@@ -49,7 +28,7 @@ function onLoad (event) {
   port.postMessage({ type: 'getBookmarkStatus' })
 
   // Receive messages
-  port.onMessage.addListener(messageHandler)
+  port.onMessage.addListener(messageBridge)
 
   return true
 }

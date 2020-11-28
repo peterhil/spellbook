@@ -5,22 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Directory from '../components/Directory.svelte'
-import { choice } from '../lib/pure'
-import { disconnectionHandler, messages, unhandledMessage } from '../lib/messaging'
-
-const messageHandler = function (message) {
-  console.debug('[directory] Got message:', message.type, message)
-
-  const action = choice(message.type, {
-    allBookmarksTree: () => {
-      console.log('[directory] All bookmarks tree:', message.data)
-      messages.emit(message.type, message.data)
-    },
-    default: unhandledMessage,
-  })
-
-  action(message)
-}
+import { disconnectionHandler, messageBridge } from '../lib/messaging'
 
 function onLoad (event) {
   const port = chrome.runtime.connect({ name: 'directory' })
@@ -31,7 +16,7 @@ function onLoad (event) {
   port.postMessage({ type: 'getAllBookmarks' })
 
   // Receive messages
-  port.onMessage.addListener(messageHandler)
+  port.onMessage.addListener(messageBridge)
 }
 
 new Directory({ // eslint-disable-line no-new
