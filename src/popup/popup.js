@@ -13,11 +13,6 @@ import { disconnectionHandler, messageBridge } from '../lib/messaging'
 function onLoad (event) {
   const port = chrome.runtime.connect({ name: 'popup' })
 
-  new Popup({ // eslint-disable-line no-new
-    target: document.getElementById('popup'),
-    props: {},
-  })
-
   chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
 
   port.onDisconnect.addListener(disconnectionHandler)
@@ -30,7 +25,10 @@ function onLoad (event) {
   // Receive messages
   port.onMessage.addListener(messageBridge)
 
-  return true
+  new Popup({ // eslint-disable-line no-new
+    target: document.getElementById('popup'),
+    props: {},
+  })
 }
 
 function onUnload (event) {

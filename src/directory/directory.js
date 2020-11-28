@@ -17,11 +17,11 @@ function onLoad (event) {
 
   // Receive messages
   port.onMessage.addListener(messageBridge)
-}
 
-new Directory({ // eslint-disable-line no-new
-  target: document.getElementById('directory'),
-  props: {},
-})
+  new Directory({ // eslint-disable-line no-new
+    target: document.getElementById('directory'),
+    props: {},
+  })
+}
 
 document.addEventListener('DOMContentLoaded', onLoad)
