@@ -87,7 +87,7 @@
 
   onMount(() => {
     const categorySearch$ = inputEvent$(search, { minLength: 2 })
-      .flatMapLatest(query => bookmarkSearch({ query })) // TODO See how RxJS.switchMap cancel the previous observable
+      .flatMapLatest(query => bookmarkSearch({ query }))
       .map(filterBy(isCategory))
       .map(sortBy(propertyCompare('title', true)))
 
