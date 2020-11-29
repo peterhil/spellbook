@@ -25,6 +25,7 @@ export const getTree$ = () => {
 export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
   .map(get(1))
   .spy('Bookmark created:')
+
 export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
   .map(get(1))
   .spy('Bookmark removed:')

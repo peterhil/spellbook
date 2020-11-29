@@ -25,7 +25,7 @@
   export let t = translate
 
   const isVisible = (dropdown) => {
-    console.debug('isVisible:', dropdown, $showDropdown === dropdown)
+    // console.debug('isVisible:', dropdown, $showDropdown === dropdown)
     return $showDropdown === dropdown
   }
 
