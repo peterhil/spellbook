@@ -12,7 +12,5 @@
     "package.json"
   ],
   "require": [
-    "./test/utils/browser-env",
-    "./test/utils/node-extensions"
   ]
 }

@@ -9,6 +9,11 @@ import { curry } from 'fkit'
 
 export const messages = new EventEmitter()
 
+export const messageBridge = function (message) {
+  console.debug('[message] %s: %o', message.type, message.data)
+  messages.emit(message.type, message.data)
+}
+
 export function disconnectionHandler (port) {
   if (chrome.runtime.lastError) {
     console.error('Connection error:', chrome.runtime.lastError)
