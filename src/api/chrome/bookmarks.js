@@ -4,15 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from '../helpers'
 
 export function bookmarkSearch (queryObject) {
-  return Kefir.fromPromise(callbackToPromise(
+  return callbackToPromise(
     withErrorChecking(chrome.bookmarks.search),
     queryObject
-  ))
+  )
 }
 
 export const get = (...args) => {

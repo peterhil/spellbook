@@ -1,16 +1,13 @@
 <script>
-  import { get, sortBy } from 'fkit'
+  import { get } from 'fkit'
   import { onDestroy, onMount } from 'svelte'
   import { messages } from '../lib/messaging'
-  import { filterBy, propertyCompare } from '../lib/pure'
   import { inputEvent$ } from '../lib/reactive'
   import {
     dropdownStore as showDropdown,
     emptySelection,
   } from '../lib/stores'
   import { t as translate } from '../lib/translate'
-  import { bookmarkSearch } from '../api/bookmarks.js'
-  import { isCategory } from '../api/helpers'
   import Button from './Button.svelte'
   import ChildCategories from './ChildCategories.svelte'
   import Dropdown from './Dropdown.svelte'
@@ -55,6 +52,10 @@
     $showDropdown = 'search'
   }
 
+  const searchCategories = (query) => {
+    messages.emit('api', { type: 'categorySearch', query })
+  }
+
   export const onSelection = (value) => {
     selection = value
     console.debug('Category selection:', value, selection)
@@ -87,17 +88,14 @@
 
   onMount(() => {
     const categorySearch$ = inputEvent$(search, { minLength: 2 })
-      .flatMapLatest(query => bookmarkSearch({ query }))
-      .map(filterBy(isCategory))
-      .map(sortBy(propertyCompare('title', true)))
-
     const emptySearch$ = inputEvent$(search, { minLength: 0 })
       .filter(search => search.length <= 1)
 
-    categorySearch$.observe(updateCategories, console.error)
+    categorySearch$.observe(searchCategories, console.error)
     emptySearch$.observe(clearSelection, console.error)
 
     messages.on('categorySelected', onSelection)
+    messages.on('searchResults', updateCategories)
     messages.on('button:toggleChildren', onToggle('children'))
     messages.on('button:toggleSubcategory', onToggle('subcategory'))
     messages.on('button:toggleRecent', onToggle('recent'))

@@ -4,11 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { choice } from '../lib/pure'
+import { Kefir } from 'kefir'
+import { sortBy } from 'fkit'
+import { choice, propertyCompare } from '../lib/pure'
 import { notImplemented$ } from '../lib/reactive'
 import * as chromeBookmarks from './chrome/bookmarks'
 import * as firefoxBookmarks from './firefox/bookmarks'
-import { platform } from './helpers'
+import { isCategory, platform } from './helpers'
 
 export const getBookmark = choice(platform, {
   chrome: chromeBookmarks.get,
@@ -22,11 +24,21 @@ export const bookmarkSearch = choice(platform, {
   default: notImplemented$,
 })
 
+export const categorySearch = async (query) => {
+  const bookmarks = await bookmarkSearch(query)
+  let categories = bookmarks.filter(isCategory)
+
+  console.log('[bookmarks api] categorySearch:', query)
+  categories = sortBy(propertyCompare('title', true), categories)
+
+  return categories
+}
+
 export function searchWithBookmark (bookmark) {
   if (!(bookmark && bookmark.url)) {
     return []
   }
-  return bookmarkSearch({ url: bookmark.url })
+  return Kefir.fromPromise(bookmarkSearch({ url: bookmark.url }))
 }
 
 export function createBookmark (params, callback) {

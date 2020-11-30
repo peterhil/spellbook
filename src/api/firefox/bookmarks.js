@@ -6,10 +6,8 @@
 
 /* global browser */
 
-import Kefir from 'kefir'
-
 export function bookmarkSearch (queryObject) {
-  return Kefir.fromPromise(browser.bookmarks.search(queryObject))
+  return browser.bookmarks.search(queryObject)
 }
 
 export const get = (...args) => {

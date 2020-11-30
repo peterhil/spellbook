@@ -8,7 +8,7 @@ import Kefir from 'kefir'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { emptyBookmark } from '../lib/stores'
-import { searchWithBookmark } from '../api/bookmarks'
+import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { bookmarksModified$, recentCategories$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
@@ -22,6 +22,12 @@ export const popupController = {
       getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
       getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
       getRecentCategories: () => sendMessage(port, 'recentCategories', recentCategories),
+      categorySearch: (request) => {
+        categorySearch(request.query)
+          .then((result) => {
+            sendMessage(port, 'searchResults', result)
+          })
+      },
       default: unhandledMessage,
     })
 

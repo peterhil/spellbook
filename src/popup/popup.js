@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Popup from '../components/Popup.svelte'
-import { disconnectionHandler, messageBridge } from '../lib/messaging'
+import { disconnectionHandler, messageBridge, messages } from '../lib/messaging'
 
 function onLoad (event) {
   const port = chrome.runtime.connect({ name: 'popup' })
@@ -18,6 +18,11 @@ function onLoad (event) {
   port.postMessage({ type: 'getCurrentTab' })
   port.postMessage({ type: 'getRecentCategories' })
   port.postMessage({ type: 'getBookmarkStatus' })
+
+  messages.on('api', (request) => {
+    console.log('API request:', request)
+    port.postMessage(request)
+  })
 
   // Receive messages
   port.onMessage.addListener(messageBridge)
