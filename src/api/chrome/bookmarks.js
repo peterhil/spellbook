@@ -14,6 +14,10 @@ export function bookmarkSearch (queryObject) {
   )
 }
 
+export const create = (bookmark) => {
+  return callbackToPromise(chrome.bookmarks.create, bookmark)
+}
+
 export const get = (...args) => {
   return callbackToPromise(chrome.bookmarks.get, ...args)
 }

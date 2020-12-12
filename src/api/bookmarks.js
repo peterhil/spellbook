@@ -12,6 +12,12 @@ import * as chromeBookmarks from './chrome/bookmarks'
 import * as firefoxBookmarks from './firefox/bookmarks'
 import { isCategory, platform } from './helpers'
 
+export const createBookmark = choice(platform, {
+  chrome: chromeBookmarks.create,
+  firefox: firefoxBookmarks.create,
+  default: notImplemented$,
+})
+
 export const getBookmark = choice(platform, {
   chrome: chromeBookmarks.get,
   firefox: firefoxBookmarks.get,
@@ -45,8 +51,4 @@ export function searchWithBookmark (bookmark) {
     return []
   }
   return Kefir.fromPromise(bookmarkSearch({ url: bookmark.url }))
-}
-
-export function createBookmark (params, callback) {
-  chrome.bookmarks.create(params, callback)
 }

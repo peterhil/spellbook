@@ -10,6 +10,10 @@ export function bookmarkSearch (queryObject) {
   return browser.bookmarks.search(queryObject)
 }
 
+export const create = (bookmark) => {
+  return browser.bookmarks.create(bookmark)
+}
+
 export const get = (...args) => {
   return browser.bookmarks.get(...args)
 }

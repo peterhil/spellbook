@@ -28,14 +28,14 @@
       createBookmark({
         parentId: params.parentId,
         title: subcategory,
-      }, (subcategory) => {
+      }).then((subcategory) => {
         params.parentId = subcategory.id
-        createBookmark(params, () => {
+        createBookmark(params).then(() => {
           $bookmark.saved = true
         })
       })
     } else {
-      createBookmark(params, () => {
+      createBookmark(params).then(() => {
         $bookmark.saved = true
       })
     }
