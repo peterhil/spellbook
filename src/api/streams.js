@@ -4,19 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import {
-  compose, get, map, nub, reverse, sortBy, take
-} from 'fkit'
 import Kefir from 'kefir'
-import { domLoaded$ } from '../lib/events'
-import { filterBy, propertyCompare } from '../lib/pure'
-import { getBookmark } from './bookmarks'
-import {
-  flattenTree,
-  getParentId,
-  getTree,
-} from './categories'
-import { browserEvent$, isBookmark } from './helpers'
+import { get } from 'fkit'
+import { getTree } from './categories'
+import { browserEvent$ } from './helpers'
 
 export const getTree$ = () => {
   return Kefir.fromPromise(getTree())
@@ -44,21 +35,3 @@ export const bookmarksModified$ = Kefir.merge([
   bookmarkMoved$,
   bookmarkRemoved$.map(get('node')),
 ])
-
-export const recentCategories$ = Kefir.merge([
-  bookmarksModified$,
-  domLoaded$,
-])
-  .flatMapLatest(getTree$)
-  .map(flattenTree)
-  .map(filterBy(isBookmark))
-  .map(compose(reverse([
-    sortBy(propertyCompare('dateAdded')),
-    reverse,
-    take(20), // TODO Move hardcoded value into options
-    map(getParentId),
-    nub,
-    take(5)
-  ])))
-  .flatMap(id => Kefir.fromPromise(getBookmark(id)))
-  .spy('Recent categories')

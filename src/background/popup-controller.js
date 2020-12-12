@@ -9,24 +9,27 @@ import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { emptyBookmark } from '../lib/stores'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
-import { bookmarksModified$, recentCategories$ } from '../api/streams'
+import { getRecentCategories } from '../api/categories'
+import { bookmarksModified$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
 var bookmarked = []
 var currentTab = emptyBookmark
-var recentCategories = []
 
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
       getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
       getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
-      getRecentCategories: () => sendMessage(port, 'recentCategories', recentCategories),
+      getRecentCategories: (request) => {
+        getRecentCategories(5) // TODO Move hardcoded value into options
+          .then(result => {
+            sendMessage(port, 'recentCategories', result)
+          })
+      },
       categorySearch: (request) => {
         categorySearch(request.query)
-          .then((result) => {
-            sendMessage(port, 'searchResults', result)
-          })
+          .then(result => sendMessage(port, 'searchResults', result))
       },
       default: unhandledMessage,
     })
@@ -55,11 +58,6 @@ function onCurrentTab (tab) {
   }
 }
 
-function updateRecentCategories (categories) {
-  console.debug('[popup controller] updateRecentCategories:', categories)
-  recentCategories = categories
-}
-
 Kefir.merge([bookmarksModified$, currentTab$])
   .flatMapLatest(searchWithBookmark)
   .spy('Bookmarks found:')
@@ -67,6 +65,3 @@ Kefir.merge([bookmarksModified$, currentTab$])
 
 currentTab$
   .observe(onCurrentTab, console.error)
-
-recentCategories$
-  .observe(updateRecentCategories, console.error)
