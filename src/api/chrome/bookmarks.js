@@ -29,3 +29,7 @@ export const getSubTree = (id) => {
 export const getChildren = (id) => {
   return callbackToPromise(withErrorChecking(chrome.bookmarks.getChildren), id)
 }
+
+export const getRecent = (count) => {
+  return callbackToPromise(withErrorChecking(chrome.bookmarks.getRecent), count)
+}

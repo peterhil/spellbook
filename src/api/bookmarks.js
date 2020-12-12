@@ -18,6 +18,12 @@ export const getBookmark = choice(platform, {
   default: notImplemented$,
 })
 
+export const getRecent = choice(platform, {
+  chrome: chromeBookmarks.getRecent,
+  firefox: firefoxBookmarks.getRecent,
+  default: notImplemented$,
+})
+
 export const bookmarkSearch = choice(platform, {
   chrome: chromeBookmarks.bookmarkSearch,
   firefox: firefoxBookmarks.bookmarkSearch,

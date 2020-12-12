@@ -25,3 +25,7 @@ export const getSubTree = (id) => {
 export const getChildren = (id) => {
   return browser.bookmarks.getChildren(id)
 }
+
+export const getRecent = (count) => {
+  return browser.bookmarks.getRecent(count)
+}
