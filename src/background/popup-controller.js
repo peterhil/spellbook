@@ -53,9 +53,7 @@ function onCheckBookmarkStatus (bookmarks) {
 }
 
 function onCurrentTab (tab) {
-  currentTab = {
-    ...tab
-  }
+  currentTab = { ...tab }
 }
 
 Kefir.merge([bookmarksModified$, currentTab$])

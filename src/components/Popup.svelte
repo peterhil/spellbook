@@ -1,7 +1,7 @@
 <script>
-  import { bookmarkStore as bookmark } from '../lib/stores'
+  import { currentTab } from '../lib/stores'
   import { messages } from '../lib/messaging'
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { t as translate } from '../lib/translate'
   import BookmarkCount from './BookmarkCount.svelte'
   import BookmarkForm from '../components/BookmarkForm.svelte'
@@ -10,7 +10,7 @@
   export let t = translate
 
   const popupHeader = () => {
-    return $bookmark.saved
+    return $currentTab.saved
       ? t('saved_bookmark')
       : t('add_bookmark')
   }
@@ -20,8 +20,18 @@
     return false
   }
 
+  const onTabUpdate = (tab) => {
+    $currentTab = { ...tab }
+  }
+
   onMount(() => {
+    messages.on('currentTabInfo', onTabUpdate)
     messages.on('button:close', onClose)
+  })
+
+  onDestroy(() => {
+    messages.off('currentTabInfo', onTabUpdate)
+    messages.off('button:close', onClose)
   })
 </script>
 
@@ -36,4 +46,4 @@
 
 <h1>{ popupHeader() } <BookmarkCount /></h1>
 
-<BookmarkForm />
+<BookmarkForm bookmark={$currentTab} />

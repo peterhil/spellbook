@@ -1,12 +1,10 @@
 <script>
-  import { onDestroy, onMount } from 'svelte'
-  import { bookmarkStore as bookmark } from '../lib/stores'
   import { createBookmark } from '../api/bookmarks'
-  import { messages } from '../lib/messaging'
   import { t as translate } from '../lib/translate'
   import CategorySelector from './CategorySelector.svelte'
   import Favicon from './Favicon.svelte'
 
+  export let bookmark
   export let t = translate
   let form
   let submitButton
@@ -31,30 +29,18 @@
       }).then((subcategory) => {
         params.parentId = subcategory.id
         createBookmark(params).then(() => {
-          $bookmark.saved = true
+          bookmark.saved = true
         })
       })
     } else {
       createBookmark(params).then(() => {
-        $bookmark.saved = true
+        bookmark.saved = true
       })
     }
 
     window.close()
     return false
   }
-
-  const onTabUpdate = (tab) => {
-    $bookmark = { ...tab }
-  }
-
-  onMount(() => {
-    messages.on('currentTabInfo', onTabUpdate)
-  })
-
-  onDestroy(() => {
-    messages.off('currentTabInfo', onTabUpdate)
-  })
 </script>
 
 <style>
@@ -68,7 +54,7 @@
     <label for="title">{ t('title') }</label>
     <input name="title" required
            class="form-input"
-           bind:value={$bookmark.title}>
+           bind:value={bookmark.title}>
   </div>
 
   <div class="form-group">
@@ -76,8 +62,8 @@
     <div class="input-group">
       <input name="url" type="url" required
              class="form-input"
-             bind:value={$bookmark.url}>
-      <Favicon icon={$bookmark.favIconUrl}></Favicon>
+             bind:value={bookmark.url}>
+      <Favicon icon={bookmark.favIconUrl}></Favicon>
     </div>
   </div>
 
