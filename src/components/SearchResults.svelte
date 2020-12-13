@@ -1,10 +1,9 @@
 <script>
   import { empty, not } from 'fkit'
-  import { t as translate } from '../lib/translate'
+  import { t } from '../lib/translate'
   import CategoryList from './CategoryList.svelte'
   import MainCategories from './MainCategories.svelte'
 
-  export let t = translate
   export let categories = []
 </script>
 

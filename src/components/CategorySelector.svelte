@@ -7,7 +7,7 @@
     dropdownStore as showDropdown,
     emptySelection,
   } from '../lib/stores'
-  import { t as translate } from '../lib/translate'
+  import { t } from '../lib/translate'
   import Button from './Button.svelte'
   import ChildCategories from './ChildCategories.svelte'
   import Dropdown from './Dropdown.svelte'
@@ -19,7 +19,6 @@
   export let search = ''
   export let searchResults = []
   export let selection = emptySelection
-  export let t = translate
 
   const isVisible = (dropdown) => {
     // console.debug('isVisible:', dropdown, $showDropdown === dropdown)

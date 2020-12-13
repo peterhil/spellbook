@@ -1,11 +1,10 @@
 <script>
   import { createBookmark } from '../api/bookmarks'
-  import { t as translate } from '../lib/translate'
+  import { t } from '../lib/translate'
   import CategorySelector from './CategorySelector.svelte'
   import Favicon from './Favicon.svelte'
 
   export let bookmark
-  export let t = translate
   let form
   let submitButton
 

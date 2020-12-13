@@ -2,12 +2,10 @@
   import { currentTab } from '../lib/stores'
   import { messages } from '../lib/messaging'
   import { onDestroy, onMount } from 'svelte'
-  import { t as translate } from '../lib/translate'
+  import { t } from '../lib/translate'
   import BookmarkCount from './BookmarkCount.svelte'
   import BookmarkForm from '../components/BookmarkForm.svelte'
   import CloseButton from '../components/CloseButton.svelte'
-
-  export let t = translate
 
   const popupHeader = () => {
     return $currentTab.saved
