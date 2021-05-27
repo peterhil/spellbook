@@ -125,7 +125,7 @@ export default [
           'manifest.json',
           'popup/popup.html',
         ],
-        dest: '../' + outputDir(),
+        dest: outputDir(),
         options: {
           cwd: 'src',
           parents: true,
