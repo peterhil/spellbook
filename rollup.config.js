@@ -87,11 +87,7 @@ export default [
       dir: outputDir('popup'),
       format: outputFormat,
       sourcemap: sourceMaps,
-      globals: {
-      },
     },
-    external: [
-    ],
     plugins: plugins,
   },
   {
@@ -101,11 +97,7 @@ export default [
       name: 'directory',
       format: outputFormat,
       sourcemap: sourceMaps,
-      globals: {
-      },
     },
-    external: [
-    ],
     plugins: plugins
   },
   {
@@ -114,11 +106,7 @@ export default [
       dir: outputDir('background'),
       format: outputFormat,
       sourcemap: sourceMaps,
-      globals: {
-      },
     },
-    external: [
-    ],
     plugins: plugins.concat([
       copy({
         files: [
