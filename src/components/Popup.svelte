@@ -3,32 +3,40 @@
   import { messages } from '../lib/messaging'
   import { onDestroy, onMount } from 'svelte'
   import { t } from '../lib/translate'
-  import BookmarkCount from './BookmarkCount.svelte'
   import BookmarkForm from '../components/BookmarkForm.svelte'
   import CloseButton from '../components/CloseButton.svelte'
 
-  const popupHeader = () => {
-    return $currentTab.saved
+  let bookmarked = []
+  $: bookmarkCount = bookmarked.length
+  $: popupHeader = (
+    bookmarkCount >= 1
       ? t('saved_bookmark')
       : t('add_bookmark')
-  }
+  )
 
-  export function onClose () {
+  function onClose () {
     window.close()
     return false
   }
 
-  const onTabUpdate = (tab) => {
+  function onTabUpdate (tab) {
     $currentTab = { ...tab }
+  }
+
+  function updateBookmarks (bookmarks) {
+    console.log('Got bookmarks:', bookmarks)
+    bookmarked = bookmarks
   }
 
   onMount(() => {
     messages.on('currentTabInfo', onTabUpdate)
+    messages.on('bookmarkStatus', updateBookmarks)
     messages.on('button:close', onClose)
   })
 
   onDestroy(() => {
     messages.off('currentTabInfo', onTabUpdate)
+    messages.off('bookmarkStatus', updateBookmarks)
     messages.off('button:close', onClose)
   })
 </script>
@@ -42,6 +50,9 @@
 
 <CloseButton />
 
-<h1>{ popupHeader() } <BookmarkCount /></h1>
+<h1>
+  { popupHeader }
+  <span class="bookmark-count">({ bookmarkCount })</span>
+</h1>
 
 <BookmarkForm bookmark={$currentTab} />
