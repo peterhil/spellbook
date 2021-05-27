@@ -1,14 +1,14 @@
 <script>
   import { get } from 'fkit'
-  import { onDestroy, onMount } from 'svelte'
   import { messages } from '../lib/messaging'
-  import { inputEvent$ } from '../lib/reactive'
+  import { onDestroy, onMount } from 'svelte'
   import {
     dropdownStore as showDropdown,
     emptySelection,
   } from '../lib/stores'
   import { t } from '../lib/translate'
   import Button from './Button.svelte'
+  import CategorySearch from './CategorySearch.svelte'
   import ChildCategories from './ChildCategories.svelte'
   import Dropdown from './Dropdown.svelte'
   import Icon from './Icon.svelte'
@@ -37,7 +37,6 @@
     lastSearch = null
     selection = emptySelection
     $showDropdown = null
-    search.focus()
   }
 
   const clearSelection = (event) => {
@@ -49,10 +48,6 @@
     searchResults = results
     lastSearch = search.value
     $showDropdown = 'search'
-  }
-
-  const searchCategories = (query) => {
-    messages.emit('api', { type: 'categorySearch', query })
   }
 
   export const onSelection = (value) => {
@@ -86,15 +81,9 @@
   }
 
   onMount(() => {
-    const categorySearch$ = inputEvent$(search, { minLength: 2 })
-    const emptySearch$ = inputEvent$(search, { minLength: 0 })
-      .filter(search => search.length <= 1)
-
-    categorySearch$.observe(searchCategories, console.error)
-    emptySearch$.observe(clearSelection, console.error)
-
     messages.on('categorySelected', onSelection)
     messages.on('searchResults', updateCategories)
+    messages.on('search:clear', clearSelection)
     messages.on('button:toggleChildren', onToggle('children'))
     messages.on('button:toggleSubcategory', onToggle('subcategory'))
     messages.on('button:toggleRecent', onToggle('recent'))
@@ -125,13 +114,12 @@
 
   <div class="input-group category-search"
        on:categorySelected={onSelection}>
-    <input name="search" required
-           class="form-input"
-           bind:this={search}
-           bind:value={selection.title}
-           on:focus={onSearchFocus}
-           placeholder={ t('search_placeholder') }
-           autocomplete="off">
+    <CategorySearch
+      name="search"
+      bind:this={search}
+      bind:value={selection.title}
+      on:focus={onSearchFocus}
+      />
     <input name="category" type="hidden" bind:value={selection.id}>
     {#if hasSelection() }
     <Button name="toggleChildren" classes="input-group-btn">
