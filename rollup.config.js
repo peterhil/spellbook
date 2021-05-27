@@ -4,11 +4,11 @@ import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
 import resolve from '@rollup/plugin-node-resolve'
 import sass from 'rollup-plugin-sass'
-import svelte from 'rollup-plugin-svelte';
+import svelte from 'rollup-plugin-svelte'
 import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
-const production = !process.env.ROLLUP_WATCH;
+const production = !process.env.ROLLUP_WATCH
 const minify = production
 const sourceMaps = !production
 const outputFormat = 'iife'
@@ -30,7 +30,7 @@ const plugins = [
     // we'll extract any component CSS out into
     // a separate file — better for performance
     css: css => {
-      css.write('spellbook.css');
+      css.write('spellbook.css')
     }
   }),
 
@@ -40,11 +40,11 @@ const plugins = [
 
   // Convert CommonJS libraries to ES6
   resolve({
-    browser: true,  // default: false
-    modulesOnly: false,  // default: false
+    browser: true, // default: false
+    modulesOnly: false, // default: false
     dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
     customResolveOptions: {
-        moduleDirectory: './node_modules/',
+      moduleDirectory: './node_modules/',
     },
     preferBuiltins: false,
   }),
