@@ -1,3 +1,5 @@
+import path from 'path'
+
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
 import resolve from '@rollup/plugin-node-resolve'
@@ -9,8 +11,11 @@ import { terser } from 'rollup-plugin-terser'
 const production = !process.env.ROLLUP_WATCH;
 const minify = production
 const sourceMaps = !production
-const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
 const outputFormat = 'iife'
+
+const outputDir = (dir = '') => {
+  return path.join(__dirname, (production ? 'dist/' : 'dev/'), dir)
+}
 
 const plugins = [
   eslint({
@@ -127,7 +132,7 @@ export default [
         ],
         dest: outputDir(),
         options: {
-          cwd: 'src',
+          cwd: path.join(__dirname, 'src'),
           parents: true,
           verbose: true,
         },
