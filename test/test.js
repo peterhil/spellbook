@@ -5,7 +5,7 @@ import assert from 'assert'
 import { t } from './utils/i18n.js'
 
 const extensionPath = 'dev'
-const lang = 'en-US'
+const language = 'en-US'
 let extensionPage = null
 let browser = null
 
@@ -35,14 +35,28 @@ async function getExtensionID (extensionName, browser) {
   // This is completely an arbitrary one.
   // const dummyPage = await browser.newPage()
   // await dummyPage.waitFor(2000) // arbitrary wait time.
-
   const targets = await browser.targets()
-  const backgroundPageTarget = targets.find(target => target.type() === 'background_page')
 
+  const backgroundPageTarget = targets.find(target => target.type() === 'background_page')
   const backgroundPageUrl = backgroundPageTarget.url() || ''
   const [,, extensionID] = backgroundPageUrl.split('/')
 
   return extensionID
+}
+
+function defineBrowserLanguage (language) {
+  return () => {
+    Object.defineProperty(navigator, 'language', {
+      get: function () {
+        return language
+      }
+    })
+    Object.defineProperty(navigator, 'languages', {
+      get: function () {
+        return [languages]
+      }
+    })
+  }
 }
 
 async function boot () {
@@ -51,7 +65,7 @@ async function boot () {
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
-      `--lang=${lang}`,
+      `--lang=${language}`,
     ]
   })
 
@@ -60,24 +74,15 @@ async function boot () {
 
   // This is the page mentioned in `default_popup` key of `manifest.json`
   const extensionPopupHtml = 'popup/popup.html'
-
   extensionPage = await browser.newPage()
-  await extensionPage.setExtraHTTPHeaders({
-    'Accept-Language': lang
-  })
 
-  await extensionPage.evaluateOnNewDocument(() => {
-    Object.defineProperty(navigator, 'language', {
-      get: function () {
-        return lang
-      }
-    })
-    Object.defineProperty(navigator, 'languages', {
-      get: function () {
-        return [lang]
-      }
-    })
-  })
+  await extensionPage.setExtraHTTPHeaders({
+    'Accept-Language': language
+   })
+
+  await extensionPage.evaluateOnNewDocument(
+    defineBrowserLanguage(language)
+  )
 
   await extensionPage.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
 }
