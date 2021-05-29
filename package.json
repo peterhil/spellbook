@@ -42,7 +42,7 @@
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-svelte3": "~2.7.3",
     "mocha": "^7.1.2",
-    "puppeteer": "^3.0.2",
+    "puppeteer": "^9.1.1",
     "require-from-string": "~2.0.2",
     "rollup": "^2.26.11",
     "rollup-plugin-cpy": "^2.0.1",
