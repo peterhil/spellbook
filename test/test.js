@@ -1,6 +1,10 @@
 import puppeteer from 'puppeteer'
 import assert from 'assert'
-import { t } from './utils/i18n.js'
+
+import {
+  defineBrowserLanguage,
+  t,
+} from './utils/i18n.js'
 
 const extensionPath = 'dev'
 const language = 'en-US'
@@ -42,18 +46,6 @@ async function getExtensionID (extensionName, browser) {
   return extensionID
 }
 
-function defineBrowserLanguage (language) {
-  return () => {
-    Object.defineProperty(navigator, 'language', {
-      get: () => language
-    })
-
-    Object.defineProperty(navigator, 'languages', {
-      get: () => [languages]
-    })
-  }
-}
-
 async function boot () {
   browser = await puppeteer.launch({
     headless: false, // Extensions in Chrome currently only work in non-headless mode
@@ -68,7 +60,7 @@ async function boot () {
 
   await page.setExtraHTTPHeaders({
     'Accept-Language': language
-   })
+  })
 
   await page.evaluateOnNewDocument(
     defineBrowserLanguage(language)
@@ -76,7 +68,7 @@ async function boot () {
 
   const extensionName = 'Spellbook'
   const extensionID = await getExtensionID(extensionName, browser)
-  const extensionPopupHtml = 'popup/popup.html'  // `default_popup` key of `manifest.json`
+  const extensionPopupHtml = 'popup/popup.html' // `default_popup` key of `manifest.json`
 
   await page.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
 }

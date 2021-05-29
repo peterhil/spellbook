@@ -3,6 +3,20 @@ import path from 'path'
 
 import { __dirname } from './meta.js'
 
+const messages = getLocalizedMessages(getUserLocale())
+
+export function defineBrowserLanguage (language) {
+  return () => {
+    Object.defineProperty(navigator, 'language', {
+      get: () => language
+    })
+
+    Object.defineProperty(navigator, 'languages', {
+      get: () => [languages]
+    })
+  }
+}
+
 function getUserLocale () {
   return Intl.DateTimeFormat().resolvedOptions().locale.slice(0, 2)
 }
@@ -18,8 +32,6 @@ function getLocalizedMessages (languageCode) {
 
   return JSON.parse(rawdata)
 }
-
-const messages = getLocalizedMessages(getUserLocale())
 
 export function t(key) {
   return messages[key].message
