@@ -6,7 +6,7 @@ import { t } from './utils/i18n.js'
 
 const extensionPath = 'dev'
 const language = 'en-US'
-let extensionPage = null
+let page = null
 let browser = null
 
 describe('Popup', function () {
@@ -16,13 +16,13 @@ describe('Popup', function () {
 
   describe('Search', async function () {
     it('Searching without a match', async function () {
-      const inputElement = await extensionPage.$('input[name=search]')
+      const inputElement = await page.$('input[name=search]')
       assert.equal(inputElement, t('search_placeholder'))
 
-      await extensionPage.type('input[name=search]', 'Nonexisting\n')
-      await extensionPage.waitFor(2000)
+      await page.type('input[name=search]', 'Nonexisting\n')
+      await page.waitFor(2000)
 
-      const results = await extensionPage.$eval('#dropdown-search', element => element.textContent)
+      const results = await page.$eval('#dropdown-search', element => element.textContent)
       assert.equal(results, 'No categories found', 'No categories message is missing')
     })
   })
@@ -74,20 +74,20 @@ async function boot () {
 
   // This is the page mentioned in `default_popup` key of `manifest.json`
   const extensionPopupHtml = 'popup/popup.html'
-  extensionPage = await browser.newPage()
+  page = await browser.newPage()
 
-  await extensionPage.setExtraHTTPHeaders({
+  await page.setExtraHTTPHeaders({
     'Accept-Language': language
    })
 
-  await extensionPage.evaluateOnNewDocument(
+  await page.evaluateOnNewDocument(
     defineBrowserLanguage(language)
   )
 
-  await extensionPage.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
+  await page.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
 }
 
 async function shutdown () {
-  await extensionPage.close()
+  await page.close()
   await browser.close()
 }
