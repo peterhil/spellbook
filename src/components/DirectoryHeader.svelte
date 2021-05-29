@@ -1,6 +1,5 @@
 <script>
-  import { t as translate } from '../lib/translate'
-  const t = translate
+  import { t } from '../lib/translate'
 </script>
 
 <style type="scss">

@@ -1,30 +1,27 @@
 <script>
-  import { empty, get, not, sortBy } from 'fkit'
-  import { onDestroy, onMount } from 'svelte'
+  import { get } from 'fkit'
   import { messages } from '../lib/messaging'
-  import { filterBy, propertyCompare } from '../lib/pure'
-  import { inputEvent$ } from '../lib/reactive'
+  import { onDestroy, onMount } from 'svelte'
   import {
     dropdownStore as showDropdown,
     emptySelection,
   } from '../lib/stores'
-  import { t as translate } from '../lib/translate'
-  import { bookmarkSearch } from '../api/bookmarks.js'
-  import { isCategory } from '../api/helpers'
-  import CategoryList from './CategoryList.svelte'
+  import { t } from '../lib/translate'
+  import Button from './Button.svelte'
+  import CategorySearch from './CategorySearch.svelte'
   import ChildCategories from './ChildCategories.svelte'
-  import MainCategories from './MainCategories.svelte'
-  import RecentCategories from './RecentCategories.svelte'
   import Dropdown from './Dropdown.svelte'
+  import Icon from './Icon.svelte'
+  import RecentCategories from './RecentCategories.svelte'
+  import SearchResults from './SearchResults.svelte'
 
   export let lastSearch = null
   export let search = ''
   export let searchResults = []
   export let selection = emptySelection
-  export let t = translate
 
   const isVisible = (dropdown) => {
-    console.debug('isVisible:', dropdown, $showDropdown === dropdown)
+    // console.debug('isVisible:', dropdown, $showDropdown === dropdown)
     return $showDropdown === dropdown
   }
 
@@ -40,7 +37,6 @@
     lastSearch = null
     selection = emptySelection
     $showDropdown = null
-    search.focus()
   }
 
   const clearSelection = (event) => {
@@ -85,17 +81,13 @@
   }
 
   onMount(() => {
-    const categorySearch$ = inputEvent$(search, { minLength: 2 })
-      .flatMapLatest(query => bookmarkSearch({ query })) // TODO See how RxJS.switchMap cancel the previous observable
-      .map(filterBy(isCategory))
-      .map(sortBy(propertyCompare('title', true)))
-
-    const emptySearch$ = inputEvent$(search, { minLength: 0 })
-      .filter(search => search.length <= 1)
-
-    categorySearch$.observe(updateCategories, console.error)
-    emptySearch$.observe(clearSelection, console.error)
     messages.on('categorySelected', onSelection)
+    messages.on('searchResults', updateCategories)
+    messages.on('search:clear', clearSelection)
+    messages.on('button:toggleChildren', onToggle('children'))
+    messages.on('button:toggleSubcategory', onToggle('subcategory'))
+    messages.on('button:toggleRecent', onToggle('recent'))
+
     init()
   })
 
@@ -122,41 +114,29 @@
 
   <div class="input-group category-search"
        on:categorySelected={onSelection}>
-    <input name="search" required
-           class="form-input"
-           bind:this={search}
-           bind:value={selection.title}
-           on:focus={onSearchFocus}
-           placeholder={ t('search_placeholder') }
-           autocomplete="off">
+    <CategorySearch
+      name="search"
+      bind:this={search}
+      bind:value={selection.title}
+      on:focus={onSearchFocus}
+      />
     <input name="category" type="hidden" bind:value={selection.id}>
     {#if hasSelection() }
-    <button class="toggle-children btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('children')}>
-      <i class="icon icon-minus"></i>
-    </button>
-    <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('subcategory')}>
-      <i class="icon icon-plus"></i>
-    </button>
+    <Button name="toggleChildren" classes="input-group-btn">
+      <Icon icon="minus" />
+    </Button>
+    <Button name="toggleSubcategory" classes="input-group-btn">
+      <Icon icon="plus" />
+    </Button>
     {/if}
-    <button class="toggle-recent btn btn-primary input-group-btn" tabindex="0"
-            on:click|preventDefault={onToggle('recent')}>
-      <i class="icon icon-caret"></i>
-    </button>
+    <Button name="toggleRecent" classes="input-group-btn">
+      <Icon icon="caret" />
+    </Button>
   </div>
 
   <Dropdown name={'search'}>
     {#if isVisible('search') && lastSearch }
-    {#if not(empty(searchResults)) }
-    <ul class="menu" tabindex="-1">
-      <CategoryList categories={searchResults} />
-      <li class="divider" data-content={ t('root_categories') }></li>
-      <MainCategories />
-    </ul>
-    {:else}
-    <small>No categories found</small>
-    {/if}
+      <SearchResults categories={searchResults} />
     {/if}
   </Dropdown>
 
@@ -173,9 +153,8 @@
   <label for="subcategory">{ t('add_subcategory') }</label>
   <div class="input-group">
     <input name="subcategory" class="form-input" autocomplete="off">
-    <button class="toggle-subcategory btn btn-primary input-group-btn" tabindex="0"
-            on:click={onToggle('subcategory')}>
-      <i class="icon icon-cross"></i>
-    </button>
+    <Button name="toggleSubcategory" classes="input-group-btn">
+      <Icon icon="cross" />
+    </Button>
   </div>
 </div>

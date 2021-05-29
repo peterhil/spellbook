@@ -8,9 +8,15 @@ export const emptyBookmark = {
 }
 export const emptySelection = { title: null, id: null, parentId: null }
 
-export const bookmarkStore = writable({})
+export const currentTab = writable({}, function start (set) {
+  set(emptyBookmark)
+
+  return function stop () {}
+})
+
 export const selectionStore = writable({}, () => {
   console.log('got a subscriber')
   return () => console.log('no more subscribers')
 })
+
 export const dropdownStore = writable(null)

@@ -1,8 +1,6 @@
 <script>
   import { bookmarksBarCategoryId, otherCategoryId } from '../api/categories.js'
-  import { t as translate } from '../lib/translate'
-
-  export let t = translate
+  import { t } from '../lib/translate'
 </script>
 
 <li class="menu-item">

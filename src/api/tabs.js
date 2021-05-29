@@ -4,10 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Chrome tabs
-
-/* global chrome */
-
 import { difference, empty, get, head, pick, values } from 'fkit'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../lib/reactive'
