@@ -59,8 +59,8 @@ async function boot () {
     ]
   })
 
-  // const extensionName = 'Spellbook' // For instance, 'GreetMe'
-  let extensionID = await getExtensionID('Spellbook', browser)
+  const extensionName = 'Spellbook'
+  let extensionID = await getExtensionID(extensionName, browser)
 
   // This is the page mentioned in `default_popup` key of `manifest.json`
   const extensionPopupHtml = 'popup/popup.html'
