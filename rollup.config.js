@@ -1,16 +1,21 @@
-import commonjs from 'rollup-plugin-commonjs'
+import path from 'path'
+
+import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
-import resolve from 'rollup-plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
 import sass from 'rollup-plugin-sass'
-import svelte from 'rollup-plugin-svelte';
+import svelte from 'rollup-plugin-svelte'
 import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
-const production = !process.env.ROLLUP_WATCH;
+const production = !process.env.ROLLUP_WATCH
 const minify = production
-const sourceMaps = !production
-const outputDir = (dir = '') => { return (production ? 'dist/' : 'dev/') + dir }
-const outputFormat = 'iife'
+const sourcemap = !production
+const format = 'iife'
+
+const outputDir = (dir = '') => {
+  return path.join(__dirname, (production ? 'dist/' : 'dev/'), dir)
+}
 
 const plugins = [
   eslint({
@@ -25,7 +30,7 @@ const plugins = [
     // we'll extract any component CSS out into
     // a separate file — better for performance
     css: css => {
-      css.write(outputDir('spellbook.css'));
+      css.write('spellbook.css')
     }
   }),
 
@@ -35,12 +40,13 @@ const plugins = [
 
   // Convert CommonJS libraries to ES6
   resolve({
-    browser: true,  // default: false
-    modulesOnly: false,  // default: false
+    browser: true, // default: false
+    modulesOnly: false, // default: false
     dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
     customResolveOptions: {
-        moduleDirectory: './node_modules/',
+      moduleDirectory: './node_modules/',
     },
+    preferBuiltins: false,
   }),
   commonjs(),
 
@@ -54,7 +60,7 @@ export default [
     output: {
       dir: outputDir('popup'),
       name: 'popup.sass',
-      format: outputFormat,
+      format,
     },
     plugins: [
       sass({
@@ -67,7 +73,7 @@ export default [
     output: {
       dir: outputDir('directory'),
       name: 'directory.sass',
-      format: outputFormat,
+      format,
     },
     plugins: [
       sass({
@@ -79,40 +85,28 @@ export default [
     input: { popup: 'src/popup/popup.js' },
     output: {
       dir: outputDir('popup'),
-      format: outputFormat,
-      sourcemap: sourceMaps,
-      globals: {
-      },
+      format,
+      sourcemap,
     },
-    external: [
-    ],
-    plugins: plugins,
+    plugins,
   },
   {
     input: { directory: 'src/directory/directory.js' },
     output: {
       dir: outputDir('directory'),
       name: 'directory',
-      format: outputFormat,
-      sourcemap: sourceMaps,
-      globals: {
-      },
+      format,
+      sourcemap,
     },
-    external: [
-    ],
-    plugins: plugins
+    plugins
   },
   {
     input: { background: 'src/background/background.js' },
     output: {
       dir: outputDir('background'),
-      format: outputFormat,
-      sourcemap: sourceMaps,
-      globals: {
-      },
+      format,
+      sourcemap,
     },
-    external: [
-    ],
     plugins: plugins.concat([
       copy({
         files: [
@@ -124,9 +118,9 @@ export default [
           'manifest.json',
           'popup/popup.html',
         ],
-        dest: '../' + outputDir(),
+        dest: outputDir(),
         options: {
-          cwd: 'src',
+          cwd: path.join(__dirname, 'src'),
           parents: true,
           verbose: true,
         },

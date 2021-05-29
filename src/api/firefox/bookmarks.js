@@ -6,10 +6,12 @@
 
 /* global browser */
 
-import Kefir from 'kefir'
-
 export function bookmarkSearch (queryObject) {
-  return Kefir.fromPromise(browser.bookmarks.search(queryObject))
+  return browser.bookmarks.search(queryObject)
+}
+
+export const create = (bookmark) => {
+  return browser.bookmarks.create(bookmark)
 }
 
 export const get = (...args) => {
@@ -26,4 +28,8 @@ export const getSubTree = (id) => {
 
 export const getChildren = (id) => {
   return browser.bookmarks.getChildren(id)
+}
+
+export const getRecent = (count) => {
+  return browser.bookmarks.getRecent(count)
 }

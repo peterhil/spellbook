@@ -4,26 +4,33 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
-
 import Kefir from 'kefir'
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { emptyBookmark } from '../lib/stores'
-import { searchWithBookmark } from '../api/bookmarks'
-import { bookmarksModified$, recentCategories$ } from '../api/streams'
+import { categorySearch, searchWithBookmark } from '../api/bookmarks'
+import { getRecentCategories } from '../api/categories'
+import { bookmarksModified$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
 var bookmarked = []
 var currentTab = emptyBookmark
-var recentCategories = []
 
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
       getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
       getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
-      getRecentCategories: () => sendMessage(port, 'recentCategories', recentCategories),
+      getRecentCategories: (request) => {
+        getRecentCategories(5) // TODO Move hardcoded value into options
+          .then(result => {
+            sendMessage(port, 'recentCategories', result)
+          })
+      },
+      categorySearch: (request) => {
+        categorySearch(request.query)
+          .then(result => sendMessage(port, 'searchResults', result))
+      },
       default: unhandledMessage,
     })
 
@@ -46,14 +53,7 @@ function onCheckBookmarkStatus (bookmarks) {
 }
 
 function onCurrentTab (tab) {
-  currentTab = {
-    ...tab
-  }
-}
-
-function updateRecentCategories (categories) {
-  console.debug('[popup controller] updateRecentCategories:', categories)
-  recentCategories = categories
+  currentTab = { ...tab }
 }
 
 Kefir.merge([bookmarksModified$, currentTab$])
@@ -63,6 +63,3 @@ Kefir.merge([bookmarksModified$, currentTab$])
 
 currentTab$
   .observe(onCurrentTab, console.error)
-
-recentCategories$
-  .observe(updateRecentCategories, console.error)

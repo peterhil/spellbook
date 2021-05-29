@@ -4,17 +4,18 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
-
-import Kefir from 'kefir'
 import { callbackToPromise } from '../../lib/reactive'
 import { withErrorChecking } from '../helpers'
 
 export function bookmarkSearch (queryObject) {
-  return Kefir.fromPromise(callbackToPromise(
+  return callbackToPromise(
     withErrorChecking(chrome.bookmarks.search),
     queryObject
-  ))
+  )
+}
+
+export const create = (bookmark) => {
+  return callbackToPromise(chrome.bookmarks.create, bookmark)
 }
 
 export const get = (...args) => {
@@ -31,4 +32,8 @@ export const getSubTree = (id) => {
 
 export const getChildren = (id) => {
   return callbackToPromise(withErrorChecking(chrome.bookmarks.getChildren), id)
+}
+
+export const getRecent = (count) => {
+  return callbackToPromise(withErrorChecking(chrome.bookmarks.getRecent), count)
 }

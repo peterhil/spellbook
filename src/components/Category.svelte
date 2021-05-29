@@ -9,7 +9,7 @@
   function onClick (event) {
     const selection = { ...elem.dataset }
     console.debug('Category clicked:', selection, event)
-    messages.trigger('categorySelected', selection)
+    messages.emit('categorySelected', selection)
     return false
   }
 </script>
