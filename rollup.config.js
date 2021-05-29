@@ -10,8 +10,8 @@ import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH
 const minify = production
-const sourceMaps = !production
-const outputFormat = 'iife'
+const sourcemap = !production
+const format = 'iife'
 
 const outputDir = (dir = '') => {
   return path.join(__dirname, (production ? 'dist/' : 'dev/'), dir)
@@ -60,7 +60,7 @@ export default [
     output: {
       dir: outputDir('popup'),
       name: 'popup.sass',
-      format: outputFormat,
+      format,
     },
     plugins: [
       sass({
@@ -73,7 +73,7 @@ export default [
     output: {
       dir: outputDir('directory'),
       name: 'directory.sass',
-      format: outputFormat,
+      format,
     },
     plugins: [
       sass({
@@ -85,27 +85,27 @@ export default [
     input: { popup: 'src/popup/popup.js' },
     output: {
       dir: outputDir('popup'),
-      format: outputFormat,
-      sourcemap: sourceMaps,
+      format,
+      sourcemap,
     },
-    plugins: plugins,
+    plugins,
   },
   {
     input: { directory: 'src/directory/directory.js' },
     output: {
       dir: outputDir('directory'),
       name: 'directory',
-      format: outputFormat,
-      sourcemap: sourceMaps,
+      format,
+      sourcemap,
     },
-    plugins: plugins
+    plugins
   },
   {
     input: { background: 'src/background/background.js' },
     output: {
       dir: outputDir('background'),
-      format: outputFormat,
-      sourcemap: sourceMaps,
+      format,
+      sourcemap,
     },
     plugins: plugins.concat([
       copy({
