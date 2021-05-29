@@ -1,5 +1,3 @@
-// test.js
-
 import puppeteer from 'puppeteer'
 import assert from 'assert'
 import { t } from './utils/i18n.js'
@@ -10,7 +8,7 @@ let page = null
 let browser = null
 
 describe('Popup', function () {
-  this.timeout(20000) // default is 2 seconds and that may not be enough to boot browsers and pages.
+  this.timeout(20000) // default is 2 seconds which may not be enough to boot browser and pages
 
   before(boot)
 
@@ -38,7 +36,7 @@ async function getExtensionID (extensionName, browser) {
   const targets = await browser.targets()
 
   const backgroundPageTarget = targets.find(target => target.type() === 'background_page')
-  const backgroundPageUrl = backgroundPageTarget.url() || ''
+  const backgroundPageUrl = backgroundPageTarget.url()
   const [,, extensionID] = backgroundPageUrl.split('/')
 
   return extensionID
@@ -47,14 +45,11 @@ async function getExtensionID (extensionName, browser) {
 function defineBrowserLanguage (language) {
   return () => {
     Object.defineProperty(navigator, 'language', {
-      get: function () {
-        return language
-      }
+      get: () => language
     })
+
     Object.defineProperty(navigator, 'languages', {
-      get: function () {
-        return [languages]
-      }
+      get: () => [languages]
     })
   }
 }
@@ -69,11 +64,6 @@ async function boot () {
     ]
   })
 
-  const extensionName = 'Spellbook'
-  const extensionID = await getExtensionID(extensionName, browser)
-
-  // This is the page mentioned in `default_popup` key of `manifest.json`
-  const extensionPopupHtml = 'popup/popup.html'
   page = await browser.newPage()
 
   await page.setExtraHTTPHeaders({
@@ -83,6 +73,10 @@ async function boot () {
   await page.evaluateOnNewDocument(
     defineBrowserLanguage(language)
   )
+
+  const extensionName = 'Spellbook'
+  const extensionID = await getExtensionID(extensionName, browser)
+  const extensionPopupHtml = 'popup/popup.html'  // `default_popup` key of `manifest.json`
 
   await page.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
 }
