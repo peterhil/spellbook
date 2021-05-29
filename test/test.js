@@ -12,9 +12,7 @@ let browser = null
 describe('Popup', function() {
   this.timeout(20000) // default is 2 seconds and that may not be enough to boot browsers and pages.
 
-  before(async function() {
-    await boot()
-  })
+  before(boot)
 
   describe('Search', async function() {
     it('Searching without a match', async function() {
