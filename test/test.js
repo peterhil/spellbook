@@ -41,19 +41,17 @@ async function getExtensionID(extensionName, browser) {
   // await dummyPage.waitFor(2000) // arbitrary wait time.
 
   const targets = await browser.targets();
-  const extensionTarget = targets.find(({ _targetInfo }) => {
-    return _targetInfo.title === extensionName && _targetInfo.type === 'background_page';
-  });
+  const backgroundPageTarget = targets.find(target => target.type() === 'background_page');
 
-  const extensionUrl = extensionTarget._targetInfo.url || ''
-  const [,, extensionID] = extensionUrl.split('/')
+  const backgroundPageUrl =  backgroundPageTarget.url() || ''
+  const [,, extensionID] = backgroundPageUrl.split('/')
 
   return extensionID
 }
 
 async function boot () {
   browser = await puppeteer.launch({
-    headless: false, // extension are allowed only in head-full mode
+    headless: false, // Extensions in Chrome currently only work in non-headless mode
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
