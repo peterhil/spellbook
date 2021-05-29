@@ -27,9 +27,7 @@ describe('Popup', function () {
     })
   })
 
-  after(async function () {
-    await browser.close()
-  })
+  after(shutdown)
 })
 
 async function getExtensionID (extensionName, browser) {
@@ -82,4 +80,9 @@ async function boot () {
   })
 
   await extensionPage.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
+}
+
+async function shutdown () {
+  await extensionPage.close()
+  await browser.close()
 }
