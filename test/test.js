@@ -65,10 +65,10 @@ describe('Popup', async function () {
       assert.equal(searchPlaceholder, t('search_placeholder'))
 
       await page.type(selector, 'Nonexisting\n')
-      await page.waitFor(2000)
+      const searchResults = await page.waitForSelector('#dropdown-search.active', {visible: true})
+      const text = await searchResults.evaluate(el => el.textContent)
 
-      const results = await page.$eval('#dropdown-search', element => element.textContent)
-      assert.equal(results, 'No categories found', 'No categories message is missing')
+      assert.equal(text, 'No categories found')
     })
   })
 })
