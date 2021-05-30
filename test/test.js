@@ -51,25 +51,26 @@ describe('Popup', async function () {
     it('has header', async () => {
       await page.goto(url)
 
-      const header = await page.waitForSelector('h1', {visible: true})
-      const headerText = await header.evaluate(node => node.innerText)
+      const headerEl = await page.waitForSelector('h1', {visible: true})
+      const headerText = await headerEl.evaluate(node => node.innerText)
 
       assert.match(headerText, new RegExp(t('add_bookmark')))
     })
   })
 
   describe('search', async () => {
-    it('has placeholder', async () => {
+    it('has no results', async () => {
       await page.goto(url)
 
-      const selector = 'input[name=search]'
-      const searchInput = await page.waitForSelector(selector, {visible: true})
-      const searchPlaceholder = await searchInput.evaluate(node => node.placeholder)
-      assert.equal(searchPlaceholder, t('search_placeholder'))
+      const searchInput = 'input[name=search]'
+      const searchInputEl = await page.waitForSelector(searchInput, {visible: true})
+      const placeholderText = await searchInputEl.evaluate(node => node.placeholder)
 
-      await page.type(selector, 'Nonexisting\n')
-      const searchResults = await page.waitForSelector('#dropdown-search.active', {visible: true})
-      const text = await searchResults.evaluate(el => el.textContent)
+      assert.equal(placeholderText, t('search_placeholder'))
+
+      await page.type(searchInput, 'Nonexisting\n')
+      const searchResultsEl = await page.waitForSelector('#dropdown-search.active', {visible: true})
+      const text = await searchResultsEl.evaluate(el => el.textContent)
 
       assert.equal(text, 'No categories found')
     })
