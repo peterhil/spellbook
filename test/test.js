@@ -56,6 +56,17 @@ describe('Popup', async function () {
 
       assert.match(headerText, new RegExp(t('add_bookmark')))
     })
+
+    it('has close button', async () => {
+      await page.goto(url)
+
+      const closeButtonEl = await page.waitForSelector('.btn-close', {visible: true})
+      const result = await closeButtonEl.click()
+
+      // Closing can't be tested easily:
+      // Scripts may close only the windows that were opened by them
+      // assert.ok(page.isClosed())
+    })
   })
 
   describe('search', async () => {
