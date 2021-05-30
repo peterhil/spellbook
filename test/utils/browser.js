@@ -29,11 +29,14 @@ export async function getExtensionID (extensionName, browser) {
 
 export async function startBrowserWithExtension (
   extensionPath,
+  slowMo = 0,
   language = 'en-US',
   headless = false,  // Extensions in Chrome currently only work in non-headless mode
 ) {
   return await puppeteer.launch({
     headless,
+    slowMo,
+    // timeout: 10000,
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,

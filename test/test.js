@@ -26,7 +26,10 @@ describe('Popup', async function () {
   this.timeout(20000) // mocha timeout default is 2 seconds
 
   before(async () => {
-    browser = await startBrowserWithExtension(extensionPath)
+    browser = await startBrowserWithExtension(
+      extensionPath,
+      // 100 // slow motion
+    )
     url = await extensionUrl('Spellbook', path, browser)
   })
 
