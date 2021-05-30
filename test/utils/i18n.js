@@ -3,7 +3,13 @@ import path from 'path'
 
 import { __dirname } from './meta.js'
 
-const messages = getLocalizedMessages(getUserLocale())
+let messages = {}
+
+setLocale('en')
+
+export function setLocale(languageCode) {
+  messages = getLocalizedMessages(languageCode)
+}
 
 export function defineBrowserLanguage (language) {
   return () => {
@@ -17,22 +23,25 @@ export function defineBrowserLanguage (language) {
   }
 }
 
-function getUserLocale () {
+export function getUserLocale () {
   return Intl.DateTimeFormat().resolvedOptions().locale.slice(0, 2)
 }
 
 function getLocalizedMessages (languageCode) {
-  let rawdata = ''
+  // try {
+    const messagePath = path.resolve(__dirname, `../../src/_locales/${languageCode}/messages.json`)
+    const rawdata = fs.readFileSync(messagePath)
+  // } catch (err) {
+  //   throw new Error('Localization not found for language:', languageCode)
+  // }
 
   try {
-    rawdata = fs.readFileSync(path.resolve(__dirname, `../../src/_locales/${languageCode}/messages.json`))
+    return JSON.parse(rawdata)
   } catch (err) {
-    rawdata = fs.readFileSync(path.resolve(__dirname, '../../src/_locales/en/messages.json'))
+    throw new Error('Failed to parse localization at:', messagePath)
   }
-
-  return JSON.parse(rawdata)
 }
 
-export function t(key) {
+export function t (key) {
   return messages[key].message
 }

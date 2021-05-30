@@ -1,79 +1,74 @@
-import puppeteer from 'puppeteer'
 import assert from 'assert'
 
 import {
-  defineBrowserLanguage,
+  extensionUrl,
+  getExtensionID,
+  startBrowserWithExtension,
+  setLanguage,
+} from './utils/browser.js'
+import {
+  getUserLocale,
+  setLocale,
   t,
 } from './utils/i18n.js'
 
+const extensionName = 'Spellbook'
 const extensionPath = 'dev'
-const language = 'en-US'
-let page = null
+const path = 'popup/popup.html' // `default_popup` key of `manifest.json`
+
 let browser = null
+let page = null
+let url = null
+let language = 'en-US'
 
-describe('Popup', function () {
-  this.timeout(20000) // default is 2 seconds which may not be enough to boot browser and pages
+describe('Popup', async function () {
+  // increase timeout for browser to boot and load pages
+  this.timeout(20000) // mocha timeout default is 2 seconds
 
-  before(boot)
+  before(async () => {
+    browser = await startBrowserWithExtension(extensionPath)
+    url = await extensionUrl('Spellbook', path, browser)
+  })
 
-  describe('Search', async function () {
-    it('Searching without a match', async function () {
-      const inputElement = await page.$('input[name=search]')
-      assert.equal(inputElement, t('search_placeholder'))
+  beforeEach(async () => {
+    page = await browser.newPage()
+    // await setLanguage(page, language)
+    setLocale('fi') // or setLocale(getUserLocale())
+  })
 
-      await page.type('input[name=search]', 'Nonexisting\n')
+  afterEach(async () => {
+    await page.close()
+  })
+
+  after(async () => {
+    await browser.close()
+  })
+
+  describe('content', async () => {
+    it('has header', async () => {
+      await page.goto(url)
+
+      const header = await page.waitForSelector('h1', {visible: true})
+      const headerText = await header.evaluate(node => node.innerText)
+
+      assert.match(headerText, new RegExp(t('add_bookmark')))
+    })
+  })
+
+  describe('search', async () => {
+    it('has placeholder', async () => {
+      await page.goto(url)
+
+      const selector = 'input[name=search]'
+      const searchInput = await page.waitForSelector(selector, {visible: true})
+      const searchPlaceholder = await searchInput.evaluate(node => node.placeholder)
+      assert.equal(searchPlaceholder, t('search_placeholder'))
+
+      await page.type(selector, 'Nonexisting\n')
       await page.waitFor(2000)
 
       const results = await page.$eval('#dropdown-search', element => element.textContent)
       assert.equal(results, 'No categories found', 'No categories message is missing')
     })
   })
-
-  after(shutdown)
 })
-
-async function getExtensionID (extensionName, browser) {
-  // This wait time is for background script to boot.
-  // This is completely an arbitrary one.
-  // const dummyPage = await browser.newPage()
-  // await dummyPage.waitFor(2000) // arbitrary wait time.
-  const targets = await browser.targets()
-
-  const backgroundPageTarget = targets.find(target => target.type() === 'background_page')
-  const backgroundPageUrl = backgroundPageTarget.url()
-  const [,, extensionID] = backgroundPageUrl.split('/')
-
-  return extensionID
-}
-
-async function boot () {
-  browser = await puppeteer.launch({
-    headless: false, // Extensions in Chrome currently only work in non-headless mode
-    args: [
-      `--disable-extensions-except=${extensionPath}`,
-      `--load-extension=${extensionPath}`,
-      `--lang=${language}`,
-    ]
-  })
-
-  page = await browser.newPage()
-
-  await page.setExtraHTTPHeaders({
-    'Accept-Language': language
-  })
-
-  await page.evaluateOnNewDocument(
-    defineBrowserLanguage(language)
-  )
-
-  const extensionName = 'Spellbook'
-  const extensionID = await getExtensionID(extensionName, browser)
-  const extensionPopupHtml = 'popup/popup.html' // `default_popup` key of `manifest.json`
-
-  await page.goto(`chrome-extension://${extensionID}/${extensionPopupHtml}`)
-}
-
-async function shutdown () {
-  await page.close()
-  await browser.close()
-}
