@@ -20,6 +20,7 @@ specifiers:
   kefir: ~3.8.7
   mocha: ^7.1.2
   puppeteer: ^9.1.1
+  ramda: ^0.27.1
   require-from-string: ~2.0.2
   rollup: ^2.26.11
   rollup-plugin-cpy: ^2.0.1
@@ -37,6 +38,7 @@ dependencies:
   events: 3.2.0
   fkit: 3.4.0
   kefir: 3.8.7
+  ramda: 0.27.1
   spectre.css: 0.5.9
   zepto-detect: 0.0.0
 
@@ -5147,6 +5149,10 @@ packages:
   /quick-format-unescaped/4.0.1:
     resolution: {integrity: sha512-RyYpQ6Q5/drsJyOhrWHYMWTedvjTIat+FTwv0K4yoUxzvekw2aRHMQJLlnvt8UantkZg2++bEzD9EdxXqkWf4A==}
     dev: true
+
+  /ramda/0.27.1:
+    resolution: {integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==}
+    dev: false
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}

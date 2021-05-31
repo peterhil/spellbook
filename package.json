@@ -23,6 +23,7 @@
     "events": "^3.2.0",
     "fkit": "~3.4.0",
     "kefir": "~3.8.7",
+    "ramda": "^0.27.1",
     "spectre.css": "~0.5.9",
     "zepto-detect": "~0.0.0"
   },
