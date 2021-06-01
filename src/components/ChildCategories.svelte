@@ -1,5 +1,5 @@
 <script>
-  import { filter, sortBy } from 'fkit'
+  import { filter } from 'fkit'
   import { onDestroy, onMount } from 'svelte'
   import { getChildren } from '../api/categories'
   import { isCategory } from '../api/helpers'

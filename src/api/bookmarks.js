@@ -5,7 +5,6 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { Kefir } from 'kefir'
-import { sortBy } from 'ramda'
 import { choice, sortByTitleCaseInsensitive } from '../lib/pure'
 import { notImplemented$ } from '../lib/reactive'
 import * as chromeBookmarks from './chrome/bookmarks'
