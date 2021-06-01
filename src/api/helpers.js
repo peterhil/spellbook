@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import zd from 'zepto-detect'
-import { get, init, last } from 'fkit'
+import { prop, init, last } from 'ramda'
 import { fromEventPattern } from '../lib/rxjs'
 
 export const platform = (
@@ -13,11 +13,11 @@ export const platform = (
 )
 
 export function isBookmark (bookmark) {
-  return !!get('url', bookmark) && bookmark.id !== 'tags________'
+  return !!prop('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export function isCategory (bookmark) {
-  return !get('url', bookmark) && bookmark.id !== 'tags________'
+  return !prop('url', bookmark) && bookmark.id !== 'tags________'
 }
 
 export const browserEvent$ = (eventType) => {
