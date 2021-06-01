@@ -7,6 +7,6 @@
   }
 </script>
 
-<nav id="#dropdown-{name}" class="category dropdown" class:active={isVisible($dropdown)}>
+<nav id="dropdown-{name}" class="category dropdown" class:active={isVisible($dropdown)}>
   <slot></slot>
 </nav>
