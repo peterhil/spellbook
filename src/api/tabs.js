@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { difference, empty, get, head, pick, values } from 'fkit'
+import { difference, empty, head, pick, prop, values } from 'ramda'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
@@ -17,12 +17,11 @@ const currentTabQuery = {
 }
 
 export const isComplete = function (info) {
-  return get('status', info.change) === 'complete'
+  return prop('status', info.change) === 'complete'
 }
 
-const is = get
-const isActive = is('active')
-const isSelected = is('selected')
+const isActive = prop('active')
+const isSelected = prop('selected')
 
 const isCurrentWindow = (tab) => {
   return tab.windowId === currentWindowId
@@ -81,11 +80,11 @@ export const tabUpdate$ = onUpdated$
   .spy('tabUpdate$')
   .filter(event => isCurrent(event.tab))
   .spy('tabUpdate is current')
-  .map(get('tab'))
+  .map(prop('tab'))
 
 export const tabActivation$ = onActivated$
   .spy('tabActivation$')
-  .map(get('tabId'))
+  .map(prop('tabId'))
   .flatMapLatest(getTab)
 
 export const tabFocusChanged$ = onFocusChanged$
@@ -115,7 +114,7 @@ export const closedTab$ = onRemoved$
   .log('closedTab$')
 
 export const closedWindow$ = onRemoved$
-  .filter(get('isWindowClosing'))
-  .map(get('windowId'))
+  .filter(prop('isWindowClosing'))
+  .map(prop('windowId'))
   .skipDuplicates()
   .log('closedWindow$')
