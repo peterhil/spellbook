@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { difference, empty, head, pick, prop, values } from 'ramda'
+import { difference, head, isEmpty, pick, prop, values } from 'ramda'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
@@ -32,7 +32,7 @@ const isCurrent = (tab) => {
 }
 
 const tabsAreEqual = (a, b) => {
-  return empty(difference(values(a), values(b)))
+  return isEmpty(difference(values(a), values(b)))
 }
 
 const getTab = (id) => {
