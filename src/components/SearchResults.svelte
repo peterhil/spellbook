@@ -1,5 +1,5 @@
 <script>
-  import { isEmpty, not } from 'ramda'
+  import { isEmpty, not } from 'rambda'
   import { t } from '../lib/translate'
   import CategoryList from './CategoryList.svelte'
   import MainCategories from './MainCategories.svelte'

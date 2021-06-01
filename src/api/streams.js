@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Kefir from 'kefir'
-import { prop } from 'ramda'
+import { prop } from 'rambda'
 import { getTree } from './categories'
 import { browserEvent$ } from './helpers'
 

@@ -1,5 +1,5 @@
 <script>
-  import { prop, head, filter } from 'ramda'
+  import { prop, head, filter } from 'rambda'
   import { onMount } from 'svelte'
   import Kefir from 'kefir'
   import { messages } from '../lib/messaging'

@@ -13,7 +13,7 @@ import {
   prop,
   sortBy,
   toLower
-} from 'ramda'
+} from 'rambda'
 
 export const hasItems = array => {
   return array && !isEmpty(array)

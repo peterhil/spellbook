@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import zd from 'zepto-detect'
-import { map, pick, prop, take, uniq } from 'ramda'
+import { map, pick, prop, take, uniq } from 'rambda'
 
 import { getBookmark, getRecent } from './bookmarks'
 import { choice } from '../lib/pure'

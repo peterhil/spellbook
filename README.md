@@ -40,7 +40,9 @@ For now the stack is:
 
 - [Svelte](https://svelte.dev/)
 - [Spectre.css](https://picturepan2.github.io/spectre/) – lightweight, responsive and modern CSS Framework
-- [Ramda](https://ramdajs.com/) ([Documentation](https://ramdajs.com/docs/))
+- [Rambda](https://selfrefactor.github.io/rambda/#/)
+  ([differences](https://selfrefactor.github.io/rambda/#/?id=differences-between-rambda-and-ramda))
+  to [Ramda](https://ramdajs.com/docs/)
 - [Kefir](https://kefirjs.github.io/kefir/) – fast and light Reactive Programming library inspired by Bacon.js and RxJS
 - [ESLint](https://eslint.org/) – Pluggable JavaScript linter
 - [Rollup](https://rollupjs.org/guide/en)

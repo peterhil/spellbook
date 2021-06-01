@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { difference, head, isEmpty, pick, prop, values } from 'ramda'
+import { difference, head, isEmpty, pick, prop, values } from 'rambda'
 import Kefir from 'kefir'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'

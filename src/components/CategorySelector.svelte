@@ -1,5 +1,5 @@
 <script>
-  import { prop } from 'ramda'
+  import { prop } from 'rambda'
   import { messages } from '../lib/messaging'
   import { onDestroy, onMount } from 'svelte'
   import {
