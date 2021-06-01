@@ -27,8 +27,4 @@ export const choice = curry((selection, options) => {
   return options[selection] || options.default
 })
 
-export const filterBy = curry((fn, items) => {
-  return items.filter(fn)
-})
-
 export const sortByTitleCaseInsensitive = sortBy(compose(toLower, prop('title')))

@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import Kefir from 'kefir'
   import { messages } from '../lib/messaging'
-  import { filterBy, hasItems, sortByTitleCaseInsensitive } from '../lib/pure'
+  import { hasItems, sortByTitleCaseInsensitive } from '../lib/pure'
   import { t } from '../lib/translate'
   import { isBookmark, isCategory } from '../api/helpers.js'
   import {
@@ -28,7 +28,7 @@
 
   const categories$ = allBookmarks$
     .map(flattenTree)
-    .map(filterBy(isCategory))
+    .map(filter(isCategory))
     .map(sortByTitleCaseInsensitive)
     .spy('Directory tag: categories$')
 
