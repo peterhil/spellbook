@@ -1,5 +1,5 @@
 <script>
-  import { get } from 'fkit'
+  import { prop } from 'ramda'
   import { messages } from '../lib/messaging'
   import { onDestroy, onMount } from 'svelte'
   import {
@@ -30,7 +30,7 @@
   $: showSubcategory = isVisible('subcategory')
   $: hasSelection = () => {
     console.debug('hasSelection:', selection)
-    return get('id', selection)
+    return prop('id', selection)
   }
 
   const init = () => {

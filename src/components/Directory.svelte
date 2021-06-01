@@ -1,5 +1,5 @@
 <script>
-  import { get, head, filter } from 'fkit'
+  import { prop, head, filter } from 'ramda'
   import { onMount } from 'svelte'
   import Kefir from 'kefir'
   import { messages } from '../lib/messaging'
@@ -41,7 +41,7 @@
 
   const selectedBookmarks$ = Kefir.fromPromise(getSubTree(selectedCategory))
     .map(head) // TODO Fix this API madness on the bookmarks adapter!
-    .map(get('children'))
+    .map(prop('children'))
 
   const bookmarks$ = selectedBookmarks$
     .map(sortByTitleCaseInsensitive)

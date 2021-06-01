@@ -1,5 +1,5 @@
 <script>
-  import { filter } from 'fkit'
+  import { filter } from 'ramda'
   import { onDestroy, onMount } from 'svelte'
   import { getChildren } from '../api/categories'
   import { isCategory } from '../api/helpers'
