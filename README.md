@@ -33,17 +33,17 @@ Then add the `dev` directory as [unpacked extension to Chrome](https://developer
 
 ## Technology stack
 
-Currently I am using libraries that are well written and most importantly
+I strive to use libraries that are well written and most importantly
 extremely small in size.
 
 For now the stack is:
 
-- [Svelte • Cybernetically enhanced web apps](https://svelte.dev/)
-- [Kefir.js — fast and light Reactive Programming library for JavaScript inspired by Bacon.js and RxJS](https://kefirjs.github.io/kefir/)
-- [nullobject/fkit: A functional programming toolkit for JavaScript](https://github.com/nullobject/fkit) – [FKit API documentation](https://nullobject.github.io/fkit/api.html)
-- [Spectre.css - A Lightweight, Responsive and Modern CSS Framework](https://picturepan2.github.io/spectre/)
-- [ESLint - Pluggable JavaScript linter](https://eslint.org/)
-- [rollup.js](https://rollupjs.org/guide/en)
+- [Svelte](https://svelte.dev/)
+- [Spectre.css](https://picturepan2.github.io/spectre/) – lightweight, responsive and modern CSS Framework
+- [Fkit](https://github.com/nullobject/fkit) – functional programming toolkit for JavaScript
+- [Kefir](https://kefirjs.github.io/kefir/) – fast and light Reactive Programming library inspired by Bacon.js and RxJS
+- [ESLint](https://eslint.org/) – Pluggable JavaScript linter
+- [Rollup](https://rollupjs.org/guide/en)
 
 ## Licensing
 
