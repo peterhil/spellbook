@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Technical:**
 
+- Use [Ramda] instead of [Fkit] as Fkit seems to be not updated anymore
 - 1d8e9d8 rollup: Use absolute paths to prevent erronous destinations on copy
 - 349cb6c Switch from node-sass to sass
 - 2274c3b Get recent categories using getRecent API method
