@@ -7,17 +7,17 @@
   "license": "MPL-2.0",
   "type": "module",
   "scripts": {
-    "dev": "rm -rf dev/* && rollup -cw",
     "build": "rm -rf dist/* && rollup -c",
+    "dev": "rm -rf dev/* && rollup -cw",
+    "firefox": "pnpm run build && web-ext -s dist",
+    "firefox:build": "pnpm run build && web-ext -s dist build",
+    "firefox:dev": "pnpm run dev && web-ext -s dev run",
+    "firefox:lint": "pnpm run build && web-ext -s dist lint",
     "release": "VERSION=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && cd dist && zip -r9v ../web-ext-artifacts/spellbook-$VERSION-chrome.zip * && cd -",
-    "firefox": "yarn run build && web-ext -s dist",
-    "firefox:build": "yarn run build && web-ext -s dist build",
-    "firefox:dev": "yarn run dev && web-ext -s dev run",
-    "firefox:lint": "yarn run build && web-ext -s dist lint",
-    "version": "echo $npm_package_version",
     "test": "ava",
+    "test:puppeteer": "mocha test/test.js",
     "test:watch": "ava --watch",
-    "test:puppeteer": "mocha test/test.js"
+    "version": "echo $npm_package_version"
   },
   "dependencies": {
     "events": "^3.2.0",
