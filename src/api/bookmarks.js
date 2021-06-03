@@ -47,8 +47,22 @@ export const categorySearch = async (query) => {
 }
 
 export function searchWithBookmark (bookmark) {
+  let query
+
   if (!(bookmark && bookmark.url)) {
     return []
   }
-  return Kefir.fromPromise(bookmarkSearch(bookmark.url))
+
+  if (platform === 'firefox') {
+    // Query object with url would throw a SecurityError and a TypeError
+    // when url has scheme 'about:', so string it is:
+    query = bookmark.url
+  } else {
+    // String query on Chrome replaces special characters with spaces,
+    // so for example 'chrome://extensions' would return all bookmarks
+    // with chrome and extensions... so query object it is:
+    query = { url: bookmark.url }
+  }
+
+  return Kefir.fromPromise(bookmarkSearch(query))
 }
