@@ -5,6 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Kefir from 'kefir'
+
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { emptyBookmark } from '../lib/stores'

@@ -5,8 +5,6 @@ import { __dirname } from './meta.js'
 
 let messages = {}
 
-setLocale('en')
-
 export function setLocale(languageCode) {
   messages = getLocalizedMessages(languageCode)
 }
