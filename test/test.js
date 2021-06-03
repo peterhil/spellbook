@@ -20,6 +20,7 @@ let browser = null
 let page = null
 let url = null
 let language = 'en-US'
+let locale = 'fi'
 
 describe('Popup', async function () {
   // increase timeout for browser to boot and load pages
@@ -35,8 +36,8 @@ describe('Popup', async function () {
 
   beforeEach(async () => {
     page = await browser.newPage()
-    // await setLanguage(page, language)
-    setLocale('fi') // or setLocale(getUserLocale())
+    await setLanguage(page, language)
+    setLocale(locale) // or setLocale(getUserLocale())
   })
 
   afterEach(async () => {
