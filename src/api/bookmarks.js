@@ -50,5 +50,5 @@ export function searchWithBookmark (bookmark) {
   if (!(bookmark && bookmark.url)) {
     return []
   }
-  return Kefir.fromPromise(bookmarkSearch({ url: bookmark.url }))
+  return Kefir.fromPromise(bookmarkSearch(bookmark.url))
 }
