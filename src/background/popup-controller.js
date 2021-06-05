@@ -37,10 +37,10 @@ export const popupController = {
 }
 
 function onCheckBookmarkStatus (bookmarks) {
-  var badgeText = bookmarks.length > 1
+  const badgeText = bookmarks.length > 1
     ? bookmarks.length.toString()
     : ''
-  var icon = bookmarks.length > 0
+  const icon = bookmarks.length > 0
     ? '../asset/spellbook_icon_bookmarked.png'
     : '../asset/spellbook_icon.png'
 
