@@ -1,4 +1,7 @@
 <script>
+  import {
+    getCurrentTab,
+  } from '../api/tabs'
   import { currentTab } from '../lib/stores'
   import { messages } from '../lib/messaging'
   import { onDestroy, onMount } from 'svelte'
@@ -19,23 +22,22 @@
     return false
   }
 
-  function onTabUpdate (tab) {
-    $currentTab = { ...tab }
-  }
-
   function updateBookmarks (bookmarks) {
     console.log('Got bookmarks:', bookmarks)
     bookmarked = bookmarks
   }
 
   onMount(() => {
-    messages.on('currentTabInfo', onTabUpdate)
     messages.on('bookmarkStatus', updateBookmarks)
     messages.on('button:close', onClose)
+
+    getCurrentTab().then(tab => {
+      console.debug('[Popup] current tab:', tab)
+      $currentTab = { ...tab }
+    })
   })
 
   onDestroy(() => {
-    messages.off('currentTabInfo', onTabUpdate)
     messages.off('bookmarkStatus', updateBookmarks)
     messages.off('button:close', onClose)
   })

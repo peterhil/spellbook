@@ -8,20 +8,17 @@ import Kefir from 'kefir'
 
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
-import { emptyBookmark } from '../lib/stores'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
 var bookmarked = []
-var currentTab = emptyBookmark
 
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
       getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
-      getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
       getRecentCategories: (request) => {
         getRecentCategories(5) // TODO Move hardcoded value into options
           .then(result => {
@@ -53,14 +50,7 @@ function onCheckBookmarkStatus (bookmarks) {
   bookmarked = bookmarks
 }
 
-function onCurrentTab (tab) {
-  currentTab = { ...tab }
-}
-
 Kefir.merge([bookmarksModified$, currentTab$])
   .flatMapLatest(searchWithBookmark)
   .spy('Bookmarks found:')
   .observe(onCheckBookmarkStatus, console.error)
-
-currentTab$
-  .observe(onCurrentTab, console.error)

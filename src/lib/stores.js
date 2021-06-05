@@ -8,11 +8,7 @@ export const emptyBookmark = {
 }
 export const emptySelection = { title: null, id: null, parentId: null }
 
-export const currentTab = writable({}, function start (set) {
-  set(emptyBookmark)
-
-  return function stop () {}
-})
+export const currentTab = writable(emptyBookmark)
 
 export const selectionStore = writable({}, () => {
   console.log('got a subscriber')

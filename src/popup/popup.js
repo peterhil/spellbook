@@ -15,7 +15,6 @@ function onLoad (event) {
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
-  port.postMessage({ type: 'getCurrentTab' })
   port.postMessage({ type: 'getRecentCategories' })
   port.postMessage({ type: 'getBookmarkStatus' })
 
