@@ -6,6 +6,7 @@
 
 import { getTree$, bookmarksModified$ } from '../api/streams'
 import { domLoaded$ } from '../lib/events'
+import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 
 var bookmarks = []
@@ -18,12 +19,9 @@ export const directoryController = {
   action: function (message, port) {
     const action = choice(message.type, {
       getAllBookmarks: (message, port) => {
-        port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
+        sendMessage(port, 'allBookmarksTree', bookmarks)
       },
-      default: (message, port) => {
-        console.error('Unhandled message:', message)
-        port.disconnect()
-      }
+      default: unhandledMessage,
     })
 
     action(message, port)
