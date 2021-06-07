@@ -54,7 +54,7 @@ async function checkBookmarkStatus (activeTab) {
   return bookmarks
 }
 
-Kefir.merge([currentTab$])
+currentTab$
   .spy('[popup controller] current tab changed:')
   .observe(checkBookmarkStatus)
 
