@@ -1,7 +1,7 @@
 import path from 'path'
 
 import commonjs from '@rollup/plugin-commonjs'
-import copy from 'rollup-plugin-cpy'
+import copy from 'rollup-plugin-copy'
 import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
 import sass from 'rollup-plugin-sass'
@@ -109,33 +109,29 @@ export default [
     },
     plugins: plugins.concat([
       copy({
-        files: [
-          '_locales/**/*.json',
-          'asset/spellbook_icon*.png',
-          'asset/spellbook-bg.jpg',
-          'background/background.html',
-          'directory/directory.html',
-          'manifest.json',
-          'popup/popup.html',
-        ],
-        dest: outputDir(),
-        options: {
-          cwd: path.join(__dirname, 'src'),
-          parents: true,
-          verbose: true,
-        },
+        targets: [{
+          src: [
+            'src/**/*.html',
+            'src/_locales/**/*.json',
+            'src/asset/spellbook-bg.jpg',
+            'src/asset/spellbook_icon*.png',
+            'src/manifest.json',
+          ],
+          dest: outputDir(),
+        }],
+        flatten: false,
+        verbose: production,
       }),
       copy({
-        files: [
-          'node_modules/spectre.css/dist/spectre-icons.css',
-          'node_modules/spectre.css/dist/spectre.css',
-        ],
-        dest: outputDir('ext'),
-        options: {
-          cwd: '.',
-          parents: false,
-          verbose: true,
-        },
+        targets: [{
+          src: [
+            'node_modules/spectre.css/dist/spectre-icons.css',
+            'node_modules/spectre.css/dist/spectre.css',
+          ],
+          dest: outputDir('ext'),
+        }],
+        flatten: true,
+        verbose: production,
       }),
     ]),
     watch: {
