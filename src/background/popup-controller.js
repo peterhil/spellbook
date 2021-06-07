@@ -16,14 +16,14 @@ import { currentTab$ } from '../api/tabs'
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
-      getRecentCategories: (request) => {
+      getRecentCategories: (message) => {
         getRecentCategories(5) // TODO Move hardcoded value into options
           .then(result => {
             sendMessage(port, 'recentCategories', result)
           })
       },
-      categorySearch: (request) => {
-        categorySearch(request.query)
+      categorySearch: (message) => {
+        categorySearch(message.query)
           .then(result => sendMessage(port, 'searchResults', result))
       },
       default: unhandledMessage,
