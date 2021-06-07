@@ -45,7 +45,7 @@ function setBookmarkStatus (bookmarks, tabId) {
   chrome.browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-async function onCheckBookmarkStatus (activeTab) {
+async function checkBookmarkStatus (activeTab) {
   const bookmarks = await searchWithBookmark(activeTab)
   console.debug('[popup controller] Bookmarks found:', bookmarks)
 
@@ -56,7 +56,7 @@ async function onCheckBookmarkStatus (activeTab) {
 
 Kefir.merge([currentTab$])
   .spy('[popup controller] current tab changed:')
-  .observe(onCheckBookmarkStatus)
+  .observe(checkBookmarkStatus)
 
 bookmarksModified$
   .log('[popup controller] bookmarks modified:')
