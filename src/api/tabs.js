@@ -46,6 +46,10 @@ export function queryTabs (query) {
   )
 }
 
+export function getActiveTabs () {
+  return queryTabs({ active: true })
+}
+
 function getActiveTabOnWindow (windowId) {
   return Kefir.fromPromise(
     queryTabs({ windowId, active: true })

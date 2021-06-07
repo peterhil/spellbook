@@ -4,12 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { map } from 'rambda'
+
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
-import { currentTab$ } from '../api/tabs'
+import { currentTab$, getActiveTabs } from '../api/tabs'
 
 export const popupController = {
   action: function (message, port) {
@@ -32,6 +34,7 @@ export const popupController = {
 }
 
 function setBookmarkStatus (bookmarks, tabId) {
+  // console.debug('[popup controller] setBookmarkStatus:', tabId, bookmarks.length)
   const badgeText = bookmarks.length > 1
     ? bookmarks.length.toString()
     : ''
@@ -45,11 +48,18 @@ function setBookmarkStatus (bookmarks, tabId) {
 
 async function checkBookmarkStatus (activeTab) {
   const bookmarks = await searchWithBookmark(activeTab)
-  console.debug('[popup controller] Bookmarks found:', bookmarks)
+  // console.debug('[popup controller] Bookmarks found:', bookmarks)
 
   setBookmarkStatus(bookmarks, activeTab.id)
 
   return bookmarks
+}
+
+async function checkTabs () {
+  const activeTabs = await getActiveTabs()
+  console.debug('[popup controller] active tabs:', activeTabs)
+
+  return await map(checkBookmarkStatus, activeTabs)
 }
 
 currentTab$
@@ -57,4 +67,5 @@ currentTab$
   .observe(checkBookmarkStatus)
 
 bookmarksModified$
-  .log('[popup controller] bookmarks modified:')
+  .spy('[popup controller] bookmarks modified:')
+  .observe(checkTabs)
