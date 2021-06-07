@@ -1,9 +1,9 @@
 <script>
-  import { get, head, filter, sortBy } from 'fkit'
+  import { prop, head, filter } from 'ramda'
   import { onMount } from 'svelte'
   import Kefir from 'kefir'
   import { messages } from '../lib/messaging'
-  import { filterBy, hasItems, propertyCompare } from '../lib/pure'
+  import { hasItems, sortByTitleCaseInsensitive } from '../lib/pure'
   import { t } from '../lib/translate'
   import { isBookmark, isCategory } from '../api/helpers.js'
   import {
@@ -28,8 +28,8 @@
 
   const categories$ = allBookmarks$
     .map(flattenTree)
-    .map(filterBy(isCategory))
-    .map(sortBy(propertyCompare('title', true)))
+    .map(filter(isCategory))
+    .map(sortByTitleCaseInsensitive)
     .spy('Directory tag: categories$')
 
   const updateCategories = (newCategories) => {
@@ -41,10 +41,10 @@
 
   const selectedBookmarks$ = Kefir.fromPromise(getSubTree(selectedCategory))
     .map(head) // TODO Fix this API madness on the bookmarks adapter!
-    .map(get('children'))
+    .map(prop('children'))
 
   const bookmarks$ = selectedBookmarks$
-    .map(sortBy(propertyCompare('title', true)))
+    .map(sortByTitleCaseInsensitive)
     .spy('Directory tag: bookmarks$')
 
   const updateBookmarks = (newBookmarks) => {

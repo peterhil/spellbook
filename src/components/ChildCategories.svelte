@@ -1,10 +1,10 @@
 <script>
-  import { filter, sortBy } from 'fkit'
+  import { filter } from 'ramda'
   import { onDestroy, onMount } from 'svelte'
   import { getChildren } from '../api/categories'
   import { isCategory } from '../api/helpers'
   import { messages } from '../lib/messaging'
-  import { propertyCompare } from '../lib/pure'
+  import { sortByTitleCaseInsensitive } from '../lib/pure'
   import CategoryList from './CategoryList.svelte'
 
   export let children = []
@@ -12,8 +12,7 @@
   async function updateChildren (category) {
     console.debug('Update children:', category)
     var results = await getChildren(category.id)
-    children = sortBy(
-      propertyCompare('title', true),
+    children = sortByTitleCaseInsensitive(
       filter(isCategory, results)
     )
   }

@@ -6,10 +6,17 @@
 
 // Pure utility functions
 
-import { curry, empty, get, toLower } from 'fkit'
+import {
+  compose,
+  curry,
+  isEmpty,
+  prop,
+  sortBy,
+  toLower
+} from 'ramda'
 
 export const hasItems = array => {
-  return array && !empty(array)
+  return array && !isEmpty(array)
 }
 
 export const isFunction = fn => {
@@ -20,21 +27,4 @@ export const choice = curry((selection, options) => {
   return options[selection] || options.default
 })
 
-export const filterBy = curry((fn, items) => {
-  return items.filter(fn)
-})
-
-//
-// Use propertyComparator with sortBy or similar sort function like this:
-// sortBy(propertyCompare('title'), list)
-// This function is curried.
-//
-export const propertyCompare = (property, caseInsensitive = false) => {
-  const prop = (caseInsensitive === false)
-    ? get(property)
-    : curry((item) => toLower(get(property, item)))
-
-  return function comparator (a, b) {
-    return prop(a) < prop(b) ? -1 : (prop(a) > prop(b) ? 1 : 0)
-  }
-}
+export const sortByTitleCaseInsensitive = sortBy(compose(toLower, prop('title')))

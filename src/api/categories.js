@@ -4,8 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { get, map, nub, pick, take } from 'fkit'
 import zd from 'zepto-detect'
+import { map, pick, prop, take, uniq } from 'ramda'
+
 import { getBookmark, getRecent } from './bookmarks'
 import { choice } from '../lib/pure'
 import { notImplemented$ } from '../lib/reactive'
@@ -34,7 +35,7 @@ export const menuCategoryId = zd.browser.firefox
   : null
 
 export function isBookmarkNode (bookmark) {
-  return !!get(parentIdProperty, bookmark)
+  return !!prop(parentIdProperty, bookmark)
 }
 
 export function isTopLevelCategory (bookmark) {
@@ -74,7 +75,7 @@ export function flattenTree (tree) {
 }
 
 export function getParentId (bookmark) {
-  return get(parentIdProperty, bookmark)
+  return prop(parentIdProperty, bookmark)
 }
 
 export async function getParents (bookmark) {
@@ -109,7 +110,7 @@ export async function getParentPath (bookmark) {
 
 export const getRecentCategories = async (maxCount) => {
   const bookmarks = await getRecent(maxCount * 4) // Latest bookmarks might all be to the same category
-  const ids = take(maxCount, nub(map(getParentId, bookmarks)))
+  const ids = take(maxCount, uniq(map(getParentId, bookmarks)))
   const categories = await getBookmark(ids)
 
   return categories

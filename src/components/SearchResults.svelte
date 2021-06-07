@@ -1,5 +1,5 @@
 <script>
-  import { empty, not } from 'fkit'
+  import { isEmpty, not } from 'ramda'
   import { t } from '../lib/translate'
   import CategoryList from './CategoryList.svelte'
   import MainCategories from './MainCategories.svelte'
@@ -7,7 +7,7 @@
   export let categories = []
 </script>
 
-{#if not(empty(categories)) }
+{#if not(isEmpty(categories)) }
     <ul class="menu" tabindex="-1">
       <CategoryList categories={categories} />
       <li class="divider" data-content={ t('root_categories') }></li>

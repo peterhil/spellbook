@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import EventEmitter from 'events'
-import { curry } from 'fkit'
+import { curry } from 'ramda'
 
 export const messages = new EventEmitter()
 
