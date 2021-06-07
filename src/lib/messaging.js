@@ -37,7 +37,7 @@ export const unhandledMessage = (message) => {
 
 export function messageServer (controllers) {
   return function messageDispatcher (message, port) {
-    console.debug('[background] Message from', port.name + ':', message.type, message)
+    // console.debug('[background] Message from', port.name + ':', message.type, message)
     const controller = controllers[port.name]
 
     if (controller) {

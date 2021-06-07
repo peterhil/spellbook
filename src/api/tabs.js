@@ -86,18 +86,18 @@ const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
   })
 
 export const tabUpdate$ = onUpdated$
-  .spy('tabUpdate$')
+  // .spy('tabUpdate$')
   .filter(event => isCurrent(event.tab))
-  .spy('tabUpdate is current')
+  // .spy('tabUpdate is current')
   .map(prop('tab'))
 
 export const tabActivation$ = onActivated$
-  .spy('tabActivation$')
+  // .spy('tabActivation$')
   .map(prop('tabId'))
   .flatMapLatest(getTab)
 
 export const tabFocusChanged$ = onFocusChanged$
-  .spy('tabFocusChanged$')
+  // .spy('tabFocusChanged$')
   .filter(id => id >= 0)
   .onValue(id => { currentWindowId = id; return id })
   .flatMapLatest(getActiveTabOnWindow)
@@ -117,13 +117,13 @@ export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
     'windowId',
   ]))
   .skipDuplicates(tabsAreEqual)
-  .spy('currentTab$')
+  // .spy('currentTab$')
 
 export const closedTab$ = onRemoved$
-  .log('closedTab$')
+  .spy('closedTab$')
 
 export const closedWindow$ = onRemoved$
   .filter(prop('isWindowClosing'))
   .map(prop('windowId'))
   .skipDuplicates()
-  .log('closedWindow$')
+  // .log('closedWindow$')

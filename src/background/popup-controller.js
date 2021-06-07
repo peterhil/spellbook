@@ -57,15 +57,15 @@ async function checkBookmarkStatus (activeTab) {
 
 async function checkTabs () {
   const activeTabs = await getActiveTabs()
-  console.debug('[popup controller] active tabs:', activeTabs)
+  // console.debug('[popup controller] active tabs:', activeTabs)
 
   return await map(checkBookmarkStatus, activeTabs)
 }
 
 currentTab$
-  .spy('[popup controller] current tab changed:')
+  // .spy('[popup controller] current tab changed:')
   .observe(checkBookmarkStatus)
 
 bookmarksModified$
-  .spy('[popup controller] bookmarks modified:')
+  // .spy('[popup controller] bookmarks modified:')
   .observe(checkTabs)
