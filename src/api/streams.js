@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Kefir from 'kefir'
-import { prop } from 'ramda'
+import { path, prop } from 'ramda'
 import { getTree } from './categories'
 import { browserEvent$ } from './helpers'
 
@@ -14,24 +14,20 @@ export const getTree$ = () => {
 }
 
 export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
-  .map(prop(1))
-  .spy('Bookmark created:')
+  .spy('[api/streams] Bookmark created:')
 
 export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
-  .map(prop(1))
-  .spy('Bookmark removed:')
+  .spy('[api/streams] Bookmark removed:')
 
 export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
-  .map(prop(1))
-  .spy('Bookmark changed:')
+  .spy('[api/streams] Bookmark changed:')
 
 export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
-  .map(prop(1))
-  .spy('Bookmark moved:')
+  .spy('[api/streams] Bookmark moved:')
 
 export const bookmarksModified$ = Kefir.merge([
-  bookmarkChanged$,
-  bookmarkCreated$,
-  bookmarkMoved$,
-  bookmarkRemoved$.map(prop('node')),
+  bookmarkChanged$.map(prop(1)),
+  bookmarkCreated$.map(prop(1)),
+  bookmarkMoved$.map(prop(1)),
+  bookmarkRemoved$.map(path([1, 'node'])),
 ])
