@@ -11,7 +11,7 @@
 
   async function updateChildren (category) {
     console.debug('Update children:', category)
-    var results = await getChildren(category.id)
+    const results = await getChildren(category.id)
     children = sortByTitleCaseInsensitive(
       filter(isCategory, results)
     )

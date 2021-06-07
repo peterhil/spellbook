@@ -9,7 +9,7 @@ import Kefir from 'kefir'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
 
-var currentWindowId = -1
+let currentWindowId = -1
 
 const currentTabQuery = {
   active: true,

@@ -26,7 +26,7 @@ export function fromEventPattern (addHandler, removeHandler) {
 
   return Kefir.stream(emitter => {
     const handler = (...e) => emitter.emit(e.length === 1 ? e[0] : e)
-    var token
+    let token
 
     try {
       token = addHandler(handler)
