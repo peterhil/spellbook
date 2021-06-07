@@ -1,7 +1,9 @@
 module.exports = {
   extends: 'standard',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2019,
+    requireConfigFile: false,
     sourceType: 'module',
     ecmaFeatures: {
       impliedstrict: true,
