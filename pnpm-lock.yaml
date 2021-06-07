@@ -16,7 +16,7 @@ specifiers:
   eslint-plugin-standard: ^4.1.0
   eslint-plugin-svelte3: ~2.7.3
   events: ^3.2.0
-  kefir: ~3.8.7
+  kefir: ~3.8.8
   mocha: ^7.1.2
   puppeteer: ^9.1.1
   ramda: ^0.27.1
@@ -35,7 +35,7 @@ specifiers:
 
 dependencies:
   events: 3.2.0
-  kefir: 3.8.7
+  kefir: 3.8.8
   ramda: 0.27.1
   spectre.css: 0.5.9
   zepto-detect: 0.0.0
@@ -3921,8 +3921,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /kefir/3.8.7:
-    resolution: {integrity: sha512-F1uMGxGi4x88AuPbu0FBJnOMbYgL4op1pzpD3z4RtjUA6A17oQwum23GiEmNkwTLg8Upm+BODV+FJVaSVqBRIw==}
+  /kefir/3.8.8:
+    resolution: {integrity: sha512-xWga7QCZsR2Wjy2vNL3Kq/irT+IwxwItEWycRRlT5yhqHZK2fmEhziP+LzcJBWSTAMranGKtGTQ6lFpyJS3+jA==}
     dev: false
 
   /keyv/3.1.0:
