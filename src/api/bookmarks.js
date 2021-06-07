@@ -63,5 +63,5 @@ export function searchWithBookmark (bookmark) {
     query = { url: bookmark.url }
   }
 
-  return Kefir.fromPromise(bookmarkSearch(query))
+  return bookmarkSearch(query)
 }

@@ -36,7 +36,7 @@ export const popupController = {
   }
 }
 
-function onCheckBookmarkStatus (bookmarks) {
+function setBookmarkStatus (bookmarks, tabId) {
   const badgeText = bookmarks.length > 1
     ? bookmarks.length.toString()
     : ''
@@ -44,13 +44,23 @@ function onCheckBookmarkStatus (bookmarks) {
     ? '../asset/spellbook_icon_bookmarked.png'
     : '../asset/spellbook_icon.png'
 
-  chrome.browserAction.setIcon({ path: icon })
-  chrome.browserAction.setBadgeText({ text: badgeText })
-
-  bookmarked = bookmarks
+  chrome.browserAction.setIcon({ path: icon, tabId })
+  chrome.browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-Kefir.merge([bookmarksModified$, currentTab$])
-  .flatMapLatest(searchWithBookmark)
-  .spy('Bookmarks found:')
-  .observe(onCheckBookmarkStatus, console.error)
+async function onCheckBookmarkStatus (activeTab) {
+  const bookmarks = await searchWithBookmark(activeTab)
+  console.debug('[popup controller] Bookmarks found:', bookmarks)
+
+  setBookmarkStatus(bookmarks, activeTab.id)
+  bookmarked = bookmarks
+
+  return bookmarks
+}
+
+Kefir.merge([currentTab$])
+  .spy('[popup controller] current tab changed:')
+  .observe(onCheckBookmarkStatus)
+
+bookmarksModified$
+  .log('[popup controller] bookmarks modified:')
