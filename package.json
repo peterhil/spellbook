@@ -32,6 +32,7 @@
     "@rollup/plugin-eslint": "^8.0.1",
     "@rollup/plugin-node-resolve": "10",
     "@testing-library/svelte": "^3.0.0",
+    "addons-linter": "^3.6.0",
     "caniuse-lite": "~1.0.30001159",
     "chokidar": "^3.4.3",
     "eslint": "^7.28.0",
@@ -51,7 +52,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.34.0",
     "svelte": "^3.29.7",
-    "web-ext": "^5.0.0"
+    "web-ext": "^6.1.0"
   },
   "browserslist": [
     "Chrome >= 52",
