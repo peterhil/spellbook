@@ -2,10 +2,10 @@ import path from 'path'
 
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-cpy'
+import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
-import { eslint } from 'rollup-plugin-eslint'
 import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH
