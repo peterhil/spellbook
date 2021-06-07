@@ -17,7 +17,7 @@ const updateBookmarks = function (updatedBookmarks) {
 export const directoryController = {
   action: function (message, port) {
     const action = choice(message.type, {
-      getAllBookmarks: (_, port) => {
+      getAllBookmarks: (message, port) => {
         port.postMessage({ type: 'allBookmarksTree', data: bookmarks })
       },
       default: (message, port) => {
@@ -32,10 +32,10 @@ export const directoryController = {
 
 domLoaded$
   .flatMapLatest(getTree$)
-  .spy('All bookmarks as tree')
+  .spy('[directory controller] all bookmarks tree:')
   .observe(updateBookmarks, console.error)
 
 bookmarksModified$
   .flatMapLatest(getTree$)
-  .spy('Bookmarks modified')
+  .spy('[directory controller] bookmarks modified:')
   .observe(updateBookmarks, console.error)
