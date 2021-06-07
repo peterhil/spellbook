@@ -1,13 +1,20 @@
 import assert from 'assert'
 
 import {
+  after,
+  afterEach,
+  before,
+  beforeEach,
+  describe,
+  it,
+} from 'mocha'
+
+import {
   extensionUrl,
-  getExtensionID,
   startBrowserWithExtension,
   setLanguage,
 } from './utils/browser.js'
 import {
-  getUserLocale,
   setLocale,
   t,
 } from './utils/i18n.js'
@@ -19,8 +26,8 @@ const path = 'popup/popup.html' // `default_popup` key of `manifest.json`
 let browser = null
 let page = null
 let url = null
-let language = 'en-US'
-let locale = 'fi'
+const language = 'en-US'
+const locale = 'fi'
 
 describe('Popup', async function () {
   // increase timeout for browser to boot and load pages
@@ -31,7 +38,7 @@ describe('Popup', async function () {
       extensionPath,
       // 100 // slow motion
     )
-    url = await extensionUrl('Spellbook', path, browser)
+    url = await extensionUrl(extensionName, path, browser)
   })
 
   beforeEach(async () => {
@@ -52,7 +59,7 @@ describe('Popup', async function () {
     it('has header', async () => {
       await page.goto(url)
 
-      const headerEl = await page.waitForSelector('h1', {visible: true})
+      const headerEl = await page.waitForSelector('h1', { visible: true })
       const headerText = await headerEl.evaluate(node => node.innerText)
 
       assert.match(headerText, new RegExp(t('add_bookmark')))
@@ -61,8 +68,8 @@ describe('Popup', async function () {
     it('has close button', async () => {
       await page.goto(url)
 
-      const closeButtonEl = await page.waitForSelector('.btn-close', {visible: true})
-      const result = await closeButtonEl.click()
+      const closeButtonEl = await page.waitForSelector('.btn-close', { visible: true })
+      await closeButtonEl.click()
 
       // Closing can't be tested easily:
       // Scripts may close only the windows that were opened by them
@@ -75,13 +82,13 @@ describe('Popup', async function () {
       await page.goto(url)
 
       const searchInput = 'input[name=search]'
-      const searchInputEl = await page.waitForSelector(searchInput, {visible: true})
+      const searchInputEl = await page.waitForSelector(searchInput, { visible: true })
       const placeholderText = await searchInputEl.evaluate(node => node.placeholder)
 
       assert.equal(placeholderText, t('search_placeholder'))
 
       await page.type(searchInput, 'Nonexisting\n')
-      const searchResultsEl = await page.waitForSelector('#dropdown-search.active', {visible: true})
+      const searchResultsEl = await page.waitForSelector('#dropdown-search.active', { visible: true })
       const text = await searchResultsEl.evaluate(el => el.textContent)
 
       assert.equal(text, 'No categories found')
