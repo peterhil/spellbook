@@ -16,7 +16,6 @@ function onLoad (event) {
 
   // Send a message
   port.postMessage({ type: 'getRecentCategories' })
-  port.postMessage({ type: 'getBookmarkStatus' })
 
   messages.on('api', (request) => {
     console.log('API request:', request)

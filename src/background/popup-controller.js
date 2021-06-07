@@ -13,12 +13,9 @@ import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
 import { currentTab$ } from '../api/tabs'
 
-var bookmarked = []
-
 export const popupController = {
   action: function (message, port) {
     const action = choice(message.type, {
-      getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
       getRecentCategories: (request) => {
         getRecentCategories(5) // TODO Move hardcoded value into options
           .then(result => {
@@ -53,7 +50,6 @@ async function onCheckBookmarkStatus (activeTab) {
   console.debug('[popup controller] Bookmarks found:', bookmarks)
 
   setBookmarkStatus(bookmarks, activeTab.id)
-  bookmarked = bookmarks
 
   return bookmarks
 }
