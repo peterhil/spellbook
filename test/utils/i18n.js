@@ -5,9 +5,7 @@ import { __dirname } from './meta.js'
 
 let messages = {}
 
-setLocale('en')
-
-export function setLocale(languageCode) {
+export function setLocale (languageCode) {
   messages = getLocalizedMessages(languageCode)
 }
 
@@ -18,7 +16,7 @@ export function defineBrowserLanguage (language) {
     })
 
     Object.defineProperty(navigator, 'languages', {
-      get: () => [languages]
+      get: () => [language]
     })
   }
 }
@@ -28,12 +26,8 @@ export function getUserLocale () {
 }
 
 function getLocalizedMessages (languageCode) {
-  // try {
-    const messagePath = path.resolve(__dirname, `../../src/_locales/${languageCode}/messages.json`)
-    const rawdata = fs.readFileSync(messagePath)
-  // } catch (err) {
-  //   throw new Error('Localization not found for language:', languageCode)
-  // }
+  const messagePath = path.resolve(__dirname, `../../src/_locales/${languageCode}/messages.json`)
+  const rawdata = fs.readFileSync(messagePath)
 
   try {
     return JSON.parse(rawdata)

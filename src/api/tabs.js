@@ -51,7 +51,12 @@ const getActiveTabOnWindow = (windowId) => {
 }
 
 export const getCurrentTab = () => {
-  return callbackToPromise(withErrorChecking(chrome.tabs.query), currentTabQuery)
+  return callbackToPromise(
+    withErrorChecking(chrome.tabs.query),
+    currentTabQuery
+  ).then(
+    head
+  )
 }
 
 const onActivated$ = browserEvent$(chrome.tabs.onActivated)

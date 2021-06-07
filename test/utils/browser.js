@@ -12,8 +12,8 @@ export async function extensionUrl (extensionName, path, browser) {
 export async function getBackgroundPage (extensionName, browser) {
   const targets = await browser.targets()
   const background = targets.find(target => {
-    return target.type() === 'background_page'
-      && target._targetInfo.title === extensionName
+    return target.type() === 'background_page' &&
+      target._targetInfo.title === extensionName
   })
 
   return background
@@ -31,7 +31,7 @@ export async function startBrowserWithExtension (
   extensionPath,
   slowMo = 0,
   language = 'en-US',
-  headless = false,  // Extensions in Chrome currently only work in non-headless mode
+  headless = false, // Extensions in Chrome currently only work in non-headless mode
 ) {
   return await puppeteer.launch({
     headless,

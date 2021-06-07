@@ -16,8 +16,8 @@ or
 ## Unpacked installation
 
 ```
-yarn install
-yarn run build
+pnpm install
+pnpm run build
 ```
 
 Then add the `dist` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
@@ -25,8 +25,8 @@ Then add the `dist` directory as [unpacked extension to Chrome](https://develope
 ## Development
 
 ```
-yarn install
-yarn run dev
+pnpm install
+pnpm run dev
 ```
 
 Then add the `dev` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.

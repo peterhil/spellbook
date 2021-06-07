@@ -4,7 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { Kefir } from 'kefir'
 import { choice, sortByTitleCaseInsensitive } from '../lib/pure'
 import { notImplemented$ } from '../lib/reactive'
 import * as chromeBookmarks from './chrome/bookmarks'
@@ -46,8 +45,22 @@ export const categorySearch = async (query) => {
 }
 
 export function searchWithBookmark (bookmark) {
+  let query
+
   if (!(bookmark && bookmark.url)) {
     return []
   }
-  return Kefir.fromPromise(bookmarkSearch({ url: bookmark.url }))
+
+  if (platform === 'firefox') {
+    // Query object with url would throw a SecurityError and a TypeError
+    // when url has scheme 'about:', so string it is:
+    query = bookmark.url
+  } else {
+    // String query on Chrome replaces special characters with spaces,
+    // so for example 'chrome://extensions' would return all bookmarks
+    // with chrome and extensions... so query object it is:
+    query = { url: bookmark.url }
+  }
+
+  return bookmarkSearch(query)
 }

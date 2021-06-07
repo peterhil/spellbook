@@ -13,7 +13,7 @@ function onLoad (event) {
   port.onDisconnect.addListener(disconnectionHandler)
 
   // Send a message
-  port.postMessage({ type: 'getAllBookmarks' })
+  // port.postMessage({ type: 'getAllBookmarks' })
 
   // Receive messages
   port.onMessage.addListener(messageBridge)

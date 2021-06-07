@@ -8,34 +8,31 @@
   let form
   let submitButton
 
-  const onSubmit = (event) => {
-    const valid = form.reportValidity()
+  const onSubmit = async (event) => {
+    if (!form.reportValidity()) {
+      return false
+    }
+
     const params = {
       parentId: form.category.value,
       title: form.title.value,
       url: form.url.value,
     }
     const subcategory = form.subcategory && form.subcategory.value
-
-    console.debug('Bookmark form submitted:', params, subcategory)
-
-    if (!valid) { return }
+    console.debug('[BookmarkForm] Submitted:', params, subcategory)
 
     if (subcategory) {
-      createBookmark({
+      const newSubcategory = await createBookmark({
         parentId: params.parentId,
         title: subcategory,
-      }).then((subcategory) => {
-        params.parentId = subcategory.id
-        createBookmark(params).then(() => {
-          bookmark.saved = true
-        })
       })
-    } else {
-      createBookmark(params).then(() => {
-        bookmark.saved = true
-      })
+
+      params.parentId = newSubcategory.id
     }
+
+    const newBookmark = await createBookmark(params)
+    console.debug('[BookmarkForm] Bookmark saved:', newBookmark)
+    bookmark.saved = true
 
     window.close()
     return false
