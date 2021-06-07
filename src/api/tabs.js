@@ -39,24 +39,24 @@ const getTab = (id) => {
   return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
 }
 
-const getActiveTabOnWindow = (windowId) => {
+export function queryTabs (query) {
+  return callbackToPromise(
+    withErrorChecking(chrome.tabs.query),
+    query,
+  )
+}
+
+function getActiveTabOnWindow (windowId) {
   return Kefir.fromPromise(
-    callbackToPromise(
-      withErrorChecking(chrome.tabs.query),
-      { windowId, active: true }
-    )
+    queryTabs({ windowId, active: true })
   )
     .map(head)
     .filter()
 }
 
-export const getCurrentTab = () => {
-  return callbackToPromise(
-    withErrorChecking(chrome.tabs.query),
-    currentTabQuery
-  ).then(
-    head
-  )
+export function getCurrentTab () {
+  return queryTabs(currentTabQuery)
+    .then(head)
 }
 
 const onActivated$ = browserEvent$(chrome.tabs.onActivated)
