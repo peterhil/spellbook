@@ -14,9 +14,8 @@
     "firefox:dev": "pnpm run dev && web-ext -s dev run",
     "firefox:lint": "pnpm run build && web-ext -s dist lint",
     "release": "VERSION=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && cd dist && zip -r9v ../web-ext-artifacts/spellbook-$VERSION-chrome.zip * && cd -",
-    "test": "ava",
+    "test": "mocha test",
     "test:puppeteer": "mocha test/test.js",
-    "test:watch": "ava --watch",
     "version": "echo $npm_package_version"
   },
   "dependencies": {
@@ -32,12 +31,10 @@
     "@rollup/plugin-commonjs": "16",
     "@rollup/plugin-node-resolve": "10",
     "@testing-library/svelte": "^3.0.0",
-    "ava": "^3.12.1",
     "caniuse-lite": "~1.0.30001159",
     "chokidar": "^3.4.3",
     "eslint": "^7.27.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-ava": "^11.0.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "11",
     "eslint-plugin-promise": "^4.2.1",
