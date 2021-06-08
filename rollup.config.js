@@ -4,7 +4,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
 import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
-import sass from 'rollup-plugin-sass'
+import sveltePreprocess from 'svelte-preprocess'
+import styles from 'rollup-plugin-styles'
 import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
 
@@ -27,15 +28,16 @@ const plugins = [
     svelte({
         // enable run-time checks when not in production
         dev: !production,
+        preprocess: sveltePreprocess(),
         // we'll extract any component CSS out into
         // a separate file — better for performance
         css: css => {
             css.write('spellbook.css')
-        }
+        },
     }),
 
-    sass({
-        output: true,
+    styles({
+        mode: 'extract',
     }),
 
     // Convert CommonJS libraries to ES6
@@ -56,34 +58,9 @@ const plugins = [
 
 export default [
     {
-        input: 'src/popup/popup.sass',
-        output: {
-            dir: outputDir('popup'),
-            name: 'popup.sass',
-            format,
-        },
-        plugins: [
-            sass({
-                output: outputDir('popup/popup.css'),
-            })
-        ],
-    },
-    {
-        input: 'src/directory/directory.sass',
-        output: {
-            dir: outputDir('directory'),
-            name: 'directory.sass',
-            format,
-        },
-        plugins: [
-            sass({
-                output: outputDir('directory/directory.css'),
-            })
-        ],
-    },
-    {
         input: { popup: 'src/popup/popup.js' },
         output: {
+            assetFileNames: '[name][extname]',
             dir: outputDir('popup'),
             format,
             sourcemap,
@@ -93,6 +70,7 @@ export default [
     {
         input: { directory: 'src/directory/directory.js' },
         output: {
+            assetFileNames: '[name][extname]',
             dir: outputDir('directory'),
             name: 'directory',
             format,
@@ -103,6 +81,7 @@ export default [
     {
         input: { background: 'src/background/background.js' },
         output: {
+            assetFileNames: '[name][extname]',
             dir: outputDir('background'),
             format,
             sourcemap,

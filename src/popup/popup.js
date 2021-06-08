@@ -6,6 +6,7 @@
 
 import Popup from '../components/Popup.svelte'
 import { disconnectionHandler, messageBridge, messages } from '../lib/messaging'
+import './popup.sass'
 
 function onLoad (event) {
     const port = chrome.runtime.connect({ name: 'popup' })
