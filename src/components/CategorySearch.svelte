@@ -22,7 +22,7 @@
     onMount(() => {
         const categorySearch$ = inputEvent$(search, { minLength: 2 })
         const emptySearch$ = inputEvent$(search, { minLength: 0 })
-              .filter(search => search.length <= 1)
+            .filter(search => search.length <= 1)
 
         categorySearch$.observe(searchCategories, console.error)
         emptySearch$.observe(clearSearch, console.error)
