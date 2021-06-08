@@ -16,8 +16,8 @@ or
 ## Unpacked installation
 
 ```
-yarn install
-yarn run build
+pnpm install
+pnpm run build
 ```
 
 Then add the `dist` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
@@ -25,25 +25,27 @@ Then add the `dist` directory as [unpacked extension to Chrome](https://develope
 ## Development
 
 ```
-yarn install
-yarn run dev
+pnpm install
+pnpm run dev
 ```
 
 Then add the `dev` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
 
 ## Technology stack
 
-Currently I am using libraries that are well written and most importantly
+I strive to use libraries that are well written and most importantly
 extremely small in size.
 
 For now the stack is:
 
-- [Svelte • Cybernetically enhanced web apps](https://svelte.dev/)
-- [Kefir.js — fast and light Reactive Programming library for JavaScript inspired by Bacon.js and RxJS](https://kefirjs.github.io/kefir/)
-- [nullobject/fkit: A functional programming toolkit for JavaScript](https://github.com/nullobject/fkit) – [FKit API documentation](https://nullobject.github.io/fkit/api.html)
-- [Spectre.css - A Lightweight, Responsive and Modern CSS Framework](https://picturepan2.github.io/spectre/)
-- [ESLint - Pluggable JavaScript linter](https://eslint.org/)
-- [rollup.js](https://rollupjs.org/guide/en)
+- [Svelte](https://svelte.dev/)
+- [Spectre.css](https://picturepan2.github.io/spectre/) – lightweight, responsive and modern CSS Framework
+- [Rambda](https://selfrefactor.github.io/rambda/#/)
+  ([differences](https://selfrefactor.github.io/rambda/#/?id=differences-between-rambda-and-ramda))
+  to [Ramda](https://ramdajs.com/docs/)
+- [Kefir](https://kefirjs.github.io/kefir/) – fast and light Reactive Programming library inspired by Bacon.js and RxJS
+- [ESLint](https://eslint.org/) – Pluggable JavaScript linter
+- [Rollup](https://rollupjs.org/guide/en)
 
 ## Licensing
 

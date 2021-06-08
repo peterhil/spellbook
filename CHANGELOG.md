@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] – 2021-05 Bug fixes and stability
+
+### Fixed
+
+- 7809216 Fix popup header to show when a bookmark is saved
+- bc1243b Fix using subcategory close button with keyboard
+- 022ee1f Fix close button on popup
+
+### Added
+
+- 913bbb3 Show bookmark count on bookmark form
+- 9df8570 Show badge when several bookmarks exist
+
+### Changed
+
+- 2e9edb6 Change the minimum length of search back to two letters
+
+**Technical:**
+
+- Use [Ramda] instead of [Fkit] as Fkit seems to be not updated anymore
+- 1d8e9d8 rollup: Use absolute paths to prevent erronous destinations on copy
+- 349cb6c Switch from node-sass to sass
+- 2274c3b Get recent categories using getRecent API method
+- 36cedaa Simplify message handling with generic messageBridge
+- 702dd06 Start using pnpm instead of yarn
+- 01e2b64 Replace @riotjs/observable with browserify/events
+
 # Released versions:
 
 ## [0.4.1] – 2019-12-22 – Fix bookmark paths
@@ -209,8 +236,8 @@ Use a much slimmer tech stack. The package size dropped to about 300 Kb from sev
 
 - Mozilla Public License version 2.0
 - Use [Riot.js] instead of [Vue.js]
-- Use [Kefir.js](https://kefirjs.github.io/kefir/) instead of [RxJS]
-- Use [Fkit](https://nullobject.github.io/fkit/) instead of [Ramda]
+- Use [Kefir.js] instead of [RxJS]
+- Use [Fkit] instead of [Ramda]
 - Use [Spectre.css] instead of [Semantic UI]
 - Use [Bublé](https://buble.surge.sh/guide/) instead of Babel for ES2015 transpiling
 - Use [Rollup] instead of [Webpack]
@@ -251,6 +278,7 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 [Ava]: https://github.com/avajs/ava
 [Bublé]: https://buble.surge.sh/guide/
 [Element UI]: https://element.eleme.io/#/en-US
+[Fkit]: https://github.com/nullobject/fkit
 [Kefir.js]: https://kefirjs.github.io/kefir/
 [Ramda]: https://ramdajs.com/
 [Riot.js]: https://riot.js.org/

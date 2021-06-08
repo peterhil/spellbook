@@ -1,8 +1,13 @@
-*~
-.#*
-.DS_Store
 dev/
 dist/
 node_modules/
 yarn-error.log
 web-ext-artifacts/
+
+# Mac
+.DS_Store
+
+# Temp files
+*~
+.#*
+**/#*#

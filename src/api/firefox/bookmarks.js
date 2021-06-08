@@ -6,24 +6,30 @@
 
 /* global browser */
 
-import Kefir from 'kefir'
-
 export function bookmarkSearch (queryObject) {
-  return Kefir.fromPromise(browser.bookmarks.search(queryObject))
+    return browser.bookmarks.search(queryObject)
+}
+
+export const create = (bookmark) => {
+    return browser.bookmarks.create(bookmark)
 }
 
 export const get = (...args) => {
-  return browser.bookmarks.get(...args)
+    return browser.bookmarks.get(...args)
 }
 
 export const getTree = () => {
-  return browser.bookmarks.getTree()
+    return browser.bookmarks.getTree()
 }
 
 export const getSubTree = (id) => {
-  return browser.bookmarks.getSubTree(id)
+    return browser.bookmarks.getSubTree(id)
 }
 
 export const getChildren = (id) => {
-  return browser.bookmarks.getChildren(id)
+    return browser.bookmarks.getChildren(id)
+}
+
+export const getRecent = (count) => {
+    return browser.bookmarks.getRecent(count)
 }
