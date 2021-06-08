@@ -43,9 +43,9 @@ const plugins = [
         browser: true, // default: false
         modulesOnly: false, // default: false
         dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
-        customResolveOptions: {
-            moduleDirectory: './node_modules/',
-        },
+        moduleDirectories: [
+            './node_modules/'
+        ],
         preferBuiltins: false,
     }),
     commonjs(),
