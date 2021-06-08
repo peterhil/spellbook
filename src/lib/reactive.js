@@ -8,6 +8,8 @@
 
 import Kefir from 'kefir'
 
+const defaults = { minLength: 2, debounceTime: 250 }
+
 export function callbackToPromise (fn, ...args) {
     return new Promise((resolve, reject) => {
         try {
@@ -18,7 +20,7 @@ export function callbackToPromise (fn, ...args) {
     })
 }
 
-export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = { minLength: 2, debounceTime: 250 }) {
+export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = defaults) {
     return Kefir
         .fromEvents(element, 'input', event => event.target.value)
         .filter(query => query.length >= minLength)

@@ -1,4 +1,5 @@
 <script>
+    import { length } from 'rambda'
     import { inputEvent$ } from '../lib/reactive'
     import { messages } from '../lib/messaging'
     import { onMount } from 'svelte'
@@ -9,23 +10,29 @@
 
     let search = ''
 
-    const searchCategories = (query) => {
+    function searchCategories (query) {
         messages.emit('api', { type: 'categorySearch', query })
     }
 
-    const clearSearch = () => {
+    function clearSearch () {
         value = ''
         messages.emit('search:clear')
         search.focus()
     }
 
-    onMount(() => {
-        const categorySearch$ = inputEvent$(search, { minLength: 2 })
-        const emptySearch$ = inputEvent$(search, { minLength: 0 })
-              .filter(search => search.length <= 1)
+    function onInput (query) {
+        if (length(query) >= 2) {
+            searchCategories(query)
+        } else {
+            clearSearch()
+        }
+    }
 
-        categorySearch$.observe(searchCategories, console.error)
-        emptySearch$.observe(clearSearch, console.error)
+    onMount(() => {
+        const options = { minLength: 0, debounceTime: 250 }
+        const categorySearch$ = inputEvent$(search, options)
+
+        categorySearch$.observe(onInput, console.error)
 
         search.focus()
     })
