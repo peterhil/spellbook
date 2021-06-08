@@ -58,10 +58,10 @@ const plugins = [
 
 export default [
     {
-        input: 'src/popup/popup.sass',
+        input: 'src/popup/popup.scss',
         output: {
             dir: outputDir('popup'),
-            name: 'popup.sass',
+            name: 'popup.scss',
             format,
         },
         plugins: [
@@ -71,10 +71,10 @@ export default [
         ],
     },
     {
-        input: 'src/directory/directory.sass',
+        input: 'src/directory/directory.scss',
         output: {
             dir: outputDir('directory'),
-            name: 'directory.sass',
+            name: 'directory.scss',
             format,
         },
         plugins: [
