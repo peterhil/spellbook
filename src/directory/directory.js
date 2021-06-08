@@ -6,7 +6,6 @@
 
 import Directory from '../components/Directory.svelte'
 import { disconnectionHandler, messageBridge } from '../lib/messaging'
-import './directory.sass'
 
 function onLoad (event) {
     const port = chrome.runtime.connect({ name: 'directory' })

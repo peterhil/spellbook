@@ -5,7 +5,7 @@ import copy from 'rollup-plugin-copy'
 import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
 import sveltePreprocess from 'svelte-preprocess'
-import styles from 'rollup-plugin-styles'
+import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
 
@@ -36,8 +36,8 @@ const plugins = [
         },
     }),
 
-    styles({
-        mode: 'extract',
+    sass({
+        output: true,
     }),
 
     // Convert CommonJS libraries to ES6
@@ -58,9 +58,34 @@ const plugins = [
 
 export default [
     {
+        input: 'src/popup/popup.sass',
+        output: {
+            dir: outputDir('popup'),
+            name: 'popup.sass',
+            format,
+        },
+        plugins: [
+            sass({
+                output: outputDir('popup/popup.css'),
+            })
+        ],
+    },
+    {
+        input: 'src/directory/directory.sass',
+        output: {
+            dir: outputDir('directory'),
+            name: 'directory.sass',
+            format,
+        },
+        plugins: [
+            sass({
+                output: outputDir('directory/directory.css'),
+            })
+        ],
+    },
+    {
         input: { popup: 'src/popup/popup.js' },
         output: {
-            assetFileNames: '[name][extname]',
             dir: outputDir('popup'),
             format,
             sourcemap,
@@ -70,7 +95,6 @@ export default [
     {
         input: { directory: 'src/directory/directory.js' },
         output: {
-            assetFileNames: '[name][extname]',
             dir: outputDir('directory'),
             name: 'directory',
             format,
@@ -81,7 +105,6 @@ export default [
     {
         input: { background: 'src/background/background.js' },
         output: {
-            assetFileNames: '[name][extname]',
             dir: outputDir('background'),
             format,
             sourcemap,
