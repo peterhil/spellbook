@@ -10,7 +10,7 @@ import { curry } from 'rambda'
 export const messages = new EventEmitter()
 
 export const messageBridge = function (message) {
-    console.debug('[message] %s: %o', message.type, message.data)
+    console.debug('[message] %s', message.type)
     messages.emit(message.type, message.data)
 }
 

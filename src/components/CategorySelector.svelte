@@ -29,7 +29,7 @@
     $: isSearchActive = isVisible('search') && lastSearch
     $: showSubcategory = isVisible('subcategory')
     $: hasSelection = () => {
-        console.debug('hasSelection:', selection)
+        // console.debug('hasSelection:', selection)
         return prop('id', selection)
     }
 
@@ -44,7 +44,7 @@
     }
 
     const updateCategories = (results) => {
-        console.debug('updateCategories:', results)
+        console.debug('[CategorySelector] updateCategories:', results.length)
         searchResults = results
         lastSearch = search.value
         $showDropdown = 'search'
@@ -52,7 +52,7 @@
 
     export const onSelection = (value) => {
         selection = value
-        console.debug('Category selection:', value, selection)
+        console.debug('[CategorySelector] selection:', value, selection)
         messages.emit('categorySelection', selection)
         $showDropdown = null
         return false
