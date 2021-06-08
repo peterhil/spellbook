@@ -15,7 +15,7 @@
     }
 
     function clearSearch () {
-        value = ''
+        // value = ''
         messages.emit('search:clear')
         search.focus()
     }
