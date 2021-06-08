@@ -11,56 +11,56 @@ import * as firefoxBookmarks from './firefox/bookmarks'
 import { isCategory, platform } from './helpers'
 
 export const createBookmark = choice(platform, {
-  chrome: chromeBookmarks.create,
-  firefox: firefoxBookmarks.create,
-  default: notImplemented$,
+    chrome: chromeBookmarks.create,
+    firefox: firefoxBookmarks.create,
+    default: notImplemented$,
 })
 
 export const getBookmark = choice(platform, {
-  chrome: chromeBookmarks.get,
-  firefox: firefoxBookmarks.get,
-  default: notImplemented$,
+    chrome: chromeBookmarks.get,
+    firefox: firefoxBookmarks.get,
+    default: notImplemented$,
 })
 
 export const getRecent = choice(platform, {
-  chrome: chromeBookmarks.getRecent,
-  firefox: firefoxBookmarks.getRecent,
-  default: notImplemented$,
+    chrome: chromeBookmarks.getRecent,
+    firefox: firefoxBookmarks.getRecent,
+    default: notImplemented$,
 })
 
 export const bookmarkSearch = choice(platform, {
-  chrome: chromeBookmarks.bookmarkSearch,
-  firefox: firefoxBookmarks.bookmarkSearch,
-  default: notImplemented$,
+    chrome: chromeBookmarks.bookmarkSearch,
+    firefox: firefoxBookmarks.bookmarkSearch,
+    default: notImplemented$,
 })
 
 export const categorySearch = async (query) => {
-  const bookmarks = await bookmarkSearch(query)
-  let categories = bookmarks.filter(isCategory)
+    const bookmarks = await bookmarkSearch(query)
+    let categories = bookmarks.filter(isCategory)
 
-  console.log('[bookmarks api] categorySearch:', query)
-  categories = sortByTitleCaseInsensitive(categories)
+    console.log('[bookmarks api] categorySearch:', query)
+    categories = sortByTitleCaseInsensitive(categories)
 
-  return categories
+    return categories
 }
 
 export function searchWithBookmark (bookmark) {
-  let query
+    let query
 
-  if (!(bookmark && bookmark.url)) {
-    return []
-  }
+    if (!(bookmark && bookmark.url)) {
+        return []
+    }
 
-  if (platform === 'firefox') {
-    // Query object with url would throw a SecurityError and a TypeError
-    // when url has scheme 'about:', so string it is:
-    query = bookmark.url
-  } else {
-    // String query on Chrome replaces special characters with spaces,
-    // so for example 'chrome://extensions' would return all bookmarks
-    // with chrome and extensions... so query object it is:
-    query = { url: bookmark.url }
-  }
+    if (platform === 'firefox') {
+        // Query object with url would throw a SecurityError and a TypeError
+        // when url has scheme 'about:', so string it is:
+        query = bookmark.url
+    } else {
+        // String query on Chrome replaces special characters with spaces,
+        // so for example 'chrome://extensions' would return all bookmarks
+        // with chrome and extensions... so query object it is:
+        query = { url: bookmark.url }
+    }
 
-  return bookmarkSearch(query)
+    return bookmarkSearch(query)
 }

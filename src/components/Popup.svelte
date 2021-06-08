@@ -1,60 +1,60 @@
 <script>
-  import {
-    getCurrentTab,
-  } from '../api/tabs'
-  import { currentTab } from '../lib/stores'
-  import { messages } from '../lib/messaging'
-  import { onDestroy, onMount } from 'svelte'
-  import { t } from '../lib/translate'
-  import BookmarkForm from '../components/BookmarkForm.svelte'
-  import CloseButton from '../components/CloseButton.svelte'
+    import {
+        getCurrentTab,
+    } from '../api/tabs'
+    import { currentTab } from '../lib/stores'
+    import { messages } from '../lib/messaging'
+    import { onDestroy, onMount } from 'svelte'
+    import { t } from '../lib/translate'
+    import BookmarkForm from '../components/BookmarkForm.svelte'
+    import CloseButton from '../components/CloseButton.svelte'
 
-  let bookmarked = []
-  $: bookmarkCount = bookmarked.length
-  $: popupHeader = (
-    bookmarkCount >= 1
-      ? t('saved_bookmark')
-      : t('add_bookmark')
-  )
+    let bookmarked = []
+    $: bookmarkCount = bookmarked.length
+    $: popupHeader = (
+        bookmarkCount >= 1
+            ? t('saved_bookmark')
+            : t('add_bookmark')
+    )
 
-  function onClose () {
-    window.close()
-    return false
-  }
+    function onClose () {
+        window.close()
+        return false
+    }
 
-  function updateBookmarks (bookmarks) {
-    console.log('Got bookmarks:', bookmarks)
-    bookmarked = bookmarks
-  }
+    function updateBookmarks (bookmarks) {
+        console.log('Got bookmarks:', bookmarks)
+        bookmarked = bookmarks
+    }
 
-  onMount(() => {
-    messages.on('bookmarkStatus', updateBookmarks)
-    messages.on('button:close', onClose)
+    onMount(() => {
+        messages.on('bookmarkStatus', updateBookmarks)
+        messages.on('button:close', onClose)
 
-    getCurrentTab().then(tab => {
-      console.debug('[Popup] current tab:', tab)
-      $currentTab = { ...tab }
+        getCurrentTab().then(tab => {
+            console.debug('[Popup] current tab:', tab)
+            $currentTab = { ...tab }
+        })
     })
-  })
 
-  onDestroy(() => {
-    messages.off('bookmarkStatus', updateBookmarks)
-    messages.off('button:close', onClose)
-  })
+    onDestroy(() => {
+        messages.off('bookmarkStatus', updateBookmarks)
+        messages.off('button:close', onClose)
+    })
 </script>
 
 <style>
-  h1 {
-    color: #333;
-    margin-top: 0.25rem;
-  }
+    h1 {
+        color: #333;
+        margin-top: 0.25rem;
+    }
 </style>
 
 <CloseButton />
 
 <h1>
-  { popupHeader }
-  <span class="bookmark-count">({ bookmarkCount })</span>
+    { popupHeader }
+    <span class="bookmark-count">({ bookmarkCount })</span>
 </h1>
 
 <BookmarkForm bookmark={$currentTab} />

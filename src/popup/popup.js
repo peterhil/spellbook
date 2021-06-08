@@ -8,27 +8,27 @@ import Popup from '../components/Popup.svelte'
 import { disconnectionHandler, messageBridge, messages } from '../lib/messaging'
 
 function onLoad (event) {
-  const port = chrome.runtime.connect({ name: 'popup' })
+    const port = chrome.runtime.connect({ name: 'popup' })
 
-  chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
 
-  port.onDisconnect.addListener(disconnectionHandler)
+    port.onDisconnect.addListener(disconnectionHandler)
 
-  // Send a message
-  port.postMessage({ type: 'getRecentCategories' })
+    // Send a message
+    port.postMessage({ type: 'getRecentCategories' })
 
-  messages.on('api', (request) => {
-    console.log('API request:', request)
-    port.postMessage(request)
-  })
+    messages.on('api', (request) => {
+        console.log('API request:', request)
+        port.postMessage(request)
+    })
 
-  // Receive messages
-  port.onMessage.addListener(messageBridge)
+    // Receive messages
+    port.onMessage.addListener(messageBridge)
 
-  new Popup({ // eslint-disable-line no-new
-    target: document.getElementById('popup'),
-    props: {},
-  })
+    new Popup({ // eslint-disable-line no-new
+        target: document.getElementById('popup'),
+        props: {},
+    })
 }
 
 document.addEventListener('DOMContentLoaded', onLoad)

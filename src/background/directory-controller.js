@@ -17,18 +17,18 @@ import { choice } from '../lib/pure'
 // }
 
 export const directoryController = {
-  action: function (message, port) {
-    const action = choice(message.type, {
-      getAllBookmarks: (message, port) => {
-        getTree().then(bookmarks => {
-          sendMessage(port, 'allBookmarksTree', bookmarks)
+    action: function (message, port) {
+        const action = choice(message.type, {
+            getAllBookmarks: (message, port) => {
+                getTree().then(bookmarks => {
+                    sendMessage(port, 'allBookmarksTree', bookmarks)
+                })
+            },
+            default: unhandledMessage,
         })
-      },
-      default: unhandledMessage,
-    })
 
-    action(message, port)
-  }
+        action(message, port)
+    }
 }
 
 // domLoaded$

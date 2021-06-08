@@ -20,25 +20,25 @@ import { isFunction } from './pure'
 // https://github.com/ReactiveX/rxjs/blob/6.3.2/src/internal/observable/fromEventPattern.ts#L135-L163
 //
 export function fromEventPattern (addHandler, removeHandler) {
-  if (!isFunction(addHandler)) {
-    throw new Error('The addHandler argument must be a function.')
-  }
-
-  return Kefir.stream(emitter => {
-    const handler = (...e) => emitter.emit(e.length === 1 ? e[0] : e)
-    let token
-
-    try {
-      token = addHandler(handler)
-    } catch (err) {
-      emitter.error(err)
-      return
+    if (!isFunction(addHandler)) {
+        throw new Error('The addHandler argument must be a function.')
     }
 
-    if (!isFunction(removeHandler)) {
-      return
-    }
+    return Kefir.stream(emitter => {
+        const handler = (...e) => emitter.emit(e.length === 1 ? e[0] : e)
+        let token
 
-    return () => removeHandler(handler, token)
-  })
+        try {
+            token = addHandler(handler)
+        } catch (err) {
+            emitter.error(err)
+            return
+        }
+
+        if (!isFunction(removeHandler)) {
+            return
+        }
+
+        return () => removeHandler(handler, token)
+    })
 }

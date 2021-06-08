@@ -8,20 +8,20 @@ import Directory from '../components/Directory.svelte'
 import { disconnectionHandler, messageBridge } from '../lib/messaging'
 
 function onLoad (event) {
-  const port = chrome.runtime.connect({ name: 'directory' })
+    const port = chrome.runtime.connect({ name: 'directory' })
 
-  port.onDisconnect.addListener(disconnectionHandler)
+    port.onDisconnect.addListener(disconnectionHandler)
 
-  // Send a message
-  // port.postMessage({ type: 'getAllBookmarks' })
+    // Send a message
+    // port.postMessage({ type: 'getAllBookmarks' })
 
-  // Receive messages
-  port.onMessage.addListener(messageBridge)
+    // Receive messages
+    port.onMessage.addListener(messageBridge)
 
-  new Directory({ // eslint-disable-line no-new
-    target: document.getElementById('directory'),
-    props: {},
-  })
+    new Directory({ // eslint-disable-line no-new
+        target: document.getElementById('directory'),
+        props: {},
+    })
 }
 
 document.addEventListener('DOMContentLoaded', onLoad)
