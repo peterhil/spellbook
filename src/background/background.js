@@ -9,14 +9,14 @@ import { directoryController } from './directory-controller'
 import { popupController } from './popup-controller'
 
 const controllers = {
-  directory: directoryController,
-  popup: popupController,
+    directory: directoryController,
+    popup: popupController,
 }
 
 function onConnect (port) {
-  console.debug('[background] Connected with:', port.name, port.sender)
-  port.onMessage.addListener(messageServer(controllers))
-  port.onDisconnect.addListener(disconnectionHandler)
+    console.debug('[background] Connected with:', port.name, port.sender)
+    port.onMessage.addListener(messageServer(controllers))
+    port.onDisconnect.addListener(disconnectionHandler)
 }
 
 chrome.runtime.onConnect.addListener(onConnect)

@@ -1,8 +1,8 @@
 <script>
-  import Button from '../components/Button.svelte'
-  import Icon from '../components/Icon.svelte'
+    import Button from '../components/Button.svelte'
+    import Icon from '../components/Icon.svelte'
 </script>
 
 <Button name="close" kind="action" classes="btn-close btn-sm">
-  <Icon icon="cross" />
+    <Icon icon="cross" />
 </Button>

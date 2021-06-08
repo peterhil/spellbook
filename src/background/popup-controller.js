@@ -4,62 +4,68 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Kefir from 'kefir'
+import { map } from 'rambda'
+
 import { sendMessage, unhandledMessage } from '../lib/messaging'
 import { choice } from '../lib/pure'
-import { emptyBookmark } from '../lib/stores'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
-import { currentTab$ } from '../api/tabs'
-
-var bookmarked = []
-var currentTab = emptyBookmark
+import { currentTab$, getActiveTabs } from '../api/tabs'
 
 export const popupController = {
-  action: function (message, port) {
-    const action = choice(message.type, {
-      getBookmarkStatus: () => sendMessage(port, 'bookmarkStatus', bookmarked),
-      getCurrentTab: () => sendMessage(port, 'currentTabInfo', currentTab),
-      getRecentCategories: (request) => {
-        getRecentCategories(5) // TODO Move hardcoded value into options
-          .then(result => {
-            sendMessage(port, 'recentCategories', result)
-          })
-      },
-      categorySearch: (request) => {
-        categorySearch(request.query)
-          .then(result => sendMessage(port, 'searchResults', result))
-      },
-      default: unhandledMessage,
-    })
+    action: function (message, port) {
+        const action = choice(message.type, {
+            getRecentCategories: (message) => {
+                getRecentCategories(5) // TODO Move hardcoded value into options
+                    .then(result => {
+                        sendMessage(port, 'recentCategories', result)
+                    })
+            },
+            categorySearch: (message) => {
+                categorySearch(message.query)
+                    .then(result => sendMessage(port, 'searchResults', result))
+            },
+            default: unhandledMessage,
+        })
 
-    action(message)
-  }
+        action(message)
+    }
 }
 
-function onCheckBookmarkStatus (bookmarks) {
-  var badgeText = bookmarks.length > 1
-    ? bookmarks.length.toString()
-    : ''
-  var icon = bookmarks.length > 0
-    ? '../asset/spellbook_icon_bookmarked.png'
-    : '../asset/spellbook_icon.png'
+function setBookmarkStatus (bookmarks, tabId) {
+    // console.debug('[popup controller] setBookmarkStatus:', tabId, bookmarks.length)
+    const badgeText = bookmarks.length > 1
+        ? bookmarks.length.toString()
+        : ''
+    const icon = bookmarks.length > 0
+        ? '../asset/spellbook_icon_bookmarked.png'
+        : '../asset/spellbook_icon.png'
 
-  chrome.browserAction.setIcon({ path: icon })
-  chrome.browserAction.setBadgeText({ text: badgeText })
-
-  bookmarked = bookmarks
+    chrome.browserAction.setIcon({ path: icon, tabId })
+    chrome.browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-function onCurrentTab (tab) {
-  currentTab = { ...tab }
+async function checkBookmarkStatus (activeTab) {
+    const bookmarks = await searchWithBookmark(activeTab)
+    // console.debug('[popup controller] Bookmarks found:', bookmarks)
+
+    setBookmarkStatus(bookmarks, activeTab.id)
+
+    return bookmarks
 }
 
-Kefir.merge([bookmarksModified$, currentTab$])
-  .flatMapLatest(searchWithBookmark)
-  .spy('Bookmarks found:')
-  .observe(onCheckBookmarkStatus, console.error)
+async function checkTabs () {
+    const activeTabs = await getActiveTabs()
+    // console.debug('[popup controller] active tabs:', activeTabs)
+
+    return await map(checkBookmarkStatus, activeTabs)
+}
 
 currentTab$
-  .observe(onCurrentTab, console.error)
+    // .spy('[popup controller] current tab changed:')
+    .observe(checkBookmarkStatus)
+
+bookmarksModified$
+    // .spy('[popup controller] bookmarks modified:')
+    .observe(checkTabs)

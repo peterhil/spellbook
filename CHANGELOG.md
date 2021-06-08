@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Technical:**
 
+- Use [Ramda] instead of [Fkit] as Fkit seems to be not updated anymore
 - 1d8e9d8 rollup: Use absolute paths to prevent erronous destinations on copy
 - 349cb6c Switch from node-sass to sass
 - 2274c3b Get recent categories using getRecent API method
@@ -235,8 +236,8 @@ Use a much slimmer tech stack. The package size dropped to about 300 Kb from sev
 
 - Mozilla Public License version 2.0
 - Use [Riot.js] instead of [Vue.js]
-- Use [Kefir.js](https://kefirjs.github.io/kefir/) instead of [RxJS]
-- Use [Fkit](https://nullobject.github.io/fkit/) instead of [Ramda]
+- Use [Kefir.js] instead of [RxJS]
+- Use [Fkit] instead of [Ramda]
 - Use [Spectre.css] instead of [Semantic UI]
 - Use [Bublé](https://buble.surge.sh/guide/) instead of Babel for ES2015 transpiling
 - Use [Rollup] instead of [Webpack]
@@ -277,6 +278,7 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 [Ava]: https://github.com/avajs/ava
 [Bublé]: https://buble.surge.sh/guide/
 [Element UI]: https://element.eleme.io/#/en-US
+[Fkit]: https://github.com/nullobject/fkit
 [Kefir.js]: https://kefirjs.github.io/kefir/
 [Ramda]: https://ramdajs.com/
 [Riot.js]: https://riot.js.org/
