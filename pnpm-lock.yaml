@@ -15,8 +15,7 @@ specifiers:
   eslint-plugin-import: ^2.23.4
   eslint-plugin-node: ^11.1.0
   eslint-plugin-promise: ^5.1.0
-  eslint-plugin-standard: ^4.1.0
-  eslint-plugin-svelte3: ~2.7.3
+  eslint-plugin-svelte3: ^3.2.0
   events: ^3.3.0
   kefir: ~3.8.8
   mocha: ^8.4.0
@@ -56,8 +55,7 @@ devDependencies:
   eslint-plugin-import: 2.23.4_eslint@7.28.0
   eslint-plugin-node: 11.1.0_eslint@7.28.0
   eslint-plugin-promise: 5.1.0_eslint@7.28.0
-  eslint-plugin-standard: 4.1.0_eslint@7.28.0
-  eslint-plugin-svelte3: 2.7.3_eslint@7.28.0+svelte@3.38.2
+  eslint-plugin-svelte3: 3.2.0_eslint@7.28.0+svelte@3.38.2
   mocha: 8.4.0
   puppeteer: 9.1.1
   require-from-string: 2.0.2
@@ -1985,16 +1983,9 @@ packages:
       eslint: 7.28.0
     dev: true
 
-  /eslint-plugin-standard/4.1.0_eslint@7.28.0:
-    resolution: {integrity: sha512-ZL7+QRixjTR6/528YNGyDotyffm5OQst/sGxKDwGb9Uqs4In5Egi4+jbobhqJoyoCM6/7v/1A5fhQ7ScMtDjaQ==}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 7.28.0
-    dev: true
-
-  /eslint-plugin-svelte3/2.7.3_eslint@7.28.0+svelte@3.38.2:
-    resolution: {integrity: sha512-p6HhxyICX9x/x+8WSy6AVk2bmv9ayoznoTSyCvK47th/k/07ksuJixMwbGX9qxJVAmPBaYMjEIMSEZtJHPIN7w==}
+  /eslint-plugin-svelte3/3.2.0_eslint@7.28.0+svelte@3.38.2:
+    resolution: {integrity: sha512-qdWB1QN21dEozsJFdR8XlEhMnsS6aKHjsXWuNmchYwxoet5I6QdCr1Xcq62++IzRBMCNCeH4waXqSOAdqrZzgA==}
+    engines: {node: '>=10'}
     peerDependencies:
       eslint: '>=6.0.0'
       svelte: ^3.2.0
