@@ -11,6 +11,6 @@ export default {
         'package.json',
     ],
     require: [
-        './test/_setup.js',
+        './test/_setup.cjs',
     ],
 }
