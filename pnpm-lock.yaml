@@ -6,10 +6,10 @@ specifiers:
   '@rollup/plugin-commonjs': '16'
   '@rollup/plugin-eslint': ^8.0.1
   '@rollup/plugin-node-resolve': '10'
-  '@testing-library/svelte': ^3.0.0
+  '@testing-library/svelte': ^3.0.3
   addons-linter: ^3.6.0
-  caniuse-lite: ~1.0.30001159
-  chokidar: ^3.4.3
+  caniuse-lite: ~1.0.30001235
+  chokidar: ^3.5.1
   eslint: ^7.28.0
   eslint-config-standard: ^16.0.3
   eslint-plugin-import: ^2.23.4
@@ -17,7 +17,7 @@ specifiers:
   eslint-plugin-promise: ^5.1.0
   eslint-plugin-standard: ^4.1.0
   eslint-plugin-svelte3: ~2.7.3
-  events: ^3.2.0
+  events: ^3.3.0
   kefir: ~3.8.8
   mocha: ^8.4.0
   puppeteer: ^9.1.1
@@ -28,14 +28,14 @@ specifiers:
   rollup-plugin-sass: ^1.2.2
   rollup-plugin-svelte: ^6.0.1
   rollup-plugin-terser: ^7.0.2
-  sass: ^1.34.0
+  sass: ^1.34.1
   spectre.css: ~0.5.9
   svelte: ^3.29.7
   web-ext: ^6.1.0
   zepto-detect: ~0.0.0
 
 dependencies:
-  events: 3.2.0
+  events: 3.3.0
   kefir: 3.8.8
   rambda: 6.7.0
   spectre.css: 0.5.9
@@ -47,10 +47,10 @@ devDependencies:
   '@rollup/plugin-commonjs': 16.0.0_rollup@2.33.3
   '@rollup/plugin-eslint': 8.0.1_rollup@2.33.3
   '@rollup/plugin-node-resolve': 10.0.0_rollup@2.33.3
-  '@testing-library/svelte': 3.0.0_svelte@3.29.7
+  '@testing-library/svelte': 3.0.3_svelte@3.29.7
   addons-linter: 3.6.0
-  caniuse-lite: 1.0.30001159
-  chokidar: 3.4.3
+  caniuse-lite: 1.0.30001235
+  chokidar: 3.5.1
   eslint: 7.28.0
   eslint-config-standard: 16.0.3_384c19703c8cee0582cf82e59ce298a4
   eslint-plugin-import: 2.23.4_eslint@7.28.0
@@ -66,7 +66,7 @@ devDependencies:
   rollup-plugin-sass: 1.2.2
   rollup-plugin-svelte: 6.1.1_rollup@2.33.3+svelte@3.29.7
   rollup-plugin-terser: 7.0.2_rollup@2.33.3
-  sass: 1.34.0
+  sass: 1.34.1
   svelte: 3.29.7
   web-ext: 6.1.0
 
@@ -493,8 +493,8 @@ packages:
       pretty-format: 26.6.2
     dev: true
 
-  /@testing-library/svelte/3.0.0_svelte@3.29.7:
-    resolution: {integrity: sha512-0KarnU6czyhNaRECWUI4lpxTGg+9lTgASrsrtnflw9odVSmKk3iRym3ZOg0TOM4GBsX/CR4Un590fEsf6FdTJg==}
+  /@testing-library/svelte/3.0.3_svelte@3.29.7:
+    resolution: {integrity: sha512-GxafAllShGM2nkntFGURZ7fYVlUYwv7K62lqv1aFqtTYzzeZ2Cu8zTVhtE/Qt3bk2zMl6+FPKP03wjLip/G8mA==}
     engines: {node: '>= 8'}
     peerDependencies:
       svelte: 3.x
@@ -842,14 +842,6 @@ packages:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.2.2
-    dev: true
-
-  /anymatch/3.1.2:
-    resolution: {integrity: sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==}
-    engines: {node: '>= 8'}
-    dependencies:
-      normalize-path: 3.0.0
-      picomatch: 2.3.0
     dev: true
 
   /argparse/1.0.10:
@@ -1212,10 +1204,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001159:
-    resolution: {integrity: sha512-w9Ph56jOsS8RL20K9cLND3u/+5WASWdhC/PPrf+V3/HsM3uHOavWOR1Xzakbv4Puo/srmPHudkmCRWM7Aq+/UA==}
-    dev: true
-
   /caniuse-lite/1.0.30001235:
     resolution: {integrity: sha512-zWEwIVqnzPkSAXOUlQnPW2oKoYb2aLQ4Q5ejdjBcnH63rfypaW34CxaeBn1VMya2XaEU3P/R2qHpWyj+l0BT1A==}
     dev: true
@@ -1303,28 +1291,13 @@ packages:
       fsevents: 1.2.13
     dev: true
 
-  /chokidar/3.4.3:
-    resolution: {integrity: sha512-DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ==}
+  /chokidar/3.5.1:
+    resolution: {integrity: sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==}
     engines: {node: '>= 8.10.0'}
     dependencies:
       anymatch: 3.1.1
       braces: 3.0.2
       glob-parent: 5.1.1
-      is-binary-path: 2.1.0
-      is-glob: 4.0.1
-      normalize-path: 3.0.0
-      readdirp: 3.5.0
-    optionalDependencies:
-      fsevents: 2.1.3
-    dev: true
-
-  /chokidar/3.5.1:
-    resolution: {integrity: sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==}
-    engines: {node: '>= 8.10.0'}
-    dependencies:
-      anymatch: 3.1.2
-      braces: 3.0.2
-      glob-parent: 5.1.2
       is-binary-path: 2.1.0
       is-glob: 4.0.1
       normalize-path: 3.0.0
@@ -2267,8 +2240,8 @@ packages:
     deprecated: Use promise-toolbox/fromEvent instead
     dev: true
 
-  /events/3.2.0:
-    resolution: {integrity: sha512-/46HWwbfCX2xTawVfkKLGxMifJYQBWMwY1mjywRtb4c9x8l5NP3KoJtnIOiL1hfdRkIuYhETxQlo62IF8tcnlg==}
+  /events/3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
     dev: false
 
@@ -4853,12 +4826,12 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
-  /sass/1.34.0:
-    resolution: {integrity: sha512-rHEN0BscqjUYuomUEaqq3BMgsXqQfkcMVR7UhscsAVub0/spUrZGBMxQXFS2kfiDsPLZw5yuU9iJEFNC2x38Qw==}
+  /sass/1.34.1:
+    resolution: {integrity: sha512-scLA7EIZM+MmYlej6sdVr0HRbZX5caX5ofDT9asWnUJj21oqgsC+1LuNfm0eg+vM0fCTZHhwImTiCU0sx9h9CQ==}
     engines: {node: '>=8.9.0'}
     hasBin: true
     dependencies:
-      chokidar: 3.4.3
+      chokidar: 3.5.1
     dev: true
 
   /sass/1.7.2:
