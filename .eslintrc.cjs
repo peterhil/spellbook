@@ -27,11 +27,11 @@ module.exports = {
         },
     ],
     globals: {
-        "chrome": "readonly",
+        chrome: 'readonly',
     },
     rules: {
         'comma-dangle': ['off', 'always'],
-        'indent': ['error', 4],
+        indent: ['error', 4],
         'no-console': ['off', 'always'],
         // 'no-console': ['warn', {}],
         'no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
