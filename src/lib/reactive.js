@@ -25,9 +25,9 @@ export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = de
         .fromEvents(element, 'input', event => event.target.value)
         .filter(query => query.length >= minLength)
         .spy('Query before throttle/debounce:')
-        .skipDuplicates()
         .debounce(debounceTime)
         .spy('Debounced:')
+        .skipDuplicates()
 }
 
 export const notImplemented$ = () => {
