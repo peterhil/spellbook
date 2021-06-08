@@ -2,9 +2,10 @@ import path from 'path'
 
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
+import css from 'rollup-plugin-css-only'
 import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
-import sveltePreprocess from 'svelte-preprocess'
+import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
@@ -26,25 +27,29 @@ const plugins = [
     }),
 
     svelte({
-        // enable run-time checks when not in production
-        dev: !production,
-        preprocess: sveltePreprocess(),
-        // we'll extract any component CSS out into
-        // a separate file — better for performance
-        css: css => {
-            css.write('spellbook.css')
+        emitCss: true,
+        compilerOptions: {
+            // enable run-time checks when not in production
+            dev: !production,
         },
+        preprocess: preprocess({
+            style: sass(),
+        }),
     }),
 
-    sass({
-        output: true,
+    sass(),
+
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({
+        output: 'spellbook.css'
     }),
 
     // Convert CommonJS libraries to ES6
     resolve({
         browser: true, // default: false
         modulesOnly: false, // default: false
-        dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
+        dedupe: ['svelte'],
         moduleDirectories: [
             './node_modules/'
         ],
