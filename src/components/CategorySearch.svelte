@@ -22,6 +22,7 @@
 
     function onInput (query) {
         if (length(query) >= 2) {
+            console.debug('[CategorySearch] !!!! Will search with query:', query)
             searchCategories(query)
         } else {
             clearSearch()

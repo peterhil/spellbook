@@ -23,8 +23,12 @@ export const popupController = {
                     })
             },
             categorySearch: (message) => {
+                console.debug('[popup controller] categorySearch:', message.query)
                 categorySearch(message.query)
-                    .then(result => sendMessage(port, 'searchResults', result))
+                    .then(result => {
+                        console.debug('[popup controller] categorySearch result:', result.length)
+                        sendMessage(port, 'searchResults', result)
+                    })
             },
             default: unhandledMessage,
         })
