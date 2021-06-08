@@ -30,10 +30,13 @@
     }
 
     onMount(() => {
-        const options = { minLength: 0, debounceTime: 250 }
+        const options = { minLength: 0, debounceTime: 400 }
         const categorySearch$ = inputEvent$(search, options)
 
-        categorySearch$.observe(onInput, console.error)
+        categorySearch$
+            .throttle(1000, { leading: true, trailing: false })
+            .spy('Throttled:')
+            .observe(onInput, console.error)
 
         search.focus()
     })
