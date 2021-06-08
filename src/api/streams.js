@@ -4,62 +4,30 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome */
-
-import {
-  compose, get, map, nub, reverse, sortBy, take
-} from 'fkit'
 import Kefir from 'kefir'
-import { domLoaded$ } from '../lib/events'
-import { filterBy, propertyCompare } from '../lib/pure'
-import { getBookmark } from './bookmarks'
-import {
-  flattenTree,
-  getParentId,
-  getTree,
-} from './categories'
-import { browserEvent$, isBookmark } from './helpers'
+import { path, prop } from 'rambda'
+import { getTree } from './categories'
+import { browserEvent$ } from './helpers'
 
 export const getTree$ = () => {
-  return Kefir.fromPromise(getTree())
+    return Kefir.fromPromise(getTree())
 }
 
 export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
-  .map(get(1))
-  .spy('Bookmark created:')
+    .spy('[api/streams] Bookmark created:')
+
 export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
-  .map(get(1))
-  .spy('Bookmark removed:')
+    .spy('[api/streams] Bookmark removed:')
 
 export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
-  .map(get(1))
-  .spy('Bookmark changed:')
+    .spy('[api/streams] Bookmark changed:')
 
 export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
-  .map(get(1))
-  .spy('Bookmark moved:')
+    .spy('[api/streams] Bookmark moved:')
 
 export const bookmarksModified$ = Kefir.merge([
-  bookmarkChanged$,
-  bookmarkCreated$,
-  bookmarkMoved$,
-  bookmarkRemoved$.map(get('node')),
+    bookmarkChanged$.map(prop(1)),
+    bookmarkCreated$.map(prop(1)),
+    bookmarkMoved$.map(prop(1)),
+    bookmarkRemoved$.map(path([1, 'node'])),
 ])
-
-export const recentCategories$ = Kefir.merge([
-  bookmarksModified$,
-  domLoaded$,
-])
-  .flatMapLatest(getTree$)
-  .map(flattenTree)
-  .map(filterBy(isBookmark))
-  .map(compose(reverse([
-    sortBy(propertyCompare('dateAdded')),
-    reverse,
-    take(20), // TODO Move hardcoded value into options
-    map(getParentId),
-    nub,
-    take(5)
-  ])))
-  .flatMap(id => Kefir.fromPromise(getBookmark(id)))
-  .spy('Recent categories')
