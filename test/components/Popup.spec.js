@@ -1,18 +1,15 @@
-/* global chrome */
-
-import test from 'ava';
-import Popup from '../../src/components/Popup.svelte';
+import test from 'ava'
+import Popup from '../../src/components/Popup.svelte'
 
 test('Popup should mount', t => {
-  const tr = translate
-  const target = document.createElement('div');
-  const app = new Popup({
-    target,
-    props: {
-    },
-  });
+    const target = document.createElement('div')
+    new Popup({ // eslint-disable-line no-new
+        target,
+        props: {
+        },
+    })
 
-  const h1 = target.getElementsByTagName('h1')[0];
+    const h1 = target.getElementsByTagName('h1')[0]
 
-  t.is(h1.textContent, "Add bookmark!");
-});
+    t.is(h1.textContent, 'Add bookmark!')
+})

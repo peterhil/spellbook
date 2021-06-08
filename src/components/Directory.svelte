@@ -24,13 +24,13 @@
     const selectedCategory = bookmarksBarCategoryId
 
     const allBookmarks$ = Kefir
-          .fromEvents(messages, 'allBookmarksTree')
+        .fromEvents(messages, 'allBookmarksTree')
 
     const categories$ = allBookmarks$
-          .map(flattenTree)
-          .map(filter(isCategory))
-          .map(sortByTitleCaseInsensitive)
-          .spy('Directory tag: categories$')
+        .map(flattenTree)
+        .map(filter(isCategory))
+        .map(sortByTitleCaseInsensitive)
+        .spy('Directory tag: categories$')
 
     const updateCategories = (newCategories) => {
         console.debug('updateCategories:', newCategories)
@@ -40,12 +40,12 @@
     }
 
     const selectedBookmarks$ = Kefir.fromPromise(getSubTree(selectedCategory))
-          .map(head) // TODO Fix this API madness on the bookmarks adapter!
-          .map(prop('children'))
+        .map(head) // TODO Fix this API madness on the bookmarks adapter!
+        .map(prop('children'))
 
     const bookmarks$ = selectedBookmarks$
-          .map(sortByTitleCaseInsensitive)
-          .spy('Directory tag: bookmarks$')
+        .map(sortByTitleCaseInsensitive)
+        .spy('Directory tag: bookmarks$')
 
     const updateBookmarks = (newBookmarks) => {
         console.debug('updateBookmarks:', newBookmarks)
