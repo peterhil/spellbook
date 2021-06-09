@@ -58,4 +58,8 @@
     <span class="bookmark-count">({ bookmarkCount })</span>
 </h1>
 
+{#each savedBookmarks as bookmark }
+<BookmarkForm {bookmark} />
+{:else}
 <BookmarkForm bookmark={$currentTab} />
+{/each}
