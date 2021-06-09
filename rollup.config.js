@@ -61,6 +61,13 @@ const plugins = [
     minify && terser(),
 ]
 
+const watch = {
+    chokidar: true,
+    clearScreen: true,
+    exclude: ['node_modules/**'],
+    include: ['src/**/*'],
+}
+
 export default [
     {
         input: 'src/popup/popup.scss',
@@ -74,6 +81,7 @@ export default [
                 output: outputDir('popup/popup.css'),
             })
         ],
+        watch,
     },
     {
         input: 'src/directory/directory.scss',
@@ -87,6 +95,7 @@ export default [
                 output: outputDir('directory/directory.css'),
             })
         ],
+        watch,
     },
     {
         input: { popup: 'src/popup/popup.js' },
@@ -96,6 +105,7 @@ export default [
             sourcemap,
         },
         plugins,
+        watch,
     },
     {
         input: { directory: 'src/directory/directory.js' },
@@ -105,7 +115,8 @@ export default [
             format,
             sourcemap,
         },
-        plugins
+        plugins,
+        watch,
     },
     {
         input: { background: 'src/background/background.js' },
@@ -141,11 +152,6 @@ export default [
                 verbose: production,
             }),
         ]),
-        watch: {
-            chokidar: true,
-            clearScreen: true,
-            exclude: ['node_modules/**'],
-            include: ['src/**/*'],
-        },
+        watch,
     },
 ]
