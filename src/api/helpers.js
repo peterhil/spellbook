@@ -35,13 +35,12 @@ export const withErrorChecking = (chromeAsyncFn) => {
         function callbackWithErrorCheck (...resultArgs) {
             const error = chrome.runtime.lastError
             const isTabMessage = test(/^Tabs cannot be \w+ right now \(user may be dragging a tab\)\.$/)
-            console.debug('[withErrorChecking] chromeAsyncFn:', chromeAsyncFn.name)
 
             if (error) {
                 // Workaround for bug in Chrome v91:
                 // https://bugs.chromium.org/p/chromium/issues/detail?id=1213925
                 if (isTabMessage(error.message)) {
-                    console.warn('[withErrorChecking] avoiding:', error.message)
+                    // console.warn('[withErrorChecking] avoiding:', error.message)
                     setTimeout(() => {
                         originalCallback(...resultArgs)
                     }, 500)
