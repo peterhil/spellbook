@@ -6,7 +6,7 @@
     export let recentCategories = []
 
     const updateRecentCategories = (categories) => {
-        console.debug('updateRecentCategories:', categories)
+        // console.debug('[RecentCategories] updateRecentCategories:', categories)
         recentCategories = categories
     }
 

@@ -23,7 +23,7 @@
     }
 
     function updateBookmarks (bookmarks) {
-        console.log('Got bookmarks:', bookmarks)
+        // console.log('[Popup] updateBookmarks:', bookmarks)
         savedBookmarks = bookmarks
     }
 

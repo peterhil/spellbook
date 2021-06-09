@@ -29,7 +29,7 @@
     $: isSearchActive = isVisible('search') && lastSearch
     $: showSubcategory = isVisible('subcategory')
     $: hasSelection = () => {
-        console.debug('hasSelection:', selection)
+        // console.debug('hasSelection:', selection)
         return prop('id', selection)
     }
 
@@ -44,7 +44,7 @@
     }
 
     const updateCategories = (results) => {
-        console.debug('updateCategories:', results)
+        // console.debug('updateCategories:', results)
         searchResults = results
         lastSearch = search.value
         $showDropdown = 'search'
@@ -60,7 +60,7 @@
 
     const onSearchFocus = (event) => {
         $showDropdown = 'search'
-        console.debug('Search focused')
+        // console.debug('Search focused')
         return false
     }
 
