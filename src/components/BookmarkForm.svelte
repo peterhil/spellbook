@@ -31,7 +31,7 @@
         }
 
         const newBookmark = await createBookmark(params)
-        // console.debug('[BookmarkForm] Bookmark saved:', newBookmark)
+        console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
         window.close()
         return false
