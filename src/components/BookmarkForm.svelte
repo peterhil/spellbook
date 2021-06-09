@@ -40,7 +40,7 @@
 
 <style>
     .btn[type=submit] {
-        padding: .25rem .8rem
+        padding: .25rem .8rem;
     }
 </style>
 

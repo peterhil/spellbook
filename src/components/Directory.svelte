@@ -70,28 +70,28 @@
 
     .directory {
         position: absolute;
-        display: flex;
         top: var(--navbar-height);
+        right: 0;
         bottom: 0;
         left: 0;
-        right: 0;
+        display: flex;
     }
 
     .left-pane {
-        resize: horizontal;
         flex: 25%;
         min-width: 240px;
+        resize: horizontal;
     }
 
     .right-pane {
-        width: auto;
         flex: 75%;
+        width: auto;
         max-width: 100%;
         overflow-x: hidden;
     }
 
     .panel {
-        border: none;
+        border: 0;
         border-radius: 0;
     }
 

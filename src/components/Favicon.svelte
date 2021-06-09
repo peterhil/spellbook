@@ -17,9 +17,9 @@
     }
 
     .icon-bookmark {
-        vertical-align: text-top;
-        height: 1rem;
         width: 1rem;
+        height: 1rem;
+        vertical-align: text-top;
     }
 </style>
 

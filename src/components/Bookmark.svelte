@@ -10,8 +10,8 @@
     }
 
     .bookmark:hover {
-        border-bottom: 2px solid #4b48d6;
         margin-bottom: -2px;
+        border-bottom: 2px solid #4b48d6;
     }
 
     .bookmark .title {
@@ -19,8 +19,8 @@
     }
 
     .url {
-        font-size: 80%;
         font-weight: 400;
+        font-size: 80%;
     }
 </style>
 

@@ -46,8 +46,8 @@
 
 <style>
     h1 {
-        color: #333;
         margin-top: 0.25rem;
+        color: #333;
     }
 </style>
 

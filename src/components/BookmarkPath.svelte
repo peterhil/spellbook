@@ -13,8 +13,8 @@
     .parents {
         display: block;
         overflow: hidden;
-        text-overflow: ellipsis;
         white-space: nowrap;
+        text-overflow: ellipsis;
     }
 </style>
 

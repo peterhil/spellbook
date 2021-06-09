@@ -98,11 +98,11 @@
 
 <style>
     .subcategory {
-        display: none
+        display: none;
     }
 
     .subcategory.active {
-        display: block
+        display: block;
     }
 </style>
 
