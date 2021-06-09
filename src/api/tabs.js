@@ -4,8 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { difference, head, isEmpty, pick, prop, values } from 'rambda'
+import { difference, isEmpty, pick, prop, values } from 'rambda'
 import Kefir from 'kefir'
+import { safeHead } from '../lib/pure'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
 
@@ -54,13 +55,13 @@ function getActiveTabOnWindow (windowId) {
     return Kefir.fromPromise(
         queryTabs({ windowId, active: true })
     )
-        .map(head)
+        .map(safeHead)
         .filter()
 }
 
 export function getCurrentTab () {
     return queryTabs(currentTabQuery)
-        .then(head)
+        .then(safeHead)
 }
 
 const onActivated$ = browserEvent$(chrome.tabs.onActivated)

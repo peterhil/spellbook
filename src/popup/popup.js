@@ -18,7 +18,7 @@ function onLoad (event) {
     port.postMessage({ type: 'getRecentCategories' })
 
     messages.on('api', (request) => {
-        console.log('API request:', request)
+        // console.debug('[popup] API request:', request)
         port.postMessage(request)
     })
 

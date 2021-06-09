@@ -9,6 +9,7 @@
 import {
     compose,
     curry,
+    head,
     isEmpty,
     prop,
     sortBy,
@@ -26,5 +27,13 @@ export const isFunction = fn => {
 export const choice = curry((selection, options) => {
     return options[selection] || options.default
 })
+
+export function safeHead (list) {
+    return (
+        list && !isEmpty(list)
+            ? head(list)
+            : null
+    )
+}
 
 export const sortByTitleCaseInsensitive = sortBy(compose(toLower, prop('title')))

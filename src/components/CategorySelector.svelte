@@ -44,7 +44,7 @@
     }
 
     const updateCategories = (results) => {
-        console.debug('[CategorySelector] updateCategories:', results.length)
+        // console.debug('[CategorySelector] updateCategories:', results.length)
         searchResults = results
         lastSearch = search.value
         $showDropdown = 'search'
@@ -60,7 +60,7 @@
 
     const onSearchFocus = (event) => {
         $showDropdown = 'search'
-        console.debug('Search focused')
+        // console.debug('Search focused')
         return false
     }
 

@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import zd from 'zepto-detect'
-import { prop, init, last } from 'rambda'
+import { prop, init, last, test } from 'rambda'
 import { fromEventPattern } from '../lib/rxjs'
 
 export const platform = (
@@ -31,10 +31,25 @@ export const withErrorChecking = (chromeAsyncFn) => {
     return function wrappedAsyncChromeFn (...args) {
         const originalCallback = last(args)
         const fnArgs = init(args)
-        const callbackWithErrorCheck = (...resultArgs) => {
-            if (chrome.runtime.lastError) {
-                throw new Error(chrome.runtime.lastError.message)
+
+        function callbackWithErrorCheck (...resultArgs) {
+            const error = chrome.runtime.lastError
+            const isTabMessage = test(/^Tabs cannot be \w+ right now \(user may be dragging a tab\)\.$/)
+
+            if (error) {
+                // Workaround for bug in Chrome v91:
+                // https://bugs.chromium.org/p/chromium/issues/detail?id=1213925
+                if (isTabMessage(error.message)) {
+                    // console.warn('[withErrorChecking] avoiding:', error.message)
+                    setTimeout(() => {
+                        originalCallback(...resultArgs)
+                    }, 500)
+                    return
+                } else {
+                    throw new Error(error.message)
+                }
             }
+
             originalCallback(...resultArgs)
         }
 
