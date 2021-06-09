@@ -6,9 +6,7 @@ module.exports = {
     ],
     rules: {
         indentation: 4,
-        'order/properties-alphabetical-order': [
-		    null,
-		    { 'disableFix': false }
-        ]
+        'number-leading-zero': null,
+        'order/properties-alphabetical-order': [null, { disableFix: false }],
     },
 }

@@ -14,7 +14,7 @@
         "firefox:dev": "pnpm run dev && web-ext -s dev run",
         "firefox:lint": "pnpm run build && web-ext -s dist lint",
         "lint": "pnpm run lint:js && pnpm run lint:styles",
-        "lint:js": "eslint ./.*.cjs src/**/*.js src/**/*.svelte test/**/*.js",
+        "lint:js": "eslint --ignore-pattern '!.*.cjs' ./.*.cjs src/**/*.js src/**/*.svelte test/**/*.js",
         "lint:styles": "stylelint src/**/*.{scss,svelte}",
         "release": "VERSION=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && cd dist && zip -r9v ../web-ext-artifacts/spellbook-$VERSION-chrome.zip * && cd -",
         "test": "mocha test",
