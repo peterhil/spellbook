@@ -8,7 +8,7 @@
 
     function onClick (event) {
         const selection = { ...elem.dataset }
-        console.debug('Category clicked:', selection, event)
+        // console.debug('[Category] clicked:', selection, event)
         messages.emit('categorySelected', selection)
         return false
     }

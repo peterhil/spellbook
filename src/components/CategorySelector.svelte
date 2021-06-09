@@ -52,7 +52,7 @@
 
     export const onSelection = (value) => {
         selection = value
-        console.debug('[CategorySelector] selection:', value, selection)
+        // console.debug('[CategorySelector] selection:', value, selection)
         messages.emit('categorySelection', selection)
         $showDropdown = null
         return false
@@ -70,7 +70,7 @@
         } else {
             $showDropdown = dropdown
         }
-        console.debug('toggleDropdown:', $showDropdown)
+        // console.debug('[CategorySelector] toggleDropdown:', $showDropdown)
     }
 
     export const onToggle = (dropdown) => {

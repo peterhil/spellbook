@@ -6,7 +6,7 @@
     export let name
 
     export function onClick (event) {
-        console.debug('Button clicked:', name)
+        // console.debug('[Button] clicked:', name)
         messages.emit('button:' + name, event)
         return false
     }

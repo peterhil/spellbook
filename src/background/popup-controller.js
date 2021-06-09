@@ -33,10 +33,10 @@ export const popupController = {
                 // )
             },
             categorySearch: (message) => {
-                console.debug('[popup controller] categorySearch:', message.query)
+                // console.debug('[popup controller] categorySearch:', message.query)
                 categorySearch(message.query)
                     .then(result => {
-                        console.debug('[popup controller] categorySearch result:', result.length)
+                        // console.debug('[popup controller] categorySearch result:', result.length)
                         sendMessage(port, 'searchResults', result)
                     })
             },

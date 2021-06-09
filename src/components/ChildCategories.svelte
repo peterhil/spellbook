@@ -10,7 +10,7 @@
     export let children = []
 
     async function updateChildren (category) {
-        console.debug('Update children:', category)
+        // console.debug('[ChildCategories] updateChildren:', category)
         const results = await getChildren(category.id)
         children = sortByTitleCaseInsensitive(
             filter(isCategory, results)

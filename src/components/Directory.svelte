@@ -30,13 +30,13 @@
         .map(flattenTree)
         .map(filter(isCategory))
         .map(sortByTitleCaseInsensitive)
-        .spy('Directory tag: categories$')
+        // .spy('[Directory] categories$')
 
     const updateCategories = (newCategories) => {
-        console.debug('updateCategories:', newCategories)
+        // console.debug('[Directory] updateCategories:', newCategories)
         categories = newCategories
         // update()
-        console.debug('Categories updated')
+        // console.debug('[Directory] categories updated')
     }
 
     const selectedBookmarks$ = Kefir.fromPromise(getSubTree(selectedCategory))
@@ -45,14 +45,14 @@
 
     const bookmarks$ = selectedBookmarks$
         .map(sortByTitleCaseInsensitive)
-        .spy('Directory tag: bookmarks$')
+        // .spy('[Directory] bookmarks$')
 
     const updateBookmarks = (newBookmarks) => {
-        console.debug('updateBookmarks:', newBookmarks)
+        // console.debug('[Directory] updateBookmarks:', newBookmarks)
         bookmarks = filter(isBookmark, newBookmarks)
         subcategories = filter(isCategory, newBookmarks)
         // vm.update()
-        console.debug('Bookmarks updated')
+        // console.debug('[Directory] bookmarks updated')
     }
 
     onMount(() => {

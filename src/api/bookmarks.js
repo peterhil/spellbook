@@ -35,15 +35,15 @@ export const bookmarkSearch = choice(platform, {
 })
 
 export const categorySearch = async (query) => {
-    console.debug('[bookmarks api] categorySearch: doing bookmarkSearch', query)
+    // console.debug('[bookmarks api] categorySearch: doing bookmarkSearch', query)
 
     return new Promise((resolve, reject) => {
         return bookmarkSearch(query).then(bookmarks => {
-            console.debug('[bookmarks api] categorySearch: done bookmarks count:', bookmarks.length)
+            // console.debug('[bookmarks api] categorySearch: done bookmarks count:', bookmarks.length)
             let categories = bookmarks.filter(isCategory)
 
             categories = sortByTitleCaseInsensitive(categories)
-            console.debug('[bookmarks api] categorySearch: categories filtered and sorted', categories.length)
+            // console.debug('[bookmarks api] categorySearch: categories filtered and sorted', categories.length)
 
             resolve(categories)
         })

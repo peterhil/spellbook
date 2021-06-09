@@ -19,7 +19,7 @@
             url: form.url.value,
         }
         const subcategory = form.subcategory && form.subcategory.value
-        console.debug('[BookmarkForm] Submitted:', params, subcategory)
+        // console.debug('[BookmarkForm] Submitted:', params, subcategory)
 
         if (subcategory) {
             const newSubcategory = await createBookmark({
@@ -31,7 +31,7 @@
         }
 
         const newBookmark = await createBookmark(params)
-        console.debug('[BookmarkForm] Bookmark saved:', newBookmark)
+        // console.debug('[BookmarkForm] Bookmark saved:', newBookmark)
 
         window.close()
         return false

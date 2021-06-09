@@ -10,7 +10,7 @@ import { curry } from 'rambda'
 export const messages = new EventEmitter()
 
 export const messageBridge = function (message) {
-    console.debug('[message] %s', message.type)
+    // console.debug('[message] %s', message.type)
     messages.emit(message.type, message.data)
 }
 
@@ -21,9 +21,9 @@ export function disconnectionHandler (port) {
     }
 
     if (port) {
-        console.log('Disconnected:', port.name)
+        console.info('Disconnected:', port.name)
     } else {
-        console.log('Other end disconnected - wonder why?')
+        console.info('Other end disconnected - wonder why?')
     }
 }
 

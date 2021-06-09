@@ -32,7 +32,7 @@
         messages.on('button:close', onClose)
 
         getCurrentTab().then(tab => {
-            console.debug('[Popup] current tab:', tab)
+            // console.debug('[Popup] current tab:', tab)
             $currentTab = { ...tab }
             messages.emit('api', { type: 'bookmarkStatus', tab })
         })

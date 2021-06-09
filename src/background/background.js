@@ -14,7 +14,7 @@ const controllers = {
 }
 
 function onConnect (port) {
-    console.debug('[background] Connected with:', port.name, port.sender)
+    console.info('[background] Connected with:', port.name, port.sender)
     port.onMessage.addListener(messageServer(controllers))
     port.onDisconnect.addListener(disconnectionHandler)
 }

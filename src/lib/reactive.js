@@ -24,9 +24,9 @@ export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = de
     return Kefir
         .fromEvents(element, 'input', event => event.target.value)
         .filter(query => query.length >= minLength)
-        .spy('Query before throttle/debounce:')
+        // .spy('Query before throttle/debounce:')
         .debounce(debounceTime)
-        .spy('Debounced:')
+        // .spy('Debounced:')
         .skipDuplicates()
 }
 

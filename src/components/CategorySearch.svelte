@@ -22,7 +22,7 @@
 
     function onInput (query) {
         if (length(query) >= 2) {
-            console.debug('[CategorySearch] !!!! Will search with query:', query)
+            // console.debug('[CategorySearch] >>> Will search with query:', query)
             searchCategories(query)
         } else {
             clearSearch()
@@ -35,7 +35,7 @@
 
         categorySearch$
             .throttle(1000, { leading: true, trailing: false })
-            .spy('Throttled:')
+            // .spy('Throttled:')
             .observe(onInput, console.error)
 
         search.focus()
