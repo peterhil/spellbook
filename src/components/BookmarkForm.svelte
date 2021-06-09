@@ -8,6 +8,16 @@
     let form
     let submitButton
 
+    function humanizeDate (
+        date,
+        locale = chrome.i18n.getUILanguage(),
+        options = { dateStyle: 'full' }
+    ) {
+        const localeDate = new Intl.DateTimeFormat(locale, options)
+
+        return localeDate.format(new Date(date))
+    }
+
     const onSubmit = async (event) => {
         if (!form.reportValidity()) {
             return false
@@ -45,6 +55,13 @@
 </style>
 
 <form bind:this={form} on:submit|preventDefault={onSubmit}>
+    {#if bookmark.dateAdded }
+    <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>
+    {/if}
+    {#if bookmark.parentId }
+    <p>{ t('category') }: { bookmark.parentId }</p>
+    {/if}
+
     <div class="form-group">
         <label for="title">{ t('title') }</label>
         <input name="title" required
