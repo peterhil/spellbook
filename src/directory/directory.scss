@@ -2,11 +2,12 @@
     --border-color: #4b48d6;
     --navbar-height: 60px;
     --primary-color: #5755d9;
-    --primary-text: white;
+    --primary-text: #fff;
     --divider-width: 1.25px;
 }
 
-html, body {
+html,
+body {
     font-size: inherit;
 }
 
@@ -28,9 +29,9 @@ h1 {
 }
 
 .divider {
+    height: var(--divider-width);
     font-size: 0.8rem;
     border-top-width: var(--divider-width);
-    height: var(--divider-width);
 }
 
 .category .title {
