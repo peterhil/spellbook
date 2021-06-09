@@ -1,16 +1,16 @@
 <script>
-    import {
-        getCurrentTab,
-    } from '../api/tabs'
-    import { currentTab } from '../lib/stores'
-    import { messages } from '../lib/messaging'
     import { onDestroy, onMount } from 'svelte'
+
+    import { messages } from '../lib/messaging'
+    import { currentTab } from '../lib/stores'
+    import { getCurrentTab } from '../api/tabs'
     import { t } from '../lib/translate'
     import BookmarkForm from '../components/BookmarkForm.svelte'
     import CloseButton from '../components/CloseButton.svelte'
 
-    let bookmarked = []
-    $: bookmarkCount = bookmarked.length
+    let savedBookmarks = []
+
+    $: bookmarkCount = savedBookmarks.length
     $: popupHeader = (
         bookmarkCount >= 1
             ? t('saved_bookmark')
@@ -24,7 +24,7 @@
 
     function updateBookmarks (bookmarks) {
         console.log('Got bookmarks:', bookmarks)
-        bookmarked = bookmarks
+        savedBookmarks = bookmarks
     }
 
     onMount(() => {
@@ -34,6 +34,7 @@
         getCurrentTab().then(tab => {
             console.debug('[Popup] current tab:', tab)
             $currentTab = { ...tab }
+            messages.emit('api', { type: 'bookmarkStatus', tab })
         })
     })
 

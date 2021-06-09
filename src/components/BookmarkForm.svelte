@@ -32,7 +32,6 @@
 
         const newBookmark = await createBookmark(params)
         console.debug('[BookmarkForm] Bookmark saved:', newBookmark)
-        bookmark.saved = true
 
         window.close()
         return false
