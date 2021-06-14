@@ -22,8 +22,8 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+B",
-        "mac": "MacCtrl+B"
+        "default": "Ctrl+Alt+S",
+        "mac": "MacCtrl+S"
       },
       "description": "__MSG_execute_browser_action__"
     }
