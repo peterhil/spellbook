@@ -13,6 +13,7 @@
         "firefox:dev": "web-ext -s dev run",
         "firefox:lint": "web-ext -s dist lint",
         "firefox:sign": "web-ext -s dist sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET",
+        "firefox:beta": "pnpm run firefox:sign -- --channel=unlisted",
         "lint": "pnpm run lint:js && pnpm run lint:styles",
         "lint:js": "eslint --ignore-pattern '!.*.cjs' ./.*.cjs src/**/*.js src/**/*.svelte test/**/*.js",
         "lint:styles": "stylelint src/**/*.{scss,svelte}",
