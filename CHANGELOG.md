@@ -20,6 +20,7 @@ Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q
 
 #### Minor fixes
 
+- e939d9c Only use string query on Firefox when the url has about scheme
 - 4d651a1 Work around Chrome bug #1213925: Tabs can not be edited/queried right now
 - bf13210 Pass saved bookmark information into popup and fix popup header [Issue #56]
 - 6a9f1de Adjust debounce to 400 ms on inputEvent$ and add throttle to categorySearch$ [Issue #40]
