@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { test } from 'rambda'
+
 import { choice, sortByTitleCaseInsensitive } from '../lib/pure'
 import { notImplemented$ } from '../lib/reactive'
 import * as chromeBookmarks from './chrome/bookmarks'
@@ -57,9 +59,10 @@ export function searchWithBookmark (bookmark) {
         return []
     }
 
-    if (platform === 'firefox') {
-        // Query object with url would throw a SecurityError and a TypeError
-        // when url has scheme 'about:', so string it is:
+    if (platform === 'firefox' && test(/^about:/, bookmark.url)) {
+        // Query object with 'about:' url scheme will throw a
+        // SecurityError and a TypeError, so query with string even if
+        // it might return partial matches.
         query = bookmark.url
     } else {
         // String query on Chrome replaces special characters with spaces,
