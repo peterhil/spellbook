@@ -40,7 +40,7 @@ Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q
 
 ### Changed
 
-- 93ee78e Change default shortcut to Ctrl+Alt+S (MacCtrl+S on Mac) #59
+- 6eea4ef Change default shortcut to Ctrl+E (MacCtrl+E on Mac) [Issue #59]
 - 970d46f Don’t clear search value when it is shorter than the minimum length
 - 99902f0 Query current tab info only after popup is opened · [Issue #36]
 - 2e9edb6 Change the minimum length of search back to two letters
