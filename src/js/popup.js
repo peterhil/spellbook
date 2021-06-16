@@ -5,6 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Popup from './components/Popup.svelte'
+import events from './lib/events'
 import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
 
 function onLoad (event) {
@@ -31,4 +32,4 @@ function onLoad (event) {
     })
 }
 
-document.addEventListener('DOMContentLoaded', onLoad)
+events.add(document, 'DOMContentLoaded', onLoad)

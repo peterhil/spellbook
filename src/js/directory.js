@@ -5,6 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Directory from './components/Directory.svelte'
+import events from './lib/events'
 import { disconnectionHandler, messageBridge } from './lib/messaging'
 
 function onLoad (event) {
@@ -24,4 +25,4 @@ function onLoad (event) {
     })
 }
 
-document.addEventListener('DOMContentLoaded', onLoad)
+events.add(document, 'DOMContentLoaded', onLoad)
