@@ -71,7 +71,7 @@ const watch = {
 
 export default [
     {
-        input: 'src/popup/popup.scss',
+        input: 'src/style/popup.scss',
         output: {
             dir: outputDir('style'),
             name: 'popup.scss',
@@ -85,7 +85,7 @@ export default [
         watch,
     },
     {
-        input: 'src/directory/directory.scss',
+        input: 'src/style/directory.scss',
         output: {
             dir: outputDir('style'),
             name: 'directory.scss',
@@ -100,16 +100,16 @@ export default [
     },
     {
         input: {
-            background: 'src/background/background.js',
-            directory: 'src/directory/directory.js',
-            popup: 'src/popup/popup.js',
+            background: 'src/js/background/index.js',
+            directory: 'src/js/directory.js',
+            popup: 'src/js/popup.js',
         },
         output: {
             dir: outputDir('js'),
             entryFileNames: '[name].js',
             format,
             manualChunks: {
-                api: ['./src/api/categories.js', './src/api/tabs.js'],
+                api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
                 'ext/events': ['events'],
                 'ext/kefir': ['kefir'],
                 'ext/rambda': ['rambda'],

@@ -4,8 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Directory from '../components/Directory.svelte'
-import { disconnectionHandler, messageBridge } from '../lib/messaging'
+import Directory from './components/Directory.svelte'
+import { disconnectionHandler, messageBridge } from './lib/messaging'
 
 function onLoad (event) {
     const port = chrome.runtime.connect({ name: 'directory' })
