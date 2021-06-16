@@ -27,6 +27,7 @@ module.exports = {
         },
     ],
     globals: {
+        browser: 'readonly',
         chrome: 'readonly',
     },
     rules: {
