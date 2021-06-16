@@ -12,7 +12,7 @@ import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH
 const verbose = true
-const minify = production
+const minify = false
 const sourcemap = (production ? false : 'inline')
 const format = 'es'
 
