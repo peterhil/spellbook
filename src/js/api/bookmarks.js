@@ -1,3 +1,5 @@
+// api/bookmarks.js
+
 // Copyright (c) 2018-2019 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
