@@ -1,16 +1,14 @@
 <script>
+    import { fromEvents, fromPromise } from 'kefir'
     import { prop, head, filter } from 'rambda'
     import { onMount } from 'svelte'
-    import Kefir from 'kefir'
+
+    import { bookmarksBarCategoryId, flattenTree, getSubTree } from '../api/categories.js'
+    import { isBookmark, isCategory } from '../api/helpers.js'
     import { messages } from '../lib/messaging'
     import { hasItems, sortByTitleCaseInsensitive } from '../lib/pure'
     import { t } from '../lib/translate'
-    import { isBookmark, isCategory } from '../api/helpers.js'
-    import {
-        bookmarksBarCategoryId,
-        flattenTree,
-        getSubTree,
-    } from '../api/categories.js'
+
     import Bookmark from './Bookmark.svelte'
     import Category from './Category.svelte'
     import CategoryList from './CategoryList.svelte'
@@ -23,8 +21,7 @@
 
     const selectedCategory = bookmarksBarCategoryId
 
-    const allBookmarks$ = Kefir
-        .fromEvents(messages, 'allBookmarksTree')
+    const allBookmarks$ = fromEvents(messages, 'allBookmarksTree')
 
     const categories$ = allBookmarks$
         .map(flattenTree)
@@ -39,7 +36,7 @@
         // console.debug('[Directory] categories updated')
     }
 
-    const selectedBookmarks$ = Kefir.fromPromise(getSubTree(selectedCategory))
+    const selectedBookmarks$ = fromPromise(getSubTree(selectedCategory))
         .map(head) // TODO Fix this API madness on the bookmarks adapter!
         .map(prop('children'))
 

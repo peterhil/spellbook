@@ -8,7 +8,7 @@
 
 /* global document */
 
-import Kefir from 'kefir'
+import { fromEvents } from 'kefir'
 
 const add = (element, event, fn, useCapture = false) => {
     if (!element) {
@@ -25,7 +25,7 @@ const remove = (element, event, fn, useCapture = false) => {
     element.removeEventListener(event, fn, useCapture)
 }
 
-export const domLoaded$ = Kefir.fromEvents(document, 'DOMContentLoaded')
+export const domLoaded$ = fromEvents(document, 'DOMContentLoaded')
 
 export const events = {
     add,

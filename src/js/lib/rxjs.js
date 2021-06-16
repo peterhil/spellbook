@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Kefir from 'kefir'
+import { stream } from 'kefir'
 import { isFunction } from './pure'
 
 // Adapted from RxJS function fromEventPattern
@@ -26,7 +26,7 @@ export function fromEventPattern (addHandler, removeHandler) {
         throw new Error('The addHandler argument must be a function.')
     }
 
-    return Kefir.stream(emitter => {
+    return stream(emitter => {
         const handler = (...e) => emitter.emit(e.length === 1 ? e[0] : e)
         let token
 

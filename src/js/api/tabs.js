@@ -6,8 +6,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
-import Kefir from 'kefir'
+
 import { safeHead } from '../lib/pure'
 import { callbackToPromise } from '../lib/reactive'
 import { browserEvent$, withErrorChecking } from './helpers'
@@ -39,7 +40,7 @@ const tabsAreEqual = (a, b) => {
 }
 
 const getTab = (id) => {
-    return Kefir.fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
+    return fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
 }
 
 export function queryTabs (query) {
@@ -54,7 +55,7 @@ export function getActiveTabs () {
 }
 
 function getActiveTabOnWindow (windowId) {
-    return Kefir.fromPromise(
+    return fromPromise(
         queryTabs({ windowId, active: true })
     )
         .map(safeHead)
@@ -105,9 +106,9 @@ export const tabFocusChanged$ = onFocusChanged$
     .onValue(id => { currentWindowId = id; return id })
     .flatMapLatest(getActiveTabOnWindow)
 
-export const activeTab$ = Kefir.merge([tabActivation$, tabFocusChanged$])
+export const activeTab$ = merge([tabActivation$, tabFocusChanged$])
 
-export const currentTab$ = Kefir.merge([tabUpdate$, activeTab$])
+export const currentTab$ = merge([tabUpdate$, activeTab$])
     .filter(isActive)
     .map(pick([
         // 'active',

@@ -8,7 +8,7 @@
 
 // Reactive streams and utility functions
 
-import Kefir from 'kefir'
+import { constantError, fromEvents } from 'kefir'
 
 const defaults = { minLength: 2, debounceTime: 250 }
 
@@ -23,8 +23,7 @@ export function callbackToPromise (fn, ...args) {
 }
 
 export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = defaults) {
-    return Kefir
-        .fromEvents(element, 'input', event => event.target.value)
+    return fromEvents(element, 'input', event => event.target.value)
         .filter(query => query.length >= minLength)
         // .spy('Query before throttle/debounce:')
         .debounce(debounceTime)
@@ -33,5 +32,5 @@ export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = de
 }
 
 export const notImplemented$ = () => {
-    Kefir.constantError(new Error('Not implemented'))
+    constantError(new Error('Not implemented'))
 }
