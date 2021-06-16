@@ -53,8 +53,8 @@ function setBookmarkStatus (bookmarks, tabId) {
         ? bookmarks.length.toString()
         : ''
     const icon = bookmarks.length > 0
-        ? '../asset/spellbook_icon_bookmarked.png'
-        : '../asset/spellbook_icon.png'
+        ? '../img/spellbook_icon_bookmarked.png'
+        : '../img/spellbook_icon.png'
 
     chrome.browserAction.setIcon({ path: icon, tabId })
     chrome.browserAction.setBadgeText({ text: badgeText, tabId })

@@ -6,11 +6,11 @@
   "default_locale": "en",
   "description": "__MSG_meta_description__",
   "icons": {
-    "64": "asset/spellbook_icon_bookmarked.png"
+    "64": "img/spellbook_icon_bookmarked.png"
   },
 
   "browser_action": {
-    "default_icon": "asset/spellbook_icon.png",
+    "default_icon": "img/spellbook_icon.png",
     "default_popup": "views/popup.html"
   },
 

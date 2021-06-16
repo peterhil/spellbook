@@ -6,7 +6,7 @@
     .navbar {
         padding: 0 0.8rem;
         color: var(--primary-text);
-        background: no-repeat 0 38% / cover url('/asset/spellbook-bg.jpg') var(--primary-color);
+        background: no-repeat 0 38% / cover url('/img/spellbook-bg.jpg') var(--primary-color);
         border: 0;
     }
 

@@ -133,8 +133,8 @@ export default [
                 targets: [{
                     src: [
                         'src/_locales/**/*.json',
-                        'src/asset/spellbook-bg.jpg',
-                        'src/asset/spellbook_icon*.png',
+                        'src/img/spellbook-bg.jpg',
+                        'src/img/spellbook_icon*.png',
                         'src/manifest.json',
                     ],
                     dest: outputDir(),
