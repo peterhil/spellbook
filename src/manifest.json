@@ -11,13 +11,13 @@
 
   "browser_action": {
     "default_icon": "asset/spellbook_icon.png",
-    "default_popup": "popup/popup.html"
+    "default_popup": "views/popup.html"
   },
 
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
   "background": {
     "persistent": true,
-    "page": "background/background.html"
+    "page": "views/background.html"
   },
   "commands": {
     "_execute_browser_action": {
