@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
-    import { currentTab } from '../stores'
+    import { currentTab } from '../stores/currentTab'
     import { getCurrentTab } from '../api/tabs'
     import { t } from '../lib/translate'
     import BookmarkForm from '../components/BookmarkForm.svelte'
