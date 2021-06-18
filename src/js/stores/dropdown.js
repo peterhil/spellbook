@@ -1,4 +1,4 @@
-// lib/stores/dropdown.js
+// stores/dropdown.js
 
 import { writable } from 'svelte/store'
 

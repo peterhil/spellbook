@@ -2,8 +2,8 @@
     import { equals, prop } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
-    import { dropdownShown } from '../lib/stores/dropdown'
-    import { emptySelection } from '../lib/stores'
+    import { dropdownShown } from '../stores/dropdown'
+    import { emptySelection } from '../stores'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 

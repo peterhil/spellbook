@@ -1,6 +1,6 @@
 <script>
     import { equals } from 'rambda'
-    import { dropdownShown } from '../lib/stores/dropdown'
+    import { dropdownShown } from '../stores/dropdown'
 
     export let name
 

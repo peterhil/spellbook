@@ -1,4 +1,4 @@
-// lib/stores.js
+// stores/index.js
 
 import { writable } from 'svelte/store'
 
