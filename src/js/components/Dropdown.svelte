@@ -9,6 +9,8 @@
 
 <nav id="dropdown-{name}"
      class="category dropdown"
-     class:active={ isVisible($dropdownShown) }>
+     class:active={ isVisible($dropdownShown) }
+     class:d-hide={ !isVisible($dropdownShown) }
+     >
     <slot></slot>
 </nav>

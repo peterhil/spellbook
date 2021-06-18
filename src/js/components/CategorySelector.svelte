@@ -166,7 +166,9 @@
 </div>
 
 <div class="form-group subcategory"
-     class:active={ $dropdownShown === 'subcategory' }>
+     class:active={ $dropdownShown === 'subcategory' }
+     class:d-hide={ $dropdownShown !== 'subcategory' }
+     >
     <InputGroup name="subcategory"
                 label={ t('add_subcategory') }>
         <Button name="toggleSubcategory" classes="input-group-btn">
