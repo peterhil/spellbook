@@ -153,8 +153,7 @@
 <div class="form-group subcategory"
      class:active={ $showDropdown === 'subcategory' }>
     <InputGroup name="subcategory"
-                label={ t('add_subcategory') }
-                autocomplete="off">
+                label={ t('add_subcategory') }>
         <Button name="toggleSubcategory" classes="input-group-btn">
             <Icon icon="cross" />
         </Button>
