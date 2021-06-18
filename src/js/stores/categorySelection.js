@@ -1,18 +1,20 @@
-// stores/index.js
+// stores/categorySelection.js
 
 import { writable } from 'svelte/store'
 
-const emptySelection = {
+const emptyCategory = {
     title: null,
     id: null,
     parentId: null,
-    subcategory: null
 }
 
-export const categorySelection = writable(
-    emptySelection,
-    () => {
-        console.log('got a subscriber')
-        return () => console.log('no more subscribers')
+function createStore () {
+    const store = writable(emptyCategory)
+
+    return {
+        ...store,
+        reset: () => store.set(emptyCategory),
     }
-)
+}
+
+export const categorySelection = createStore()

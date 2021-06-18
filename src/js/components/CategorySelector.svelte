@@ -3,7 +3,7 @@
     import { onDestroy, onMount } from 'svelte'
 
     import { dropdownShown } from '../stores/dropdown'
-    import { emptySelection } from '../stores/categorySelection'
+    import { categorySelection as selection } from '../stores/categorySelection'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
@@ -19,23 +19,22 @@
     export let lastSearch = null
     export let search = ''
     export let searchResults = []
-    export let selection = emptySelection
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     $: hasSelection = () => {
-        // console.debug('hasSelection:', selection)
-        return prop('id', selection)
+        // console.debug('hasSelection:', $selection)
+        return prop('id', $selection)
     }
 
     const init = () => {
         lastSearch = null
-        selection = emptySelection
         $dropdownShown = null
     }
 
     const clearSelection = (event) => {
         init()
+        selection.reset()
     }
 
     const updateCategories = (results) => {
@@ -46,9 +45,9 @@
     }
 
     export const onSelection = (value) => {
-        selection = value
-        // console.debug('[CategorySelector] selection:', value, selection)
-        messages.emit('categorySelection', selection)
+        $selection = value
+        // console.debug('[CategorySelector] selection:', value, $selection)
+        messages.emit('categorySelection', $selection)
         $dropdownShown = null
         return false
     }
@@ -109,14 +108,14 @@
     {/if}
 
     <div class="input-group category-search"
-         on:categorySelected={onSelection}>
+         on:categorySelected={ onSelection }>
         <CategorySearch
             name="search"
-            bind:this={search}
-            bind:value={selection.title}
-            on:focus={onSearchFocus}
+            bind:this={ search }
+            bind:value={ $selection.title }
+            on:focus={ onSearchFocus }
             />
-        <input name="category" type="hidden" bind:value={selection.id}>
+        <input name="category" type="hidden" bind:value={ $selection.id }>
         {#if hasSelection() }
         <Button name="toggleChildren" classes="input-group-btn">
             <Icon icon="minus" />
