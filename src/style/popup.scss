@@ -37,6 +37,12 @@ body {
     width: 100%;
     height: auto;
     overflow: visible;
+
+    .card-header {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
 }
 
 #bookmarkForm {
@@ -87,13 +93,6 @@ label {
 }
 
 /* Styles */
-
-.btn-close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    z-index: 999;
-}
 
 .buttons-row {
     margin-top: 1rem;
