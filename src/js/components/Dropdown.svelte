@@ -1,12 +1,14 @@
 <script>
-    import { dropdownStore as dropdown } from '../lib/stores'
+    import { equals } from 'rambda'
+    import { dropdownShown } from '../lib/stores/dropdown'
+
     export let name
 
-    export const isVisible = (value) => {
-        return name === value
-    }
+    export const isVisible = equals(name)
 </script>
 
-<nav id="dropdown-{name}" class="category dropdown" class:active={isVisible($dropdown)}>
+<nav id="dropdown-{name}"
+     class="category dropdown"
+     class:active={ isVisible($dropdownShown) }>
     <slot></slot>
 </nav>

@@ -1,12 +1,12 @@
 <script>
     import { prop } from 'rambda'
-    import { messages } from '../lib/messaging'
     import { onDestroy, onMount } from 'svelte'
-    import {
-        dropdownStore as showDropdown,
-        emptySelection,
-    } from '../lib/stores'
+
+    import { dropdownShown } from '../lib/stores/dropdown'
+    import { emptySelection } from '../lib/stores'
+    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
+
     import Button from './Button.svelte'
     import CategorySearch from './CategorySearch.svelte'
     import ChildCategories from './ChildCategories.svelte'
@@ -22,8 +22,8 @@
     export let selection = emptySelection
 
     const isVisible = (dropdown) => {
-        // console.debug('isVisible:', dropdown, $showDropdown === dropdown)
-        return $showDropdown === dropdown
+        // console.debug('isVisible:', dropdown, $dropdownShown === dropdown)
+        return $dropdownShown === dropdown
     }
 
     $: categories = searchResults
@@ -37,7 +37,7 @@
     const init = () => {
         lastSearch = null
         selection = emptySelection
-        $showDropdown = null
+        $dropdownShown = null
     }
 
     const clearSelection = (event) => {
@@ -48,31 +48,31 @@
         // console.debug('[CategorySelector] updateCategories:', results.length)
         searchResults = results
         lastSearch = search.value
-        $showDropdown = 'search'
+        $dropdownShown = 'search'
     }
 
     export const onSelection = (value) => {
         selection = value
         // console.debug('[CategorySelector] selection:', value, selection)
         messages.emit('categorySelection', selection)
-        $showDropdown = null
+        $dropdownShown = null
         return false
     }
 
     const onSearchFocus = (event) => {
-        $showDropdown = 'search'
+        $dropdownShown = 'search'
         // console.debug('Search focused')
         return false
     }
 
     const toggleDropdown = (dropdown) => {
         if (isVisible(dropdown)) {
-            $showDropdown = null
+            $dropdownShown = null
         }
         else {
-            $showDropdown = dropdown
+            $dropdownShown = dropdown
         }
-        // console.debug('[CategorySelector] toggleDropdown:', $showDropdown)
+        // console.debug('[CategorySelector] toggleDropdown:', $dropdownShown)
     }
 
     export const onToggle = (dropdown) => {
@@ -152,7 +152,7 @@
 </div>
 
 <div class="form-group subcategory"
-     class:active={ $showDropdown === 'subcategory' }>
+     class:active={ $dropdownShown === 'subcategory' }>
     <InputGroup name="subcategory"
                 label={ t('add_subcategory') }>
         <Button name="toggleSubcategory" classes="input-group-btn">

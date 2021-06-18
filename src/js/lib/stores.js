@@ -16,5 +16,3 @@ export const selectionStore = writable({}, () => {
     console.log('got a subscriber')
     return () => console.log('no more subscribers')
 })
-
-export const dropdownStore = writable(null)
