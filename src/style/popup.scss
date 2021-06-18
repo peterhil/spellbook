@@ -4,17 +4,38 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+html {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 0.25rem;
+    overflow: visible;
+    background-color: #444;
+}
+
 body {
     width: 42ch;
     min-width: 180px;
     max-width: 100%;
     height: auto;
+    overflow: auto;
     margin: 0;
     padding: 0.75rem;
+    background-color: #fff;
 }
 
 #popup {
     position: relative;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+#bookmarkForm {
+    padding: 0.75rem;
+    border: 1px dotted #999;
 }
 
 /* Spectre overrides */
@@ -75,7 +96,7 @@ label {
 }
 
 .dropdown.active .menu,
-.dropdown .dropdown-toggle:focus + .menu {
+.dropdown.active:focus-within .menu {
     position: relative;
     display: block;
 }

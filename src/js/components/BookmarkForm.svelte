@@ -45,7 +45,8 @@
     }
 </style>
 
-<form bind:this={ form }
+<form id="bookmarkForm"
+      bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
     <div class="form-group">
