@@ -14,6 +14,8 @@
     "saved_bookmark":  { "message": "Lisätyt kirjanmerkit" },
     "search": { "message": "Haku" },
     "search_placeholder": { "message": "Etsi kirjoittamalla" },
+    "selected_category": { "message": "Valittu kategoria" },
+    "selection": { "message": "Valinta" },
     "subcategories": { "message": "Alakategoriat" },
     "title": { "message": "Nimi" },
     "url": { "message": "Osoite" }

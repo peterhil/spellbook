@@ -14,6 +14,8 @@
     "saved_bookmark":  { "message": "Закладка сохранена" },
     "search": { "message": "Поиск" },
     "search_placeholder": { "message": "Введите поисковый запрос" },
+    "selected_category": { "message": "Выбранной категории" },
+    "selection": { "message": "Выбор" },
     "subcategories": { "message": "Подкатегории" },
     "title": { "message": "Название" },
     "url": { "message": "Ссылка" }

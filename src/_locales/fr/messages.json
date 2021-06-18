@@ -14,6 +14,8 @@
     "saved_bookmark":  { "message": "Signet sauvegardé" },
     "search": { "message": "Recherché" },
     "search_placeholder": { "message": "Tapez pour cherchert" },
+    "selected_category": { "message": "Catégorie sélectionnée" },
+    "selection": { "message": "Sélection" },
     "subcategories": { "message": "Sous-catégories" },
     "title": { "message": "Titre" },
     "url": { "message": "Url" }
