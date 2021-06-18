@@ -23,7 +23,6 @@
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
-    $: categories = searchResults
     $: hasSelection = () => {
         // console.debug('hasSelection:', selection)
         return prop('id', selection)
