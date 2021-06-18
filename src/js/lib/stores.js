@@ -8,7 +8,7 @@ export const emptyBookmark = {
     favIconUrl: '',
     category: '',
 }
-export const emptySelection = { title: null, id: null, parentId: null }
+export const emptySelection = { title: null, id: null, parentId: null, subcategory: null }
 
 export const currentTab = writable(emptyBookmark)
 

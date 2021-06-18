@@ -3,6 +3,7 @@
     import { t } from '../lib/translate'
     import CategorySelector from './CategorySelector.svelte'
     import Favicon from './Favicon.svelte'
+    import InputGroup from './form/InputGroup.svelte'
 
     export let bookmark
     let form
@@ -44,27 +45,31 @@
     }
 </style>
 
-<form bind:this={form} on:submit|preventDefault={onSubmit}>
+<form bind:this={ form }
+      on:submit|preventDefault={ onSubmit }
+      >
     <div class="form-group">
-        <label for="title">{ t('title') }</label>
-        <input name="title" required
-               class="form-input"
-               bind:value={bookmark.title}>
+        <InputGroup name="title"
+                    required="true"
+                    bind:value={ bookmark.title } />
     </div>
 
     <div class="form-group">
-        <label for="url">{ t('url') }</label>
-        <div class="input-group">
-            <input name="url" type="url" required
-                   class="form-input"
-                   bind:value={bookmark.url}>
-            <Favicon icon={bookmark.favIconUrl}></Favicon>
-        </div>
+        <InputGroup name="url"
+                    required="true"
+                    type="url"
+                    bind:value={ bookmark.url }>
+            <Favicon icon={ bookmark.favIconUrl } />
+        </InputGroup>
     </div>
 
     <CategorySelector />
 
     <div class="form-group text-right buttons-row">
-        <button type="submit" bind:this={submitButton} class="btn btn-primary">{ t('buttons_add') }</button>
+        <button type="submit"
+                bind:this={submitButton}
+                class="btn btn-primary">
+            { t('buttons_add') }
+        </button>
     </div>
 </form>
