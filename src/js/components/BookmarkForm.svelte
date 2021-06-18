@@ -1,8 +1,12 @@
 <script>
     import { createBookmark } from '../api/bookmarks'
     import { t } from '../lib/translate'
+    import { dropdownShown } from '../stores/dropdown'
+
+    import Button from './Button.svelte'
     import CategorySelector from './CategorySelector.svelte'
     import Favicon from './Favicon.svelte'
+    import Icon from './Icon.svelte'
     import InputGroup from './form/InputGroup.svelte'
 
     export let bookmark
@@ -65,6 +69,18 @@
     </div>
 
     <CategorySelector />
+
+    <div class="form-group subcategory"
+         class:active={ $dropdownShown === 'subcategory' }
+         class:d-hide={ $dropdownShown !== 'subcategory' }
+         >
+        <InputGroup name="subcategory"
+                    label={ t('add_subcategory') }>
+            <Button name="toggleSubcategory" classes="input-group-btn">
+                <Icon icon="cross" />
+            </Button>
+        </InputGroup>
+    </div>
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
