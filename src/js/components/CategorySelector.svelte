@@ -17,6 +17,7 @@
     import SearchResults from './SearchResults.svelte'
 
     export let lastSearch = null
+    export let lastSelection = null
     export let search = ''
     export let searchResults = []
 
@@ -46,6 +47,7 @@
 
     export const onSelection = (value) => {
         $selection = value
+        lastSelection = value
         // console.debug('[CategorySelector] selection:', value, $selection)
         messages.emit('categorySelection', $selection)
         $dropdownShown = null
@@ -91,7 +93,11 @@
     })
 </script>
 
-<style>
+<style lang="scss">
+    .status .label {
+        margin-bottom: 0.2rem;
+    }
+
     .subcategory {
         display: none;
     }
@@ -102,11 +108,23 @@
 </style>
 
 <div class="form-group">
-    <label for="category">{ t('category') }</label>
-    {#if isVisible('search') && lastSearch }
-    <small class="float-right">{ t('search') }: { lastSearch }</small>
-    {/if}
-
+    <label for="category" class="clearfix">
+        { t('category') }
+        <small class="status float-right">
+            {#if isVisible('search') && lastSearch }
+                <span class="label" title="{ t('search') }">
+                    <i class="icon icon-search"></i>
+                    { lastSearch }
+                </span>
+            {/if}
+            {#if hasSelection() }
+                <span class="label label-primary" title="{ t('selected') }">
+                    <i class="icon icon-check"></i>
+                    { lastSelection.title }
+                </span>
+            {/if}
+        </small>
+    </label>
     <div class="input-group category-search"
          on:categorySelected={ onSelection }>
         <CategorySearch
