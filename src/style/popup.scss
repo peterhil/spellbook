@@ -33,7 +33,6 @@ body {
     height: auto;
     overflow: auto;
     margin: 0;
-    // padding: 0.75rem;
     padding: 0;
     background-color: $light-color;
 }
@@ -44,7 +43,6 @@ body {
     width: 100%;
     height: auto;
     overflow: visible;
-    // border-top: 8px solid $primary-color;
 
     .stripe {
         width: 100%;
@@ -63,8 +61,6 @@ body {
         justify-content: space-between;
         align-items: center;
         margin: -1px;
-        // padding-bottom: 0.6rem;
-        // min-height: 1.8rem;
 
         .btn-close {
             color: $light-color;
@@ -80,8 +76,6 @@ body {
 
 #bookmarkForm {
     box-sizing: content-box;
-    // padding: 0.75rem;
-    // border: 1px dotted #999;
 
     & > * {
         box-sizing: border-box;
@@ -135,7 +129,7 @@ label {
     text-overflow: ellipsis;
 }
 
-/* Styles */
+// Styles
 
 .buttons-row {
     margin-top: 1rem;
@@ -164,7 +158,6 @@ label {
 
 .category.dropdown {
     display: block;
-    // user-select: none;
 }
 
 .category .title {
