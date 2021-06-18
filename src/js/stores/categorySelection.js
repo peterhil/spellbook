@@ -2,10 +2,15 @@
 
 import { writable } from 'svelte/store'
 
-export const emptySelection = { title: null, id: null, parentId: null, subcategory: null }
+const emptySelection = {
+    title: null,
+    id: null,
+    parentId: null,
+    subcategory: null
+}
 
-export const selectionStore = writable(
-    {},
+export const categorySelection = writable(
+    emptySelection,
     () => {
         console.log('got a subscriber')
         return () => console.log('no more subscribers')

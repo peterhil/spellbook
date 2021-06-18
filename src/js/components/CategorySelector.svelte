@@ -3,7 +3,7 @@
     import { onDestroy, onMount } from 'svelte'
 
     import { dropdownShown } from '../stores/dropdown'
-    import { emptySelection } from '../stores'
+    import { emptySelection } from '../stores/categorySelection'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
