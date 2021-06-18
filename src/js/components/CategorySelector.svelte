@@ -12,7 +12,6 @@
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
     import Icon from './Icon.svelte'
-    import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
@@ -97,14 +96,6 @@
     .status .label {
         margin-bottom: 0.2rem;
     }
-
-    .subcategory {
-        display: none;
-    }
-
-    .subcategory.active {
-        display: block;
-    }
 </style>
 
 <div class="form-group">
@@ -163,16 +154,4 @@
     <Dropdown name={'recent'}>
         <RecentCategories />
     </Dropdown>
-</div>
-
-<div class="form-group subcategory"
-     class:active={ $dropdownShown === 'subcategory' }
-     class:d-hide={ $dropdownShown !== 'subcategory' }
-     >
-    <InputGroup name="subcategory"
-                label={ t('add_subcategory') }>
-        <Button name="toggleSubcategory" classes="input-group-btn">
-            <Icon icon="cross" />
-        </Button>
-    </InputGroup>
 </div>
