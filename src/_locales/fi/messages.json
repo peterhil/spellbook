@@ -10,6 +10,7 @@
     "execute_browser_action": { "message": "Lisää kirjanmerkkeihin" },
     "meta_description": { "message": "Käytä helposti tuhansia kirjanmerkkejä" },
     "other_bookmarks": { "message": "Muut kirjanmerkit" },
+    "recent_categories": { "message": "Viimeaikaiset kategoriat" },
     "root_categories": { "message": "pääkategoriat" },
     "saved_bookmark":  { "message": "Lisätyt kirjanmerkit" },
     "search": { "message": "Haku" },

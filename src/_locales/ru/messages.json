@@ -10,6 +10,7 @@
     "execute_browser_action": { "message": "Добавить в закладки" },
     "meta_description": { "message": "Используйте тысячи закладок с лёгкостью" },
     "other_bookmarks": { "message": "Другие закладки" },
+    "recent_categories": { "message": "Последние категории" },
     "root_categories": { "message": "корневые категории" },
     "saved_bookmark":  { "message": "Закладка сохранена" },
     "search": { "message": "Поиск" },

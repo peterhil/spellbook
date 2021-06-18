@@ -135,14 +135,17 @@
             />
         <input name="category" type="hidden" bind:value={ $selection.id }>
         {#if hasSelection() }
-        <Button name="toggleChildren" classes="input-group-btn">
-            <Icon icon="caret" />
-        </Button>
-        <Button name="toggleSubcategory" classes="input-group-btn">
-            <Icon icon="plus" />
-        </Button>
+            <Button name="toggleChildren" classes="input-group-btn"
+                    title={ t('subcategories') }>
+                <Icon icon="caret" />
+            </Button>
+            <Button name="toggleSubcategory" classes="input-group-btn"
+                    title={ t('add_subcategory') }>
+                <Icon icon="plus" />
+            </Button>
         {/if}
-        <Button name="toggleRecent" classes="input-group-btn">
+        <Button name="toggleRecent" classes="input-group-btn"
+                title={ t('recent_categories') }>
             <Icon icon="time" />
         </Button>
     </div>

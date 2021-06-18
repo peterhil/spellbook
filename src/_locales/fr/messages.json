@@ -10,6 +10,7 @@
     "execute_browser_action": { "message": "Ajouter aux signets" },
     "meta_description": { "message": "Utilisez un millier de signets facilement" },
     "other_bookmarks": { "message": "Autres signets" },
+    "recent_categories": { "message": "Catégories récentes" },
     "root_categories": { "message": "catégories racines" },
     "saved_bookmark":  { "message": "Signet sauvegardé" },
     "search": { "message": "Recherché" },
