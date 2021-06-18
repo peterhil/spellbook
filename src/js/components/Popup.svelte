@@ -46,7 +46,7 @@
 
 <style>
     h1 {
-        margin-top: 0.25rem;
+        margin-block: 0.25rem;
         color: #333;
     }
 </style>
