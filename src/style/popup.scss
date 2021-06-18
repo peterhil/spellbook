@@ -11,28 +11,34 @@ $card-padding: .75rem;
 // Basic layout
 
 html {
+    box-sizing: content-box;
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
     width: 100%;
     height: auto;
     padding: 0.25rem;
+    padding: 0;
+    margin: 0;
     overflow: visible;
     background-color: #444;
 }
 
 body {
+    box-sizing: content-box;
     width: 42ch;
     min-width: 180px;
     max-width: 100%;
     height: auto;
     overflow: auto;
     margin: 0;
-    padding: 0.75rem;
+    // padding: 0.75rem;
+    padding: 0;
     background-color: #fff;
 }
 
 #popup {
+    box-sizing: content-box;
     position: relative;
     width: 100%;
     height: auto;
@@ -46,8 +52,18 @@ body {
 }
 
 #bookmarkForm {
-    padding: 0.75rem;
-    border: 1px dotted #999;
+    box-sizing: content-box;
+    // padding: 0.75rem;
+    // border: 1px dotted #999;
+
+    & > * {
+        box-sizing: border-box;
+    }
+
+    .btn,
+    .form-input {
+        padding: 0 0.4rem;
+    }
 }
 
 // Spectre overrides
@@ -121,6 +137,7 @@ label {
 
 .category.dropdown {
     display: block;
+    // user-select: none;
 }
 
 .category .title {
