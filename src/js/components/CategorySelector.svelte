@@ -68,7 +68,8 @@
     const toggleDropdown = (dropdown) => {
         if (isVisible(dropdown)) {
             $showDropdown = null
-        } else {
+        }
+        else {
             $showDropdown = dropdown
         }
         // console.debug('[CategorySelector] toggleDropdown:', $showDropdown)

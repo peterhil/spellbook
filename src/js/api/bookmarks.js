@@ -66,7 +66,8 @@ export function searchWithBookmark (bookmark) {
         // SecurityError and a TypeError, so query with string even if
         // it might return partial matches.
         query = bookmark.url
-    } else {
+    }
+    else {
         // String query on Chrome replaces special characters with spaces,
         // so for example 'chrome://extensions' would return all bookmarks
         // with chrome and extensions... so query object it is:

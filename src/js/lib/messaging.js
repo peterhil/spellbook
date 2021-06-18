@@ -24,7 +24,8 @@ export function disconnectionHandler (port) {
 
     if (port) {
         console.info('Disconnected:', port.name)
-    } else {
+    }
+    else {
         console.info('Other end disconnected - wonder why?')
     }
 }
@@ -44,7 +45,8 @@ export function messageServer (controllers) {
 
         if (controller) {
             controller.action(message, port)
-        } else {
+        }
+        else {
             notFound(port)
         }
     }

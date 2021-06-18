@@ -32,7 +32,8 @@ export function fromEventPattern (addHandler, removeHandler) {
 
         try {
             token = addHandler(handler)
-        } catch (err) {
+        }
+        catch (err) {
             emitter.error(err)
             return
         }

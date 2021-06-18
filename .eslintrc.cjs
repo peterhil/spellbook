@@ -31,7 +31,7 @@ module.exports = {
         chrome: 'readonly',
     },
     rules: {
-        'brace-style': ['warn', 'stroustrup', { allowSingleLine: true }],
+        'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
         'comma-dangle': ['off', 'always'],
         indent: ['error', 4],
         'no-console': ['off', 'always'],

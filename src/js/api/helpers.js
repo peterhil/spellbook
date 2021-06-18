@@ -47,7 +47,8 @@ export const withErrorChecking = (chromeAsyncFn) => {
                         originalCallback(...resultArgs)
                     }, 500)
                     return
-                } else {
+                }
+                else {
                     throw new Error(error.message)
                 }
             }

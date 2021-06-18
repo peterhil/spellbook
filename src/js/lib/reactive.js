@@ -16,7 +16,8 @@ export function callbackToPromise (fn, ...args) {
     return new Promise((resolve, reject) => {
         try {
             fn(...args, resolve)
-        } catch (err) {
+        }
+        catch (err) {
             reject(err)
         }
     })

@@ -90,7 +90,8 @@ export async function getParents (bookmark) {
             const result = await getBookmark(getParentId(current))
             current = pick(parentPathProperties, result[0])
             parents.push(current)
-        } catch (err) {
+        }
+        catch (err) {
             console.error(err)
         }
     }
@@ -103,7 +104,8 @@ export async function getParentPath (bookmark) {
 
     try {
         parents = await getParents(bookmark)
-    } catch (err) {
+    }
+    catch (err) {
         console.error(err)
     }
 
