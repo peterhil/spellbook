@@ -27,8 +27,6 @@
     }
 
     $: categories = searchResults
-    $: isSearchActive = isVisible('search') && lastSearch
-    $: showSubcategory = isVisible('subcategory')
     $: hasSelection = () => {
         // console.debug('hasSelection:', selection)
         return prop('id', selection)
