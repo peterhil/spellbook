@@ -129,6 +129,11 @@ label {
     text-overflow: ellipsis;
 }
 
+.dropdown .menu {
+    padding: 0.2rem;
+    transform: translateY(0);
+}
+
 // Styles
 
 .buttons-row {
