@@ -8,8 +8,8 @@
     export let value = ''
 
     export let label = t(name)
-    export let autocomplete = 'off' // true
-    export let placeholder = label
+    export let placeholder = ''
+    export let autocomplete = true
 
     // Handle input with two way binding of 'type':
     // https://stackoverflow.com/a/57393751/470560
