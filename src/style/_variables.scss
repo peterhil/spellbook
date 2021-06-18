@@ -16,11 +16,11 @@ $bg-color: lighten($dark-color, 75%);
 
 // Control colors
 $success-color: #32b643;
-$warning-color: #ffb700;
-$error-color: #e85600;
+$warning-color: #ffe757;
+$error-color: #e83660;
 
 // Other colors
-$code-color: #d73e48;
+$code-color: $primary-color;
 $highlight-color: #ffe9b3;
 
 // Other variables
