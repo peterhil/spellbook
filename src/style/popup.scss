@@ -4,6 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// Variables
+
+$card-padding: .75rem;
+
+// Basic layout
+
 html {
     display: flex;
     justify-content: flex-end;
@@ -38,7 +44,7 @@ body {
     border: 1px dotted #999;
 }
 
-/* Spectre overrides */
+// Spectre overrides
 
 h1,
 h2,
@@ -60,6 +66,19 @@ small {
 label {
     font-weight: 700;
     font-size: 0.65rem;
+}
+
+.card {
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: $card-padding;
+        padding-bottom: 0;
+
+        &:last-child {
+            padding-bottom: $card-padding;
+        }
+    }
 }
 
 .form-input {
