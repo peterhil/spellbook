@@ -51,11 +51,15 @@
     }
 </style>
 
-<CloseButton />
-
-<h1>
-    { popupHeader }
-    <span class="bookmark-count">({ bookmarkCount })</span>
-</h1>
-
-<BookmarkForm bookmark={$currentTab} />
+<div class="card">
+    <div class="card-header">
+        <CloseButton />
+        <h1>
+            { popupHeader }
+            <span class="bookmark-count">({ bookmarkCount })</span>
+        </h1>
+    </div>
+    <div class="card-body">
+        <BookmarkForm bookmark={$currentTab} />
+    </div>
+</div>
