@@ -1,0 +1,28 @@
+// Variables
+
+// Core colors
+$primary-color: #5735b9;
+$primary-color-dark: darken($primary-color, 13%);
+$primary-color-light: lighten($primary-color, 7%);
+$secondary-color: #ecedfe;
+
+// Gray colors
+$dark-color: #222627;
+$light-color: #fff;
+$gray-color: lighten($dark-color, 55%);
+
+$border-color: lighten($dark-color, 65%);
+$bg-color: lighten($dark-color, 75%);
+
+// Control colors
+$success-color: #32b643;
+$warning-color: #ffb700;
+$error-color: #e85600;
+
+// Other colors
+$code-color: #d73e48;
+$highlight-color: #ffe9b3;
+
+// Other variables
+
+$card-padding: .75rem;

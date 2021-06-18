@@ -4,9 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Variables
+@import "./variables";
 
-$card-padding: .75rem;
+@import '../../node_modules/spectre.css/src/spectre';
+@import '../../node_modules/spectre.css/src/spectre-icons';
 
 // Basic layout
 
@@ -21,7 +22,7 @@ html {
     padding: 0;
     margin: 0;
     overflow: visible;
-    background-color: #444;
+    background-color: $dark-color;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
     margin: 0;
     // padding: 0.75rem;
     padding: 0;
-    background-color: #fff;
+    background-color: $light-color;
 }
 
 #popup {
@@ -43,12 +44,37 @@ body {
     width: 100%;
     height: auto;
     overflow: visible;
+    // border-top: 8px solid $primary-color;
+
+    .stripe {
+        width: 100%;
+        min-height: 12px;
+        background-color: $primary-color;
+        background-image: url(../img/spellbook-bg.jpg);
+        background-position: 0 22%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: $light-color;
+    }
 
     .card-header {
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
         align-items: center;
+        margin: -1px;
+        // padding-bottom: 0.6rem;
+        // min-height: 1.8rem;
+
+        .btn-close {
+            color: $light-color;
+            border-color: $light-color;
+            background: rgba(255, 255, 255, 0.27);
+        }
+
+        h1 {
+            margin-block: 0.25rem;
+        }
     }
 }
 

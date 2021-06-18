@@ -44,13 +44,7 @@
     })
 </script>
 
-<style>
-    h1 {
-        margin-block: 0.25rem;
-        color: #333;
-    }
-</style>
-
+<div class="stripe"></div>
 <div class="card">
     <div class="card-header">
         <CloseButton />
