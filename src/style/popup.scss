@@ -62,13 +62,8 @@ body {
         align-items: center;
         margin: -1px;
 
-        .btn-close {
-            color: $light-color;
-            border-color: $light-color;
-            background: rgba(255, 255, 255, 0.27);
-        }
-
         h1 {
+            font-size: 0.9rem;
             margin-block: 0.25rem;
         }
     }
@@ -96,10 +91,6 @@ h4,
 h5,
 h6 {
     font-weight: 700;
-}
-
-h1 {
-    font-size: 0.9rem;
 }
 
 small {
