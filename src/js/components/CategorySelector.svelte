@@ -12,6 +12,7 @@
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
     import Icon from './Icon.svelte'
+    import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
@@ -149,12 +150,13 @@
     </Dropdown>
 </div>
 
-<div class="form-group subcategory" class:active={$showDropdown === 'subcategory'}>
-    <label for="subcategory">{ t('add_subcategory') }</label>
-    <div class="input-group">
-        <input name="subcategory" class="form-input" autocomplete="off">
+<div class="form-group subcategory"
+     class:active={ $showDropdown === 'subcategory' }>
+    <InputGroup name="subcategory"
+                label={ t('add_subcategory') }
+                autocomplete="off">
         <Button name="toggleSubcategory" classes="input-group-btn">
             <Icon icon="cross" />
         </Button>
-    </div>
+    </InputGroup>
 </div>
