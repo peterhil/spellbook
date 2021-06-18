@@ -118,14 +118,14 @@
         <input name="category" type="hidden" bind:value={ $selection.id }>
         {#if hasSelection() }
         <Button name="toggleChildren" classes="input-group-btn">
-            <Icon icon="minus" />
+            <Icon icon="caret" />
         </Button>
         <Button name="toggleSubcategory" classes="input-group-btn">
             <Icon icon="plus" />
         </Button>
         {/if}
         <Button name="toggleRecent" classes="input-group-btn">
-            <Icon icon="caret" />
+            <Icon icon="time" />
         </Button>
     </div>
 
