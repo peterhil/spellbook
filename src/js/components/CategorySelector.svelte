@@ -1,5 +1,5 @@
 <script>
-    import { prop } from 'rambda'
+    import { equals, prop } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
     import { dropdownShown } from '../lib/stores/dropdown'
@@ -21,10 +21,7 @@
     export let searchResults = []
     export let selection = emptySelection
 
-    const isVisible = (dropdown) => {
-        // console.debug('isVisible:', dropdown, $dropdownShown === dropdown)
-        return $dropdownShown === dropdown
-    }
+    const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     $: categories = searchResults
     $: hasSelection = () => {
