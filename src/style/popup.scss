@@ -21,8 +21,7 @@ html {
     padding: 0.25rem;
     padding: 0;
     margin: 0;
-    overflow: visible;
-    background-color: $dark-color;
+    background-color: $gray-color;
 }
 
 body {
@@ -30,11 +29,11 @@ body {
     width: 42ch;
     min-width: 180px;
     max-width: 100%;
+    // max-width: 640px;
     height: auto;
-    overflow: auto;
     margin: 0;
     padding: 0;
-    background-color: $light-color;
+    background-color: transparent;
 }
 
 #popup {
@@ -42,18 +41,6 @@ body {
     position: relative;
     width: 100%;
     height: auto;
-    overflow: visible;
-
-    .stripe {
-        width: 100%;
-        min-height: 9px;
-        background-color: $primary-color;
-        background-image: url(../img/spellbook-bg.jpg);
-        background-position: 0 22%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        color: $light-color;
-    }
 
     .card-header {
         display: flex;
@@ -67,6 +54,17 @@ body {
             margin-block: 0.25rem;
         }
     }
+}
+
+.stripe {
+    width: 100%;
+    min-height: 9px;
+    background-color: $primary-color;
+    background-image: url(../img/spellbook-bg.jpg);
+    background-position: 0 22%;
+    background-size: cover;
+    background-repeat: repeat;
+    color: $light-color;
 }
 
 #bookmarkForm {
@@ -137,10 +135,9 @@ label {
 
 .dropdown .menu {
     position: relative;
-    max-width: 640px;
-    max-height: 266px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    max-height: 258px;
+    overflow: hidden auto;
+    will-change: transform;
     white-space: nowrap;
     text-overflow: ellipsis;
     animation-duration: 0.1s;
@@ -148,8 +145,9 @@ label {
 
 .dropdown.active .menu,
 .dropdown.active:focus-within .menu {
-    position: relative;
     display: block;
+    position: absolute;
+    width: 100%;
 }
 
 .category.dropdown {

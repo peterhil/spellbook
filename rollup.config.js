@@ -110,6 +110,7 @@ export default [
             format,
             manualChunks: {
                 api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
+                icons: ['./src/js/lib/icons.js'],
                 'ext/events': ['events'],
                 'ext/kefir': ['kefir'],
                 'ext/rambda': ['rambda'],

@@ -1,5 +1,7 @@
 <script>
-	export let icon
+    import Icon from '../components/Icon.svelte'
+
+    export let icon
 </script>
 
 <style>
@@ -15,12 +17,6 @@
         width: 24px;
         height: 24px;
     }
-
-    .icon-bookmark {
-        width: 1rem;
-        height: 1rem;
-        vertical-align: text-top;
-    }
 </style>
 
 <span class="input-group-addon" class:with-icon={ icon }>
@@ -28,6 +24,6 @@
         <img class="icon favicon"
              src={ icon } alt={ icon } title={ icon }>
     {:else}
-        <i class="icon icon-bookmark"></i>
+        <Icon icon="bookmark" />
     {/if}
 </span>

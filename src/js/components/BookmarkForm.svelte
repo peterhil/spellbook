@@ -53,11 +53,7 @@
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
-    <div class="form-group">
-        <InputGroup name="title"
-                    required="true"
-                    bind:value={ bookmark.title } />
-    </div>
+    <CategorySelector />
 
     <div class="form-group">
         <InputGroup name="url"
@@ -68,7 +64,11 @@
         </InputGroup>
     </div>
 
-    <CategorySelector />
+    <div class="form-group">
+        <InputGroup name="title"
+                    required="true"
+                    bind:value={ bookmark.title } />
+    </div>
 
     <div class="form-group subcategory"
          class:active={ $dropdownShown === 'subcategory' }

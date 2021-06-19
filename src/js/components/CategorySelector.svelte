@@ -12,6 +12,8 @@
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
     import Icon from './Icon.svelte'
+    import IconFa from './IconFa.svelte'
+    import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
@@ -104,13 +106,13 @@
         <small class="status float-right">
             {#if isVisible('search') && lastSearch }
                 <span class="label" title="{ t('search') }">
-                    <i class="icon icon-search"></i>
+                    <IconFa icon="search" />
                     { lastSearch }
                 </span>
             {/if}
             {#if hasSelection() }
                 <span class="label label-primary" title="{ t('selected') }">
-                    <i class="icon icon-check"></i>
+                    <IconFa icon="check" />
                     { lastSelection.title }
                 </span>
             {/if}
@@ -128,7 +130,7 @@
         {#if hasSelection() }
             <Button name="toggleChildren" classes="input-group-btn"
                     title={ t('subcategories') }>
-                <Icon icon="caret" />
+                <IconFa icon="sitemap" />
             </Button>
             <Button name="toggleSubcategory" classes="input-group-btn"
                     title={ t('add_subcategory') }>
@@ -137,7 +139,7 @@
         {/if}
         <Button name="toggleRecent" classes="input-group-btn"
                 title={ t('recent_categories') }>
-            <Icon icon="time" />
+            <IconFa icon="history" />
         </Button>
     </div>
 
