@@ -54,6 +54,14 @@ body {
             margin-block: 0.25rem;
         }
     }
+
+    form {
+        box-sizing: content-box;
+
+        & > * {
+            box-sizing: border-box;
+        }
+    }
 }
 
 .stripe {
@@ -65,19 +73,6 @@ body {
     background-size: cover;
     background-repeat: repeat;
     color: $light-color;
-}
-
-#bookmarkForm {
-    box-sizing: content-box;
-
-    & > * {
-        box-sizing: border-box;
-    }
-
-    .btn,
-    .form-input {
-        padding: 0 0.4rem;
-    }
 }
 
 // Spectre overrides
