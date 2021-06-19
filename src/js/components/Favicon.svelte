@@ -1,4 +1,6 @@
 <script>
+    import Icon from '../components/Icon.svelte'
+
 	export let icon
 </script>
 
@@ -28,6 +30,6 @@
         <img class="icon favicon"
              src={ icon } alt={ icon } title={ icon }>
     {:else}
-        <i class="icon icon-bookmark"></i>
+        <Icon icon="bookmark" />
     {/if}
 </span>
