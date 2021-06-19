@@ -153,3 +153,9 @@ label {
 .category.dropdown {
     display: block;
 }
+
+.category .title {
+    overflow: hidden;
+    font-weight: bolder;
+    text-overflow: ellipsis;
+}
