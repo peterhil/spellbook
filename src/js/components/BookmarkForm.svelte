@@ -53,7 +53,9 @@
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
-    <CategorySelector />
+    <div class="form-group">
+        <CategorySelector />
+    </div>
 
     <div class="form-group subcategory"
          class:active={ $dropdownShown === 'subcategory' }

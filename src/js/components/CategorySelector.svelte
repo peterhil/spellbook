@@ -100,60 +100,58 @@
     }
 </style>
 
-<div class="form-group">
-    <label for="category" class="clearfix">
-        { t('category') }
-        <small class="status float-right">
-            {#if isVisible('search') && lastSearch }
-                <span class="label" title="{ t('search') }">
-                    <IconFa icon="search" />
-                    { lastSearch }
-                </span>
-            {/if}
-            {#if hasSelection() }
-                <span class="label label-primary" title="{ t('selected') }">
-                    <IconFa icon="check" />
-                    { lastSelection.title }
-                </span>
-            {/if}
-        </small>
-    </label>
-    <div class="input-group category-search"
-         on:categorySelected={ onSelection }>
-        <CategorySearch
-            name="search"
-            bind:this={ search }
-            bind:value={ $selection.title }
-            on:focus={ onSearchFocus }
-            />
-        <input name="category" type="hidden" bind:value={ $selection.id }>
-        {#if hasSelection() }
-            <Button name="toggleChildren" classes="input-group-btn"
-                    title={ t('subcategories') }>
-                <IconFa icon="sitemap" />
-            </Button>
-            <Button name="toggleSubcategory" classes="input-group-btn"
-                    title={ t('add_subcategory') }>
-                <Icon icon="plus" />
-            </Button>
-        {/if}
-        <Button name="toggleRecent" classes="input-group-btn"
-                title={ t('recent_categories') }>
-            <IconFa icon="history" />
-        </Button>
-    </div>
-
-    <Dropdown name={'search'}>
+<label for="category" class="clearfix">
+    { t('category') }
+    <small class="status float-right">
         {#if isVisible('search') && lastSearch }
-        <SearchResults categories={searchResults} />
+            <span class="label" title="{ t('search') }">
+                <IconFa icon="search" />
+                { lastSearch }
+            </span>
         {/if}
-    </Dropdown>
-
-    <Dropdown name={'children'}>
-        <ChildCategories />
-    </Dropdown>
-
-    <Dropdown name={'recent'}>
-        <RecentCategories />
-    </Dropdown>
+        {#if hasSelection() }
+            <span class="label label-primary" title="{ t('selected') }">
+                <IconFa icon="check" />
+                { lastSelection.title }
+            </span>
+        {/if}
+    </small>
+</label>
+<div class="input-group category-search"
+     on:categorySelected={ onSelection }>
+    <CategorySearch
+        name="search"
+        bind:this={ search }
+        bind:value={ $selection.title }
+        on:focus={ onSearchFocus }
+        />
+    <input name="category" type="hidden" bind:value={ $selection.id }>
+    {#if hasSelection() }
+        <Button name="toggleChildren" classes="input-group-btn"
+                title={ t('subcategories') }>
+            <IconFa icon="sitemap" />
+        </Button>
+        <Button name="toggleSubcategory" classes="input-group-btn"
+                title={ t('add_subcategory') }>
+            <Icon icon="plus" />
+        </Button>
+    {/if}
+    <Button name="toggleRecent" classes="input-group-btn"
+            title={ t('recent_categories') }>
+        <IconFa icon="history" />
+    </Button>
 </div>
+
+<Dropdown name={'search'}>
+    {#if isVisible('search') && lastSearch }
+        <SearchResults categories={searchResults} />
+    {/if}
+</Dropdown>
+
+<Dropdown name={'children'}>
+    <ChildCategories />
+</Dropdown>
+
+<Dropdown name={'recent'}>
+    <RecentCategories />
+</Dropdown>
