@@ -29,9 +29,11 @@
     }
 </script>
 
-<label for={name}>
-    { label }
-</label>
+<slot name="label">
+    <label for={name}>
+        { label }
+    </label>
+</slot>
 <div class="input-group">
     <input class="form-input"
            {name}

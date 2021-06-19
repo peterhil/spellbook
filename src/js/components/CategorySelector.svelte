@@ -98,32 +98,37 @@
     }
 </style>
 
-<label for="category" class="clearfix">
-    { t('category') }
-    <small class="status float-right">
-        {#if isVisible('search') && lastSearch }
-            <span class="label" title="{ t('search') }">
-                <IconFa icon="search" />
-                { lastSearch }
-            </span>
-        {/if}
-        {#if hasSelection() }
-            <span class="label label-primary" title="{ t('selected') }">
-                <IconFa icon="check" />
-                { lastSelection.title }
-            </span>
-        {/if}
-    </small>
-</label>
-<div class="input-group category-search"
-     on:categorySelected={ onSelection }>
+<InputGroup
+    name="category"
+    type="hidden"
+    bind:value={ $selection.id }
+    on:categorySelected={ onSelection }
+    >
+    <label slot="label" for="category" class="clearfix">
+        { t('category') }
+        <small class="status float-right">
+            {#if isVisible('search') && lastSearch }
+                <span class="label" title="{ t('search') }">
+                    <IconFa icon="search" />
+                    { lastSearch }
+                </span>
+            {/if}
+            {#if hasSelection() }
+                <span class="label label-primary" title="{ t('selected') }">
+                    <IconFa icon="check" />
+                    { lastSelection.title }
+                </span>
+            {/if}
+        </small>
+    </label>
+
     <CategorySearch
         name="search"
         bind:this={ search }
         bind:value={ $selection.title }
-        on:focus={ onSearchFocus }
-        />
-    <input name="category" type="hidden" bind:value={ $selection.id }>
+        on:focus={ onSearchFocus }>
+    </CategorySearch>
+
     {#if hasSelection() }
         <Button name="toggleChildren" classes="input-group-btn"
                 title={ t('subcategories') }>
@@ -138,7 +143,7 @@
             title={ t('recent_categories') }>
         <IconFa icon="history" />
     </Button>
-</div>
+</InputGroup>
 
 <Dropdown name={'search'}>
     {#if isVisible('search') && lastSearch }
