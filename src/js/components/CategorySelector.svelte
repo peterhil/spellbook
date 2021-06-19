@@ -1,6 +1,6 @@
 <script>
     import { equals } from 'rambda'
-    import { onDestroy, onMount } from 'svelte'
+    import { onMount } from 'svelte'
 
     import { dropdownShown } from '../stores/dropdown'
     import { categorySelection as selection } from '../stores/categorySelection'
@@ -20,48 +20,40 @@
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
-    const clearSelection = (event) => {
+    function clearSelection () {
         selection.reset()
         $dropdownShown = null
     }
 
-    const updateCategories = (results) => {
+    function updateCategories (results) {
         // console.debug('[CategorySelector] updateCategories:', results.length)
         $search.results = results
         $search.last = $search.query
         $dropdownShown = 'search'
     }
 
-    export const onSelection = (value) => {
+    function onSelection (value) {
+        // console.debug('[CategorySelector] selection:', value)
         $selection = value
         lastSelection = value
-        // console.debug('[CategorySelector] selection:', value, $selection)
         messages.emit('categorySelection', $selection)
         $dropdownShown = null
-        return false
     }
 
-    const onSearchFocus = (event) => {
+    function onSearchFocus () {
         $dropdownShown = 'search'
-        // console.debug('Search focused')
-        return false
     }
 
-    const toggleDropdown = (dropdown) => {
-        if (isVisible(dropdown)) {
-            $dropdownShown = null
-        }
-        else {
-            $dropdownShown = dropdown
-        }
+    function toggleDropdown (dropdown) {
+        $dropdownShown = (
+            isVisible(dropdown)
+                ? null
+                : dropdown)
         // console.debug('[CategorySelector] toggleDropdown:', $dropdownShown)
     }
 
-    export const onToggle = (dropdown) => {
-        return () => {
-            toggleDropdown(dropdown)
-            return false
-        }
+    function onToggle (dropdown) {
+        return () => toggleDropdown(dropdown)
     }
 
     onMount(() => {
@@ -71,10 +63,6 @@
         messages.on('button:toggleChildren', onToggle('children'))
         messages.on('button:toggleSubcategory', onToggle('subcategory'))
         messages.on('button:toggleRecent', onToggle('recent'))
-    })
-
-    onDestroy(() => {
-        messages.off('categorySelected', onSelection)
     })
 </script>
 
