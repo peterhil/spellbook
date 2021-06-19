@@ -136,8 +136,8 @@ label {
 .dropdown .menu {
     position: relative;
     max-height: 258px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
+    will-change: transform;
     white-space: nowrap;
     text-overflow: ellipsis;
     animation-duration: 0.1s;
