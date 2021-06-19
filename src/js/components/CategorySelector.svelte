@@ -20,13 +20,9 @@
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
-    const init = () => {
-        $dropdownShown = null
-    }
-
     const clearSelection = (event) => {
-        init()
         selection.reset()
+        $dropdownShown = null
     }
 
     const updateCategories = (results) => {
@@ -75,8 +71,6 @@
         messages.on('button:toggleChildren', onToggle('children'))
         messages.on('button:toggleSubcategory', onToggle('subcategory'))
         messages.on('button:toggleRecent', onToggle('recent'))
-
-        init()
     })
 
     onDestroy(() => {
