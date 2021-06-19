@@ -58,7 +58,9 @@
                     bind:value={ bookmark.url }>
             <Favicon icon={ bookmark.favIconUrl } />
         </InputGroup>
+    </div>
 
+    <div class="form-group">
         <InputGroup name="title"
                     required="true"
                     bind:value={ bookmark.title } />
