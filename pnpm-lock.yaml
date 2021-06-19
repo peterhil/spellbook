@@ -3,6 +3,8 @@ lockfileVersion: 5.3
 specifiers:
   '@babel/core': ^7.14.3
   '@babel/eslint-parser': ^7.14.4
+  '@fortawesome/fontawesome-svg-core': ^1.2.35
+  '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@rollup/plugin-commonjs': ^19.0.0
   '@rollup/plugin-eslint': ^8.0.1
   '@rollup/plugin-node-resolve': ^13.0.0
@@ -49,6 +51,8 @@ dependencies:
 devDependencies:
   '@babel/core': 7.14.3
   '@babel/eslint-parser': 7.14.4_@babel+core@7.14.3+eslint@7.28.0
+  '@fortawesome/fontawesome-svg-core': 1.2.35
+  '@fortawesome/free-solid-svg-icons': 5.15.3
   '@rollup/plugin-commonjs': 19.0.0_rollup@2.51.1
   '@rollup/plugin-eslint': 8.0.1_rollup@2.51.1
   '@rollup/plugin-node-resolve': 13.0.0_rollup@2.51.1
@@ -365,6 +369,28 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@fortawesome/fontawesome-common-types/0.2.35:
+    resolution: {integrity: sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: true
+
+  /@fortawesome/fontawesome-svg-core/1.2.35:
+    resolution: {integrity: sha512-uLEXifXIL7hnh2sNZQrIJWNol7cTVIzwI+4qcBIq9QWaZqUblm0IDrtSqbNg+3SQf8SMGHkiSigD++rHmCHjBg==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 0.2.35
+    dev: true
+
+  /@fortawesome/free-solid-svg-icons/5.15.3:
+    resolution: {integrity: sha512-XPeeu1IlGYqz4VWGRAT5ukNMd4VHUEEJ7ysZ7pSSgaEtNvSo+FLurybGJVmiqkQdK50OkSja2bfZXOeyMGRD8Q==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 0.2.35
     dev: true
 
   /@jest/types/26.6.2:
