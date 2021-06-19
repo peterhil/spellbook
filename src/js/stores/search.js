@@ -3,8 +3,8 @@
 import { writable } from 'svelte/store'
 
 const initial = {
-    last: '',
     query: '',
+    last: '',
     results: [],
 }
 
