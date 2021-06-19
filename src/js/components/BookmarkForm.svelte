@@ -49,11 +49,7 @@
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
-    <div class="form-group">
-        <InputGroup name="title"
-                    required="true"
-                    bind:value={ bookmark.title } />
-    </div>
+    <CategorySelector />
 
     <div class="form-group">
         <InputGroup name="url"
@@ -62,9 +58,11 @@
                     bind:value={ bookmark.url }>
             <Favicon icon={ bookmark.favIconUrl } />
         </InputGroup>
-    </div>
 
-    <CategorySelector />
+        <InputGroup name="title"
+                    required="true"
+                    bind:value={ bookmark.title } />
+    </div>
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
