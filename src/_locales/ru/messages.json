@@ -18,6 +18,8 @@
     "selected_category": { "message": "Выбранной категории" },
     "selection": { "message": "Выбор" },
     "subcategories": { "message": "Подкатегории" },
+    "tab_explore": { "message": "Исследовать" },
+    "tab_organise": { "message": "Организовать" },
     "title": { "message": "Название" },
     "url": { "message": "Ссылка" }
 }

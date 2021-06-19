@@ -18,6 +18,8 @@
     "selected_category": { "message": "Catégorie sélectionnée" },
     "selection": { "message": "Sélection" },
     "subcategories": { "message": "Sous-catégories" },
+    "tab_explore": { "message": "Explorer" },
+    "tab_organise": { "message": "Organiser" },
     "title": { "message": "Titre" },
     "url": { "message": "Url" }
 }
