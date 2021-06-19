@@ -7,6 +7,7 @@
     import { t } from '../lib/translate'
     import BookmarkForm from '../components/BookmarkForm.svelte'
     import CloseButton from '../components/CloseButton.svelte'
+    import Explore from '../components/Explore.svelte'
 
     let savedBookmarks = []
 
@@ -45,6 +46,7 @@
 </script>
 
 <div class="stripe"></div>
+<Explore />
 <div class="card">
     <div class="card-header">
         <CloseButton />
