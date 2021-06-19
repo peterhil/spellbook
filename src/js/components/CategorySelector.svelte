@@ -107,7 +107,7 @@
     }
 </style>
 
-<div class="form-group">
+<div class="form-group border">
     <label for="category" class="clearfix">
         { t('category') }
         <small class="status float-right">
@@ -163,16 +163,16 @@
     <Dropdown name={'recent'}>
         <RecentCategories />
     </Dropdown>
-</div>
 
-<div class="form-group subcategory"
-     class:active={ $dropdownShown === 'subcategory' }
-     class:d-hide={ $dropdownShown !== 'subcategory' }
-     >
-    <InputGroup name="subcategory"
-                label={ t('add_subcategory') }>
-        <Button name="toggleSubcategory" classes="input-group-btn">
-            <Icon icon="cross" />
-        </Button>
-    </InputGroup>
+    <div class="subcategory"
+         class:active={ $dropdownShown === 'subcategory' }
+         class:d-hide={ $dropdownShown !== 'subcategory' }
+         >
+        <InputGroup name="subcategory"
+                    label={ t('add_subcategory') }>
+            <Button name="toggleSubcategory" classes="input-group-btn">
+                <Icon icon="cross" />
+            </Button>
+        </InputGroup>
+    </div>
 </div>

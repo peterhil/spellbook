@@ -116,9 +116,18 @@ label {
     }
 }
 
+.form-group.border:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 0.45rem;
+}
+
 .form-input {
     font-size: 0.75rem;
     text-overflow: ellipsis;
+}
+
+.input-group {
+    margin-bottom: 0.45rem;
 }
 
 .dropdown .menu {
