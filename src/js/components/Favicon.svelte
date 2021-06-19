@@ -1,7 +1,7 @@
 <script>
     import Icon from '../components/Icon.svelte'
 
-	export let icon
+    export let icon
 </script>
 
 <style>
@@ -16,12 +16,6 @@
     .icon.favicon {
         width: 24px;
         height: 24px;
-    }
-
-    .icon-bookmark {
-        width: 1rem;
-        height: 1rem;
-        vertical-align: text-top;
     }
 </style>
 
