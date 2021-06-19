@@ -1,5 +1,5 @@
 <script>
-    import { equals, prop } from 'rambda'
+    import { equals } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
     import { dropdownShown } from '../stores/dropdown'
@@ -21,11 +21,6 @@
     export let searchResults = []
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
-
-    $: hasSelection = () => {
-        // console.debug('hasSelection:', $selection)
-        return prop('id', $selection)
-    }
 
     const init = () => {
         lastSearch = null
@@ -113,7 +108,7 @@
                     { lastSearch }
                 </span>
             {/if}
-            {#if hasSelection() }
+            {#if $selection.id }
                 <span class="label label-primary" title="{ t('selected') }">
                     <IconFa icon="check" />
                     { lastSelection.title }
@@ -129,7 +124,7 @@
         on:focus={ onSearchFocus }>
     </CategorySearch>
 
-    {#if hasSelection() }
+    {#if $selection.id }
         <Button name="toggleChildren" classes="input-group-btn"
                 title={ t('subcategories') }>
             <IconFa icon="sitemap" />
