@@ -55,6 +55,18 @@
       >
     <CategorySelector />
 
+    <div class="form-group subcategory"
+         class:active={ $dropdownShown === 'subcategory' }
+         class:d-hide={ $dropdownShown !== 'subcategory' }
+         >
+        <InputGroup name="subcategory"
+                    label={ t('add_subcategory') }>
+            <Button name="toggleSubcategory" classes="input-group-btn">
+                <Icon icon="cross" />
+            </Button>
+        </InputGroup>
+    </div>
+
     <div class="form-group">
         <InputGroup name="url"
                     required="true"
@@ -68,18 +80,6 @@
         <InputGroup name="title"
                     required="true"
                     bind:value={ bookmark.title } />
-    </div>
-
-    <div class="form-group subcategory"
-         class:active={ $dropdownShown === 'subcategory' }
-         class:d-hide={ $dropdownShown !== 'subcategory' }
-         >
-        <InputGroup name="subcategory"
-                    label={ t('add_subcategory') }>
-            <Button name="toggleSubcategory" classes="input-group-btn">
-                <Icon icon="cross" />
-            </Button>
-        </InputGroup>
     </div>
 
     <div class="form-group text-right buttons-row">
