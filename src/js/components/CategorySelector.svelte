@@ -114,13 +114,13 @@
         <small class="status float-right">
             {#if isVisible('search') && lastSearch }
                 <span class="label" title="{ t('search') }">
-                    <Icon icon="search" />
+                    <IconFa icon="search" />
                     { lastSearch }
                 </span>
             {/if}
             {#if hasSelection() }
                 <span class="label label-primary" title="{ t('selected') }">
-                    <Icon icon="check" />
+                    <IconFa icon="check" />
                     { lastSelection.title }
                 </span>
             {/if}

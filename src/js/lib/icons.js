@@ -1,10 +1,14 @@
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import {
+    faCheck,
+    faSearch,
     faHistory,
     faSitemap,
 } from '@fortawesome/free-solid-svg-icons'
 
 const icons = [
+    faCheck,
+    faSearch,
     faHistory,
     faSitemap,
 ]
