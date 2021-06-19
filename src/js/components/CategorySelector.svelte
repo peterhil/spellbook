@@ -4,6 +4,7 @@
 
     import { dropdownShown } from '../stores/dropdown'
     import { categorySelection as selection } from '../stores/categorySelection'
+    import { search } from '../stores/search'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
@@ -15,15 +16,12 @@
     import InputGroup from './form/InputGroup.svelte'
     import SearchResults from './SearchResults.svelte'
 
-    export let lastSearch = null
     export let lastSelection = null
-    export let search = ''
-    export let searchResults = []
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     const init = () => {
-        lastSearch = null
+        $search.last = null
         $dropdownShown = null
     }
 
@@ -34,8 +32,8 @@
 
     const updateCategories = (results) => {
         // console.debug('[CategorySelector] updateCategories:', results.length)
-        searchResults = results
-        lastSearch = search.value
+        $search.results = results
+        $search.last = $search.query
         $dropdownShown = 'search'
     }
 
@@ -102,10 +100,10 @@
     <label slot="label" for="category" class="clearfix">
         { t('category') }
         <small class="status float-right">
-            {#if isVisible('search') && lastSearch }
+            {#if isVisible('search') && $search.last }
                 <span class="label" title="{ t('search') }">
                     <IconFa icon="search" />
-                    { lastSearch }
+                    { $search.last }
                 </span>
             {/if}
             {#if $selection.id }
@@ -119,8 +117,7 @@
 
     <CategorySearch
         name="search"
-        bind:this={ search }
-        bind:value={ $selection.title }
+        bind:value={ $search.query }
         on:focus={ onSearchFocus }>
     </CategorySearch>
 
@@ -141,7 +138,7 @@
 </InputGroup>
 
 <Dropdown name={'search'}>
-    {#if isVisible('search') && lastSearch }
-        <SearchResults categories={searchResults} />
+    {#if isVisible('search') && $search.last }
+        <SearchResults categories={$search.results} />
     {/if}
 </Dropdown>
