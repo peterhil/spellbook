@@ -5,9 +5,12 @@
 
     import Button from './Button.svelte'
     import CategorySelector from './CategorySelector.svelte'
+    import ChildCategories from './ChildCategories.svelte'
+    import Dropdown from './Dropdown.svelte'
     import Favicon from './Favicon.svelte'
     import Icon from './Icon.svelte'
     import InputGroup from './form/InputGroup.svelte'
+    import RecentCategories from './RecentCategories.svelte'
 
     export let bookmark
     let form
@@ -55,6 +58,14 @@
       >
     <div class="form-group">
         <CategorySelector />
+
+        <Dropdown name={'children'}>
+            <ChildCategories />
+        </Dropdown>
+
+        <Dropdown name={'recent'}>
+            <RecentCategories />
+        </Dropdown>
     </div>
 
     <div class="form-group subcategory"

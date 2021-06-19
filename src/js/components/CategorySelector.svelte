@@ -9,12 +9,10 @@
 
     import Button from './Button.svelte'
     import CategorySearch from './CategorySearch.svelte'
-    import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
-    import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
     export let lastSearch = null
@@ -146,12 +144,4 @@
     {#if isVisible('search') && lastSearch }
         <SearchResults categories={searchResults} />
     {/if}
-</Dropdown>
-
-<Dropdown name={'children'}>
-    <ChildCategories />
-</Dropdown>
-
-<Dropdown name={'recent'}>
-    <RecentCategories />
 </Dropdown>
