@@ -13,6 +13,7 @@
     import CategorySelector from './CategorySelector.svelte'
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
+    import DropdownToggles from './DropdownToggles.svelte'
     import Favicon from './Favicon.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
@@ -91,11 +92,14 @@
                     </span>
                 {/if}
             </span>
+
             <CategorySearch
                 name="search"
                 bind:value={ $search.query }
                 on:focus={ onSearchFocus }
                 />
+
+            <DropdownToggles />
         </CategorySelector>
 
         <Dropdown name={'search'}>
