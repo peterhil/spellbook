@@ -9,7 +9,6 @@
     import { t } from '../lib/translate'
 
     import Button from './Button.svelte'
-    import CategorySearch from './CategorySearch.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
 
@@ -22,23 +21,12 @@
         $dropdownShown = null
     }
 
-    function updateCategories (results) {
-        // console.debug('[CategorySelector] updateCategories:', results.length)
-        $search.results = results
-        $search.last = $search.query
-        $dropdownShown = 'search'
-    }
-
     function onSelection (value) {
         // console.debug('[CategorySelector] selection:', value)
         $selection = value
         lastSelection = value
         messages.emit('categorySelection', $selection)
         $dropdownShown = null
-    }
-
-    function onSearchFocus () {
-        $dropdownShown = 'search'
     }
 
     function toggleDropdown (dropdown) {
@@ -55,7 +43,6 @@
 
     onMount(() => {
         messages.on('categorySelected', onSelection)
-        messages.on('searchResults', updateCategories)
         messages.on('search:clear', clearSelection)
         messages.on('button:toggleChildren', onToggle('children'))
         messages.on('button:toggleSubcategory', onToggle('subcategory'))
@@ -69,34 +56,31 @@
     }
 </style>
 
-<CategorySearch
-    name="search"
-    bind:value={ $search.query }
-    on:focus={ onSearchFocus }>
-    <label slot="label" for="category" class="clearfix">
-        { t('category') }
-        <small class="status float-right">
-            {#if isVisible('search') && $search.last }
-                <span class="label" title="{ t('search') }">
-                    <IconFa icon="search" />
-                    { $search.query }
-                </span>
-            {/if}
-            {#if $selection.id }
-                <span class="label label-primary" title="{ t('selected') }">
-                    <IconFa icon="check" />
-                    { lastSelection.title }
-                </span>
-            {/if}
-        </small>
-    </label>
+<label for="category" class="clearfix">
+    { t('category') }
+    <small class="status float-right">
+        {#if isVisible('search') && $search.last }
+            <span class="label" title="{ t('search') }">
+                <IconFa icon="search" />
+                { $search.query }
+            </span>
+        {/if}
+        {#if $selection.id }
+            <span class="label label-primary" title="{ t('selected') }">
+                <IconFa icon="check" />
+                { lastSelection.title }
+            </span>
+        {/if}
+    </small>
+</label>
+<div class="input-group">
     <input
         name="category"
         type="hidden"
         bind:value={ $selection.id }
         on:categorySelected={ onSelection }
         >
-
+    <slot></slot>
     {#if $selection.id }
         <Button name="toggleChildren" classes="input-group-btn"
                 title={ t('subcategories') }>
@@ -111,4 +95,4 @@
             title={ t('recent_categories') }>
         <IconFa icon="history" />
     </Button>
-</CategorySearch>
+</div>

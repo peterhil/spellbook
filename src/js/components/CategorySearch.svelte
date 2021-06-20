@@ -44,14 +44,10 @@
     })
 </script>
 
-<slot name="label"></slot>
-<div class="input-group">
-    <input {name}
-           class="form-input"
-           bind:this={search}
-           bind:value={value}
-           on:focus
-           placeholder={ t('search_placeholder') }
-           autocomplete="off">
-    <slot></slot>
-</div>
+<input {name}
+       class="form-input"
+       bind:this={search}
+       bind:value={value}
+       on:focus
+       placeholder={ t('search_placeholder') }
+       autocomplete="off">

@@ -1,12 +1,15 @@
 <script>
     import { equals } from 'rambda'
+    import { onMount } from 'svelte'
 
     import { createBookmark } from '../api/bookmarks'
+    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
     import Button from './Button.svelte'
+    import CategorySearch from './CategorySearch.svelte'
     import CategorySelector from './CategorySelector.svelte'
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
@@ -21,6 +24,17 @@
     let submitButton
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
+
+    function onSearchFocus () {
+        $dropdownShown = 'search'
+    }
+
+    function updateCategories (results) {
+        // console.debug('[CategorySelector] updateCategories:', results.length)
+        $search.results = results
+        $search.last = $search.query
+        $dropdownShown = 'search'
+    }
 
     const onSubmit = async (event) => {
         if (!form.reportValidity()) {
@@ -50,6 +64,10 @@
         window.close()
         return false
     }
+
+    onMount(() => {
+        messages.on('searchResults', updateCategories)
+    })
 </script>
 
 <style>
@@ -63,7 +81,13 @@
       on:submit|preventDefault={ onSubmit }
       >
     <div class="form-group">
-        <CategorySelector />
+        <CategorySelector>
+            <CategorySearch
+                name="search"
+                bind:value={ $search.query }
+                on:focus={ onSearchFocus }
+                />
+        </CategorySelector>
 
         <Dropdown name={'search'}>
             {#if isVisible('search') && $search.last }
