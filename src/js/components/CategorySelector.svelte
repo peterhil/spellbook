@@ -10,11 +10,9 @@
 
     import Button from './Button.svelte'
     import CategorySearch from './CategorySearch.svelte'
-    import Dropdown from './Dropdown.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
-    import SearchResults from './SearchResults.svelte'
 
     export let lastSelection = null
 
@@ -117,9 +115,3 @@
         <IconFa icon="history" />
     </Button>
 </InputGroup>
-
-<Dropdown name={'search'}>
-    {#if isVisible('search') && $search.last }
-        <SearchResults categories={$search.results} />
-    {/if}
-</Dropdown>

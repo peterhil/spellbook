@@ -1,7 +1,10 @@
 <script>
+    import { equals } from 'rambda'
+
     import { createBookmark } from '../api/bookmarks'
     import { t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
+    import { search } from '../stores/search'
 
     import Button from './Button.svelte'
     import CategorySelector from './CategorySelector.svelte'
@@ -11,10 +14,13 @@
     import Icon from './Icon.svelte'
     import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
+    import SearchResults from './SearchResults.svelte'
 
     export let bookmark
     let form
     let submitButton
+
+    const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     const onSubmit = async (event) => {
         if (!form.reportValidity()) {
@@ -58,6 +64,12 @@
       >
     <div class="form-group">
         <CategorySelector />
+
+        <Dropdown name={'search'}>
+            {#if isVisible('search') && $search.last }
+                <SearchResults categories={$search.results} />
+            {/if}
+        </Dropdown>
 
         <Dropdown name={'children'}>
             <ChildCategories />
