@@ -7,12 +7,12 @@
     export let categories = []
 </script>
 
-{#if not(isEmpty(categories)) }
-    <ul class="menu" tabindex="-1">
+<ul class="menu" tabindex="-1">
+    {#if not(isEmpty(categories)) }
         <CategoryList categories={categories} />
         <li class="divider" data-content={ t('root_categories') }></li>
         <MainCategories />
-    </ul>
-{:else}
-    <small>No categories found</small>
-{/if}
+    {:else}
+        <small class="toast">No categories found</small>
+    {/if}
+</ul>

@@ -1,13 +1,26 @@
 <script>
+    import { equals } from 'rambda'
+
     import { createBookmark } from '../api/bookmarks'
     import { t } from '../lib/translate'
+    import { dropdownShown } from '../stores/dropdown'
+    import { search } from '../stores/search'
+
+    import Button from './Button.svelte'
     import CategorySelector from './CategorySelector.svelte'
+    import ChildCategories from './ChildCategories.svelte'
+    import Dropdown from './Dropdown.svelte'
     import Favicon from './Favicon.svelte'
+    import Icon from './Icon.svelte'
     import InputGroup from './form/InputGroup.svelte'
+    import RecentCategories from './RecentCategories.svelte'
+    import SearchResults from './SearchResults.svelte'
 
     export let bookmark
     let form
     let submitButton
+
+    const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     const onSubmit = async (event) => {
         if (!form.reportValidity()) {
@@ -49,7 +62,35 @@
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
-    <CategorySelector />
+    <div class="form-group">
+        <CategorySelector />
+
+        <Dropdown name={'search'}>
+            {#if isVisible('search') && $search.last }
+                <SearchResults categories={$search.results} />
+            {/if}
+        </Dropdown>
+
+        <Dropdown name={'children'}>
+            <ChildCategories />
+        </Dropdown>
+
+        <Dropdown name={'recent'}>
+            <RecentCategories />
+        </Dropdown>
+    </div>
+
+    <div class="form-group subcategory"
+         class:active={ $dropdownShown === 'subcategory' }
+         class:d-hide={ $dropdownShown !== 'subcategory' }
+         >
+        <InputGroup name="subcategory"
+                    label={ t('add_subcategory') }>
+            <Button name="toggleSubcategory" classes="input-group-btn">
+                <Icon icon="cross" />
+            </Button>
+        </InputGroup>
+    </div>
 
     <div class="form-group">
         <InputGroup name="url"

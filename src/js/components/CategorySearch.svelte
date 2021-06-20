@@ -44,7 +44,7 @@
 </script>
 
 <svelte:options accessors />
-<input {name} required
+<input {name}
        class="form-input"
        bind:this={search}
        bind:value={value}
