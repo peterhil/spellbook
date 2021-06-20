@@ -12,7 +12,6 @@
     import CategorySearch from './CategorySearch.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
-    import InputGroup from './form/InputGroup.svelte'
 
     export let lastSelection = null
 
@@ -70,12 +69,10 @@
     }
 </style>
 
-<InputGroup
-    name="category"
-    type="hidden"
-    bind:value={ $selection.id }
-    on:categorySelected={ onSelection }
-    >
+<CategorySearch
+    name="search"
+    bind:value={ $search.query }
+    on:focus={ onSearchFocus }>
     <label slot="label" for="category" class="clearfix">
         { t('category') }
         <small class="status float-right">
@@ -93,12 +90,12 @@
             {/if}
         </small>
     </label>
-
-    <CategorySearch
-        name="search"
-        bind:value={ $search.query }
-        on:focus={ onSearchFocus }>
-    </CategorySearch>
+    <input
+        name="category"
+        type="hidden"
+        bind:value={ $selection.id }
+        on:categorySelected={ onSelection }
+        >
 
     {#if $selection.id }
         <Button name="toggleChildren" classes="input-group-btn"
@@ -114,4 +111,4 @@
             title={ t('recent_categories') }>
         <IconFa icon="history" />
     </Button>
-</InputGroup>
+</CategorySearch>
