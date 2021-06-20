@@ -7,9 +7,8 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
-    import Button from './Button.svelte'
-    import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
+    import InputGroup from './form/InputGroup.svelte'
 
     export let lastSelection = null
 
@@ -55,24 +54,23 @@
     }
 </style>
 
-<label for="category" class="clearfix">
-    { t('category') }
-    <small class="status float-right">
-        <slot name="status"></slot>
-        {#if $selection.id }
-            <span class="label label-primary" title="{ t('selected') }">
-                <IconFa icon="check" />
-                { lastSelection.title }
-            </span>
-        {/if}
-    </small>
-</label>
-<div class="input-group">
-    <input
-        name="category"
-        type="hidden"
-        bind:value={ $selection.id }
-        on:categorySelected={ onSelection }
-        >
+<InputGroup
+    name="category"
+    type="hidden"
+    bind:value={ $selection.id }
+    on:categorySelected={ onSelection }
+    >
+    <label slot="label" for="category" class="clearfix">
+        { t('category') }
+        <small class="status float-right">
+            <slot name="status"></slot>
+            {#if $selection.id }
+                <span class="label label-primary" title="{ t('selected') }">
+                    <IconFa icon="check" />
+                    { lastSelection.title }
+                </span>
+            {/if}
+        </small>
+    </label>
     <slot></slot>
-</div>
+</InputGroup>
