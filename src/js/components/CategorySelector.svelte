@@ -4,7 +4,6 @@
 
     import { dropdownShown } from '../stores/dropdown'
     import { categorySelection as selection } from '../stores/categorySelection'
-    import { search } from '../stores/search'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
@@ -59,12 +58,7 @@
 <label for="category" class="clearfix">
     { t('category') }
     <small class="status float-right">
-        {#if isVisible('search') && $search.last }
-            <span class="label" title="{ t('search') }">
-                <IconFa icon="search" />
-                { $search.query }
-            </span>
-        {/if}
+        <slot name="status"></slot>
         {#if $selection.id }
             <span class="label label-primary" title="{ t('selected') }">
                 <IconFa icon="check" />

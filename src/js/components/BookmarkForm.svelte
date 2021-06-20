@@ -15,6 +15,7 @@
     import Dropdown from './Dropdown.svelte'
     import Favicon from './Favicon.svelte'
     import Icon from './Icon.svelte'
+    import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
@@ -82,6 +83,14 @@
       >
     <div class="form-group">
         <CategorySelector>
+            <span slot="status">
+                {#if isVisible('search') && $search.last }
+                    <span class="label" title="{ t('search') }">
+                        <IconFa icon="search" />
+                        { $search.query }
+                    </span>
+                {/if}
+            </span>
             <CategorySearch
                 name="search"
                 bind:value={ $search.query }
