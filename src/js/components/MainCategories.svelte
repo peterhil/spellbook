@@ -1,19 +1,18 @@
 <script>
-    import { bookmarksBarCategoryId, otherCategoryId } from '../api/categories.js'
-    import { t } from '../lib/translate'
+    import { onMount } from 'svelte'
+    import { getTree } from '../api/categories.js'
+    import CategoryList from './CategoryList.svelte'
+
+    let categories = []
+
+    function update (tree) {
+        categories = tree[0]?.children || []
+    }
+
+    onMount(() => {
+        getTree()
+            .then(update)
+    })
 </script>
 
-<li class="menu-item">
-    <a data-title="Bookmarks Bar" data-id={bookmarksBarCategoryId}
-       href="#{bookmarksBarCategoryId}" class="category"
-       tabindex="0">
-        <div class="title">{ t('bookmarks_bar') }</div>
-    </a>
-</li>
-<li class="menu-item">
-    <a data-title="Other Bookmarks" data-id={otherCategoryId}
-       href="#{otherCategoryId}" class="category"
-       tabindex="0">
-        <div class="title">{ t('other_bookmarks') }</div>
-    </a>
-</li>
+<CategoryList categories={categories} />
