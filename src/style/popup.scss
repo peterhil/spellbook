@@ -154,3 +154,10 @@ label {
     font-weight: bolder;
     text-overflow: ellipsis;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
