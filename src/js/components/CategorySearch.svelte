@@ -43,7 +43,6 @@
     })
 </script>
 
-<svelte:options accessors />
 <input {name}
        class="form-input"
        bind:this={search}
