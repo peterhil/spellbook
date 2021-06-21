@@ -4,8 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-@import "./variables";
-
+@import './variables';
 @import '../../node_modules/spectre.css/src/spectre';
 @import '../../node_modules/spectre.css/src/spectre-icons';
 
@@ -33,20 +32,6 @@ h1 {
 
 .navbar {
     height: var(--navbar-height);
-}
-
-.directory {
-    top: var(--navbar-height);
-}
-
-.divider {
-    height: var(--divider-width);
-    font-size: 0.8rem;
-    border-top-width: var(--divider-width);
-}
-
-.category .title {
-    font-weight: bolder;
 }
 
 .view {
@@ -80,26 +65,36 @@ h1 {
 .panel {
     border: 0;
     border-radius: 0;
-}
 
-.panel-header {
-    background-color: #333;
-}
+    .panel-header {
+        background-color: #333;
+    }
 
-.panel-title {
-    color: #eee;
-}
+    .panel-title {
+        color: #eee;
+    }
 
-.panel .panel-body {
-    padding: 0 .4rem;
-}
+    .panel-body {
+        padding: 0 .4rem;
+    }
 
-.panel .menu {
-    padding: 0;
-    box-shadow: none;
+    .menu {
+        padding: 0;
+        box-shadow: none;
+    }
 }
 
 .menu:focus,
 .panel:focus {
     outline: none;
+}
+
+.category .title {
+    font-weight: bolder;
+}
+
+.divider {
+    height: var(--divider-width);
+    font-size: 0.8rem;
+    border-top-width: var(--divider-width);
 }
