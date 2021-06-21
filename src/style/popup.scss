@@ -124,6 +124,10 @@ label {
     transform: translateY(0);
 }
 
+.menu .menu-item + .menu-item {
+    margin-top: 0;
+}
+
 // Styles
 
 .buttons-row {
