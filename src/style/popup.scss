@@ -35,7 +35,7 @@ body {
     background-color: transparent;
 }
 
-#popup {
+.popup {
     position: relative;
     box-sizing: content-box;
     width: 100%;
@@ -74,7 +74,7 @@ body {
     background-size: cover;
 }
 
-#bookmarkForm {
+.bookmark-form {
     .btn[type=submit] {
         padding: .25rem .8rem;
     }

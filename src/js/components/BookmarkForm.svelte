@@ -65,7 +65,7 @@
     })
 </script>
 
-<form id="bookmarkForm"
+<form class="bookmark-form"
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
