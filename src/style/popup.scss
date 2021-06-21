@@ -4,23 +4,22 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-@import "./variables";
-
+@import './variables';
 @import '../../node_modules/spectre.css/src/spectre';
 @import '../../node_modules/spectre.css/src/spectre-icons';
 
 // Basic layout
 
 html {
-    box-sizing: content-box;
     display: flex;
-    justify-content: flex-end;
     flex-direction: row;
+    justify-content: flex-end;
+    box-sizing: content-box;
     width: 100%;
     height: auto;
+    margin: 0;
     padding: 0.25rem;
     padding: 0;
-    margin: 0;
     background-color: $gray-color;
 }
 
@@ -37,16 +36,16 @@ body {
 }
 
 #popup {
-    box-sizing: content-box;
     position: relative;
+    box-sizing: content-box;
     width: 100%;
     height: auto;
 
     .card-header {
         display: flex;
         flex-direction: row-reverse;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         margin: -1px;
 
         h1 {
@@ -58,7 +57,7 @@ body {
     form {
         box-sizing: content-box;
 
-        & > * {
+        > * {
             box-sizing: border-box;
         }
     }
@@ -67,12 +66,12 @@ body {
 .stripe {
     width: 100%;
     min-height: 9px;
+    color: $light-color;
     background-color: $primary-color;
-    background-image: url(../img/spellbook-bg.jpg);
+    background-image: url('../img/spellbook-bg.jpg');
+    background-repeat: repeat;
     background-position: 0 22%;
     background-size: cover;
-    background-repeat: repeat;
-    color: $light-color;
 }
 
 #bookmarkForm {
@@ -119,11 +118,6 @@ label {
     text-overflow: ellipsis;
 }
 
-.dropdown .menu {
-    padding: 0.2rem;
-    transform: translateY(0);
-}
-
 .menu .menu-item + .menu-item {
     margin-top: 0;
 }
@@ -141,17 +135,19 @@ label {
 .dropdown .menu {
     position: relative;
     max-height: 258px;
+    padding: 0.2rem;
     overflow: hidden auto;
-    will-change: transform;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transform: translateY(0);
     animation-duration: 0.1s;
+    will-change: transform;
 }
 
 .dropdown.active .menu,
 .dropdown.active:focus-within .menu {
-    display: block;
     position: absolute;
+    display: block;
     width: 100%;
 }
 
