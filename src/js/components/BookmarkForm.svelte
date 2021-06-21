@@ -24,7 +24,6 @@
 
     export let bookmark
     let form
-    let submitButton
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
@@ -39,17 +38,11 @@
         $dropdownShown = 'search'
     }
 
-    const onSubmit = async (event) => {
-        if (!form.reportValidity()) {
-            return false
-        }
+    async function onSubmit (event) {
+        if (!form.reportValidity()) return false
 
         const data = Object.fromEntries(new FormData(form))
-        const bookmarkFields = [
-            'parentId',
-            'title',
-            'url',
-        ]
+        const bookmarkFields = ['parentId', 'title', 'url']
         // console.debug('[BookmarkForm] Submitted:', data, data.subcategory)
 
         if (data.subcategory) {
@@ -148,7 +141,6 @@
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
-                bind:this={submitButton}
                 class="btn btn-primary">
             { t('buttons_add') }
         </button>
