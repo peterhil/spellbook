@@ -65,12 +65,6 @@
     })
 </script>
 
-<style>
-    .btn[type=submit] {
-        padding: .25rem .8rem;
-    }
-</style>
-
 <form id="bookmarkForm"
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }

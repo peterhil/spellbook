@@ -78,6 +78,10 @@ body {
     .form-input {
         padding: 0 0.4rem;
     }
+
+    .btn[type=submit] {
+        padding: .25rem .8rem;
+    }
 }
 
 // Spectre overrides
