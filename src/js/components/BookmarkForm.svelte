@@ -1,83 +1,109 @@
 <script>
-    import { equals } from 'rambda'
+    import { equals, pick } from 'rambda'
+    import { onMount } from 'svelte'
 
     import { createBookmark } from '../api/bookmarks'
+    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
     import Button from './Button.svelte'
+    import CategorySearch from './CategorySearch.svelte'
     import CategorySelector from './CategorySelector.svelte'
     import ChildCategories from './ChildCategories.svelte'
     import Dropdown from './Dropdown.svelte'
+    import DropdownGroup from './DropdownGroup.svelte'
+    import DropdownToggles from './DropdownToggles.svelte'
     import Favicon from './Favicon.svelte'
     import Icon from './Icon.svelte'
+    import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
     export let bookmark
     let form
-    let submitButton
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
-    const onSubmit = async (event) => {
-        if (!form.reportValidity()) {
-            return false
-        }
+    function onSearchFocus () {
+        $dropdownShown = 'search'
+    }
 
-        const params = {
-            parentId: form.category.value,
-            title: form.title.value,
-            url: form.url.value,
-        }
-        const subcategory = form.subcategory && form.subcategory.value
-        // console.debug('[BookmarkForm] Submitted:', params, subcategory)
+    function updateCategories (results) {
+        // console.debug('[CategorySelector] updateCategories:', results.length)
+        $search.results = results
+        $search.last = $search.query
+        $dropdownShown = 'search'
+    }
 
-        if (subcategory) {
+    async function onSubmit (event) {
+        if (!form.reportValidity()) return false
+
+        const data = Object.fromEntries(new FormData(form))
+        const bookmarkFields = ['parentId', 'title', 'url']
+        // console.debug('[BookmarkForm] Submitted:', data, data.subcategory)
+
+        if (data.subcategory) {
             const newSubcategory = await createBookmark({
-                parentId: params.parentId,
-                title: subcategory,
+                parentId: data.parentId,
+                title: data.subcategory,
             })
-
-            params.parentId = newSubcategory.id
+            data.parentId = newSubcategory.id
         }
 
-        const newBookmark = await createBookmark(params)
+        const newBookmark = await createBookmark(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
         window.close()
         return false
     }
-</script>
 
-<style>
-    .btn[type=submit] {
-        padding: .25rem .8rem;
-    }
-</style>
+    onMount(() => {
+        messages.on('searchResults', updateCategories)
+    })
+</script>
 
 <form id="bookmarkForm"
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
     <div class="form-group">
-        <CategorySelector />
+        <CategorySelector>
+            <span slot="status">
+                {#if isVisible('search') && $search.last }
+                    <span class="label" title="{ t('search') }">
+                        <IconFa icon="search" />
+                        { $search.query }
+                    </span>
+                {/if}
+            </span>
 
-        <Dropdown name={'search'}>
-            {#if isVisible('search') && $search.last }
-                <SearchResults categories={$search.results} />
-            {/if}
-        </Dropdown>
+            <CategorySearch
+                name="search"
+                bind:value={ $search.query }
+                on:focus={ onSearchFocus }
+                />
 
-        <Dropdown name={'children'}>
-            <ChildCategories />
-        </Dropdown>
+            <DropdownToggles />
+        </CategorySelector>
 
-        <Dropdown name={'recent'}>
-            <RecentCategories />
-        </Dropdown>
+        <DropdownGroup>
+            <Dropdown name={'search'}>
+                {#if isVisible('search') && $search.last }
+                    <SearchResults categories={$search.results} />
+                {/if}
+            </Dropdown>
+
+            <Dropdown name={'children'}>
+                <ChildCategories />
+            </Dropdown>
+
+            <Dropdown name={'recent'}>
+                <RecentCategories />
+            </Dropdown>
+        </DropdownGroup>
     </div>
 
     <div class="form-group subcategory"
@@ -109,7 +135,6 @@
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
-                bind:this={submitButton}
                 class="btn btn-primary">
             { t('buttons_add') }
         </button>

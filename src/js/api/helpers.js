@@ -8,6 +8,8 @@
 
 import zd from 'zepto-detect'
 import { prop, init, last, test } from 'rambda'
+
+import { callbackToPromise } from '../lib/reactive'
 import { fromEventPattern } from '../lib/rxjs'
 
 export const platform = (
@@ -26,6 +28,13 @@ export const browserEvent$ = (eventType) => {
     return fromEventPattern(
         eventType.addListener.bind(eventType),
         eventType.removeListener.bind(eventType)
+    )
+}
+
+export function toPromise (fn, ...args) {
+    return callbackToPromise(
+        withErrorChecking(fn),
+        ...args
     )
 }
 

@@ -1,8 +1,9 @@
 <script>
     import { length } from 'rambda'
+    import { onMount } from 'svelte'
+
     import { inputEvent$ } from '../lib/reactive'
     import { messages } from '../lib/messaging'
-    import { onMount } from 'svelte'
     import { t } from '../lib/translate'
 
     export let name
@@ -43,7 +44,6 @@
     })
 </script>
 
-<svelte:options accessors />
 <input {name}
        class="form-input"
        bind:this={search}
