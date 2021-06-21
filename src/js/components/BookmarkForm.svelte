@@ -1,5 +1,5 @@
 <script>
-    import { equals } from 'rambda'
+    import { equals, pick } from 'rambda'
     import { onMount } from 'svelte'
 
     import { createBookmark } from '../api/bookmarks'
@@ -44,24 +44,23 @@
             return false
         }
 
-        const params = {
-            parentId: form.category.value,
-            title: form.title.value,
-            url: form.url.value,
-        }
-        const subcategory = form.subcategory && form.subcategory.value
-        // console.debug('[BookmarkForm] Submitted:', params, subcategory)
+        const data = Object.fromEntries(new FormData(form))
+        const bookmarkFields = [
+            'parentId',
+            'title',
+            'url',
+        ]
+        // console.debug('[BookmarkForm] Submitted:', data, data.subcategory)
 
-        if (subcategory) {
+        if (data.subcategory) {
             const newSubcategory = await createBookmark({
-                parentId: params.parentId,
-                title: subcategory,
+                parentId: data.parentId,
+                title: data.subcategory,
             })
-
-            params.parentId = newSubcategory.id
+            data.parentId = newSubcategory.id
         }
 
-        const newBookmark = await createBookmark(params)
+        const newBookmark = await createBookmark(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
         window.close()

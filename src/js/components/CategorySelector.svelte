@@ -37,12 +37,12 @@
 </style>
 
 <InputGroup
-    name="category"
+    name="parentId"
     type="hidden"
     bind:value={ $selection.id }
     on:categorySelected={ onSelection }
     >
-    <label slot="label" for="category" class="clearfix">
+    <label slot="label" for="parentId" class="clearfix">
         { t('category') }
         <small class="status float-right">
             <slot name="status"></slot>
