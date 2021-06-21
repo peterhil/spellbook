@@ -42,25 +42,25 @@ body {
     width: 100%;
     height: auto;
 
+    form {
+        box-sizing: content-box;
+    }
+
+    form > * {
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 0.9rem;
+        margin-block: 0.25rem;
+    }
+
     .card-header {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
         justify-content: space-between;
         margin: -1px;
-
-        h1 {
-            font-size: 0.9rem;
-            margin-block: 0.25rem;
-        }
-    }
-
-    form {
-        box-sizing: content-box;
-
-        > * {
-            box-sizing: border-box;
-        }
     }
 }
 

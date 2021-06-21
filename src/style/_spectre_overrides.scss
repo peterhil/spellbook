@@ -24,10 +24,6 @@ label {
     .card-footer {
         padding: $card-padding;
         padding-bottom: 0;
-
-        &:last-child {
-            padding-bottom: $card-padding;
-        }
     }
 }
 
