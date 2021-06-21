@@ -1,0 +1,41 @@
+// Spectre overrides
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+small {
+    font-size: 75%;
+}
+
+label {
+    font-weight: 700;
+    font-size: 0.65rem;
+}
+
+.card {
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: $card-padding;
+        padding-bottom: 0;
+
+        &:last-child {
+            padding-bottom: $card-padding;
+        }
+    }
+}
+
+.form-input {
+    font-size: 0.75rem;
+    text-overflow: ellipsis;
+}
+
+.menu .menu-item + .menu-item {
+    margin-top: 0;
+}
