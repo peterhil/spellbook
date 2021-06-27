@@ -1,5 +1,5 @@
 <script>
-    import Icon from '../components/Icon.svelte'
+    import IconNoir from '../components/IconNoir.svelte'
 
     export let icon
 </script>
@@ -24,6 +24,6 @@
         <img class="icon favicon"
              src={ icon } alt={ icon } title={ icon }>
     {:else}
-        <Icon icon="bookmark" />
+        <IconNoir icon="bookmark-empty" />
     {/if}
 </span>

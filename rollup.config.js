@@ -146,6 +146,7 @@ export default [
             copy({
                 targets: [{
                     src: [
+                        'node_modules/iconoir/fonts/iconoir.css',
                         'node_modules/spectre.css/dist/spectre-icons.css',
                         'node_modules/spectre.css/dist/spectre.css',
                     ],
