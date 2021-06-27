@@ -6,7 +6,7 @@
     export let bookmark
 </script>
 
-<a class="bookmark"
+<a class="bookmark saved"
      href={ bookmark.url }
      data-id={ bookmark.id }
      data-parent-id={ getParentId(bookmark) }
@@ -15,11 +15,14 @@
      title="{ bookmark.title }"
      tabindex="0">
     <div class="title">{ bookmark.title }</div>
-    <div class="url">{ bookmark.url }</div>
     <div class="label label-secondary">
         <BookmarkPath { bookmark } />
     </div>
     {#if bookmark.dateAdded }
-        <li>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</li>
+        <div class="date">
+            <small>
+                { t('added') }: { humanizeDate(bookmark.dateAdded) }
+            </small>
+        </div>
     {/if}
 </a>

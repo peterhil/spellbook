@@ -1,9 +1,15 @@
 .bookmark,
 .category {
     .title {
-        overflow: hidden;
         font-weight: bolder;
+    }
+
+    .url,
+    .title {
+        display: block;
+        overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 
@@ -26,4 +32,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.bookmark.saved {
+    .parents {
+        white-space: normal;
+    }
 }

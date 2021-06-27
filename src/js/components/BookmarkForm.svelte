@@ -4,10 +4,11 @@
 
     import { createBookmark } from '../api/bookmarks'
     import { messages } from '../lib/messaging'
-    import { humanizeDate, t } from '../lib/translate'
+    import { t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
+    import BookmarkSaved from './BookmarkSaved.svelte'
     import Button from './Button.svelte'
     import CategorySearch from './CategorySearch.svelte'
     import CategorySelector from './CategorySelector.svelte'
@@ -23,6 +24,7 @@
     import SearchResults from './SearchResults.svelte'
 
     export let bookmark
+    export let saved = []
     let form
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
@@ -68,12 +70,13 @@
 <form class="bookmark-form"
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
-      >
-    {#if bookmark.dateAdded }
-    <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>
-    {/if}
-    {#if bookmark.parentId }
-    <p>{ t('category') }: { bookmark.parentId }</p>
+>
+    {#if saved && saved.length > 0 }
+    <ul class="menu saved-bookmarks">
+        {#each saved as bookmark }
+            <li class="menu-item"><BookmarkSaved { bookmark } /></li>
+        {/each}
+    </ul>
     {/if}
 
     <div class="form-group">

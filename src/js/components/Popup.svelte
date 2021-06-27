@@ -1,5 +1,5 @@
 <script>
-    import { last, prop, sortBy } from 'rambda'
+    import { prop, sortBy } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
@@ -10,7 +10,7 @@
     import CloseButton from './CloseButton.svelte'
 
     let savedBookmarks = []
-    let saved = null
+    let saved = []
 
     $: bookmarkCount = savedBookmarks.length
     $: popupHeader = (
@@ -27,9 +27,9 @@
     function updateBookmarks (bookmarks) {
         savedBookmarks = bookmarks
         if (bookmarks.length > 0) {
-            saved = last(sortBy(prop('dateAdded'), savedBookmarks))
+            saved = sortBy(prop('dateAdded'), savedBookmarks)
         }
-        // console.debug('[Popup] updateBookmarks:', bookmarks, saved)
+        console.debug('[Popup] updateBookmarks:', bookmarks, saved)
     }
 
     onMount(() => {
@@ -59,10 +59,6 @@
         </h1>
     </div>
     <div class="card-body">
-        {#if saved}
-            <BookmarkForm bookmark={ saved } />
-        {:else}
-            <BookmarkForm bookmark={ $currentTab } />
-        {/if}
+        <BookmarkForm bookmark={ $currentTab } { saved } />
     </div>
 </div>
