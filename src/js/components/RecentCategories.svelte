@@ -1,6 +1,8 @@
 <script>
-    import { messages } from '../lib/messaging'
     import { onDestroy, onMount } from 'svelte'
+
+    import { messages } from '../lib/messaging'
+    import { t } from '../lib/translate'
     import CategoryList from './CategoryList.svelte'
 
     export let recentCategories = []
@@ -20,5 +22,6 @@
 </script>
 
 <ul class="menu" tabindex="-1">
+    <small class="toast">{ t('recent_categories') }</small>
     <CategoryList categories={recentCategories} />
 </ul>

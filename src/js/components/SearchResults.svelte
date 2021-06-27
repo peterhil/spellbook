@@ -9,10 +9,11 @@
 
 <ul class="menu" tabindex="-1">
     {#if not(isEmpty(categories)) }
+        <small class="toast">{ t('search_results') }</small>
         <CategoryList categories={categories} />
         <li class="divider" data-content={ t('root_categories') }></li>
         <MainCategories />
     {:else}
-        <small class="toast">No categories found</small>
+        <small class="toast">{ t('no_categories_found') }</small>
     {/if}
 </ul>
