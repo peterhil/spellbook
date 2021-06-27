@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "events": "^3.3.0",
+        "iconoir": "github:Wiwaltill/iconoir#patch-1",
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
         "spectre.css": "~0.5.9",
