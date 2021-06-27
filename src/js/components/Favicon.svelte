@@ -1,5 +1,5 @@
 <script>
-    import Icon from '../components/Icon.svelte'
+    import IconBi from '../components/IconBi.svelte'
 
     export let icon
 </script>
@@ -24,6 +24,6 @@
         <img class="icon favicon"
              src={ icon } alt={ icon } title={ icon }>
     {:else}
-        <Icon icon="bookmark" />
+        <IconBi icon="bookmark" />
     {/if}
 </span>

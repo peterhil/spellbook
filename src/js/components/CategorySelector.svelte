@@ -6,7 +6,7 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
-    import IconFa from './IconFa.svelte'
+    import IconBi from './IconBi.svelte'
     import InputGroup from './form/InputGroup.svelte'
 
     export let lastSelection = null
@@ -42,7 +42,7 @@
             <slot name="status"></slot>
             {#if $selection.id }
                 <span class="label label-primary" title="{ t('selected') }">
-                    <IconFa icon="check" />
+                    <IconBi icon="check-lg" />
                     { lastSelection.title }
                 </span>
             {/if}

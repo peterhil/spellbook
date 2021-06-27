@@ -7,6 +7,7 @@
 import Popup from './components/Popup.svelte'
 
 import './lib/icons'
+
 import events from './lib/events'
 import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
 

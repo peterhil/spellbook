@@ -16,8 +16,7 @@
     import DropdownGroup from './DropdownGroup.svelte'
     import DropdownToggles from './DropdownToggles.svelte'
     import Favicon from './Favicon.svelte'
-    import Icon from './Icon.svelte'
-    import IconFa from './IconFa.svelte'
+    import IconBi from './IconBi.svelte'
     import InputGroup from './form/InputGroup.svelte'
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
@@ -74,7 +73,7 @@
             <span slot="status">
                 {#if isVisible('search') && $search.last }
                     <span class="label" title="{ t('search') }">
-                        <IconFa icon="search" />
+                        <IconBi icon="search" />
                         { $search.query }
                     </span>
                 {/if}
@@ -113,7 +112,7 @@
         <InputGroup name="subcategory"
                     label={ t('add_subcategory') }>
             <Button name="toggleSubcategory" classes="input-group-btn">
-                <Icon icon="cross" />
+                <IconBi icon="x-lg" />
             </Button>
         </InputGroup>
     </div>

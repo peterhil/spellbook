@@ -146,6 +146,9 @@ export default [
             copy({
                 targets: [{
                     src: [
+                        'node_modules/bootstrap-icons/bootstrap-icons.svg',
+                        'node_modules/bootstrap-icons/icons/',
+                        'node_modules/bootstrap-icons/font/',
                         'node_modules/spectre.css/dist/spectre-icons.css',
                         'node_modules/spectre.css/dist/spectre.css',
                     ],

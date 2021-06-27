@@ -3,21 +3,20 @@
     import { categorySelection as selection } from '../stores/categorySelection'
 
     import Button from './Button.svelte'
-    import Icon from './Icon.svelte'
-    import IconFa from './IconFa.svelte'
+    import IconBi from './IconBi.svelte'
 </script>
 
 {#if $selection.id }
     <Button name="toggleChildren" classes="input-group-btn"
             title={ t('subcategories') }>
-        <IconFa icon="sitemap" />
+        <IconBi icon="diagram-3-fill" />
     </Button>
     <Button name="toggleSubcategory" classes="input-group-btn"
             title={ t('add_subcategory') }>
-        <Icon icon="plus" />
+        <IconBi icon="plus-lg" />
     </Button>
 {/if}
 <Button name="toggleRecent" classes="input-group-btn"
         title={ t('recent_categories') }>
-    <IconFa icon="history" />
+    <IconBi icon="clock-history" />
 </Button>
