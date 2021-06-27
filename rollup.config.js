@@ -11,9 +11,10 @@ import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH
-const minify = production
-const sourcemap = !production
-const format = 'iife'
+const verbose = true
+const minify = false
+const sourcemap = (production ? false : 'inline')
+const format = 'es'
 
 const outputDir = (dir = '') => {
     return path.join(__dirname, (production ? 'dist/' : 'dev/'), dir)
@@ -42,7 +43,7 @@ const plugins = [
     // we'll extract any component CSS out into
     // a separate file - better for performance
     css({
-        output: 'spellbook.css'
+        output: 'component.css',
     }),
 
     // Convert CommonJS libraries to ES6
@@ -61,57 +62,61 @@ const plugins = [
     minify && terser(),
 ]
 
+const watch = {
+    chokidar: true,
+    clearScreen: true,
+    exclude: ['node_modules/**'],
+    include: ['src/**/*'],
+}
+
 export default [
     {
-        input: 'src/popup/popup.scss',
+        input: 'src/style/popup.scss',
         output: {
-            dir: outputDir('popup'),
+            dir: outputDir('style'),
             name: 'popup.scss',
             format,
         },
         plugins: [
             sass({
-                output: outputDir('popup/popup.css'),
+                output: outputDir('style/popup.css'),
             })
         ],
+        watch,
     },
     {
-        input: 'src/directory/directory.scss',
+        input: 'src/style/directory.scss',
         output: {
-            dir: outputDir('directory'),
+            dir: outputDir('style'),
             name: 'directory.scss',
             format,
         },
         plugins: [
             sass({
-                output: outputDir('directory/directory.css'),
+                output: outputDir('style/directory.css'),
             })
         ],
+        watch,
     },
     {
-        input: { popup: 'src/popup/popup.js' },
-        output: {
-            dir: outputDir('popup'),
-            format,
-            sourcemap,
+        input: {
+            background: 'src/js/background/index.js',
+            directory: 'src/js/directory.js',
+            popup: 'src/js/popup.js',
         },
-        plugins,
-    },
-    {
-        input: { directory: 'src/directory/directory.js' },
         output: {
-            dir: outputDir('directory'),
-            name: 'directory',
+            dir: outputDir('js'),
+            entryFileNames: '[name].js',
             format,
-            sourcemap,
-        },
-        plugins
-    },
-    {
-        input: { background: 'src/background/background.js' },
-        output: {
-            dir: outputDir('background'),
-            format,
+            manualChunks: {
+                api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
+                icons: ['./src/js/lib/icons.js'],
+                'ext/events': ['events'],
+                'ext/kefir': ['kefir'],
+                'ext/rambda': ['rambda'],
+                'ext/svelte': ['svelte', 'svelte/store'],
+                'ext/zepto-detect': ['zepto-detect'],
+            },
             sourcemap,
         },
         plugins: plugins.concat([
@@ -119,15 +124,24 @@ export default [
                 targets: [{
                     src: [
                         'src/**/*.html',
+                    ],
+                    dest: outputDir('views'),
+                }],
+                flatten: true,
+                verbose,
+            }),
+            copy({
+                targets: [{
+                    src: [
                         'src/_locales/**/*.json',
-                        'src/asset/spellbook-bg.jpg',
-                        'src/asset/spellbook_icon*.png',
+                        'src/img/spellbook-bg.jpg',
+                        'src/img/spellbook_icon*.png',
                         'src/manifest.json',
                     ],
                     dest: outputDir(),
                 }],
                 flatten: false,
-                verbose: production,
+                verbose,
             }),
             copy({
                 targets: [{
@@ -135,17 +149,12 @@ export default [
                         'node_modules/spectre.css/dist/spectre-icons.css',
                         'node_modules/spectre.css/dist/spectre.css',
                     ],
-                    dest: outputDir('ext'),
+                    dest: outputDir('style'),
                 }],
                 flatten: true,
-                verbose: production,
+                verbose,
             }),
         ]),
-        watch: {
-            chokidar: true,
-            clearScreen: true,
-            exclude: ['node_modules/**'],
-            include: ['src/**/*'],
-        },
+        watch,
     },
 ]

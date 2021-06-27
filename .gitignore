@@ -4,6 +4,10 @@ node_modules/
 yarn-error.log
 web-ext-artifacts/
 
+# Environment
+.envrc
+.direnv/
+
 # Mac
 .DS_Store
 

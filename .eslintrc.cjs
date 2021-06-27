@@ -27,9 +27,11 @@ module.exports = {
         },
     ],
     globals: {
+        browser: 'readonly',
         chrome: 'readonly',
     },
     rules: {
+        'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
         'comma-dangle': ['off', 'always'],
         indent: ['error', 4],
         'no-console': ['off', 'always'],

@@ -7,32 +7,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.4.2] – 2021-05 Bug fixes and stability
+## [0.4.2] – 2021-06-09 Bug fixes and stability
+
+Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.4.2)
 
 ### Fixed
 
+#### Bugs fixed
+
+* Fix adding subcategory with a bookmark on Firefox · [Issue #39] · [Pull request #38]
+* Wrong data in popup · [Issue #31]
+
+#### Minor fixes
+
+- e939d9c Only use string query on Firefox when the url has about scheme
+- 4d651a1 Work around Chrome bug #1213925: Tabs can not be edited/queried right now
+- bf13210 Pass saved bookmark information into popup and fix popup header [Issue #56]
+- 6a9f1de Adjust debounce to 400 ms on inputEvent$ and add throttle to categorySearch$ [Issue #40]
+- 75a0512 Set browser action icon and badge text per tab · [Issue #36]
+- 3708832 Fix errors caused by platform differences when searching
+- d0a5576 Firefox: Fix creating bookmarks in new subcategories
+- 365e38e Firefox: Fix errors caused by 'about:' pages
 - 7809216 Fix popup header to show when a bookmark is saved
 - bc1243b Fix using subcategory close button with keyboard
 - 022ee1f Fix close button on popup
 
 ### Added
 
+- Started using Github projects for [development boards](https://github.com/peterhil/spellbook/projects)
 - 913bbb3 Show bookmark count on bookmark form
 - 9df8570 Show badge when several bookmarks exist
 
 ### Changed
 
+- 6eea4ef Change default shortcut to Ctrl+E (MacCtrl+E on Mac) [Issue #59]
+- 970d46f Don’t clear search value when it is shorter than the minimum length
+- 99902f0 Query current tab info only after popup is opened · [Issue #36]
 - 2e9edb6 Change the minimum length of search back to two letters
 
 **Technical:**
 
+- Renamed default branch to `main`
+- 36af623 Change indentation to four spaces
+- e06d95b Install [pre-commit] hooks with [ESLint] and other checkers
+- 3d43662 Start writing browser tests with [Puppeteer]
+- Use [Rambda] instead of [Ramda] as is seems to be lighter and faster
 - Use [Ramda] instead of [Fkit] as Fkit seems to be not updated anymore
 - 1d8e9d8 rollup: Use absolute paths to prevent erronous destinations on copy
-- 349cb6c Switch from node-sass to sass
+- 349cb6c Switch from node-sass to [Dart Sass]
 - 2274c3b Get recent categories using getRecent API method
 - 36cedaa Simplify message handling with generic messageBridge
-- 702dd06 Start using pnpm instead of yarn
-- 01e2b64 Replace @riotjs/observable with browserify/events
+- 702dd06 Start using [pnpm] instead of yarn
+- 01e2b64 Replace [@riotjs/observable] with [browserify/events]
+
+### Removed
+
+- Removed all references to [Ava]
+
+[Issue #56]: https://github.com/peterhil/spellbook/issues/56
+[Issue #40]: https://github.com/peterhil/spellbook/issues/40
+[Issue #39]: https://github.com/peterhil/spellbook/issues/39
+[Issue #36]: https://github.com/peterhil/spellbook/issues/36
+[Issue #31]: https://github.com/peterhil/spellbook/issues/31
+[Pull request #38]: https://github.com/peterhil/spellbook/pull/38
 
 # Released versions:
 
@@ -261,8 +298,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/peterhil/spellbook/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/peterhil/spellbook/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/peterhil/spellbook/compare/v0.3.7...v0.4.0
 [0.3.7]: https://github.com/peterhil/spellbook/compare/v0.3.6...v0.3.7
@@ -275,12 +312,20 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 [0.3.0]: https://github.com/peterhil/spellbook/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/peterhil/spellbook/compare/59dab6c...v0.2.0
 
+[@riotjs/observable]: https://github.com/riot/observable
 [Ava]: https://github.com/avajs/ava
+[browserify/events]: https://github.com/browserify/events
 [Bublé]: https://buble.surge.sh/guide/
+[Dart Sass]: https://sass-lang.com/dart-sass
 [Element UI]: https://element.eleme.io/#/en-US
+[ESLint]: https://eslint.org/
 [Fkit]: https://github.com/nullobject/fkit
 [Kefir.js]: https://kefirjs.github.io/kefir/
+[Pnpm]: https://pnpm.io/
+[pre-commit]: https://pre-commit.com/
+[Puppeteer]: https://pptr.dev/
 [Ramda]: https://ramdajs.com/
+[Rambda]: https://selfrefactor.github.io/rambda/#/
 [Riot.js]: https://riot.js.org/
 [Rollup]: https://rollupjs.org/guide/en
 [RxJS]: https://rxjs-dev.firebaseapp.com/guide/overview

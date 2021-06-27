@@ -31,6 +31,13 @@ pnpm run dev
 
 Then add the `dev` directory as [unpacked extension to Chrome](https://developer.chrome.com/extensions/getstarted#manifest) or compatible browser.
 
+## Testing
+
+```
+pnpm run test
+pnpm run test:puppeteer
+```
+
 ## Technology stack
 
 I strive to use libraries that are well written and most importantly

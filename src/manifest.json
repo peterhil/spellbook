@@ -1,29 +1,29 @@
 {
   "manifest_version": 2,
   "name": "Spellbook",
-  "version": "0.4.2",
+  "version": "0.4.3",
 
   "default_locale": "en",
   "description": "__MSG_meta_description__",
   "icons": {
-    "64": "asset/spellbook_icon_bookmarked.png"
+    "64": "img/spellbook_icon_bookmarked.png"
   },
 
   "browser_action": {
-    "default_icon": "asset/spellbook_icon.png",
-    "default_popup": "popup/popup.html"
+    "default_icon": "img/spellbook_icon.png",
+    "default_popup": "views/popup.html"
   },
 
   "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
   "background": {
     "persistent": true,
-    "page": "background/background.html"
+    "page": "views/background.html"
   },
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+B",
-        "mac": "MacCtrl+B"
+        "default": "Ctrl+E",
+        "mac": "MacCtrl+E"
       },
       "description": "__MSG_execute_browser_action__"
     }
