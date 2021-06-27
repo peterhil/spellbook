@@ -25,6 +25,7 @@
         "version": "echo $npm_package_version"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.5.0",
         "events": "^3.3.0",
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
