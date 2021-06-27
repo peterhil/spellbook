@@ -7,7 +7,7 @@
     import IconFa from './IconFa.svelte'
 </script>
 
-{#if $selection.id }
+<div class:d-hide={ !$selection.id } class="input-group">
     <Button name="toggleChildren" classes="input-group-btn"
             title={ t('subcategories') }>
         <IconFa icon="sitemap" />
@@ -16,7 +16,7 @@
             title={ t('add_subcategory') }>
         <Icon icon="plus" />
     </Button>
-{/if}
+</div>
 <Button name="toggleRecent" classes="input-group-btn"
         title={ t('recent_categories') }>
     <IconFa icon="history" />

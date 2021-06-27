@@ -5,23 +5,25 @@
     import { inputEvent$ } from '../lib/reactive'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
+    import { search } from '../stores/search'
 
-    export let name
-    export let value = ''
-
-    let search = ''
+    let input = ''
 
     function searchCategories (query) {
+        // console.debug('[CategorySearch] search:', query)
         messages.emit('api', { type: 'categorySearch', query })
     }
 
     function clearSearch () {
-        // value = ''
+        // console.debug('[CategorySearch] clearSearch')
+        // $search.query = ''
+        $search.last = ''
         messages.emit('search:clear')
-        search.focus()
+        input.focus()
     }
 
     function onInput (query) {
+        // console.debug('[CategorySearch] onInput:', query)
         if (length(query) >= 2) {
             // console.debug('[CategorySearch] >>> Will search with query:', query)
             searchCategories(query)
@@ -33,21 +35,21 @@
 
     onMount(() => {
         const options = { minLength: 0, debounceTime: 400 }
-        const categorySearch$ = inputEvent$(search, options)
+        const categorySearch$ = inputEvent$(input, options)
 
         categorySearch$
             .throttle(1000, { leading: true, trailing: false })
             // .spy('Throttled:')
             .observe(onInput, console.error)
 
-        search.focus()
+        input.focus()
     })
 </script>
 
-<input {name}
+<input name="search"
        class="form-input"
-       bind:this={search}
-       bind:value={value}
+       bind:this={ input }
+       bind:value={ $search.query }
        on:focus
        placeholder={ t('search_placeholder') }
        autocomplete="off">
