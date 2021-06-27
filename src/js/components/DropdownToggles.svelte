@@ -4,13 +4,13 @@
 
     import Button from './Button.svelte'
     import Icon from './Icon.svelte'
-    import IconFa from './IconFa.svelte'
+    import IconHawcon from './IconHawcon.svelte'
 </script>
 
 {#if $selection.id }
     <Button name="toggleChildren" classes="input-group-btn"
             title={ t('subcategories') }>
-        <IconFa icon="sitemap" />
+        <IconHawcon icon="folder-download" />
     </Button>
     <Button name="toggleSubcategory" classes="input-group-btn"
             title={ t('add_subcategory') }>
@@ -19,5 +19,5 @@
 {/if}
 <Button name="toggleRecent" classes="input-group-btn"
         title={ t('recent_categories') }>
-    <IconFa icon="history" />
+    <IconHawcon icon="stop-watch" />
 </Button>

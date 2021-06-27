@@ -5,6 +5,8 @@ specifiers:
   '@babel/eslint-parser': ^7.14.4
   '@fortawesome/fontawesome-svg-core': ^1.2.35
   '@fortawesome/free-solid-svg-icons': ^5.15.3
+  '@icon/hawcons-filled': ^1.0.0-alpha.3
+  '@icon/hawcons-stroke': ^1.0.0-alpha.3
   '@rollup/plugin-commonjs': ^19.0.0
   '@rollup/plugin-eslint': ^8.0.1
   '@rollup/plugin-node-resolve': ^13.0.0
@@ -42,6 +44,8 @@ specifiers:
   zepto-detect: ~0.0.0
 
 dependencies:
+  '@icon/hawcons-filled': 1.0.0-alpha.3
+  '@icon/hawcons-stroke': 1.0.0-alpha.3
   events: 3.3.0
   kefir: 3.8.8
   rambda: 6.7.0
@@ -392,6 +396,14 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-common-types': 0.2.35
     dev: true
+
+  /@icon/hawcons-filled/1.0.0-alpha.3:
+    resolution: {integrity: sha512-AQruqYI4bioiTKJb9t251UsWoQDo+FlMJ/OOwmc+QZINCVl/sbGHZZIH7VuN5FfE1frCERGZFTO3uZo8y165Ug==}
+    dev: false
+
+  /@icon/hawcons-stroke/1.0.0-alpha.3:
+    resolution: {integrity: sha512-lajruE+qYmb1dwPk6HxRkLY44ex7CQ3ewORw0PoquMxnxko0bRIfS1tpyB6fZG/eLZXPzBBr19PvL7Jv4x2I0Q==}
+    dev: false
 
   /@jest/types/26.6.2:
     resolution: {integrity: sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ==}

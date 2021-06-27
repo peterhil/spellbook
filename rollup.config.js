@@ -146,6 +146,10 @@ export default [
             copy({
                 targets: [{
                     src: [
+                        'node_modules/@icon/hawcons-filled/hawcons-filled.*',
+                        // 'node_modules/@icon/hawcons-filled/icons/',
+                        'node_modules/@icon/hawcons-stroke/hawcons-stroke.*',
+                        // 'node_modules/@icon/hawcons-stroke/icons/',
                         'node_modules/spectre.css/dist/spectre-icons.css',
                         'node_modules/spectre.css/dist/spectre.css',
                     ],
