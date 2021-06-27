@@ -8,6 +8,7 @@
 @import '../../node_modules/spectre.css/src/spectre';
 @import '../../node_modules/spectre.css/src/spectre-icons';
 @import './spectre_overrides';
+@import './common';
 
 // Basic layout
 
@@ -112,12 +113,6 @@ body {
 
 .category.dropdown {
     display: block;
-}
-
-.category .title {
-    overflow: hidden;
-    font-weight: bolder;
-    text-overflow: ellipsis;
 }
 
 .status .label {

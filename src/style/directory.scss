@@ -7,6 +7,8 @@
 @import './variables';
 @import '../../node_modules/spectre.css/src/spectre';
 @import '../../node_modules/spectre.css/src/spectre-icons';
+@import './spectre_overrides';
+@import './common';
 
 :scope {
     --border-color: #4b48d6;
@@ -108,10 +110,6 @@ h1 {
 .menu:focus,
 .panel:focus {
     outline: none;
-}
-
-.category .title {
-    font-weight: bolder;
 }
 
 .divider {
