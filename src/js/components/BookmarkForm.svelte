@@ -28,6 +28,7 @@
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     function onSearchFocus () {
+        // console.debug('[CategorySelector] onSearchFocus')
         $dropdownShown = 'search'
     }
 
@@ -79,7 +80,7 @@
     <div class="form-group">
         <CategorySelector>
             <span slot="status">
-                {#if isVisible('search') && $search.last }
+                {#if $search.last }
                     <span class="label" title="{ t('search') }">
                         <IconFa icon="search" />
                         { $search.last }
@@ -87,11 +88,7 @@
                 {/if}
             </span>
 
-            <CategorySearch
-                name="search"
-                bind:value={ $search.query }
-                on:focus={ onSearchFocus }
-                />
+            <CategorySearch on:focus={ onSearchFocus } />
 
             <DropdownToggles />
         </CategorySelector>
