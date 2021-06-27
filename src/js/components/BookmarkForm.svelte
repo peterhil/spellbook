@@ -82,7 +82,7 @@
                 {#if isVisible('search') && $search.last }
                     <span class="label" title="{ t('search') }">
                         <IconFa icon="search" />
-                        { $search.query }
+                        { $search.last }
                     </span>
                 {/if}
             </span>
