@@ -29,8 +29,10 @@
 </script>
 
 <ul class="menu" tabindex="-1"
-    on:categorySelection={updateChildren}
-    >
-    <small class="toast">{ t('subcategories') }</small>
+    on:categorySelection={updateChildren}>
+    <small class="toast">
+        { t('subcategories') }
+        ({ children.length } { t('pieces') })
+    </small>
     <CategoryList categories={children} />
 </ul>
