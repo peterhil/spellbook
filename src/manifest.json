@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Spellbook",
-  "version": "0.4.3",
+  "version": "0.5.0",
 
   "default_locale": "en",
   "description": "__MSG_meta_description__",
