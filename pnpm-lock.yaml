@@ -20,6 +20,7 @@ specifiers:
   events: ^3.3.0
   kefir: ~3.8.8
   mocha: ^9.0.0
+  ngrammy: github:peterhil/ngrammy
   puppeteer: ^10.0.0
   rambda: ^6.7.0
   require-from-string: ~2.0.2
@@ -44,6 +45,7 @@ specifiers:
 dependencies:
   events: 3.3.0
   kefir: 3.8.8
+  ngrammy: github.com/peterhil/ngrammy/b31e853174005711045e565b8f1ae260117c2bb3
   rambda: 6.7.0
   spectre.css: 0.5.9
   zepto-detect: 0.0.0
@@ -7300,3 +7302,12 @@ packages:
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: true
+
+  github.com/peterhil/ngrammy/b31e853174005711045e565b8f1ae260117c2bb3:
+    resolution: {tarball: 'https://codeload.github.com/peterhil/ngrammy/tar.gz/b31e853174005711045e565b8f1ae260117c2bb3'}
+    name: ngrammy
+    version: 0.1.0
+    engines: {node: '>=10'}
+    prepare: true
+    requiresBuild: true
+    dev: false

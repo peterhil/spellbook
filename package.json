@@ -27,6 +27,7 @@
     "dependencies": {
         "events": "^3.3.0",
         "kefir": "~3.8.8",
+        "ngrammy": "github:peterhil/ngrammy",
         "rambda": "^6.7.0",
         "spectre.css": "~0.5.9",
         "zepto-detect": "~0.0.0"
