@@ -17,8 +17,9 @@ function onLoad (event) {
 
     port.onDisconnect.addListener(disconnectionHandler)
 
-    // Send a message
+    // Send messages
     port.postMessage({ type: 'getRecentCategories' })
+    port.postMessage({ type: 'prepareCategoryIndex' })
 
     messages.on('api', (request) => {
         // console.debug('[popup] API request:', request)

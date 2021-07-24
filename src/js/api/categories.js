@@ -64,8 +64,9 @@ export const getChildren = choice(platform, {
 
 export function flattenTree (tree) {
     const bookmarks = []
+    const treeOrEmpty = tree ?? []
 
-    tree.each((bookmark) => {
+    treeOrEmpty.forEach((bookmark) => {
         const children = isCategory(bookmark)
             ? flattenTree(bookmark.children)
             : []

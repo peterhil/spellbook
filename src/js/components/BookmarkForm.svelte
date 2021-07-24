@@ -33,7 +33,7 @@
     }
 
     function updateCategories (results) {
-        // console.debug('[CategorySelector] updateCategories:', results.length)
+        console.debug('[CategorySelector] updateCategories:', results)
         $search.results = results
         $search.last = $search.query
         $dropdownShown = 'search'
@@ -63,6 +63,7 @@
 
     onMount(() => {
         messages.on('searchResults', updateCategories)
+        messages.on('categoryIndexPrepared', console.debug)
     })
 </script>
 

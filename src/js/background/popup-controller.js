@@ -6,17 +6,28 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { map } from 'rambda'
+import {
+    filter,
+    forEach,
+    map,
+    pick,
+    pipe,
+    values,
+} from 'rambda'
+import ngrammy from 'ngrammy'
 
 import { sendMessage, unhandledMessage } from '../lib/messaging'
-import { choice } from '../lib/pure'
+import { choice, sortByTitleCaseInsensitive } from '../lib/pure'
+import allCategories from '../stores/categories'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
-import { getRecentCategories } from '../api/categories'
+import { flattenTree, getRecentCategories, getTree } from '../api/categories'
+import { isCategory } from '../api/helpers'
 import { bookmarksModified$ } from '../api/streams'
 import { currentTab$, getActiveTabs } from '../api/tabs'
 
-// TODO Use Svelte store?
+// TODO Use Svelte store!
 const savedBookmarks = new Map()
+const index = new ngrammy.Index(2)
 
 export const popupController = {
     action: function (message, port) {
@@ -35,12 +46,57 @@ export const popupController = {
                 // )
             },
             categorySearch: (message) => {
-                // console.debug('[popup controller] categorySearch:', message.query)
-                categorySearch(message.query)
-                    .then(result => {
-                        // console.debug('[popup controller] categorySearch result:', result.length)
-                        sendMessage(port, 'searchResults', result)
+                console.debug('[popup controller] categorySearch:', message.query)
+
+                if (index.size() > 0) {
+                    const ids = index.search(message.query)
+                    console.debug('[popup controller] using index')
+                    const result = pick(ids, allCategories)
+
+                    sendMessage(port, 'searchResults', values(result))
+                }
+                else {
+                    console.debug('[popup controller] using browser api')
+                    categorySearch(message.query)
+                        .then(result => {
+                            // console.debug('[popup controller] categorySearch result:', result.length)
+                            sendMessage(port, 'searchResults', result)
+                        })
+                }
+            },
+            prepareCategoryIndex: (message) => {
+                if (index.size() > 0) {
+                    console.debug('[popup controller] index exists already')
+                }
+                else {
+                    console.debug('[popup controller] prepareCategoryIndex:', message)
+                    // TODO Use a store!
+                    getTree().then(bookmarks => {
+                        // console.debug({ bookmarks })
+                        const categories = pipe(
+                            flattenTree,
+                            filter(isCategory),
+                            sortByTitleCaseInsensitive,
+                        )(bookmarks || [])
+
+                        // console.debug({ categories })
+                        // const allCategories = fromPairs(pick(['id', 'title'], categories))
+                        forEach(
+                            (category) => {
+                                index.add(category.title, category.id)
+                                allCategories[category.id] = category // TODO Use map
+                            },
+                            categories
+                        )
+
+                        sendMessage(port, 'categoryIndexPrepared', {
+                            // bookmarks,
+                            // categories,
+                            categoriesLength: categories.length,
+                            indexSize: index.size(),
+                        })
                     })
+                }
             },
             default: unhandledMessage,
         })
