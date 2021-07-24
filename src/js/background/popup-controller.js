@@ -52,8 +52,9 @@ export const popupController = {
                     const ids = index.search(message.query)
                     console.debug('[popup controller] using index')
                     const result = pick(ids, allCategories)
+                    const sorted = sortByTitleCaseInsensitive(values(result))
 
-                    sendMessage(port, 'searchResults', values(result))
+                    sendMessage(port, 'searchResults', sorted)
                 }
                 else {
                     console.debug('[popup controller] using browser api')
@@ -76,7 +77,7 @@ export const popupController = {
                         const categories = pipe(
                             flattenTree,
                             filter(isCategory),
-                            sortByTitleCaseInsensitive,
+                            // sortByTitleCaseInsensitive,
                         )(bookmarks || [])
 
                         // console.debug({ categories })
@@ -84,7 +85,7 @@ export const popupController = {
                         forEach(
                             (category) => {
                                 index.add(category.title, category.id)
-                                allCategories[category.id] = category // TODO Use map
+                                allCategories[category.id] = category // TODO Use map?
                             },
                             categories
                         )
