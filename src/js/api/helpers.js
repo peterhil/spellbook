@@ -46,16 +46,12 @@ export function promised (object, prefix = null) {
 
         switch (kind) {
         case 'function':
-            // console.log(`${kind}: ${path}`, thing)
             promises[property] = toPromise(thing)
             break
         case 'object':
-            // console.debug(`${kind}: ${path}`, { isEvent })
             if (isEvent) continue
             promises[property] = promised(object[property], path)
             break
-        default:
-            // console.debug(`${kind}: ${path} = `, thing)
         }
     }
 
