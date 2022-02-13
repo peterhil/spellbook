@@ -35,22 +35,20 @@ export function toPromise (fn) {
     return compose(callbackToPromise, withErrorChecking, curry)(fn)
 }
 
-export function promised (object, prefix = null) {
+export function promised (object) {
     const promises = {}
 
     for (const property in object) {
         const thing = object[property]
         const kind = typeof thing
-        const path = [prefix, property].filter(item => item).join('.')
-        const isEvent = property.slice(0, 2) === 'on'
 
         switch (kind) {
         case 'function':
             promises[property] = toPromise(thing)
             break
         case 'object':
-            if (isEvent) continue
-            promises[property] = promised(object[property], path)
+            if (property.slice(0, 2) === 'on') continue
+            promises[property] = promised(thing)
             break
         }
     }
