@@ -10,8 +10,7 @@ import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
 
 import { safeHead } from '../lib/pure'
-import { callbackToPromise } from '../lib/reactive'
-import { browserEvent$, withErrorChecking } from './helpers'
+import { browserEvent$, toPromise } from './helpers'
 
 let currentWindowId = -1
 
@@ -40,14 +39,13 @@ const tabsAreEqual = (a, b) => {
 }
 
 const getTab = (id) => {
-    return fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
+    const getTabPromised = toPromise(chrome.tabs.get)
+    return fromPromise(getTabPromised(id))
 }
 
 export function queryTabs (query) {
-    return callbackToPromise(
-        withErrorChecking(chrome.tabs.query),
-        query,
-    )
+    const queryTabsPromised = toPromise(chrome.tabs.query)
+    return queryTabsPromised(query)
 }
 
 export function getActiveTabs () {

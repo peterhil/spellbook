@@ -12,15 +12,19 @@ import { constantError, fromEvents } from 'kefir'
 
 const defaults = { minLength: 2, debounceTime: 250 }
 
-export function callbackToPromise (fn, ...args) {
-    return new Promise((resolve, reject) => {
-        try {
-            fn(...args, resolve)
-        }
-        catch (err) {
-            reject(err)
-        }
-    })
+export function callbackToPromise (fn) {
+    const promised = (...args) => {
+        return new Promise((resolve, reject) => {
+            try {
+                fn(...args, resolve)
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+    return promised
 }
 
 export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = defaults) {

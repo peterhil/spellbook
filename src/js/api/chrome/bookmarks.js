@@ -9,15 +9,15 @@
 import { toPromise } from '../helpers'
 
 export function bookmarkSearch (queryObject) {
-    return toPromise(chrome.bookmarks.search, queryObject)
+    return toPromise(chrome.bookmarks.search)(queryObject)
 }
 
 export const create = (bookmark) => {
-    return toPromise(chrome.bookmarks.create, bookmark)
+    return toPromise(chrome.bookmarks.create)(bookmark)
 }
 
 export const get = (...args) => {
-    return toPromise(chrome.bookmarks.get, ...args)
+    return toPromise(chrome.bookmarks.get)(...args)
 }
 
 export const getTree = () => {
@@ -25,13 +25,13 @@ export const getTree = () => {
 }
 
 export const getSubTree = (id) => {
-    return toPromise(chrome.bookmarks.getSubTree, id)
+    return toPromise(chrome.bookmarks.getSubTree)(id)
 }
 
 export const getChildren = (id) => {
-    return toPromise(chrome.bookmarks.getChildren, id)
+    return toPromise(chrome.bookmarks.getChildren)(id)
 }
 
 export const getRecent = (count) => {
-    return toPromise(chrome.bookmarks.getRecent, count)
+    return toPromise(chrome.bookmarks.getRecent)(count)
 }
