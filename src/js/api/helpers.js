@@ -35,6 +35,33 @@ export function toPromise (fn) {
     return compose(callbackToPromise, withErrorChecking, curry)(fn)
 }
 
+export function promised (object, prefix = null) {
+    const promises = {}
+
+    for (const property in object) {
+        const thing = object[property]
+        const kind = typeof thing
+        const path = [prefix, property].filter(item => item).join('.')
+        const isEvent = property.slice(0, 2) === 'on'
+
+        switch (kind) {
+        case 'function':
+            // console.log(`${kind}: ${path}`, thing)
+            promises[property] = toPromise(thing)
+            break
+        case 'object':
+            // console.debug(`${kind}: ${path}`, { isEvent })
+            if (isEvent) continue
+            promises[property] = promised(object[property], path)
+            break
+        default:
+            // console.debug(`${kind}: ${path} = `, thing)
+        }
+    }
+
+    return promises
+}
+
 export const withErrorChecking = (chromeAsyncFn) => {
     return function wrappedAsyncChromeFn (...args) {
         const originalCallback = last(args)

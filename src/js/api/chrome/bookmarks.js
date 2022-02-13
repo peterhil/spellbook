@@ -6,32 +6,39 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { toPromise } from '../helpers'
+import { platform, promised, toPromise } from '../helpers'
+
+if (platform === 'chrome') {
+    // Make a global browser object with promisified API
+    const promises = promised(chrome)
+    const browser = Object.assign({}, chrome, promises)
+    globalThis.browser = browser
+}
 
 export function bookmarkSearch (queryObject) {
-    return toPromise(chrome.bookmarks.search)(queryObject)
+    return browser.bookmarks.search(queryObject)
 }
 
 export const create = (bookmark) => {
-    return toPromise(chrome.bookmarks.create)(bookmark)
+    return browser.bookmarks.create(bookmark)
 }
 
 export const get = (...args) => {
-    return toPromise(chrome.bookmarks.get)(...args)
+    return browser.bookmarks.get(...args)
 }
 
 export const getTree = () => {
-    return toPromise(chrome.bookmarks.getTree)
+    return browser.bookmarks.getTree()
 }
 
 export const getSubTree = (id) => {
-    return toPromise(chrome.bookmarks.getSubTree)(id)
+    return browser.bookmarks.getSubTree(id)
 }
 
 export const getChildren = (id) => {
-    return toPromise(chrome.bookmarks.getChildren)(id)
+    return browser.bookmarks.getChildren(id)
 }
 
 export const getRecent = (count) => {
-    return toPromise(chrome.bookmarks.getRecent)(count)
+    return browser.bookmarks.getRecent(count)
 }
