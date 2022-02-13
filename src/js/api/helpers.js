@@ -7,7 +7,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import zd from 'zepto-detect'
-import { curry, prop, init, last, test } from 'rambda'
+import { compose, curry, prop, init, last, test } from 'rambda'
 
 import { callbackToPromise } from '../lib/reactive'
 import { fromEventPattern } from '../lib/rxjs'
@@ -32,9 +32,7 @@ export const browserEvent$ = (eventType) => {
 }
 
 export function toPromise (fn) {
-    return callbackToPromise(
-        withErrorChecking(curry(fn))
-    )
+    return compose(callbackToPromise, withErrorChecking, curry)(fn)
 }
 
 export const withErrorChecking = (chromeAsyncFn) => {
