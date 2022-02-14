@@ -6,11 +6,22 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/* global chrome, globalThis */
+
 import zd from 'zepto-detect'
 import { compose, curry, prop, init, last, test } from 'rambda'
 
 import { callbackToPromise } from '../lib/reactive'
 import { fromEventPattern } from '../lib/rxjs'
+
+if (zd.browser.chrome) {
+    // Make a global browser object with promisified API
+    const promises = promised(chrome)
+    const browser = Object.assign({}, chrome, promises)
+    globalThis.browser = browser
+}
+
+export const browser = globalThis.browser
 
 export const platform = (
     zd.browser.firefox ? 'firefox' : (zd.browser.chrome ? 'chrome' : null)

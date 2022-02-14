@@ -6,14 +6,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { platform, promised, toPromise } from '../helpers'
-
-if (platform === 'chrome') {
-    // Make a global browser object with promisified API
-    const promises = promised(chrome)
-    const browser = Object.assign({}, chrome, promises)
-    globalThis.browser = browser
-}
+import { browser } from '../helpers'
 
 export function bookmarkSearch (queryObject) {
     return browser.bookmarks.search(queryObject)
