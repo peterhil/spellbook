@@ -40,7 +40,6 @@
         "@rollup/plugin-eslint": "^8.0.1",
         "@rollup/plugin-node-resolve": "^13.0.0",
         "@testing-library/svelte": "^3.0.3",
-        "caniuse-lite": "~1.0.30001235",
         "chokidar": "^3.5.1",
         "eslint": "^7.28.0",
         "eslint-config-standard": "^16.0.3",
