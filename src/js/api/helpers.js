@@ -6,22 +6,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/* global chrome, globalThis */
-
 import zd from 'zepto-detect'
-import { compose, curry, prop, init, last, test } from 'rambda'
+import { prop } from 'rambda'
 
-import { callbackToPromise } from '../lib/reactive'
 import { fromEventPattern } from '../lib/rxjs'
-
-if (zd.browser.chrome) {
-    // Make a global browser object with promisified API
-    const promises = promised(chrome)
-    const browser = Object.assign({}, chrome, promises)
-    globalThis.browser = browser
-}
-
-export const browser = globalThis.browser
 
 export const platform = (
     zd.browser.firefox ? 'firefox' : (zd.browser.chrome ? 'chrome' : null)
@@ -40,60 +28,4 @@ export const browserEvent$ = (eventType) => {
         eventType.addListener.bind(eventType),
         eventType.removeListener.bind(eventType)
     )
-}
-
-export function toPromise (fn) {
-    return compose(callbackToPromise, withErrorChecking, curry)(fn)
-}
-
-export function promised (object) {
-    const promises = {}
-
-    for (const property in object) {
-        const thing = object[property]
-        const kind = typeof thing
-
-        switch (kind) {
-        case 'function':
-            promises[property] = toPromise(thing)
-            break
-        case 'object':
-            if (property.slice(0, 2) === 'on') continue
-            promises[property] = promised(thing)
-            break
-        }
-    }
-
-    return promises
-}
-
-export const withErrorChecking = (chromeAsyncFn) => {
-    return function wrappedAsyncChromeFn (...args) {
-        const originalCallback = last(args)
-        const fnArgs = init(args)
-
-        function callbackWithErrorCheck (...resultArgs) {
-            const error = chrome.runtime.lastError
-            const isTabMessage = test(/^Tabs cannot be \w+ right now \(user may be dragging a tab\)\.$/)
-
-            if (error) {
-                // Workaround for bug in Chrome v91:
-                // https://bugs.chromium.org/p/chromium/issues/detail?id=1213925
-                if (isTabMessage(error.message)) {
-                    // console.warn('[withErrorChecking] avoiding:', error.message)
-                    setTimeout(() => {
-                        originalCallback(...resultArgs)
-                    }, 500)
-                    return
-                }
-                else {
-                    throw new Error(error.message)
-                }
-            }
-
-            originalCallback(...resultArgs)
-        }
-
-        chromeAsyncFn(...fnArgs, callbackWithErrorCheck)
-    }
 }

@@ -28,6 +28,7 @@ specifiers:
   rollup-plugin-sass: ^1.2.2
   rollup-plugin-svelte: ^7.1.0
   rollup-plugin-terser: ^7.0.2
+  rosegarden: github:peterhil/rosegarden
   sass: ^1.34.1
   spectre.css: ~0.5.9
   stylelint: ^13.13.1
@@ -44,6 +45,7 @@ dependencies:
   events: 3.3.0
   kefir: 3.8.8
   rambda: 6.7.0
+  rosegarden: github.com/peterhil/rosegarden/774e2db4f21a84d554756620c9e382d2e13f25be
   spectre.css: 0.5.9
   zepto-detect: 0.0.0
 
@@ -7301,3 +7303,11 @@ packages:
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: true
+
+  github.com/peterhil/rosegarden/774e2db4f21a84d554756620c9e382d2e13f25be:
+    resolution: {tarball: https://codeload.github.com/peterhil/rosegarden/tar.gz/774e2db4f21a84d554756620c9e382d2e13f25be}
+    name: rosegarden
+    version: 0.5.0
+    dependencies:
+      rambda: 6.7.0
+    dev: false

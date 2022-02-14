@@ -8,9 +8,10 @@
 
 import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
+import { toPromise } from 'rosegarden'
 
 import { safeHead } from '../lib/pure'
-import { browserEvent$, toPromise } from './helpers'
+import { browserEvent$ } from './helpers'
 
 let currentWindowId = -1
 
