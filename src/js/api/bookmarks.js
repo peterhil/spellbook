@@ -14,17 +14,12 @@ import { sortByTitleCaseInsensitive } from '../lib/pure'
 import { isCategory } from './helpers'
 
 export const categorySearch = async (query) => {
-    // console.debug('[bookmarks api] categorySearch: doing bookmarkSearch', query)
-
     return new Promise((resolve, reject) => {
         return browser.bookmarks.search(query).then(bookmarks => {
-            // console.debug('[bookmarks api] categorySearch: done bookmarks count:', bookmarks.length)
-            let categories = bookmarks.filter(isCategory)
+            const categories = bookmarks.filter(isCategory)
+            const sorted = sortByTitleCaseInsensitive(categories)
 
-            categories = sortByTitleCaseInsensitive(categories)
-            // console.debug('[bookmarks api] categorySearch: categories filtered and sorted', categories.length)
-
-            resolve(categories)
+            resolve(sorted)
         })
     })
 }
@@ -32,10 +27,7 @@ export const categorySearch = async (query) => {
 export function searchWithBookmark (bookmark) {
     let query
 
-    if (!(bookmark && bookmark.url)) {
-        return []
-    }
-
+    if (!bookmark?.url) return []
     if (zd.browser.firefox && test(/^about:/, bookmark.url)) {
         // Query object with 'about:' url scheme will throw a
         // SecurityError and a TypeError, so query with string even if
