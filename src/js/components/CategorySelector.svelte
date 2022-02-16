@@ -44,7 +44,7 @@
         <small class="status float-right">
             <slot name="status"></slot>
             {#if $selection.id }
-                <span class="label label-primary" title="{ t('selected') }">
+                <span class="label label-primary" title="{ t('selected_category') }">
                     <IconFa icon="check" />
                     { lastSelection.title }
                 </span>
