@@ -25,15 +25,9 @@ export const popupController = {
     bookmarkStatus: (message, port) => {
         const result = savedBookmarks.getBookmark(message.tab.id) || []
         sendMessage(port, 'bookmarkStatus', result)
-        // console.debug(
-        //     '[popup controller] bookmarkStatus:', message, result, savedBookmarks
-        // )
     },
     categorySearch: async (message, port) => {
-        console.debug('[popup controller] categorySearch:', port.name, message, message.query)
         const result = await categorySearch(message.query)
-        console.debug('[popup controller] categorySearch result:', result.length)
-
         sendMessage(port, 'searchResults', result)
     },
 }
