@@ -21,7 +21,7 @@ export function isCategory (bookmark) {
 }
 
 export function isTag (bookmark) {
-    return bookmark.id !== 'tags________'
+    return bookmark.id === 'tags________'
 }
 
 export const browserEvent$ = (eventType) => {
