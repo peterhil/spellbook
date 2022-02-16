@@ -7,7 +7,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import zd from 'zepto-detect'
-import { map, pick, prop, take, uniq } from 'rambda'
+import { map, pick, prop, props, take, uniq } from 'rambda'
 import { browser } from 'rosegarden'
 
 import { isCategory } from './helpers'
@@ -78,16 +78,9 @@ export async function getParents (bookmark) {
 }
 
 export async function getParentPath (bookmark) {
-    let parents = []
-
-    try {
-        parents = await getParents(bookmark)
-    }
-    catch (err) {
-        console.error(err)
-    }
-
-    return parents.map(parent => parent.title).join(' < ')
+    return getParents(bookmark)
+        .then((parents) => props(['title'], parents).join(' < '))
+        .catch(console.error)
 }
 
 export const getRecentCategories = async (maxCount) => {
