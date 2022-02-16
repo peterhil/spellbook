@@ -11,10 +11,6 @@ import { prop } from 'rambda'
 
 import { fromEventPattern } from '../lib/rxjs'
 
-export const platform = (
-    zd.browser.firefox ? 'firefox' : (zd.browser.chrome ? 'chrome' : null)
-)
-
 export function isBookmark (bookmark) {
     return !!prop('url', bookmark) && bookmark.id !== 'tags________'
 }

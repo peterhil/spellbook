@@ -1,8 +1,8 @@
 <script>
     import { filter } from 'rambda'
+    import { browser } from 'rosegarden'
     import { onDestroy, onMount } from 'svelte'
 
-    import { getChildren } from '../api/categories'
     import { isCategory } from '../api/helpers'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
@@ -13,7 +13,7 @@
 
     async function updateChildren (category) {
         // console.debug('[ChildCategories] updateChildren:', category)
-        const results = await getChildren(category.id)
+        const results = await browser.bookmarks.getChildren(category.id)
         children = sortByTitleCaseInsensitive(
             filter(isCategory, results)
         )

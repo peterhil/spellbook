@@ -1,8 +1,8 @@
 <script>
     import { equals, pick } from 'rambda'
+    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
 
-    import { createBookmark } from '../api/bookmarks'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
@@ -47,14 +47,14 @@
         // console.debug('[BookmarkForm] Submitted:', data, data.subcategory)
 
         if (data.subcategory) {
-            const newSubcategory = await createBookmark({
+            const newSubcategory = await browser.bookmarks.create({
                 parentId: data.parentId,
                 title: data.subcategory,
             })
             data.parentId = newSubcategory.id
         }
 
-        const newBookmark = await createBookmark(pick(bookmarkFields, data))
+        const newBookmark = await browser.bookmarks.create(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
         window.close()
