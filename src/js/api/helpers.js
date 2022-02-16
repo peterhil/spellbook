@@ -10,12 +10,18 @@ import { prop } from 'rambda'
 
 import { fromEventPattern } from '../lib/rxjs'
 
+export const url = prop('url')
+
 export function isBookmark (bookmark) {
-    return !!prop('url', bookmark) && bookmark.id !== 'tags________'
+    return !!url(bookmark) && !isTag(bookmark)
 }
 
 export function isCategory (bookmark) {
-    return !prop('url', bookmark) && bookmark.id !== 'tags________'
+    return !url(bookmark) && !isTag(bookmark)
+}
+
+export function isTag (bookmark) {
+    return bookmark.id !== 'tags________'
 }
 
 export const browserEvent$ = (eventType) => {
