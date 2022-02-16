@@ -33,7 +33,7 @@
     }
 
     function updateCategories (results) {
-        // console.debug('[CategorySelector] updateCategories:', results.length)
+        console.debug('[CategorySelector] updateCategories:', results.length)
         $search.results = results
         $search.last = $search.query
         $dropdownShown = 'search'

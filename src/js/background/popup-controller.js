@@ -8,8 +8,7 @@
 
 import { map } from 'rambda'
 
-import { sendMessage, unhandledMessage } from '../lib/messaging'
-import { choice } from '../lib/pure'
+import { sendMessage } from '../lib/messaging'
 import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
@@ -19,34 +18,26 @@ import { currentTab$, getActiveTabs } from '../api/tabs'
 const savedBookmarks = new Map()
 
 export const popupController = {
-    action: function (message, port) {
-        const action = choice(message.type, {
-            getRecentCategories: (message) => {
-                getRecentCategories(5) // TODO Move hardcoded value into options
-                    .then(result => {
-                        sendMessage(port, 'recentCategories', result)
-                    })
-            },
-            bookmarkStatus: (message) => {
-                const result = savedBookmarks.get(message.tab.id) || []
-                sendMessage(port, 'bookmarkStatus', result)
-                // console.debug(
-                //     '[popup controller] bookmarkStatus:', message, result, savedBookmarks
-                // )
-            },
-            categorySearch: (message) => {
-                // console.debug('[popup controller] categorySearch:', message.query)
-                categorySearch(message.query)
-                    .then(result => {
-                        // console.debug('[popup controller] categorySearch result:', result.length)
-                        sendMessage(port, 'searchResults', result)
-                    })
-            },
-            default: unhandledMessage,
-        })
+    getRecentCategories: (message, port) => {
+        getRecentCategories(5) // TODO Move hardcoded value into options
+            .then(result => {
+                sendMessage(port, 'recentCategories', result)
+            })
+    },
+    bookmarkStatus: (message, port) => {
+        const result = savedBookmarks.get(message.tab.id) || []
+        sendMessage(port, 'bookmarkStatus', result)
+        // console.debug(
+        //     '[popup controller] bookmarkStatus:', message, result, savedBookmarks
+        // )
+    },
+    categorySearch: async (message, port) => {
+        console.debug('[popup controller] categorySearch:', port.name, message, message.query)
+        const result = await categorySearch(message.query)
+        console.debug('[popup controller] categorySearch result:', result.length)
 
-        action(message)
-    }
+        sendMessage(port, 'searchResults', result)
+    },
 }
 
 function setBookmarkStatus (bookmarks, tabId) {

@@ -7,7 +7,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import EventEmitter from 'events'
-import { curry } from 'rambda'
+import { curry, omit, path } from 'rambda'
 
 export const messages = new EventEmitter()
 
@@ -34,17 +34,12 @@ export const sendMessage = curry((port, type, data) => {
     port.postMessage({ type, data })
 })
 
-export const unhandledMessage = (message) => {
-    console.warn('Unhandled message:', message)
-}
-
 export function messageServer (controllers) {
     return function messageDispatcher (message, port) {
-    // console.debug('[background] Message from', port.name + ':', message.type, message)
-        const controller = controllers[port.name]
+        const action = path([port.name, message.type], controllers)
 
-        if (controller) {
-            controller.action(message, port)
+        if (action) {
+            action(omit(['type'], message), port)
         }
         else {
             notFound(port)
