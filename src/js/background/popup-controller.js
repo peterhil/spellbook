@@ -13,9 +13,7 @@ import { categorySearch, searchWithBookmark } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { bookmarksModified$ } from '../api/streams'
 import { currentTab$, getActiveTabs } from '../api/tabs'
-
-// TODO Use Svelte store?
-const savedBookmarks = new Map()
+import { savedBookmarks } from '../stores/savedBookmarks'
 
 export const popupController = {
     getRecentCategories: (message, port) => {
@@ -25,7 +23,7 @@ export const popupController = {
             })
     },
     bookmarkStatus: (message, port) => {
-        const result = savedBookmarks.get(message.tab.id) || []
+        const result = savedBookmarks.getBookmark(message.tab.id) || []
         sendMessage(port, 'bookmarkStatus', result)
         // console.debug(
         //     '[popup controller] bookmarkStatus:', message, result, savedBookmarks
@@ -58,7 +56,7 @@ async function checkBookmarkStatus (activeTab) {
     // console.debug('[popup controller] Bookmarks found:', bookmarks)
 
     setBookmarkStatus(bookmarks, activeTab.id)
-    savedBookmarks.set(activeTab.id, bookmarks || [])
+    savedBookmarks.setBookmark(activeTab.id, bookmarks || [])
 
     return bookmarks
 }
@@ -68,7 +66,7 @@ async function checkTabs () {
     // console.debug('[popup controller] active tabs:', activeTabs)
 
     // Clear saved bookmarks cache when bookmarks are modified
-    savedBookmarks.clear()
+    savedBookmarks.reset()
 
     return await map(checkBookmarkStatus, activeTabs)
 }

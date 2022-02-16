@@ -14,8 +14,6 @@ import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
 function onLoad (event) {
     const port = browser.runtime.connect({ name: 'popup' })
 
-    browser.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
-
     // Receive messages and handle disconnect
     port.onMessage.addListener(messageBridge)
     port.onDisconnect.addListener(disconnectionHandler)
