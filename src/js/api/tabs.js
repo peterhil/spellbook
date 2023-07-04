@@ -8,10 +8,10 @@
 
 import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
+import { browser } from 'rosegarden'
 
 import { safeHead } from '../lib/pure'
-import { callbackToPromise } from '../lib/reactive'
-import { browserEvent$, withErrorChecking } from './helpers'
+import { browserEvent$ } from './helpers'
 
 let currentWindowId = -1
 
@@ -39,39 +39,32 @@ const tabsAreEqual = (a, b) => {
     return isEmpty(difference(values(a), values(b)))
 }
 
-const getTab = (id) => {
-    return fromPromise(callbackToPromise(withErrorChecking(chrome.tabs.get), id))
-}
-
-export function queryTabs (query) {
-    return callbackToPromise(
-        withErrorChecking(chrome.tabs.query),
-        query,
-    )
+const getTab$ = (id) => {
+    return fromPromise(browser.tabs.get(id))
 }
 
 export function getActiveTabs () {
-    return queryTabs({ active: true })
+    return browser.tabs.query({ active: true })
 }
 
 function getActiveTabOnWindow (windowId) {
     return fromPromise(
-        queryTabs({ windowId, active: true })
+        browser.tabs.query({ windowId, active: true })
     )
         .map(safeHead)
         .filter()
 }
 
 export function getCurrentTab () {
-    return queryTabs(currentTabQuery)
+    return browser.tabs.query(currentTabQuery)
         .then(safeHead)
 }
 
-const onActivated$ = browserEvent$(chrome.tabs.onActivated)
+const onActivated$ = browserEvent$(browser.tabs.onActivated)
 
-const onFocusChanged$ = browserEvent$(chrome.windows.onFocusChanged)
+const onFocusChanged$ = browserEvent$(browser.windows.onFocusChanged)
 
-const onRemoved$ = browserEvent$(chrome.tabs.onRemoved)
+const onRemoved$ = browserEvent$(browser.tabs.onRemoved)
     .map((event) => {
         return {
             id: event[0],
@@ -80,7 +73,7 @@ const onRemoved$ = browserEvent$(chrome.tabs.onRemoved)
         }
     })
 
-const onUpdated$ = browserEvent$(chrome.tabs.onUpdated)
+const onUpdated$ = browserEvent$(browser.tabs.onUpdated)
     .map((event) => {
         return {
             id: event[0],
@@ -98,7 +91,7 @@ export const tabUpdate$ = onUpdated$
 export const tabActivation$ = onActivated$
     // .spy('tabActivation$')
     .map(prop('tabId'))
-    .flatMapLatest(getTab)
+    .flatMapLatest(getTab$)
 
 export const tabFocusChanged$ = onFocusChanged$
     // .spy('tabFocusChanged$')

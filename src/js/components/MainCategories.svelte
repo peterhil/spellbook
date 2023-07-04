@@ -1,6 +1,7 @@
 <script>
+    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
-    import { getTree } from '../api/categories.js'
+
     import CategoryList from './CategoryList.svelte'
 
     let categories = []
@@ -10,7 +11,7 @@
     }
 
     onMount(() => {
-        getTree()
+        browser.bookmarks.getTree()
             .then(update)
     })
 </script>

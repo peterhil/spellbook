@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { browser } from 'rosegarden'
+
 import { disconnectionHandler, messageServer } from '../lib/messaging'
 import { directoryController } from './directory-controller'
 import { popupController } from './popup-controller'
@@ -19,4 +21,5 @@ function onConnect (port) {
     port.onDisconnect.addListener(disconnectionHandler)
 }
 
-chrome.runtime.onConnect.addListener(onConnect)
+browser.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+browser.runtime.onConnect.addListener(onConnect)

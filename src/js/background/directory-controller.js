@@ -6,11 +6,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { getTree } from '../api/categories'
+import { browser } from 'rosegarden'
+
 // import { getTree$, bookmarksModified$ } from '../api/streams'
 // import { domLoaded$ } from '../lib/events'
-import { sendMessage, unhandledMessage } from '../lib/messaging'
-import { choice } from '../lib/pure'
+import { sendMessage } from '../lib/messaging'
 
 // var bookmarks = []
 
@@ -19,18 +19,12 @@ import { choice } from '../lib/pure'
 // }
 
 export const directoryController = {
-    action: function (message, port) {
-        const action = choice(message.type, {
-            getAllBookmarks: (message, port) => {
-                getTree().then(bookmarks => {
-                    sendMessage(port, 'allBookmarksTree', bookmarks)
-                })
-            },
-            default: unhandledMessage,
-        })
-
-        action(message, port)
-    }
+    getAllBookmarks: (message, port) => {
+        browser.bookmarks.getTree()
+            .then(bookmarks => {
+                sendMessage(port, 'allBookmarksTree', bookmarks)
+            })
+    },
 }
 
 // domLoaded$

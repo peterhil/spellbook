@@ -10,7 +10,6 @@
 
 import {
     compose,
-    curry,
     head,
     isEmpty,
     prop,
@@ -25,10 +24,6 @@ export const hasItems = array => {
 export const isFunction = fn => {
     return typeof fn === 'function'
 }
-
-export const choice = curry((selection, options) => {
-    return options[selection] || options.default
-})
 
 export function safeHead (list) {
     return (

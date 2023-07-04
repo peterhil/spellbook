@@ -1,9 +1,10 @@
 <script>
     import { fromEvents, fromPromise } from 'kefir'
     import { prop, head, filter } from 'rambda'
+    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
 
-    import { bookmarksBarCategoryId, flattenTree, getSubTree } from '../api/categories.js'
+    import { bookmarksBarCategoryId, flattenTree } from '../api/categories.js'
     import { isBookmark, isCategory } from '../api/helpers.js'
     import { messages } from '../lib/messaging'
     import { hasItems, sortByTitleCaseInsensitive } from '../lib/pure'
@@ -36,7 +37,7 @@
         // console.debug('[Directory] categories updated')
     }
 
-    const selectedBookmarks$ = fromPromise(getSubTree(selectedCategory))
+    const selectedBookmarks$ = fromPromise(browser.bookmarks.getSubTree(selectedCategory))
         .map(head) // TODO Fix this API madness on the bookmarks adapter!
         .map(prop('children'))
 

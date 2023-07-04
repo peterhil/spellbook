@@ -8,11 +8,13 @@
 </script>
 
 <ul class="menu" tabindex="-1">
+    <small class="toast">
+        { t('search_results') }
+        ({ categories.length } { t('results') })
+    </small>
     {#if not(isEmpty(categories)) }
         <CategoryList categories={categories} />
         <li class="divider" data-content={ t('root_categories') }></li>
         <MainCategories />
-    {:else}
-        <small class="toast">No categories found</small>
     {/if}
 </ul>

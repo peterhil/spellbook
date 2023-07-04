@@ -8,24 +8,24 @@
 
 import { fromPromise, merge } from 'kefir'
 import { path, prop } from 'rambda'
+import { browser } from 'rosegarden'
 
-import { getTree } from './categories'
 import { browserEvent$ } from './helpers'
 
 export const getTree$ = () => {
-    return fromPromise(getTree())
+    return fromPromise(browser.bookmarks.getTree())
 }
 
-export const bookmarkCreated$ = browserEvent$(chrome.bookmarks.onCreated)
+export const bookmarkCreated$ = browserEvent$(browser.bookmarks.onCreated)
     .spy('[api/streams] Bookmark created:')
 
-export const bookmarkRemoved$ = browserEvent$(chrome.bookmarks.onRemoved)
+export const bookmarkRemoved$ = browserEvent$(browser.bookmarks.onRemoved)
     .spy('[api/streams] Bookmark removed:')
 
-export const bookmarkChanged$ = browserEvent$(chrome.bookmarks.onChanged)
+export const bookmarkChanged$ = browserEvent$(browser.bookmarks.onChanged)
     .spy('[api/streams] Bookmark changed:')
 
-export const bookmarkMoved$ = browserEvent$(chrome.bookmarks.onMoved)
+export const bookmarkMoved$ = browserEvent$(browser.bookmarks.onMoved)
     .spy('[api/streams] Bookmark moved:')
 
 export const bookmarksModified$ = merge([

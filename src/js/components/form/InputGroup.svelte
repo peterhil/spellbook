@@ -7,7 +7,7 @@
     export let required = false
     export let value = ''
 
-    export let label = t(name)
+    export let label = (type === 'hidden' ? '' : t(name))
     export let placeholder = ''
     export let autocomplete = true
 

@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] – 2021-06-29 Intuitive UI
+
+Github [closed issues for v0.5.0](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.5.0)
+
+### Fixed
+
+* Make main categories dynamic and fix their selection [Issue #72]
+* Fix popup height on Firefox after selection [Issue #60]
+
+### Added
+
+* Colourful theme [Issue #70]
+
+### Changed
+
+* More intuitive and self explanatory UI: Better icons, titles and headings on dropdowns [Issue #32] [Issue #69]
+* Show number of search results and subcategories [Issue #32]
+* Reorganize the content of the popup for more flexible UI [Issue #43]
+
+**Technical:**
+
+* Clean up CSS styles [Issue #54]
+* Make CategorySelector code elegant, use single responsibility principle [Issue #63]
+* Handle search using a store #47 [Issue #63]
+* Change to Stroustrup brace style
+
+[Issue #72]: https://github.com/peterhil/spellbook/issues/72
+[Issue #70]: https://github.com/peterhil/spellbook/issues/70
+[Issue #69]: https://github.com/peterhil/spellbook/issues/69
+[Issue #63]: https://github.com/peterhil/spellbook/issues/63
+[Issue #60]: https://github.com/peterhil/spellbook/issues/60
+[Issue #54]: https://github.com/peterhil/spellbook/issues/54
+[Issue #47]: https://github.com/peterhil/spellbook/issues/47
+[Issue #43]: https://github.com/peterhil/spellbook/issues/43
+[Issue #32]: https://github.com/peterhil/spellbook/issues/32
+
 ## [0.4.2] – 2021-06-09 Bug fixes and stability
 
 Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.4.2)
@@ -298,7 +334,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/peterhil/spellbook/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/peterhil/spellbook/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/peterhil/spellbook/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/peterhil/spellbook/compare/v0.3.7...v0.4.0

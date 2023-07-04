@@ -1,6 +1,6 @@
 {
     "name": "spellbook",
-    "version": "0.4.3",
+    "version": "0.5.0",
     "description": "Spellbook bookmark manager",
     "main": "src/popup.js",
     "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
@@ -28,6 +28,7 @@
         "events": "^3.3.0",
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
+        "rosegarden": "github:peterhil/rosegarden",
         "spectre.css": "~0.5.9",
         "zepto-detect": "~0.0.0"
     },
@@ -40,7 +41,6 @@
         "@rollup/plugin-eslint": "^8.0.1",
         "@rollup/plugin-node-resolve": "^13.0.0",
         "@testing-library/svelte": "^3.0.3",
-        "caniuse-lite": "~1.0.30001235",
         "chokidar": "^3.5.1",
         "eslint": "^7.28.0",
         "eslint-config-standard": "^16.0.3",

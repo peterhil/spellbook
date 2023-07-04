@@ -4,20 +4,21 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { browser } from 'rosegarden'
+
 import Directory from './components/Directory.svelte'
 import events from './lib/events'
 import { disconnectionHandler, messageBridge } from './lib/messaging'
 
 function onLoad (event) {
-    const port = chrome.runtime.connect({ name: 'directory' })
+    const port = browser.runtime.connect({ name: 'directory' })
 
+    // Receive messages and handle disconnect
+    port.onMessage.addListener(messageBridge)
     port.onDisconnect.addListener(disconnectionHandler)
 
     // Send a message
     // port.postMessage({ type: 'getAllBookmarks' })
-
-    // Receive messages
-    port.onMessage.addListener(messageBridge)
 
     new Directory({ // eslint-disable-line no-new
         target: document.getElementById('directory'),
