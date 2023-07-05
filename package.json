@@ -30,6 +30,7 @@
         "rambda": "^6.7.0",
         "rosegarden": "github:peterhil/rosegarden",
         "spectre.css": "~0.5.9",
+        "vite": "^4.3.9",
         "zepto-detect": "~0.0.0"
     },
     "devDependencies": {
