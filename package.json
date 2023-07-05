@@ -30,7 +30,6 @@
         "rambda": "^6.7.0",
         "rosegarden": "github:peterhil/rosegarden",
         "spectre.css": "~0.5.9",
-        "vite": "^4.3.9",
         "zepto-detect": "~0.0.0"
     },
     "devDependencies": {
@@ -41,6 +40,7 @@
         "@rollup/plugin-commonjs": "^19.0.0",
         "@rollup/plugin-eslint": "^8.0.1",
         "@rollup/plugin-node-resolve": "^13.0.0",
+        "@sveltejs/vite-plugin-svelte": "^2.4.2",
         "@testing-library/svelte": "^3.0.3",
         "chokidar": "^3.5.1",
         "eslint": "^7.28.0",
@@ -66,6 +66,7 @@
         "svelte": "^3.38.2",
         "svelte-preprocess": "^4.7.3",
         "svelte-preprocess-sass": "^1.0.0",
+        "vite": "^4.3.9",
         "web-ext": "^6.1.0"
     },
     "browserslist": [
