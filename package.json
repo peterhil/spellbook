@@ -68,7 +68,7 @@
         "svelte-preprocess-sass": "^1.0.0",
         "vite": "^4.3.9",
         "vite-plugin-web-extension": "^3.1.0",
-        "web-ext": "^6.1.0"
+        "web-ext": "^7.6.2"
     },
     "browserslist": [
         "Chrome >= 52",
