@@ -30,7 +30,7 @@ specifiers:
   rollup-plugin-svelte: ^7.1.0
   rollup-plugin-terser: ^7.0.2
   rosegarden: github:peterhil/rosegarden
-  sass: ^1.34.1
+  sass: ^1.63.6
   spectre.css: ~0.5.9
   stylelint: ^13.13.1
   stylelint-config-rational-order: ^0.1.2
@@ -78,15 +78,15 @@ devDependencies:
   rollup-plugin-sass: 1.2.2
   rollup-plugin-svelte: 7.1.0_f7ngdldd3eujhldmugr4rrrxba
   rollup-plugin-terser: 7.0.2_rollup@2.51.1
-  sass: 1.34.1
+  sass: 1.63.6
   stylelint: 13.13.1
   stylelint-config-rational-order: 0.1.2
   stylelint-config-sass-guidelines: 8.0.0_stylelint@13.13.1
   stylelint-config-standard: 22.0.0_stylelint@13.13.1
   svelte: 3.59.2
-  svelte-preprocess: 4.7.3_g422hgdx6i7qlfcsek77qkd77i
+  svelte-preprocess: 4.7.3_4pbxnto4rvb7mznf7tt3lrhoz4
   svelte-preprocess-sass: 1.0.0
-  vite: 4.3.9_sass@1.34.1
+  vite: 4.3.9_sass@1.63.6
   vite-plugin-web-extension: 3.1.0_vite@4.3.9
   web-ext: 7.6.2
 
@@ -881,7 +881,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.2_svelte@3.59.2+vite@4.3.9
       debug: 4.3.4
       svelte: 3.59.2
-      vite: 4.3.9_sass@1.34.1
+      vite: 4.3.9_sass@1.63.6
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -900,7 +900,7 @@ packages:
       magic-string: 0.30.1
       svelte: 3.59.2
       svelte-hmr: 0.15.2_svelte@3.59.2
-      vite: 4.3.9_sass@1.34.1
+      vite: 4.3.9_sass@1.63.6
       vitefu: 0.2.4_vite@4.3.9
     transitivePeerDependencies:
       - supports-color
@@ -1889,7 +1889,7 @@ packages:
 
   /chokidar/2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
-    deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
     dependencies:
       anymatch: 2.0.0
       async-each: 1.0.3
@@ -3967,6 +3967,10 @@ packages:
 
   /immediate/3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
+    dev: true
+
+  /immutable/4.3.0:
+    resolution: {integrity: sha512-0AOCmOip+xgJwEVTQj1EfiDDOkPmuyllDuTuEX+DDXUgapLAsBIfkg3sxCYyCEA8mQqZrrxPUGjcOQ2JS3WLkg==}
     dev: true
 
   /import-fresh/2.0.0:
@@ -6687,12 +6691,14 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
-  /sass/1.34.1:
-    resolution: {integrity: sha512-scLA7EIZM+MmYlej6sdVr0HRbZX5caX5ofDT9asWnUJj21oqgsC+1LuNfm0eg+vM0fCTZHhwImTiCU0sx9h9CQ==}
-    engines: {node: '>=8.9.0'}
+  /sass/1.63.6:
+    resolution: {integrity: sha512-MJuxGMHzaOW7ipp+1KdELtqKbfAWbH7OLIdoSMnVe3EXPMTmxTmlaZDCTsgIpPCs3w99lLo9/zDKkOrJuT5byw==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.1
+      immutable: 4.3.0
+      source-map-js: 1.0.2
     dev: true
 
   /sass/1.7.2:
@@ -7473,7 +7479,7 @@ packages:
       svelte-preprocess-filter: 1.0.0
     dev: true
 
-  /svelte-preprocess/4.7.3_g422hgdx6i7qlfcsek77qkd77i:
+  /svelte-preprocess/4.7.3_4pbxnto4rvb7mznf7tt3lrhoz4:
     resolution: {integrity: sha512-Zx1/xLeGOIBlZMGPRCaXtlMe4ZA0faato5Dc3CosEqwu75MIEPuOstdkH6cy+RYTUYynoxzNaDxkPX4DbrPwRA==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -7518,7 +7524,7 @@ packages:
       '@types/pug': 2.0.4
       '@types/sass': 1.16.0
       detect-indent: 6.1.0
-      sass: 1.34.1
+      sass: 1.63.6
       strip-indent: 3.0.0
       svelte: 3.59.2
     dev: true
@@ -8048,7 +8054,7 @@ packages:
       lodash.uniq: 4.5.0
       lodash.uniqby: 4.7.0
       md5: 2.3.0
-      vite: 4.3.9_sass@1.34.1
+      vite: 4.3.9_sass@1.63.6
       web-ext: 7.6.2
       webextension-polyfill: 0.10.0
       yaml: 2.3.1
@@ -8061,7 +8067,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /vite/4.3.9_sass@1.34.1:
+  /vite/4.3.9_sass@1.63.6:
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -8089,7 +8095,7 @@ packages:
       esbuild: 0.17.19
       postcss: 8.4.24
       rollup: 3.26.0
-      sass: 1.34.1
+      sass: 1.63.6
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -8102,7 +8108,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.3.9_sass@1.34.1
+      vite: 4.3.9_sass@1.63.6
     dev: true
 
   /watchpack/2.4.0:
