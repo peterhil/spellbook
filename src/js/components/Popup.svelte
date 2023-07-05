@@ -6,11 +6,11 @@
     import { currentTab } from '../stores/currentTab'
     import { getCurrentTab } from '../api/tabs'
     import { t } from '../lib/translate'
+    import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
     import CloseButton from './CloseButton.svelte'
 
     let savedBookmarks = []
-    let saved = null
 
     $: bookmarkCount = savedBookmarks.length
     $: popupHeader = (
@@ -25,11 +25,10 @@
     }
 
     function updateBookmarks (bookmarks) {
-        savedBookmarks = bookmarks
         if (bookmarks.length > 0) {
-            saved = last(sortBy(prop('dateAdded'), savedBookmarks))
+            savedBookmarks = sortBy(prop('dateAdded'), bookmarks)
         }
-        // console.debug('[Popup] updateBookmarks:', bookmarks, saved)
+        // console.debug('[Popup] updateBookmarks:', savedBookmarks)
     }
 
     onMount(() => {
@@ -59,10 +58,11 @@
         </h1>
     </div>
     <div class="card-body">
-        {#if saved}
-            <BookmarkForm bookmark={ saved } />
-        {:else}
-            <BookmarkForm bookmark={ $currentTab } />
+        {#if savedBookmarks}
+            {#each savedBookmarks as bookmark}
+                <Bookmark {bookmark} />
+            {/each}
         {/if}
+        <BookmarkForm bookmark={ $currentTab } />
     </div>
 </div>
