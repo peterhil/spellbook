@@ -3,14 +3,16 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import eslint from 'vite-plugin-eslint'
-import webExtension, { readJsonFile } from 'vite-plugin-web-extension'
+import generateFile from 'vite-plugin-generate-file'
 
 import rollupOptions from './rollup.config'
 import { isDev, outputDir, rel, urlPath } from './utils.config'
 
+import { getManifest } from './src/manifest'
+
 const format = 'es'
 const sourcemap = (isDev ? 'inline' : false)
-const target = process.env.TARGET || 'chrome'
+const target = process.env.TARGET || 'firefox'
 
 export default defineConfig({
     root: rel('src'),
@@ -23,18 +25,12 @@ export default defineConfig({
         svelte({
             configFile: rel('svelte.config.js'),
         }),
-        webExtension({
-            browser: target,
-            manifest: () => {
-                // Use `readJsonFile` instead of import/require to avoid caching during rebuild.
-                const pkg = readJsonFile(rel('package.json'));
-                const template = readJsonFile(rel('src/manifest.json'));
-                return {
-                    ...template,
-                    version: pkg.version,
-                };
-            },
-        }),
+        generateFile([{
+            type: 'json',
+            contentType: 'application/json',
+            output: './manifest.json',
+            data: getManifest(target),
+        }]),
     ],
     build: {
         outDir: outputDir(),
