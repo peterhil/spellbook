@@ -62,9 +62,9 @@
         "web-ext": "^7.6.2"
     },
     "browserslist": [
-        "Chrome >= 72",
-        "Firefox >= 65",
-        "Firefox ESR",
-        "since 2019 and not ios_saf > 0 and not ie > 0"
+        "Chrome >= 87",
+        "Firefox >= 78",
+        "Safari >= 14",
+        "Edge >= 88"
     ]
 }
