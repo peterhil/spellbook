@@ -6,7 +6,7 @@ export const mode = process.env.NODE_ENV || 'development';
 export const isDev = mode !== 'production';
 
 export function outputDir (dir = '') {
-    return path.join(__dirname, (isDev ? 'dist' : 'dist'), dir)
+    return path.join(__dirname, (isDev ? 'dev' : 'dist'), dir)
 }
 
 export function urlPath (path) {
