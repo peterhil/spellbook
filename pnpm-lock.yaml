@@ -18,7 +18,6 @@ specifiers:
   mocha: ^9.0.0
   puppeteer: ^10.0.0
   rambda: ^6.7.0
-  require-from-string: ~2.0.2
   rollup: ^2.78.0
   rollup-plugin-copy: ^3.4.0
   rosegarden: github:peterhil/rosegarden
@@ -59,7 +58,6 @@ devDependencies:
   eslint-plugin-svelte3: 3.2.0_ajzti5vqzplyezbpwsroe2jxci
   mocha: 9.0.0
   puppeteer: 10.0.0
-  require-from-string: 2.0.2
   rollup: 2.78.0
   rollup-plugin-copy: 3.4.0
   sass: 1.63.6
