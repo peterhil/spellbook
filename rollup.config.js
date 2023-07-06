@@ -1,33 +1,8 @@
-// import commonjs from '@rollup/plugin-commonjs'
-import copy from 'rollup-plugin-copy'
-// import css from 'rollup-plugin-css-only'
-// import eslint from '@rollup/plugin-eslint'
-// import resolve from '@rollup/plugin-node-resolve'
-// import preprocess from 'svelte-preprocess'
-// import sass from 'rollup-plugin-sass'
-// import svelte from 'rollup-plugin-svelte'
-// import { terser } from 'rollup-plugin-terser'
-
 import { isDev, outputDir, rel, urlPath } from './utils.config'
 
 const format = 'es'
 const sourcemap = (isDev ? 'inline' : false)
 const verbose = true
-
-const copyAssets = [
-    copy({
-        targets: [{
-            src: [
-                'src/_locales/**/*.json',
-                'src/img/spellbook-bg.jpg',
-                'src/img/spellbook_icon*.png',
-            ],
-            dest: outputDir(),
-        }],
-        flatten: false,
-        verbose,
-    }),
-]
 
 export default {
     input: {
@@ -50,5 +25,4 @@ export default {
         },
         sourcemap,
     },
-    plugins: copyAssets,
 }
