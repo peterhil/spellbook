@@ -51,7 +51,7 @@ const plugins = [
         browser: true, // default: false
         modulesOnly: false, // default: false
         dedupe: ['svelte'],
-        moduleDirectories: [
+        modulePaths: [
             './node_modules/'
         ],
         preferBuiltins: false,
