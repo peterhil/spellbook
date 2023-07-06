@@ -60,10 +60,9 @@
         "web-ext": "^7.6.2"
     },
     "browserslist": [
-        "Chrome >= 52",
-        "Firefox >= 56",
-        "FirefoxAndroid >= 56",
+        "Chrome >= 72",
+        "Firefox >= 65",
         "Firefox ESR",
-        "since 2015 and not safari > 0 and not ios_saf > 0 and not ie > 0 and not edge > 0"
+        "since 2019 and not ios_saf > 0 and not ie > 0"
     ]
 }
