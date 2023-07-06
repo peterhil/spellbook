@@ -43,7 +43,7 @@ export default defineConfig({
         minify: false,
         rollupOptions,
         sourcemap: isDev ? 'inline' : false,
-        watch: isDev ? {} : false,
+        // watch: isDev ? {} : false,
     },
     resolve: {
         alias: {
