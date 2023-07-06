@@ -18,7 +18,7 @@ specifiers:
   mocha: ^9.0.0
   puppeteer: ^10.0.0
   rambda: ^6.7.0
-  rollup: ^2.78.0
+  rollup: ^3.26.1
   rosegarden: github:peterhil/rosegarden
   sass: ^1.63.6
   spectre.css: github:Valexr/spectre
@@ -57,7 +57,7 @@ devDependencies:
   eslint-plugin-svelte3: 3.2.0_ajzti5vqzplyezbpwsroe2jxci
   mocha: 9.0.0
   puppeteer: 10.0.0
-  rollup: 2.78.0
+  rollup: 3.26.1
   sass: 1.63.6
   stylelint: 13.13.1
   stylelint-config-rational-order: 0.1.2
@@ -6250,8 +6250,8 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup/2.78.0:
-    resolution: {integrity: sha512-4+YfbQC9QEVvKTanHhIAFVUFSRsezvQF8vFOJwtGfb9Bb+r014S+qryr9PSmw8x6sMnPkmFBGAvIFVQxvJxjtg==}
+  /rollup/2.79.1:
+    resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -7605,7 +7605,7 @@ packages:
       '@rollup/pluginutils': 4.2.1
       '@types/eslint': 8.40.2
       eslint: 7.28.0
-      rollup: 2.78.0
+      rollup: 2.79.1
       vite: 4.3.9_sass@1.63.6
     dev: true
 

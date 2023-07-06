@@ -46,7 +46,7 @@
         "eslint-plugin-svelte3": "^3.2.0",
         "mocha": "^9.0.0",
         "puppeteer": "^10.0.0",
-        "rollup": "^2.78.0",
+        "rollup": "^3.26.1",
         "sass": "^1.63.6",
         "stylelint": "^13.13.1",
         "stylelint-config-rational-order": "^0.1.2",
