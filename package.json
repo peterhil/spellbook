@@ -29,7 +29,7 @@
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
         "rosegarden": "github:peterhil/rosegarden",
-        "spectre.css": "~0.5.9",
+        "spectre.css": "github:Valexr/spectre",
         "zepto-detect": "~0.0.0"
     },
     "devDependencies": {
