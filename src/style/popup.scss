@@ -115,6 +115,15 @@ body {
     display: block;
 }
 
+.input-group-addon.with-icon {
+    padding: 0.2rem;
+
+    .icon.favicon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
 .status .label {
     margin-bottom: 0.2rem;
 }

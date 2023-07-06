@@ -5,9 +5,9 @@ import resolve from '@rollup/plugin-node-resolve'
 import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
-import { terser } from '@rollup/plugin-terser'
+// import terser from '@rollup/plugin-terser'
 
-import { isDev, outputDir, rel, urlPath } from './utils.config'
+import { isDev, outputDir, rel, urlPath } from './utils.config.mjs'
 
 const format = 'es'
 const sourcemap = (isDev ? 'inline' : false)
@@ -63,7 +63,7 @@ const copyAssets = [
                 'src/_locales/**/*.json',
                 'src/img/spellbook-bg.jpg',
                 'src/img/spellbook_icon*.png',
-                // 'src/manifest.json',
+                'src/manifest.json',
             ],
             dest: outputDir(),
         }],
@@ -90,29 +90,59 @@ const watch = {
     include: ['src/**/*'],
 }
 
-export default {
-    input: {
-        background: urlPath('./src/views/background.html'),
-        directory: urlPath('./src/views/directory.html'),
-        popup: urlPath('./src/views/popup.html'),
-        serviceWorker: urlPath('./src/js/background/worker.js'),
-    },
-    output: {
-        dir: outputDir(),
-        entryFileNames: '[name].js',
-        format,
-        manualChunks: {
-            api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
-            icons: ['./src/js/lib/icons.js'],
-            rosegarden: ['rosegarden'],
-            'ext/events': ['events'],
-            'ext/kefir': ['kefir'],
-            'ext/rambda': ['rambda'],
-            'ext/svelte': ['svelte', 'svelte/store'],
-            'ext/zepto-detect': ['zepto-detect'],
+export default [
+    {
+        input: 'src/style/popup.scss',
+        output: {
+            dir: outputDir('style'),
+            name: 'popup.scss',
+            format,
         },
-        sourcemap,
+        plugins: [
+            sass({
+                output: outputDir('style/popup.css'),
+            })
+        ],
+        watch,
     },
-    plugins: plugins.concat(copyAssets),
-    watch,
-}
+    {
+        input: 'src/style/directory.scss',
+        output: {
+            dir: outputDir('style'),
+            name: 'directory.scss',
+            format,
+        },
+        plugins: [
+            sass({
+                output: outputDir('style/directory.css'),
+            })
+        ],
+        watch,
+    },
+    {
+        input: {
+            background: 'src/js/background/index.js',
+            directory: 'src/js/directory.js',
+            popup: 'src/js/popup.js',
+            serviceWorker: 'src/js/background/worker.js',
+        },
+        output: {
+            dir: outputDir('js'),
+            entryFileNames: '[name].js',
+            format,
+            manualChunks: {
+                api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
+                icons: ['./src/js/lib/icons.js'],
+                rosegarden: ['rosegarden'],
+                'ext/events': ['events'],
+                'ext/kefir': ['kefir'],
+                'ext/rambda': ['rambda'],
+                'ext/svelte': ['svelte', 'svelte/store'],
+                'ext/zepto-detect': ['zepto-detect'],
+            },
+            sourcemap,
+        },
+        plugins: plugins.concat(copyAssets),
+        watch,
+    }
+]

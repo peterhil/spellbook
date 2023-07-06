@@ -6,8 +6,8 @@
     "license": "MPL-2.0",
     "type": "module",
     "scripts": {
-        "build": "NODE_ENV=production vite build",
-        "dev": "NODE_ENV=development vite dev",
+        "build": "rm -rf dist/* && NODE_ENV=production rollup -c",
+        "dev": "rm -rf dev/* && NODE_ENV=development rollup -cw",
         "firefox": "web-ext",
         "firefox:dev": "web-ext -s dev run",
         "firefox:build": "web-ext -s dist build",
