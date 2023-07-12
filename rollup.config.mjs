@@ -69,17 +69,17 @@ const copyAssets = [
         flatten: false,
         verbose,
     }),
-    // copy({
-    //     targets: [{
-    //         src: [
-    //             'node_modules/spectre.css/dist/spectre-icons.css',
-    //             'node_modules/spectre.css/dist/spectre.css',
-    //         ],
-    //         dest: outputDir('style'),
-    //     }],
-    //     flatten: true,
-    //     verbose,
-    // }),
+    copy({
+        targets: [{
+            src: [
+                'node_modules/spectre.css/dist/spectre-icons.css',
+                'node_modules/spectre.css/dist/spectre.css',
+            ],
+            dest: outputDir('style'),
+        }],
+        flatten: true,
+        verbose,
+    }),
 ]
 
 const watch = {
