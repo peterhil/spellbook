@@ -27,6 +27,7 @@ specifiers:
   rambda: ^6.7.0
   rollup: ^3.26.1
   rollup-plugin-copy: ^3.4.0
+  rollup-plugin-execute: ^1.1.1
   rollup-plugin-sass: ^1.2.2
   rollup-plugin-svelte: ^7.1.0
   rosegarden: github:peterhil/rosegarden
@@ -77,6 +78,7 @@ devDependencies:
   puppeteer: 10.0.0
   rollup: 3.26.1
   rollup-plugin-copy: 3.4.0
+  rollup-plugin-execute: 1.1.1
   rollup-plugin-sass: 1.12.19
   rollup-plugin-svelte: 7.1.6_5j7xwpzka5ah7as4v42entovnm
   sass: 1.63.6
@@ -6336,6 +6338,10 @@ packages:
       fs-extra: 8.1.0
       globby: 10.0.1
       is-plain-object: 3.0.1
+    dev: true
+
+  /rollup-plugin-execute/1.1.1:
+    resolution: {integrity: sha512-isCNR/VrwlEfWJMwsnmt5TBRod8dW1IjVRxcXCBrxDmVTeA1IXjzeLSS3inFBmRD7KDPlo38KSb2mh5v5BoWgA==}
     dev: true
 
   /rollup-plugin-sass/1.12.19:

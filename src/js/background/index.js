@@ -21,5 +21,5 @@ function onConnect (port) {
     port.onDisconnect.addListener(disconnectionHandler)
 }
 
-browser.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
 browser.runtime.onConnect.addListener(onConnect)

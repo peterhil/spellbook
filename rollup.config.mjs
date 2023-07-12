@@ -1,12 +1,13 @@
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
 import eslint from '@rollup/plugin-eslint'
+import execute from 'rollup-plugin-execute'
 import resolve from '@rollup/plugin-node-resolve'
 import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
 
-import { isDev, outputDir, rel, urlPath } from './utils.config.mjs'
+import { isDev, outputDir, rel, target, urlPath } from './utils.config.mjs'
 
 const format = 'es'
 const sourcemap = (isDev ? 'inline' : false)
@@ -46,6 +47,9 @@ const plugins = [
 ]
 
 const copyAssets = [
+    execute([
+        `TARGET=${target} ./bin/generateManifest.js`,
+    ]),
     copy({
         targets: [{
             src: [
@@ -62,7 +66,6 @@ const copyAssets = [
                 'src/_locales/**/*.json',
                 'src/img/spellbook-bg.jpg',
                 'src/img/spellbook_icon*.png',
-                'src/manifest.json',
             ],
             dest: outputDir(),
         }],

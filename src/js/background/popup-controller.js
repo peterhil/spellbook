@@ -41,8 +41,8 @@ function setBookmarkStatus (bookmarks, tabId) {
         ? '../img/spellbook_icon_bookmarked.png'
         : '../img/spellbook_icon.png'
 
-    chrome.browserAction.setIcon({ path: icon, tabId })
-    chrome.browserAction.setBadgeText({ text: badgeText, tabId })
+    chrome.action.setIcon({ path: icon, tabId })
+    chrome.action.setBadgeText({ text: badgeText, tabId })
 }
 
 async function checkBookmarkStatus (activeTab) {
