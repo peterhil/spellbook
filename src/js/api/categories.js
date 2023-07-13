@@ -8,7 +8,7 @@
 
 import zd from 'zepto-detect'
 import { map, pick, prop, props, take, uniq } from 'rambda'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import { isCategory } from './helpers'
 

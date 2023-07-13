@@ -1,7 +1,7 @@
 <script>
+    import browser from 'webextension-polyfill'
     import { fromEvents, fromPromise } from 'kefir'
     import { prop, head, filter } from 'rambda'
-    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
 
     import { bookmarksBarCategoryId, flattenTree } from '../api/categories.js'

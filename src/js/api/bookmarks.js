@@ -8,7 +8,7 @@
 
 import zd from 'zepto-detect'
 import { test } from 'rambda'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import { sortByTitleCaseInsensitive } from '../lib/pure'
 import { isCategory } from './helpers'

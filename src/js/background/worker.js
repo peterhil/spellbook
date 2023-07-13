@@ -1,4 +1,4 @@
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 browser.runtime.onInstalled.addListener(() => {
     // eslint-disable-next-line no-console
