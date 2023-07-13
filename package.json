@@ -28,7 +28,6 @@
         "events": "^3.3.0",
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
-        "rosegarden": "github:peterhil/rosegarden",
         "spectre.css": "github:Valexr/spectre",
         "zepto-detect": "~0.0.0"
     },

@@ -30,7 +30,6 @@ specifiers:
   rollup-plugin-execute: ^1.1.1
   rollup-plugin-sass: ^1.2.2
   rollup-plugin-svelte: ^7.1.0
-  rosegarden: github:peterhil/rosegarden
   sass: ^1.63.6
   spectre.css: github:Valexr/spectre
   stylelint: ^15.10.1
@@ -51,7 +50,6 @@ dependencies:
   events: 3.3.0
   kefir: 3.8.8
   rambda: 6.7.0
-  rosegarden: github.com/peterhil/rosegarden/a53932b3895cfc6a02e87923b6b58508d489eb80
   spectre.css: github.com/Valexr/spectre/dfe3bc2c59d23cd4bfd43c690aae3655576ff708
   zepto-detect: 0.0.0
 
@@ -8084,12 +8082,4 @@ packages:
     resolution: {tarball: https://codeload.github.com/Valexr/spectre/tar.gz/dfe3bc2c59d23cd4bfd43c690aae3655576ff708}
     name: spectre.css
     version: 0.5.9
-    dev: false
-
-  github.com/peterhil/rosegarden/a53932b3895cfc6a02e87923b6b58508d489eb80:
-    resolution: {tarball: https://codeload.github.com/peterhil/rosegarden/tar.gz/a53932b3895cfc6a02e87923b6b58508d489eb80}
-    name: rosegarden
-    version: 0.5.0
-    dependencies:
-      rambda: 6.7.0
     dev: false

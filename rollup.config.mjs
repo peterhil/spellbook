@@ -135,11 +135,11 @@ export default [
             manualChunks: {
                 api: ['./src/js/api/categories.js', './src/js/api/tabs.js'],
                 icons: ['./src/js/lib/icons.js'],
-                rosegarden: ['rosegarden'],
                 'ext/events': ['events'],
                 'ext/kefir': ['kefir'],
                 'ext/rambda': ['rambda'],
                 'ext/svelte': ['svelte', 'svelte/store'],
+                'ext/webextension-polyfill': ['webextension-polyfill'],
                 'ext/zepto-detect': ['zepto-detect'],
             },
             sourcemap,
