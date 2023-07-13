@@ -90,7 +90,8 @@ export const getRecentCategories = async (maxCount) => {
     if (ids.length > 0) {
         const categories = await browser.bookmarks.get(ids)
         return categories
-    } else {
+    }
+    else {
         return []
     }
 }
