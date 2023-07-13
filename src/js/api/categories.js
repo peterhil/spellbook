@@ -86,7 +86,11 @@ export async function getParentPath (bookmark) {
 export const getRecentCategories = async (maxCount) => {
     const bookmarks = await browser.bookmarks.getRecent(maxCount * 4) // Latest bookmarks might all be to the same category
     const ids = take(maxCount, uniq(map(getParentId, bookmarks)))
-    const categories = await browser.bookmarks.get(ids)
 
-    return categories
+    if (ids.length > 0) {
+        const categories = await browser.bookmarks.get(ids)
+        return categories
+    } else {
+        return []
+    }
 }
