@@ -6,20 +6,8 @@
 
 import browser from 'webextension-polyfill'
 
-import { disconnectionHandler, messageServer } from '../lib/messaging'
-import { directoryController } from './directory-controller'
-import { popupController } from './popup-controller'
-
-const controllers = {
-    directory: directoryController,
-    popup: popupController,
-}
-
-function onConnect (port) {
-    console.info('[background] Connected with:', port.name, port.sender)
-    port.onMessage.addListener(messageServer(controllers))
-    port.onDisconnect.addListener(disconnectionHandler)
-}
+import { onConnect } from './common'
 
 browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
+
 browser.runtime.onConnect.addListener(onConnect)
