@@ -68,11 +68,9 @@
                 <div class="panel-title">{ t('categories') }</div>
             </div>
             <div class="panel-body" tabindex="-1">
-                <ul class="menu" tabindex="-1">
-                    <MainCategories />
-                    <li class="divider"></li>
-                    <CategoryList categories={categories} />
-                </ul>
+                <MainCategories />
+                <li class="divider"></li>
+                <CategoryList categories={categories} />
             </div>
         </div>
 
@@ -81,24 +79,18 @@
                 <div class="panel-title">{ t('bookmarks') }</div>
             </div>
             <div class="panel-body" tabindex="-1">
-                <ul class="menu" tabindex="-1">
-                    {#if hasItems(subcategories) }
-                        <li class="divider" data-content={ t('subcategories') }></li>
-                    {/if}
-                    {#each subcategories as category }
-                        <li class="menu-item">
-                            <Category category={category} />
-                        </li>
-                    {/each}
-                    {#if hasItems(bookmarks) }
-                        <li class="divider"  data-content={ t('bookmarks') }></li>
-                    {/if}
-                    {#each bookmarks as bookmark }
-                        <li class="menu-item">
-                            <Bookmark bookmark={ bookmark } />
-                        </li>
-                    {/each}
-                </ul>
+                {#if hasItems(subcategories) }
+                    <li class="divider" data-content={ t('subcategories') }></li>
+                {/if}
+                {#each subcategories as category }
+                    <Category category={category} />
+                {/each}
+                {#if hasItems(bookmarks) }
+                    <li class="divider"  data-content={ t('bookmarks') }></li>
+                {/if}
+                {#each bookmarks as bookmark }
+                    <Bookmark bookmark={ bookmark } />
+                {/each}
             </div>
         </div>
     </div>

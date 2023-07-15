@@ -5,7 +5,5 @@
 </script>
 
 {#each categories as category}
-    <li class="menu-item">
-        <Category category={category} />
-    </li>
+    <Category category={category} />
 {/each}

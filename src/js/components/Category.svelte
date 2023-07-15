@@ -22,5 +22,7 @@
    data-parent-id={getParentId(category)}
    >
     <div class="title">{category.title}</div>
-    <BookmarkPath bookmark={category} />
+    <div class="info">
+        <BookmarkPath bookmark={category} />
+    </div>
 </a>

@@ -10,9 +10,14 @@
    data-title={bookmark.title}
    data-url={bookmark.url}
    tabindex="0">
-    <div class="title">{bookmark.title}</div>
-    <div class="url">{bookmark.url}</div>
-    <div class="label label-secondary">
-        <BookmarkPath bookmark={bookmark} />
+    <div class="title">
+        {bookmark.title}
+        <i class="icon icon-bookmark float-right"></i>
+    </div>
+    <div class="info">
+        <div class="url">{bookmark.url}</div>
+        <div class="label label-secondary">
+            <BookmarkPath bookmark={bookmark} />
+        </div>
     </div>
 </a>

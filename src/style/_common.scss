@@ -1,24 +1,54 @@
-.bookmark,
-.category {
+a.bookmark,
+a.category {
+    display: block;
+    border: 1px solid $item-border-color;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    padding: 3px;
+    text-decoration: none;
+    background-color: #def0ff;
+    color: $item-color;
+    box-shadow: 3px 3px 4px -4px $item-border-color;
+
     .title {
-        overflow: hidden;
+        padding: 0.1rem 0.3rem 0;
         font-weight: bolder;
+
+        .icon {
+            margin-block: 4px;
+        }
+    }
+
+    .label {
+        display: block;
+        margin-top: 0.2rem;
+    }
+
+    .title {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
+    }
+
+    .info {
+        padding: 0.3rem;
+        padding-top: 0;
     }
 }
 
 .bookmark {
-    word-break: break-word;
-
-    &:hover {
-        margin-bottom: -2px;
-        border-bottom: 2px solid #4b48d6;
-    }
+    word-break: break-all;
 
     .url {
         font-weight: 400;
         font-size: 80%;
     }
+}
+
+.label.label-secondary {
+    color: #d1e5ff;
+    background-color: #5755d9;
 }
 
 .parents {
