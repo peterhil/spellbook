@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    box-sizing: content-box;
+    box-sizing: border-box;
     width: 42ch;
     min-width: 180px;
     max-width: 100%;
@@ -37,17 +37,8 @@ body {
 
 .popup {
     position: relative;
-    box-sizing: content-box;
     width: 100%;
     height: auto;
-
-    form {
-        box-sizing: content-box;
-    }
-
-    form > * {
-        box-sizing: border-box;
-    }
 
     h1 {
         font-size: 0.9rem;
