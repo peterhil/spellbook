@@ -1,5 +1,5 @@
 <script>
-    import { last, prop, sortBy } from 'rambda'
+    import { prop, sortBy } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
