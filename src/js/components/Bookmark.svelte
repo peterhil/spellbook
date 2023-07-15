@@ -11,8 +11,8 @@
    data-url={bookmark.url}
    tabindex="0">
     <div class="title">
+        <i class="icon icon-bookmark"></i>
         {bookmark.title}
-        <i class="icon icon-bookmark float-right"></i>
     </div>
     <div class="info">
         <div class="url">{bookmark.url}</div>
