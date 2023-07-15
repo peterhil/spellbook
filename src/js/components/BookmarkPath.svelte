@@ -4,17 +4,17 @@
 
     export let bookmark
 
-    const getPath = async function () {
-        path = await getParentPath(bookmark)
-    }
+    async function getPath (bookmark) {
+        const path = await getParentPath(bookmark)
 
-    $: path = getPath(bookmark)
+        return path || t('root_category')
+    }
 </script>
 
 <small class="parents">
-{#if path.length > 0 }
-    { path }
-{:else}
-    { t('root_category') }
-{/if}
+    {#await getPath(bookmark) }
+        <span class="loading">Loading...</span>
+    {:then path }
+        { path }
+    {/await}
 </small>
