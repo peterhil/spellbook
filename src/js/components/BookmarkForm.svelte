@@ -1,6 +1,6 @@
 <script>
+    import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
-    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'

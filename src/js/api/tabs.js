@@ -8,7 +8,7 @@
 
 import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import { safeHead } from '../lib/pure'
 import { browserEvent$ } from './helpers'

@@ -1,6 +1,6 @@
 <script>
+    import browser from 'webextension-polyfill'
     import { filter } from 'rambda'
-    import { browser } from 'rosegarden'
     import { onDestroy, onMount } from 'svelte'
 
     import { isCategory } from '../api/helpers'

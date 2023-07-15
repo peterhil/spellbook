@@ -18,7 +18,7 @@ export const messageBridge = function (message) {
 
 export function disconnectionHandler (port) {
     if (chrome.runtime.lastError) {
-        console.error('Connection error:', chrome.runtime.lastError)
+        console.error('Connection error:', chrome.runtime.lastError.message)
         return
     }
 

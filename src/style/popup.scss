@@ -5,8 +5,6 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 @import './variables';
-@import '../../node_modules/spectre.css/src/spectre';
-@import '../../node_modules/spectre.css/src/spectre-icons';
 @import './spectre_overrides';
 @import './common';
 
@@ -113,6 +111,15 @@ body {
 
 .category.dropdown {
     display: block;
+}
+
+.input-group-addon.with-icon {
+    padding: 0.2rem;
+
+    .icon.favicon {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .status .label {

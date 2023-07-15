@@ -4,22 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
-import { disconnectionHandler, messageServer } from '../lib/messaging'
-import { directoryController } from './directory-controller'
-import { popupController } from './popup-controller'
+import { onConnect } from './common'
 
-const controllers = {
-    directory: directoryController,
-    popup: popupController,
-}
+browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
 
-function onConnect (port) {
-    console.info('[background] Connected with:', port.name, port.sender)
-    port.onMessage.addListener(messageServer(controllers))
-    port.onDisconnect.addListener(disconnectionHandler)
-}
-
-browser.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
 browser.runtime.onConnect.addListener(onConnect)

@@ -1,5 +1,5 @@
 <script>
-    import { browser } from 'rosegarden'
+    import browser from 'webextension-polyfill'
     import { onMount } from 'svelte'
 
     import CategoryList from './CategoryList.svelte'

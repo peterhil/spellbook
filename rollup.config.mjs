@@ -1,24 +1,17 @@
-import path from 'path'
-
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
-import css from 'rollup-plugin-css-only'
 import eslint from '@rollup/plugin-eslint'
+import execute from 'rollup-plugin-execute'
 import resolve from '@rollup/plugin-node-resolve'
 import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
-import { terser } from 'rollup-plugin-terser'
 
-const production = !process.env.ROLLUP_WATCH
-const verbose = true
-const minify = false
-const sourcemap = (production ? false : 'inline')
+import { isDev, outputDir, rel, target, urlPath } from './utils.config.mjs'
+
 const format = 'es'
-
-const outputDir = (dir = '') => {
-    return path.join(__dirname, (production ? 'dist/' : 'dev/'), dir)
-}
+const sourcemap = (isDev ? 'inline' : false)
+const verbose = true
 
 const plugins = [
     eslint({
@@ -31,7 +24,7 @@ const plugins = [
         emitCss: true,
         compilerOptions: {
             // enable run-time checks when not in production
-            dev: !production,
+            dev: isDev,
         },
         preprocess: preprocess({
             style: sass(),
@@ -40,26 +33,56 @@ const plugins = [
 
     sass(),
 
-    // we'll extract any component CSS out into
-    // a separate file - better for performance
-    css({
-        output: 'component.css',
-    }),
-
     // Convert CommonJS libraries to ES6
     resolve({
         browser: true, // default: false
         modulesOnly: false, // default: false
         dedupe: ['svelte'],
-        moduleDirectories: [
+        modulePaths: [
             './node_modules/'
         ],
         preferBuiltins: false,
     }),
     commonjs(),
+]
 
-    // Minify on production
-    minify && terser(),
+const copyAssets = [
+    execute([
+        `TARGET=${target} ./bin/generateManifest.js`,
+    ]),
+    copy({
+        targets: [{
+            src: [
+                'src/**/*.html',
+            ],
+            dest: outputDir('views'),
+        }],
+        flatten: true,
+        verbose,
+    }),
+    copy({
+        targets: [{
+            src: [
+                'src/_locales/**/*.json',
+                'src/img/spellbook-bg.jpg',
+                'src/img/spellbook_icon*.png',
+            ],
+            dest: outputDir(),
+        }],
+        flatten: false,
+        verbose,
+    }),
+    copy({
+        targets: [{
+            src: [
+                'node_modules/spectre.css/dist/spectre-icons.css',
+                'node_modules/spectre.css/dist/spectre.css',
+            ],
+            dest: outputDir('style'),
+        }],
+        flatten: true,
+        verbose,
+    }),
 ]
 
 const watch = {
@@ -103,6 +126,7 @@ export default [
             background: 'src/js/background/index.js',
             directory: 'src/js/directory.js',
             popup: 'src/js/popup.js',
+            serviceWorker: 'src/js/background/worker.js',
         },
         output: {
             dir: outputDir('js'),
@@ -115,46 +139,12 @@ export default [
                 'ext/kefir': ['kefir'],
                 'ext/rambda': ['rambda'],
                 'ext/svelte': ['svelte', 'svelte/store'],
+                'ext/webextension-polyfill': ['webextension-polyfill'],
                 'ext/zepto-detect': ['zepto-detect'],
             },
             sourcemap,
         },
-        plugins: plugins.concat([
-            copy({
-                targets: [{
-                    src: [
-                        'src/**/*.html',
-                    ],
-                    dest: outputDir('views'),
-                }],
-                flatten: true,
-                verbose,
-            }),
-            copy({
-                targets: [{
-                    src: [
-                        'src/_locales/**/*.json',
-                        'src/img/spellbook-bg.jpg',
-                        'src/img/spellbook_icon*.png',
-                        'src/manifest.json',
-                    ],
-                    dest: outputDir(),
-                }],
-                flatten: false,
-                verbose,
-            }),
-            copy({
-                targets: [{
-                    src: [
-                        'node_modules/spectre.css/dist/spectre-icons.css',
-                        'node_modules/spectre.css/dist/spectre.css',
-                    ],
-                    dest: outputDir('style'),
-                }],
-                flatten: true,
-                verbose,
-            }),
-        ]),
+        plugins: plugins.concat(copyAssets),
         watch,
-    },
+    }
 ]
