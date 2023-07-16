@@ -27,9 +27,22 @@ label {
     }
 }
 
+a:focus,
+.btn:focus {
+    box-shadow: 0 0 0 0.1rem $focus-color;
+}
+
+.btn:focus, .btn:hover {
+    background: lighten($focus-color, 32.5%);
+}
+
 .form-input {
     font-size: 0.75rem;
     text-overflow: ellipsis;
+
+    &:focus {
+        box-shadow: 0 0 0 0.1rem $focus-color;
+    }
 }
 
 .menu .menu-item {
