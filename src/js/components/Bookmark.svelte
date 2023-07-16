@@ -3,6 +3,7 @@
     import { messages } from '../lib/messaging'
 
     import BookmarkPath from './BookmarkPath.svelte'
+    import Icon from './Icon.svelte'
 
     export let bookmark
 
@@ -21,7 +22,7 @@
     <button class="btn btn-sm float-right"
             type="button"
             on:click={onDelete}>
-        <i class="icon icon-cross"></i>
+        <Icon icon="cross" />
     </button>
     <div class="title">
         <i class="icon icon-bookmark"></i>
