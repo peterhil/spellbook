@@ -34,8 +34,8 @@
     "devDependencies": {
         "@babel/core": "^7.22.6",
         "@babel/eslint-parser": "^7.22.6",
-        "@fortawesome/fontawesome-svg-core": "^1.2.35",
-        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@fortawesome/fontawesome-svg-core": "^6.4.0",
+        "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@rollup/plugin-commonjs": "^25.0.2",
         "@rollup/plugin-eslint": "^9.0.4",
         "@rollup/plugin-node-resolve": "^15.0.1",
