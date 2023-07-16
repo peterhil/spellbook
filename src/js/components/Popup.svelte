@@ -1,18 +1,19 @@
 <script>
-    import { prop, sortBy } from 'rambda'
+    import { indexBy, prop, sortBy, toPairs } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
-    import { messages } from '../lib/messaging'
-    import { currentTab } from '../stores/currentTab'
     import { getCurrentTab } from '../api/tabs'
+    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
+
+    import { currentTab } from '../stores/currentTab'
+    import { savedBookmarks } from '../stores/savedBookmarks'
+
     import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
     import CloseButton from './CloseButton.svelte'
 
-    let savedBookmarks = []
-
-    $: bookmarkCount = savedBookmarks.length
+    $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
         bookmarkCount >= 1
             ? t('saved_bookmark')
@@ -25,10 +26,11 @@
     }
 
     function updateBookmarks (bookmarks) {
-        if (bookmarks.length > 0) {
-            savedBookmarks = sortBy(prop('dateAdded'), bookmarks)
-        }
-        // console.debug('[Popup] updateBookmarks:', savedBookmarks)
+        const sorted = sortBy(prop('dateAdded'), bookmarks)
+        const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
+        // console.debug('[Popup] updateBookmarks:', { saved })
+
+        $savedBookmarks = saved
     }
 
     onMount(() => {
@@ -58,9 +60,9 @@
         </h1>
     </div>
     <div class="card-body">
-        {#if savedBookmarks}
+        {#if $savedBookmarks}
             <div class="saved-bookmarks">
-                {#each savedBookmarks as bookmark}
+                {#each [...$savedBookmarks.values()] as bookmark}
                     <Bookmark {bookmark} />
                 {/each}
             </div>
