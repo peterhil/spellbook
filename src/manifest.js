@@ -3,12 +3,15 @@ const action = {
     default_popup: 'views/popup.html',
 }
 
-const executeAction = {
-    suggested_key: {
-        default: "Ctrl+E",
-        mac: "MacCtrl+E",
-    },
-    description: "__MSG_execute_browser_action__",
+function executeAction (target = 'firefox') {
+    const defaultKey = target == 'firefox' ? 'Ctrl+Alt+S' : 'Alt+S'
+    return {
+        suggested_key: {
+            default: defaultKey,
+            mac: 'Alt+S',
+        },
+        description: '__MSG_execute_browser_action__',
+    }
 }
 
 export const firefox = {
@@ -18,7 +21,7 @@ export const firefox = {
         page: 'views/background.html',
     },
     commands: {
-        _execute_action: executeAction,
+        _execute_action: executeAction('firefox'),
     },
 }
 
@@ -30,6 +33,6 @@ export const chrome = {
         type: 'module',
     },
     commands: {
-        _execute_action: executeAction,
+        _execute_action: executeAction('chrome'),
     },
 }
