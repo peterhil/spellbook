@@ -1,4 +1,5 @@
 <script>
+    import browser from 'webextension-polyfill'
     import { indexBy, prop, sortBy, toPairs } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
@@ -20,9 +21,28 @@
             : t('add_bookmark')
     )
 
+    async function deleteBookmark (bookmark) {
+        // console.debug('Deleting bookmark:', bookmark)
+        browser.bookmarks.remove(bookmark.id)
+            .then(() => {
+                // console.info('Bookmark deleted:', bookmark)
+                location.reload()
+            })
+            .then(updateStatus)
+            .catch(console.error)
+    }
+
     function onClose () {
         window.close()
         return false
+    }
+
+    function updateStatus () {
+        getCurrentTab().then(tab => {
+            // console.debug('[Popup] updating bookmark status:', { tab })
+            $currentTab = { ...tab }
+            messages.emit('api', { type: 'bookmarkStatus', tab })
+        })
     }
 
     function updateBookmarks (bookmarks) {
@@ -36,17 +56,15 @@
     onMount(() => {
         messages.on('bookmarkStatus', updateBookmarks)
         messages.on('button:close', onClose)
+        messages.on('deleteBookmark', deleteBookmark)
 
-        getCurrentTab().then(tab => {
-            // console.debug('[Popup] current tab:', tab)
-            $currentTab = { ...tab }
-            messages.emit('api', { type: 'bookmarkStatus', tab })
-        })
+        updateStatus()
     })
 
     onDestroy(() => {
         messages.off('bookmarkStatus', updateBookmarks)
         messages.off('button:close', onClose)
+        messages.off('deleteBookmark', deleteBookmark)
     })
 </script>
 
@@ -60,13 +78,11 @@
         </h1>
     </div>
     <div class="card-body">
-        {#if $savedBookmarks}
-            <div class="saved-bookmarks">
-                {#each [...$savedBookmarks.values()] as bookmark}
-                    <Bookmark {bookmark} />
-                {/each}
-            </div>
-        {/if}
+        <div class="saved-bookmarks">
+            {#each [...$savedBookmarks.values()] as bookmark (bookmark.id)}
+                <Bookmark {bookmark} />
+            {/each}
+        </div>
         <BookmarkForm bookmark={ $currentTab } />
     </div>
 </div>

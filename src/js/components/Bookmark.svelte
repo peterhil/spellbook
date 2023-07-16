@@ -1,7 +1,15 @@
 <script>
     import { getParentId } from '../api/categories.js'
+    import { messages } from '../lib/messaging'
+
     import BookmarkPath from './BookmarkPath.svelte'
+
     export let bookmark
+
+    function onDelete () {
+        messages.emit('deleteBookmark', bookmark)
+        return false
+    }
 </script>
 
 <a class="bookmark" href={bookmark.url}
@@ -10,6 +18,11 @@
    data-title={bookmark.title}
    data-url={bookmark.url}
    tabindex="0">
+    <button class="btn btn-sm float-right"
+            type="button"
+            on:click={onDelete}>
+        <i class="icon icon-cross"></i>
+    </button>
     <div class="title">
         <i class="icon icon-bookmark"></i>
         {bookmark.title}

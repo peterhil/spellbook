@@ -47,7 +47,7 @@ function setBookmarkStatus (bookmarks, tabId) {
 
 async function checkBookmarkStatus (activeTab) {
     const bookmarks = await searchWithBookmark(activeTab)
-    // console.debug('[popup controller] Bookmarks found:', bookmarks)
+    // console.debug('[popup controller] Bookmarks found:', { activeTab, bookmarks })
 
     setBookmarkStatus(bookmarks, activeTab.id)
     savedBookmarks.setBookmark(activeTab.id, bookmarks || [])
@@ -57,7 +57,7 @@ async function checkBookmarkStatus (activeTab) {
 
 async function checkTabs () {
     const activeTabs = await getActiveTabs()
-    // console.debug('[popup controller] active tabs:', activeTabs)
+    // console.debug('[popup controller] checking active tabs:', activeTabs)
 
     // Clear saved bookmarks cache when bookmarks are modified
     savedBookmarks.reset()
@@ -71,4 +71,5 @@ currentTab$
 
 bookmarksModified$
     // .spy('[popup controller] bookmarks modified:')
+    .debounce(1000, { immediate: true })
     .observe(checkTabs)
