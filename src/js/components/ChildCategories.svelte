@@ -7,7 +7,7 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { sortByTitleCaseInsensitive } from '../lib/pure'
-    import CategoryList from './CategoryList.svelte'
+    import CategoryMenu from './CategoryMenu.svelte'
 
     export let children = []
 
@@ -34,5 +34,5 @@
         { t('subcategories') }
         ({ children.length } { t('pieces') })
     </small>
-    <CategoryList categories={children} />
+    <CategoryMenu categories={children} />
 </ul>

@@ -1,7 +1,7 @@
 <script>
     import { isEmpty, not } from 'rambda'
     import { t } from '../lib/translate'
-    import CategoryList from './CategoryList.svelte'
+    import CategoryMenu from './CategoryMenu.svelte'
     import MainCategories from './MainCategories.svelte'
 
     export let categories = []
@@ -13,7 +13,7 @@
         ({ categories.length } { t('results') })
     </small>
     {#if not(isEmpty(categories)) }
-        <CategoryList categories={categories} />
+        <CategoryMenu categories={categories} />
         <li class="divider" data-content={ t('root_categories') }></li>
         <MainCategories />
     {/if}

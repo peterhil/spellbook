@@ -2,7 +2,7 @@
     import browser from 'webextension-polyfill'
     import { onMount } from 'svelte'
 
-    import CategoryList from './CategoryList.svelte'
+    import CategoryMenu from './CategoryMenu.svelte'
 
     let categories = []
 
@@ -16,4 +16,4 @@
     })
 </script>
 
-<CategoryList categories={categories} />
+<CategoryMenu categories={categories} />

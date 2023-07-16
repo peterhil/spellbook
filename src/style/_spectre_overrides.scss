@@ -32,6 +32,21 @@ label {
     text-overflow: ellipsis;
 }
 
-.menu .menu-item + .menu-item {
-    margin-top: 0;
+.menu .menu-item {
+    & + .menu-item {
+        margin-top: 0;
+    }
+
+    & > a {
+        &:focus,
+        &:hover {
+            background: $secondary-color;
+            color: $primary-color-dark;
+        }
+        &:active,
+        &.active {
+            background: $secondary-color;
+            color: $primary-color-dark;
+        }
+    }
 }

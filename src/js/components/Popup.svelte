@@ -59,9 +59,11 @@
     </div>
     <div class="card-body">
         {#if savedBookmarks}
-            {#each savedBookmarks as bookmark}
-                <Bookmark {bookmark} />
-            {/each}
+            <div class="saved-bookmarks">
+                {#each savedBookmarks as bookmark}
+                    <Bookmark {bookmark} />
+                {/each}
+            </div>
         {/if}
         <BookmarkForm bookmark={ $currentTab } />
     </div>

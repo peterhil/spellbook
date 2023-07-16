@@ -1,39 +1,51 @@
-a.bookmark,
-a.category {
-    display: block;
-    border: 1px solid $item-border-color;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    padding: 3px;
-    text-decoration: none;
-    background-color: #def0ff;
-    color: $item-color;
-    box-shadow: 3px 3px 4px -4px $item-border-color;
-
-    .title {
-        padding: 0.1rem 0.3rem 0;
-        font-weight: bolder;
-
-        .icon {
-            margin-block: 4px;
+.menu {
+    a.bookmark,
+    a.category {
+        .title {
+            font-weight: 700;
         }
     }
+}
 
-    .label {
+.directory,
+.saved-bookmarks {
+    a.bookmark,
+    a.category {
         display: block;
-        margin-top: 0.2rem;
-    }
+        margin-bottom: 5px;
+        padding: 3px;
+        border: 1px solid $border-color;
+        border-radius: 2px;
+        box-shadow: 3px 3px 4px -4px $border-color;
+        background-color: $secondary-color;
+        color: $primary-color-dark;
+        text-decoration: none;
 
-    .title {
-        display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+        .title {
+            padding: 0.1rem 0.3rem 0;
+            font-weight: bolder;
 
-    .info {
-        padding: 0.3rem;
-        padding-top: 0;
+            .icon {
+                margin-block: 4px;
+            }
+        }
+
+        .label {
+            display: block;
+            margin-top: 0.2rem;
+        }
+
+        .title {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .info {
+            padding: 0.3rem;
+            padding-top: 0;
+        }
     }
 }
 
