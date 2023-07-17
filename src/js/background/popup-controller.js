@@ -17,11 +17,11 @@ import { savedBookmarks } from '../stores/savedBookmarks'
 
 export const popupController = {
     recentCategories: async (message, port) => {
-        const result = getRecentCategories(5)
+        const result = await getRecentCategories(5)
         sendMessage(port, 'recentCategories', result)
     },
-    bookmarkStatus: (message, port) => {
-        const result = savedBookmarks.getBookmark(message.tab.id) || []
+    bookmarkStatus: async (message, port) => {
+        const result = await savedBookmarks.getBookmark(message.tab.id)
         sendMessage(port, 'bookmarkStatus', result)
     },
     categorySearch: async (message, port) => {
