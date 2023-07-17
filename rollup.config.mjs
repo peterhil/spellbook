@@ -108,23 +108,8 @@ export default [
         watch,
     },
     {
-        input: 'src/style/directory.scss',
-        output: {
-            dir: outputDir('style'),
-            name: 'directory.scss',
-            format,
-        },
-        plugins: [
-            sass({
-                output: outputDir('style/directory.css'),
-            })
-        ],
-        watch,
-    },
-    {
         input: {
             background: 'src/js/background/index.js',
-            directory: 'src/js/directory.js',
             popup: 'src/js/popup.js',
             serviceWorker: 'src/js/background/worker.js',
         },

@@ -5,11 +5,9 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { disconnectionHandler, messageServer } from '../lib/messaging'
-import { directoryController } from './directory-controller'
 import { popupController } from './popup-controller'
 
 const controllers = {
-    directory: directoryController,
     popup: popupController,
 }
 
