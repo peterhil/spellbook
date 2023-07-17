@@ -15,6 +15,23 @@ function executeAction (target = 'firefox') {
 }
 
 export const firefox = {
+    manifest_version: 2,
+    browser_action: action,
+    background: {
+        page: 'views/background.html',
+    },
+    commands: {
+        _execute_browser_action: executeAction('firefox'),
+    },
+    'browser_specific_settings': {
+        'gecko': {
+            'id': '{95013b88-3657-4199-b8ae-179f4a92f727}',
+            'strict_min_version': '101.0'
+        },
+    },
+}
+
+export const firefoxV3 = {
     manifest_version: 3,
     action,
     background: {
@@ -26,7 +43,7 @@ export const firefox = {
     'browser_specific_settings': {
         'gecko': {
             'id': '{95013b88-3657-4199-b8ae-179f4a92f727}',
-            'strict_min_version': '101.0'
+            'strict_min_version': '109.0'
         },
     },
 }

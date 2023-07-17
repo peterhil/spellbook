@@ -18,7 +18,7 @@ const manifest = {
     ...platform,
 }
 
-const manifestFilename = isFF ? 'manifest.json' : 'manifest.json'
+const manifestFilename = 'manifest.json'
 const manifestPath = rel(outDir, manifestFilename)
 const manifestString = JSON.stringify(manifest, null, 2) + '\n'
 

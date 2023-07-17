@@ -5,9 +5,10 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import browser from 'webextension-polyfill'
+import { browserAction } from '../lib/compat'
 
 import { onMessage } from './common'
 
-browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
+browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
 
 browser.runtime.onMessage.addListener(onMessage)
