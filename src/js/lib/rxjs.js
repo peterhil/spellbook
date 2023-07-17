@@ -1,5 +1,3 @@
-// lib/rxjs.js
-
 // Copyright (c) 2015-2018 Peter Hillerström, Google, Inc., Netflix, Inc.,
 // Microsoft Corp. and contributors
 //
