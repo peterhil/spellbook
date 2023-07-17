@@ -16,11 +16,9 @@ import { currentTab$, getActiveTabs } from '../api/tabs'
 import { savedBookmarks } from '../stores/savedBookmarks'
 
 export const popupController = {
-    getRecentCategories: (message, port) => {
-        getRecentCategories(5) // TODO Move hardcoded value into options
-            .then(result => {
-                sendMessage(port, 'recentCategories', result)
-            })
+    recentCategories: async (message, port) => {
+        const result = getRecentCategories(5)
+        sendMessage(port, 'recentCategories', result)
     },
     bookmarkStatus: (message, port) => {
         const result = savedBookmarks.getBookmark(message.tab.id) || []
