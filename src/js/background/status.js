@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import browser from 'webextension-polyfill'
+import { browserAction } from '../lib/compat'
 
 import { map } from 'rambda'
 
@@ -21,8 +21,8 @@ function setBookmarkStatus (bookmarks, tabId) {
         ? '../img/spellbook_icon_bookmarked.png'
         : '../img/spellbook_icon.png'
 
-    browser.action.setIcon({ path: icon, tabId })
-    browser.action.setBadgeText({ text: badgeText, tabId })
+    browserAction.setIcon({ path: icon, tabId })
+    browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
 export async function checkBookmarkStatus (activeTab) {
