@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# Released versions
+
+## [0.6.0] - 2023-07-18 Manifest V3, show and remove saved bookmarks
+
+Github [closed issues for v0.6.0](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.6.0)
+
+### Added
+
+* Show saved bookmark info on popup [Issue #56] [Issue #71] [Issue #78]
+* Enable deleting bookmarks [Issue #88]
+* New bookmark and category style [Issue #56]
+
+### Changed
+
+* Change default shortcut key to `Alt+S` (`Ctrl+Alt+S` on Firefox)
+* Generate manifest V3 for different browser targets [Issue #58] [Issue #87]
+* Use custom focus colour [Issue #56]
+
+### Fixed
+
+* Use simple nonpersistent message passing for service worker [Issue #87]
+* Clean up and simplify code, styles and packaging [Issue #42] [Issue #62]
+
+[Issue #42]: https://github.com/peterhil/spellbook/issues/42
+[Issue #56]: https://github.com/peterhil/spellbook/issues/56
+[Issue #58]: https://github.com/peterhil/spellbook/issues/58
+[Issue #62]: https://github.com/peterhil/spellbook/issues/62
+[Issue #67]: https://github.com/peterhil/spellbook/issues/67
+[Issue #71]: https://github.com/peterhil/spellbook/issues/71
+[Issue #78]: https://github.com/peterhil/spellbook/issues/78
+[Issue #81]: https://github.com/peterhil/spellbook/issues/81
+[Issue #87]: https://github.com/peterhil/spellbook/issues/87
+[Issue #88]: https://github.com/peterhil/spellbook/issues/88
+
+
 ## [0.5.0] – 2021-06-29 Intuitive UI
 
 Github [closed issues for v0.5.0](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.5.0)
@@ -107,7 +142,6 @@ Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q
 [Issue #31]: https://github.com/peterhil/spellbook/issues/31
 [Pull request #38]: https://github.com/peterhil/spellbook/pull/38
 
-# Released versions:
 
 ## [0.4.1] – 2019-12-22 – Fix bookmark paths
 
@@ -115,6 +149,7 @@ Github [closed issues for v0.4.2](https://github.com/peterhil/spellbook/issues?q
 
 - Fix bookmark paths to update reactively
 - Fix popup styles to avoid extra scroll bars on popup
+
 
 ## [0.4.0] – 2019-12-17 – Use [Svelte] instead of Riot.js
 
@@ -334,7 +369,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/peterhil/spellbook/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/peterhil/spellbook/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/peterhil/spellbook/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/peterhil/spellbook/compare/v0.4.0...v0.4.1
