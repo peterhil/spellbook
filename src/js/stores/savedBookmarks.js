@@ -10,7 +10,7 @@ function createStore () {
     return {
         ...saved,
         ...store,
-        getBookmark: (tabId) => saved.get(tabId),
+        getBookmark: (tabId) => saved.get(tabId, []),
         setBookmark: (tabId, bookmark) => saved.set(tabId, bookmark),
         reset: () => saved.clear(),
     }
