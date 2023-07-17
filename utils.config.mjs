@@ -9,10 +9,10 @@ const __dirname = dirname(__filename)
 
 export const rel = (...args) => resolve(__dirname, ...args)
 
-export const mode = process.env.NODE_ENV || 'development';
+export const mode = process.env.NODE_ENV || 'development'
 export const target = process.env.TARGET || 'firefox'
 
-export const isDev = mode !== 'production';
+export const isDev = mode !== 'production'
 export const outDir = isDev ? 'dev' : 'dist'
 
 export function outputDir (dir = '') {

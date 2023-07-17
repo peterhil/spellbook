@@ -7,7 +7,7 @@ import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
 
-import { isDev, outputDir, rel, target, urlPath } from './utils.config.mjs'
+import { isDev, outputDir, target } from './utils.config.mjs'
 
 const format = 'es'
 const sourcemap = (isDev ? 'inline' : false)
