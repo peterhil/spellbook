@@ -6,6 +6,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import preprocess from 'svelte-preprocess'
 import sass from 'rollup-plugin-sass'
 import svelte from 'rollup-plugin-svelte'
+import terser from '@rollup/plugin-terser'
 
 import { isDev, outputDir, target } from './utils.config.mjs'
 
@@ -44,6 +45,8 @@ const plugins = [
         preferBuiltins: false,
     }),
     commonjs(),
+
+    !isDev && terser(),
 ]
 
 const copyAssets = [

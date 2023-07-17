@@ -8,6 +8,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^25.0.2
   '@rollup/plugin-eslint': ^9.0.4
   '@rollup/plugin-node-resolve': ^15.0.1
+  '@rollup/plugin-terser': ^0.4.3
   '@sveltejs/vite-plugin-svelte': ^2.4.2
   '@testing-library/svelte': ^3.0.3
   chokidar: ^3.5.1
@@ -61,6 +62,7 @@ devDependencies:
   '@rollup/plugin-commonjs': 25.0.2_rollup@3.26.1
   '@rollup/plugin-eslint': 9.0.4_rollup@3.26.1
   '@rollup/plugin-node-resolve': 15.1.0_rollup@3.26.1
+  '@rollup/plugin-terser': 0.4.3_rollup@3.26.1
   '@sveltejs/vite-plugin-svelte': 2.4.2_svelte@3.59.2+vite@4.3.9
   '@testing-library/svelte': 3.0.3_svelte@3.59.2
   chokidar: 3.5.3
@@ -744,6 +746,13 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
+  /@jridgewell/source-map/0.3.5:
+    resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/trace-mapping': 0.3.18
+    dev: true
+
   /@jridgewell/sourcemap-codec/1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
     dev: true
@@ -879,6 +888,21 @@ packages:
       is-module: 1.0.0
       resolve: 1.22.2
       rollup: 3.26.1
+    dev: true
+
+  /@rollup/plugin-terser/0.4.3_rollup@3.26.1:
+    resolution: {integrity: sha512-EF0oejTMtkyhrkwCdg0HJ0IpkcaVg1MMSf2olHb2Jp+1mnLM04OhjpJWGma4HobiDTF0WCyViWuvadyE9ch2XA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.x || ^3.x
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 3.26.1
+      serialize-javascript: 6.0.1
+      smob: 1.4.0
+      terser: 5.19.1
     dev: true
 
   /@rollup/pluginutils/4.2.1:
@@ -6478,6 +6502,12 @@ packages:
       randombytes: 2.1.0
     dev: true
 
+  /serialize-javascript/6.0.1:
+    resolution: {integrity: sha512-owoXEFjWRllis8/M1Q+Cw5k8ZH40e3zhp/ovX+Xr/vi1qj6QesbyXXViFbpNvWvPNAD62SutwEXavefrLJWj7w==}
+    dependencies:
+      randombytes: 2.1.0
+    dev: true
+
   /set-value/2.0.1:
     resolution: {integrity: sha512-JxHc1weCN68wRY0fhCoXpyK55m/XPHafOmK4UWD7m2CI14GMcFypt4w/0+NV5f/ZMby2F6S2wwA7fgynh9gWSw==}
     engines: {node: '>=0.10.0'}
@@ -6594,6 +6624,10 @@ packages:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    dev: true
+
+  /smob/1.4.0:
+    resolution: {integrity: sha512-MqR3fVulhjWuRNSMydnTlweu38UhQ0HXM4buStD/S3mc/BzX3CuM9OmhyQpmtYCvoYdl5ris6TI0ZqH355Ymqg==}
     dev: true
 
   /snapdragon-node/2.1.1:
@@ -7287,6 +7321,17 @@ packages:
       fs-constants: 1.0.0
       inherits: 2.0.4
       readable-stream: 3.6.0
+    dev: true
+
+  /terser/5.19.1:
+    resolution: {integrity: sha512-27hxBUVdV6GoNg1pKQ7Z5cbR6V9txPVyBA+FQw3BaZ1Wuzvztce5p156DaP0NVZNrMZZ+6iG9Syf7WgMNKDg2Q==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      '@jridgewell/source-map': 0.3.5
+      acorn: 8.10.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
     dev: true
 
   /text-table/0.2.0:
