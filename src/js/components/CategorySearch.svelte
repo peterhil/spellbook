@@ -11,7 +11,7 @@
 
     function searchCategories (query) {
         // console.debug('[CategorySearch] search:', query)
-        messages.emit('api', { type: 'categorySearch', query })
+        messages.emit('api', { action: 'categorySearch', query })
     }
 
     function clearSearch () {

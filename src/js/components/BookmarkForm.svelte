@@ -62,7 +62,7 @@
     }
 
     onMount(() => {
-        messages.on('searchResults', updateCategories)
+        messages.on('categorySearch', updateCategories)
     })
 </script>
 

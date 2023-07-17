@@ -41,7 +41,7 @@
         getCurrentTab().then(tab => {
             // console.debug('[Popup] updating bookmark status:', { tab })
             $currentTab = { ...tab }
-            messages.emit('api', { type: 'bookmarkStatus', tab })
+            messages.emit('api', { action: 'bookmarkStatus', tab })
         })
     }
 
@@ -57,6 +57,8 @@
         messages.on('bookmarkStatus', updateBookmarks)
         messages.on('button:close', onClose)
         messages.on('deleteBookmark', deleteBookmark)
+
+        messages.emit('api', { action: 'recentCategories' })
 
         updateStatus()
     })

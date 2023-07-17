@@ -6,25 +6,26 @@
 
 import browser from 'webextension-polyfill'
 
-import Popup from './components/Popup.svelte'
-
 import './lib/icons'
 import events from './lib/events'
-import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
+import { messages } from './lib/messaging'
+
+import Popup from './components/Popup.svelte'
 
 function onLoad (event) {
-    const port = browser.runtime.connect({ name: 'popup' })
+    messages.on('api', async (request) => {
+        const { action } = request
+        // console.debug('[popup] API request:', action, request)
 
-    // Receive messages and handle disconnect
-    port.onMessage.addListener(messageBridge)
-    port.onDisconnect.addListener(disconnectionHandler)
+        try {
+            const response = await browser.runtime.sendMessage(request)
+            // console.debug('[popup] API response:', action, response)
 
-    // Send a message
-    port.postMessage({ type: 'recentCategories' })
-
-    messages.on('api', (request) => {
-        // console.debug('[popup] API request:', request)
-        port.postMessage(request)
+            messages.emit(action, response)
+        }
+        catch (err) {
+            console.error(err)
+        }
     })
 
     new Popup({ // eslint-disable-line no-new

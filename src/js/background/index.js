@@ -6,8 +6,8 @@
 
 import browser from 'webextension-polyfill'
 
-import { onConnect } from './common'
+import { onMessage } from './common'
 
 browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
 
-browser.runtime.onConnect.addListener(onConnect)
+browser.runtime.onMessage.addListener(onMessage)
