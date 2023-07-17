@@ -1,6 +1,7 @@
 {
     "add_bookmark": { "message": "Ajouter un signet" },
     "add_subcategory": { "message": "Ajouter une sous-catégorie" },
+    "added": { "message": "Ajouté" },
     "bookmarks": { "message": "Signets" },
     "bookmarks_bar": { "message": "Barre de signets" },
     "buttons_add": { "message": "Ajouter" },

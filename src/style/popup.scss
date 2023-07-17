@@ -4,11 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-@import './variables';
-@import '../../node_modules/spectre.css/src/spectre';
-@import '../../node_modules/spectre.css/src/spectre-icons';
-@import './spectre_overrides';
-@import './common';
+@use './variables' as *;
+@use './spectre_overrides';
+@use './common';
 
 // Basic layout
 
@@ -26,7 +24,7 @@ html {
 }
 
 body {
-    box-sizing: content-box;
+    box-sizing: border-box;
     width: 42ch;
     min-width: 180px;
     max-width: 100%;
@@ -39,17 +37,8 @@ body {
 
 .popup {
     position: relative;
-    box-sizing: content-box;
     width: 100%;
     height: auto;
-
-    form {
-        box-sizing: content-box;
-    }
-
-    form > * {
-        box-sizing: border-box;
-    }
 
     h1 {
         font-size: 0.9rem;
@@ -79,7 +68,7 @@ body {
 }
 
 .bookmark-form {
-    .btn[type=submit] {
+    .btn[type="submit"] {
         padding: .25rem .8rem;
     }
 }
@@ -113,6 +102,15 @@ body {
 
 .category.dropdown {
     display: block;
+}
+
+.input-group-addon.with-icon {
+    padding: 0.2rem;
+
+    .icon.favicon {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .status .label {

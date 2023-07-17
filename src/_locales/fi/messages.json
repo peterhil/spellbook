@@ -1,6 +1,7 @@
 {
     "add_bookmark": { "message": "Lisää kirjanmerkki" },
     "add_subcategory": { "message": "Lisää alakategoria" },
+    "added": { "message": "Lisätty" },
     "bookmarks": { "message": "Kirjanmerkit" },
     "bookmarks_bar": { "message": "Kirjanmerkkipalkki" },
     "buttons_add": { "message": "Lisää" },

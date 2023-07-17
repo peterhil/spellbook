@@ -1,5 +1,3 @@
-// api/tabs.js
-
 // Copyright (c) 2018 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -8,7 +6,7 @@
 
 import { fromPromise, merge } from 'kefir'
 import { difference, isEmpty, pick, prop, values } from 'rambda'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import { safeHead } from '../lib/pure'
 import { browserEvent$ } from './helpers'

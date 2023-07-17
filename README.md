@@ -56,7 +56,7 @@ For now the stack is:
 
 ## Licensing
 
-Copyright © 2018–2019 Peter Hillerström and contributors
+Copyright © 2018–2023 Peter Hillerström and contributors
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a [copy of the MPL](https://github.com/peterhil/spellbook/blob/master/LICENSE.txt) was not distributed with this

@@ -1,6 +1,7 @@
 {
     "add_bookmark": { "message": "Добавить в закладки" },
     "add_subcategory": { "message": "Добавить подкатегорию" },
+    "added": { "message": "Добавить" },
     "bookmarks": { "message": "Закладки" },
     "bookmarks_bar": { "message": "Панель закладок" },
     "buttons_add": { "message": "Добавить" },

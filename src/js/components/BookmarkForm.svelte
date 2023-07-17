@@ -1,10 +1,10 @@
 <script>
+    import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
-    import { browser } from 'rosegarden'
     import { onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
-    import { t } from '../lib/translate'
+    import { humanizeDate, t } from '../lib/translate'
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
@@ -57,12 +57,12 @@
         const newBookmark = await browser.bookmarks.create(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
-        window.close()
+        location.reload() // Refresh the popup
         return false
     }
 
     onMount(() => {
-        messages.on('searchResults', updateCategories)
+        messages.on('categorySearch', updateCategories)
     })
 </script>
 
@@ -70,6 +70,13 @@
       bind:this={ form }
       on:submit|preventDefault={ onSubmit }
       >
+    {#if bookmark.dateAdded }
+    <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>
+    {/if}
+    {#if bookmark.parentId }
+    <p>{ t('category') }: { bookmark.parentId }</p>
+    {/if}
+
     <div class="form-group">
         <CategorySelector>
             <span slot="status">

@@ -6,14 +6,8 @@
 
 import browser from 'webextension-polyfill'
 
-export const t = browser.i18n.getMessage
+import { onMessage } from './common'
 
-export function humanizeDate (
-    date,
-    locale = browser.i18n.getUILanguage(),
-    options = { dateStyle: 'full' }
-) {
-    const localeDate = new Intl.DateTimeFormat(locale, options)
+browser.action.setBadgeBackgroundColor({ color: '#5755d9' })
 
-    return localeDate.format(new Date(date))
-}
+browser.runtime.onMessage.addListener(onMessage)

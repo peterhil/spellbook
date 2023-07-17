@@ -5,8 +5,9 @@ module.exports = {
         'stylelint-config-rational-order',
     ],
     rules: {
-        indentation: 4,
+        'max-nesting-depth': 2,
         'number-leading-zero': null,
         'order/properties-alphabetical-order': [null, { disableFix: false }],
+        'selector-no-qualifying-type': null,
     },
 }

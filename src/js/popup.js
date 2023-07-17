@@ -4,26 +4,28 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Popup from './components/Popup.svelte'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import './lib/icons'
 import events from './lib/events'
-import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
+import { messages } from './lib/messaging'
+
+import Popup from './components/Popup.svelte'
 
 function onLoad (event) {
-    const port = browser.runtime.connect({ name: 'popup' })
+    messages.on('api', async (request) => {
+        const { action } = request
+        // console.debug('[popup] API request:', action, request)
 
-    // Receive messages and handle disconnect
-    port.onMessage.addListener(messageBridge)
-    port.onDisconnect.addListener(disconnectionHandler)
+        try {
+            const response = await browser.runtime.sendMessage(request)
+            // console.debug('[popup] API response:', action, response)
 
-    // Send a message
-    port.postMessage({ type: 'getRecentCategories' })
-
-    messages.on('api', (request) => {
-        // console.debug('[popup] API request:', request)
-        port.postMessage(request)
+            messages.emit(action, response)
+        }
+        catch (err) {
+            console.error(err)
+        }
     })
 
     new Popup({ // eslint-disable-line no-new

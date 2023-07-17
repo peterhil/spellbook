@@ -1,5 +1,3 @@
-// api/bookmarks.js
-
 // Copyright (c) 2018-2019 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -8,7 +6,7 @@
 
 import zd from 'zepto-detect'
 import { test } from 'rambda'
-import { browser } from 'rosegarden'
+import browser from 'webextension-polyfill'
 
 import { sortByTitleCaseInsensitive } from '../lib/pure'
 import { isCategory } from './helpers'

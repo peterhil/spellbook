@@ -3,7 +3,7 @@
 
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
-    import CategoryList from './CategoryList.svelte'
+    import CategoryMenu from './CategoryMenu.svelte'
 
     export let recentCategories = []
 
@@ -23,5 +23,5 @@
 
 <ul class="menu" tabindex="-1">
     <small class="toast">{ t('recent_categories') }</small>
-    <CategoryList categories={recentCategories} />
+    <CategoryMenu categories={recentCategories} />
 </ul>
