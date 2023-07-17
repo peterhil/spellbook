@@ -109,7 +109,7 @@ export default [
     },
     {
         input: {
-            background: 'src/js/background/index.js',
+            background: 'src/js/background/script.js',
             popup: 'src/js/popup.js',
             serviceWorker: 'src/js/background/worker.js',
         },
