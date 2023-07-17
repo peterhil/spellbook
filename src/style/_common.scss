@@ -22,13 +22,13 @@
         border-radius: 2px;
         box-shadow: 3px 3px 4px -4px $border-color;
 
-        .title {
-            padding: 0.1rem 0.3rem 0;
-            font-weight: bolder;
+        .icon {
+            margin-block: 4px;
+        }
 
-            .icon {
-                margin-block: 4px;
-            }
+        .info {
+            padding: 0.3rem;
+            padding-top: 0;
         }
 
         .label {
@@ -38,14 +38,11 @@
 
         .title {
             display: block;
+            padding: 0.1rem 0.3rem 0;
             overflow: hidden;
+            font-weight: bolder;
             white-space: nowrap;
             text-overflow: ellipsis;
-        }
-
-        .info {
-            padding: 0.3rem;
-            padding-top: 0;
         }
     }
 }

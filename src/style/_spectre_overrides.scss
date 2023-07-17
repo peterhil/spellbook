@@ -1,5 +1,6 @@
 // Spectre overrides
 
+@use 'sass:color';
 @use './variables' as *;
 
 h1,
@@ -35,7 +36,7 @@ a:focus,
 }
 
 .btn:focus, .btn:hover {
-    background: lighten($focus-color, 32.5%);
+    background: color.adjust($focus-color, $lightness: 32.5%);
 }
 
 .form-input {
@@ -47,22 +48,20 @@ a:focus,
     }
 }
 
-.menu .menu-item {
-    & + .menu-item {
-        margin-top: 0;
+.menu .menu-item + .menu-item {
+    margin-top: 0;
+}
+
+.menu .menu-item > a {
+    &:focus,
+    &:hover {
+        color: $primary-color-dark;
+        background: $secondary-color;
     }
 
-    & > a {
-        &:focus,
-        &:hover {
-            color: $primary-color-dark;
-            background: $secondary-color;
-        }
-
-        &:active,
-        &.active {
-            color: $primary-color-dark;
-            background: $secondary-color;
-        }
+    &:active,
+    &.active {
+        color: $primary-color-dark;
+        background: $secondary-color;
     }
 }
