@@ -46,10 +46,11 @@
     }
 
     function updateBookmarks (bookmarks) {
-        const sorted = sortBy(prop('dateAdded'), bookmarks)
+        const sorted = sortBy(prop('dateAdded'), bookmarks || [])
         const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
-        // console.debug('[Popup] updateBookmarks:', { saved })
+        // console.debug('[Popup] updateBookmarks sorted:', { sorted, saved })
 
+        // TODO Use separate store?
         $savedBookmarks = saved
     }
 
