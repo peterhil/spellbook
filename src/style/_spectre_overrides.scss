@@ -55,13 +55,14 @@ a:focus,
     & > a {
         &:focus,
         &:hover {
-            background: $secondary-color;
             color: $primary-color-dark;
+            background: $secondary-color;
         }
+
         &:active,
         &.active {
-            background: $secondary-color;
             color: $primary-color-dark;
+            background: $secondary-color;
         }
     }
 }
