@@ -23,6 +23,12 @@ export const firefox = {
     commands: {
         _execute_action: executeAction('firefox'),
     },
+    'browser_specific_settings': {
+        'gecko': {
+            'id': '{95013b88-3657-4199-b8ae-179f4a92f727}',
+            'strict_min_version': '101.0'
+        },
+    },
 }
 
 export const chrome = {
