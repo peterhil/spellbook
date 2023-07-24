@@ -13,7 +13,7 @@
     import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
     import CloseButton from './CloseButton.svelte'
-    import Explore from './Explore.svelte'
+    import Tabs from './Tabs.svelte'
 
     $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
@@ -74,7 +74,7 @@
 
 <div class="stripe"></div>
 <div class="card">
-    <Explore />
+    <Tabs />
     <div class="card-header">
         <CloseButton />
         <h1>
