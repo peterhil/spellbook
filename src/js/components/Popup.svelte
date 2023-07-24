@@ -73,8 +73,8 @@
 </script>
 
 <div class="stripe"></div>
-<Explore />
 <div class="card">
+    <Explore />
     <div class="card-header">
         <CloseButton />
         <h1>
