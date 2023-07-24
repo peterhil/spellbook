@@ -7,16 +7,13 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
-    import BookmarkForm from '../components/BookmarkForm.svelte'
-    import CloseButton from '../components/CloseButton.svelte'
-    import Explore from '../components/Explore.svelte'
-
     import { currentTab } from '../stores/currentTab'
     import { savedBookmarks } from '../stores/savedBookmarks'
 
     import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
     import CloseButton from './CloseButton.svelte'
+    import Explore from './Explore.svelte'
 
     $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
