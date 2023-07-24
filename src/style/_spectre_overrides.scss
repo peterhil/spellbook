@@ -27,7 +27,21 @@ label {
     .card-footer {
         padding: $card-padding;
         padding-bottom: 0;
+
+        &:last-child {
+            padding-bottom: $card-padding;
+        }
     }
+}
+
+.card,
+.tab {
+    border: 0;
+    margin: 0;
+}
+
+.card + .card {
+    border-radius: 0 0 $border-radius $border-radius;
 }
 
 a:focus,
@@ -63,5 +77,34 @@ a:focus,
     &.active {
         color: $primary-color-dark;
         background: $secondary-color;
+    }
+}
+
+.tab {
+    .tab-item {
+        a {
+            border-bottom: 0;
+            border-top: 0.3rem solid transparent;
+            background-color: $tab-active-color;
+            border-top-color: $dark-color;
+            text-align: left;
+            padding-left: 0.75rem;
+        }
+
+        &.active a,
+        a.active {
+            background-color: $light-color;
+            border-top-color: $primary-color-light;
+        }
+
+        a:focus {
+            position: relative;
+            z-index: 1;
+        }
+
+        a:hover {
+            background-color: $secondary-color;
+            border-top-color: $primary-color;
+        }
     }
 }
