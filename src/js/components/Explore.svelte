@@ -5,10 +5,10 @@
 <div class="card">
     <ul class="tab tab-block">
         <li class="tab-item active">
-            <a href="#">{ t('tab_explore') }</a>
+            <a href="#">{ t('tab_organise') }</a>
         </li>
         <li class="tab-item">
-            <a href="#">{ t('tab_organise') }</a>
+            <a href="#">{ t('tab_explore') }</a>
         </li>
     </ul>
 </div>
