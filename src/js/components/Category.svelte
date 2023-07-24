@@ -14,12 +14,6 @@
     }
 </script>
 
-<style>
-    .title {
-        font-weight: bolder;
-    }
-</style>
-
 <a href="#{category.id}" class="category" tabindex="0"
    bind:this={elem}
    on:click={onClick}
@@ -28,5 +22,7 @@
    data-parent-id={getParentId(category)}
    >
     <div class="title">{category.title}</div>
-    <BookmarkPath bookmark={category} />
+    <div class="info">
+        <BookmarkPath bookmark={category} />
+    </div>
 </a>

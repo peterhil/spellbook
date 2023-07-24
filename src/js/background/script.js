@@ -5,15 +5,10 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import browser from 'webextension-polyfill'
+import { browserAction } from '../lib/compat'
 
-export const t = browser.i18n.getMessage
+import { onMessage } from './common'
 
-export function humanizeDate (
-    date,
-    locale = browser.i18n.getUILanguage(),
-    options = { dateStyle: 'full' }
-) {
-    const localeDate = new Intl.DateTimeFormat(locale, options)
+browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
 
-    return localeDate.format(new Date(date))
-}
+browser.runtime.onMessage.addListener(onMessage)

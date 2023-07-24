@@ -1,18 +1,18 @@
 // Variables
 
 // Core colors
-$primary-color: #5735b9;
-$primary-color-dark: darken($primary-color, 13%);
-$primary-color-light: lighten($primary-color, 7%);
-$secondary-color: #ecedfe;
+$primary-color: #5755d9;
+$primary-color-dark: #24b;
+$primary-color-light: #807fe233;
+$secondary-color: #def0ff;
 
 // Gray colors
 $dark-color: #222627;
 $light-color: #fff;
-$gray-color: #555659;
+$gray-color: #567;
 
-$border-color: lighten($dark-color, 65%);
-$bg-color: lighten($dark-color, 75%);
+$border-color: #6af;
+$bg-color: $secondary-color;
 
 // Control colors
 $success-color: #32b643;
@@ -21,6 +21,7 @@ $error-color: #e83660;
 
 // Other colors
 $code-color: $primary-color;
+$focus-color: #55b9d9b0;
 $highlight-color: #ffe9b3;
 
 // Other variables

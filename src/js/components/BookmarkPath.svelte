@@ -1,21 +1,20 @@
 <script>
     import { getParentPath } from '../api/categories.js'
+    import { t } from '../lib/translate'
+
     export let bookmark
 
-    const getPath = async function () {
-        path = await getParentPath(bookmark)
-    }
+    async function getPath (bookmark) {
+        const path = await getParentPath(bookmark)
 
-    $: path = getPath(bookmark)
+        return path || t('root_category')
+    }
 </script>
 
-<style>
-    .parents {
-        display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-</style>
-
-<small class="parents">{path}</small>
+<small class="parents">
+    {#await getPath(bookmark) }
+        <span class="loading">Loading...</span>
+    {:then path }
+        { path }
+    {/await}
+</small>

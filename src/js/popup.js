@@ -4,29 +4,29 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Popup from './components/Popup.svelte'
+import browser from 'webextension-polyfill'
 
 import './lib/icons'
 import events from './lib/events'
-import { disconnectionHandler, messageBridge, messages } from './lib/messaging'
+import { messages } from './lib/messaging'
+
+import Popup from './components/Popup.svelte'
 
 function onLoad (event) {
-    const port = chrome.runtime.connect({ name: 'popup' })
+    messages.on('api', async (request) => {
+        const { action } = request
+        // console.debug('[popup] API request:', action, request)
 
-    chrome.browserAction.setBadgeBackgroundColor({ color: '#5755d9' })
+        try {
+            const response = await browser.runtime.sendMessage(request)
+            // console.debug('[popup] API response:', action, response)
 
-    port.onDisconnect.addListener(disconnectionHandler)
-
-    // Send a message
-    port.postMessage({ type: 'getRecentCategories' })
-
-    messages.on('api', (request) => {
-        // console.debug('[popup] API request:', request)
-        port.postMessage(request)
+            messages.emit(action, response)
+        }
+        catch (err) {
+            console.error(err)
+        }
     })
-
-    // Receive messages
-    port.onMessage.addListener(messageBridge)
 
     new Popup({ // eslint-disable-line no-new
         target: document.getElementById('popup'),

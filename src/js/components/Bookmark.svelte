@@ -1,28 +1,17 @@
 <script>
     import { getParentId } from '../api/categories.js'
+    import { messages } from '../lib/messaging'
+
     import BookmarkPath from './BookmarkPath.svelte'
+    import Icon from './Icon.svelte'
+
     export let bookmark
+
+    function onDelete () {
+        messages.emit('deleteBookmark', bookmark)
+        return false
+    }
 </script>
-
-<style>
-    .bookmark {
-        word-break: break-word;
-    }
-
-    .bookmark:hover {
-        margin-bottom: -2px;
-        border-bottom: 2px solid #4b48d6;
-    }
-
-    .bookmark .title {
-        font-weight: bolder;
-    }
-
-    .url {
-        font-weight: 400;
-        font-size: 80%;
-    }
-</style>
 
 <a class="bookmark" href={bookmark.url}
    data-id={bookmark.id}
@@ -30,9 +19,19 @@
    data-title={bookmark.title}
    data-url={bookmark.url}
    tabindex="0">
-    <div class="title">{bookmark.title}</div>
-    <div class="url">{bookmark.url}</div>
-    <div class="label label-secondary">
-        <BookmarkPath bookmark={bookmark} />
+    <button class="btn btn-sm float-right"
+            type="button"
+            on:click={onDelete}>
+        <Icon icon="cross" />
+    </button>
+    <div class="title">
+        <i class="icon icon-bookmark"></i>
+        {bookmark.title}
+    </div>
+    <div class="info">
+        <div class="url">{bookmark.url}</div>
+        <div class="label label-secondary">
+            <BookmarkPath bookmark={bookmark} />
+        </div>
     </div>
 </a>

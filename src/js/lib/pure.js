@@ -1,5 +1,3 @@
-// lib/pure.js
-
 // Copyright (c) 2018 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -10,7 +8,6 @@
 
 import {
     compose,
-    curry,
     head,
     isEmpty,
     prop,
@@ -25,10 +22,6 @@ export const hasItems = array => {
 export const isFunction = fn => {
     return typeof fn === 'function'
 }
-
-export const choice = curry((selection, options) => {
-    return options[selection] || options.default
-})
 
 export function safeHead (list) {
     return (

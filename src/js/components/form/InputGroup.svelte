@@ -7,7 +7,7 @@
     export let required = false
     export let value = ''
 
-    export let label = t(name)
+    export let label = (type === 'hidden' ? '' : t(name))
     export let placeholder = ''
     export let autocomplete = true
 
@@ -29,9 +29,11 @@
     }
 </script>
 
-<label for={name}>
-    { label }
-</label>
+<slot name="label">
+    <label for={name}>
+        { label }
+    </label>
+</slot>
 <div class="input-group">
     <input class="form-input"
            {name}

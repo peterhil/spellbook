@@ -1,5 +1,3 @@
-// api/categories.js
-
 // Copyright (c) 2019 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -8,13 +6,9 @@
 
 import zd from 'zepto-detect'
 import { map, pick, prop, take, uniq } from 'rambda'
+import browser from 'webextension-polyfill'
 
-import { getBookmark, getRecent } from './bookmarks'
-import { choice } from '../lib/pure'
-import { notImplemented$ } from '../lib/reactive'
-import * as chromeBookmarks from './chrome/bookmarks'
-import * as firefoxBookmarks from './firefox/bookmarks'
-import { isCategory, platform } from './helpers'
+import { isCategory } from './helpers'
 
 export const parentIdProperty = (zd.browser.firefox && zd.browser.version < 64)
     ? 'parentGuid'
@@ -44,24 +38,6 @@ export function isTopLevelCategory (bookmark) {
     return getParentId(bookmark) === rootCategoryId
 }
 
-export const getTree = choice(platform, {
-    chrome: chromeBookmarks.getTree,
-    firefox: firefoxBookmarks.getTree,
-    default: notImplemented$,
-})
-
-export const getSubTree = choice(platform, {
-    chrome: chromeBookmarks.getSubTree,
-    firefox: firefoxBookmarks.getSubTree,
-    default: notImplemented$,
-})
-
-export const getChildren = choice(platform, {
-    chrome: chromeBookmarks.getChildren,
-    firefox: firefoxBookmarks.getChildren,
-    default: notImplemented$,
-})
-
 export function flattenTree (tree) {
     const bookmarks = []
 
@@ -87,7 +63,7 @@ export async function getParents (bookmark) {
 
     while (isBookmarkNode(current) && !isTopLevelCategory(current)) {
         try {
-            const result = await getBookmark(getParentId(current))
+            const result = await browser.bookmarks.get(getParentId(current))
             current = pick(parentPathProperties, result[0])
             parents.push(current)
         }
@@ -100,22 +76,21 @@ export async function getParents (bookmark) {
 }
 
 export async function getParentPath (bookmark) {
-    let parents = []
+    const parents = await getParents(bookmark)
+    const titles = map(prop('title'), parents).join(' < ')
 
-    try {
-        parents = await getParents(bookmark)
-    }
-    catch (err) {
-        console.error(err)
-    }
-
-    return parents.map(parent => parent.title).join(' < ')
+    return titles
 }
 
 export const getRecentCategories = async (maxCount) => {
-    const bookmarks = await getRecent(maxCount * 4) // Latest bookmarks might all be to the same category
+    const bookmarks = await browser.bookmarks.getRecent(maxCount * 4) // Latest bookmarks might all be to the same category
     const ids = take(maxCount, uniq(map(getParentId, bookmarks)))
-    const categories = await getBookmark(ids)
 
-    return categories
+    if (ids.length > 0) {
+        const categories = await browser.bookmarks.get(ids)
+        return categories
+    }
+    else {
+        return []
+    }
 }

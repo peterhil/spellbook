@@ -1,5 +1,3 @@
-// lib/reactive.js
-
 // Copyright (c) 2018 Peter Hillerström and contributors
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -11,17 +9,6 @@
 import { constantError, fromEvents } from 'kefir'
 
 const defaults = { minLength: 2, debounceTime: 250 }
-
-export function callbackToPromise (fn, ...args) {
-    return new Promise((resolve, reject) => {
-        try {
-            fn(...args, resolve)
-        }
-        catch (err) {
-            reject(err)
-        }
-    })
-}
 
 export function inputEvent$ (element, { minLength = 2, debounceTime = 250 } = defaults) {
     return fromEvents(element, 'input', event => event.target.value)
