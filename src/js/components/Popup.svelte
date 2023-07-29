@@ -3,7 +3,7 @@
     import { indexBy, prop, sortBy, toPairs } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
-    import { getCurrentTab } from '../api/tabs'
+    import { activeTabQuery } from '../api/tabs'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
 
@@ -28,7 +28,7 @@
                 // console.info('Bookmark deleted:', bookmark)
                 location.reload()
             })
-            .then(updateStatus)
+            .then(currentTabStatus)
             .catch(console.error)
     }
 
@@ -37,35 +37,38 @@
         return false
     }
 
-    function updateStatus () {
-        getCurrentTab().then(tab => {
-            // console.debug('[Popup] updating bookmark status:', { tab })
+    async function currentTabStatus () {
+        const tabs = await browser.tabs.query(activeTabQuery)
+        const tab = tabs[0]
+
+        // console.debug('[Popup] currentTabStatus:', { tab })
+        if (tab) {
             $currentTab = { ...tab }
-            messages.emit('api', { action: 'bookmarkStatus', tab })
-        })
+            messages.emit('api', { action: 'savedBookmarks', tab })
+        }
     }
 
-    function updateBookmarks (bookmarks) {
+    function updateSavedBookmarks (bookmarks) {
         const sorted = sortBy(prop('dateAdded'), bookmarks || [])
         const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
-        // console.debug('[Popup] updateBookmarks sorted:', { sorted, saved })
+        // console.debug('[Popup] updateBookmarks sorted:', { bookmarks, sorted, saved })
 
         // TODO Use separate store?
         $savedBookmarks = saved
     }
 
     onMount(() => {
-        messages.on('bookmarkStatus', updateBookmarks)
+        messages.on('savedBookmarks', updateSavedBookmarks)
         messages.on('button:close', onClose)
         messages.on('deleteBookmark', deleteBookmark)
 
         messages.emit('api', { action: 'recentCategories' })
 
-        updateStatus()
+        currentTabStatus()
     })
 
     onDestroy(() => {
-        messages.off('bookmarkStatus', updateBookmarks)
+        messages.off('savedBookmarks', updateSavedBookmarks)
         messages.off('button:close', onClose)
         messages.off('deleteBookmark', deleteBookmark)
     })
