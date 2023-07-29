@@ -23,25 +23,16 @@ function updateIcon (bookmarks, tabId) {
     browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-export function updateActiveTab () {
-    function updateTab (tabs) {
-        if (tabs[0]) {
-            const currentTab = tabs[0]
+async function updateTab (tabs) {
+    if (tabs[0]) {
+        const currentTab = tabs[0]
+        const bookmarks = await searchWithBookmark(currentTab)
 
-            try {
-                const searching = searchWithBookmark(currentTab)
-
-                searching.then((bookmarks) => {
-                    updateIcon(bookmarks, currentTab.id)
-                })
-            }
-            catch (err) {
-                console.log(`Spellbook does not support the '${currentTab.url}' URL protocol.`)
-                console.error(err)
-            }
-        }
+        updateIcon(bookmarks, currentTab.id)
     }
+}
 
-    const gettingActiveTab = browser.tabs.query(activeTabQuery)
-    gettingActiveTab.then(updateTab)
+export async function updateActiveTab () {
+    const tabs = await browser.tabs.query(activeTabQuery)
+    updateTab(tabs)
 }
