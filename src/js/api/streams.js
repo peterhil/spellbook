@@ -6,7 +6,6 @@
 
 import browser from 'webextension-polyfill'
 import { fromPromise, merge } from 'kefir'
-import { path, prop } from 'rambda'
 
 import { browserEvent$ } from './helpers'
 
