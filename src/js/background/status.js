@@ -4,13 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import browser from 'webextension-polyfill'
+
+import { activeTabQuery } from '../api/tabs'
 import { browserAction } from '../lib/compat'
-
-import { map } from 'rambda'
-
-import { searchWithBookmark } from '../api/bookmarks'
-import { getActiveTabs } from '../api/tabs'
-import { savedBookmarks } from '../stores/savedBookmarks'
 
 function updateIcon (bookmarks, tabId) {
     // console.debug('[background] updateIcon:', tabId, bookmarks.length)
@@ -25,22 +22,25 @@ function updateIcon (bookmarks, tabId) {
     browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-export async function checkBookmarkStatus (activeTab) {
-    const bookmarks = await searchWithBookmark(activeTab)
-    // console.debug('[background] Bookmarks found:', { activeTab, bookmarks })
+export function updateActiveTab () {
+    function updateTab (tabs) {
+        if (tabs[0]) {
+            const currentTab = tabs[0]
 
-    updateIcon(bookmarks, activeTab.id)
-    savedBookmarks.setBookmark(activeTab.id, bookmarks || [])
+            try {
+                const searching = browser.bookmarks.search({ url: currentTab.url })
 
-    return bookmarks
-}
+                searching.then((bookmarks) => {
+                    updateIcon(bookmarks, currentTab.id)
+                })
+            }
+            catch (err) {
+                console.log(`Spellbook does not support the '${currentTab.url}' URL protocol.`)
+                console.error(err)
+            }
+        }
+    }
 
-export async function checkTabs () {
-    const activeTabs = await getActiveTabs()
-    // console.debug('[background] checking active tabs:', activeTabs)
-
-    // Clear saved bookmarks cache when bookmarks are modified
-    savedBookmarks.reset()
-
-    return await map(checkBookmarkStatus, activeTabs)
+    const gettingActiveTab = browser.tabs.query(activeTabQuery)
+    gettingActiveTab.then(updateTab)
 }

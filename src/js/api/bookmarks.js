@@ -25,6 +25,7 @@ export const categorySearch = async (query) => {
 export function searchWithBookmark (bookmark) {
     let query
 
+    // console.debug('searchWithBookmark:', bookmark)
     if (!bookmark?.url) return []
     if (zd.browser.firefox && test(/^about:/, bookmark.url)) {
         // Query object with 'about:' url scheme will throw a
