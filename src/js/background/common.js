@@ -20,7 +20,7 @@ export async function onMessage (request, sender) {
     switch (request.action) {
     case 'recentCategories':
         return await getRecentCategories(5)
-    case 'bookmarkStatus':
+    case 'savedBookmarks':
         return await searchWithBookmark(request.tab)
     case 'categorySearch':
         return await categorySearch(request.query)

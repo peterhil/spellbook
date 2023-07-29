@@ -44,11 +44,11 @@
         // console.debug('[Popup] currentTabStatus:', { tab })
         if (tab) {
             $currentTab = { ...tab }
-            messages.emit('api', { action: 'bookmarkStatus', tab })
+            messages.emit('api', { action: 'savedBookmarks', tab })
         }
     }
 
-    function updateBookmarks (bookmarks) {
+    function updateSavedBookmarks (bookmarks) {
         const sorted = sortBy(prop('dateAdded'), bookmarks || [])
         const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
         // console.debug('[Popup] updateBookmarks sorted:', { bookmarks, sorted, saved })
@@ -58,7 +58,7 @@
     }
 
     onMount(() => {
-        messages.on('bookmarkStatus', updateBookmarks)
+        messages.on('savedBookmarks', updateSavedBookmarks)
         messages.on('button:close', onClose)
         messages.on('deleteBookmark', deleteBookmark)
 
@@ -68,7 +68,7 @@
     })
 
     onDestroy(() => {
-        messages.off('bookmarkStatus', updateBookmarks)
+        messages.off('savedBookmarks', updateSavedBookmarks)
         messages.off('button:close', onClose)
         messages.off('deleteBookmark', deleteBookmark)
     })
