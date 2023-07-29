@@ -8,6 +8,7 @@ import browser from 'webextension-polyfill'
 
 import { activeTabQuery } from '../api/tabs'
 import { browserAction } from '../lib/compat'
+import { searchWithBookmark } from '../api/bookmarks'
 
 function updateIcon (bookmarks, tabId) {
     // console.debug('[background] updateIcon:', tabId, bookmarks.length)
@@ -28,7 +29,7 @@ export function updateActiveTab () {
             const currentTab = tabs[0]
 
             try {
-                const searching = browser.bookmarks.search({ url: currentTab.url })
+                const searching = searchWithBookmark(currentTab)
 
                 searching.then((bookmarks) => {
                     updateIcon(bookmarks, currentTab.id)
