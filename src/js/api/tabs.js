@@ -13,7 +13,7 @@ import { browserEvent$ } from './helpers'
 
 let currentWindowId = -1
 
-const activeTabQuery = {
+export const activeTabQuery = {
     active: true,
     currentWindow: true,
 }
@@ -51,11 +51,6 @@ function getActiveTabOnWindow (windowId) {
     )
         .map(safeHead)
         .filter()
-}
-
-export function getCurrentTab () {
-    return browser.tabs.query(activeTabQuery)
-        .then(safeHead)
 }
 
 const onActivated$ = browserEvent$(browser.tabs.onActivated)
