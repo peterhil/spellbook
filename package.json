@@ -1,6 +1,6 @@
 {
     "name": "spellbook",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "Spellbook bookmark manager",
     "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
     "license": "MPL-2.0",
