@@ -12,14 +12,14 @@ import { searchWithBookmark } from '../api/bookmarks'
 import { getActiveTabs } from '../api/tabs'
 import { savedBookmarks } from '../stores/savedBookmarks'
 
-function setBookmarkStatus (bookmarks, tabId) {
-    // console.debug('[background] setBookmarkStatus:', tabId, bookmarks.length)
-    const badgeText = bookmarks.length > 1
-        ? bookmarks.length.toString()
-        : ''
+function updateIcon (bookmarks, tabId) {
+    // console.debug('[background] updateIcon:', tabId, bookmarks.length)
     const icon = bookmarks.length > 0
         ? '../img/spellbook_icon_bookmarked.png'
         : '../img/spellbook_icon.png'
+    const badgeText = bookmarks.length > 1
+        ? bookmarks.length.toString()
+        : ''
 
     browserAction.setIcon({ path: icon, tabId })
     browserAction.setBadgeText({ text: badgeText, tabId })
@@ -29,7 +29,7 @@ export async function checkBookmarkStatus (activeTab) {
     const bookmarks = await searchWithBookmark(activeTab)
     // console.debug('[background] Bookmarks found:', { activeTab, bookmarks })
 
-    setBookmarkStatus(bookmarks, activeTab.id)
+    updateIcon(bookmarks, activeTab.id)
     savedBookmarks.setBookmark(activeTab.id, bookmarks || [])
 
     return bookmarks
