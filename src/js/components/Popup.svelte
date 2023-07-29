@@ -5,6 +5,7 @@
 
     import { activeTabQuery } from '../api/tabs'
     import { messages } from '../lib/messaging'
+    import { bookmarkCountChanged$ } from '../api/streams'
     import { t } from '../lib/translate'
 
     import { currentTab } from '../stores/currentTab'
@@ -21,14 +22,20 @@
             : t('add_bookmark')
     )
 
+    async function currentTabStatus () {
+        const tabs = await browser.tabs.query(activeTabQuery)
+        const tab = tabs[0]
+
+        // console.debug('[Popup] currentTabStatus:', tab)
+        if (tab) {
+            $currentTab = { ...tab }
+            messages.emit('api', { action: 'savedBookmarks', tab })
+        }
+    }
+
     async function deleteBookmark (bookmark) {
         // console.debug('Deleting bookmark:', bookmark)
         browser.bookmarks.remove(bookmark.id)
-            .then(() => {
-                // console.info('Bookmark deleted:', bookmark)
-                location.reload()
-            })
-            .then(currentTabStatus)
             .catch(console.error)
     }
 
@@ -37,23 +44,11 @@
         return false
     }
 
-    async function currentTabStatus () {
-        const tabs = await browser.tabs.query(activeTabQuery)
-        const tab = tabs[0]
-
-        // console.debug('[Popup] currentTabStatus:', { tab })
-        if (tab) {
-            $currentTab = { ...tab }
-            messages.emit('api', { action: 'savedBookmarks', tab })
-        }
-    }
-
     function updateSavedBookmarks (bookmarks) {
         const sorted = sortBy(prop('dateAdded'), bookmarks || [])
         const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
         // console.debug('[Popup] updateBookmarks sorted:', { bookmarks, sorted, saved })
 
-        // TODO Use separate store?
         $savedBookmarks = saved
     }
 
@@ -62,9 +57,12 @@
         messages.on('button:close', onClose)
         messages.on('deleteBookmark', deleteBookmark)
 
+        currentTabStatus()
+
         messages.emit('api', { action: 'recentCategories' })
 
-        currentTabStatus()
+        // Refresh contents when bookmarks change
+        bookmarkCountChanged$.observe(currentTabStatus)
     })
 
     onDestroy(() => {

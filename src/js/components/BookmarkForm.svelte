@@ -57,7 +57,6 @@
         const newBookmark = await browser.bookmarks.create(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
-        location.reload() // Refresh the popup
         return false
     }
 

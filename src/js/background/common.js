@@ -31,13 +31,11 @@ export async function onMessage (request, sender) {
 
 // listen for bookmarks being created or removed
 bookmarkCountChanged$
-    .debounce(250, { immediate: false })
     // .spy('[background] bookmark count changed:')
     .observe(updateActiveTab)
 
 // listen to tab URL changes, tab switching and window switching
 tabsChanged$
-    .debounce(125, { immediate: false })
     // .spy('[background] tabs changed:')
     .observe(updateActiveTab)
 

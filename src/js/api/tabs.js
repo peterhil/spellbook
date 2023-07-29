@@ -23,3 +23,4 @@ export const tabsChanged$ = merge([
     onActivated$,
     onFocusChanged$,
 ])
+    .debounce(125, { immediate: false })
