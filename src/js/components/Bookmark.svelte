@@ -21,7 +21,7 @@
    tabindex="0">
     <button class="btn btn-sm float-right"
             type="button"
-            on:click={onDelete}>
+            on:click|preventDefault={onDelete}>
         <Icon icon="cross" />
     </button>
     <div class="title">
