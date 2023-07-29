@@ -4,13 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { categorySearch, searchWithUrl } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
-import { categorySearch } from '../api/bookmarks'
-import { currentTab$ } from '../api/tabs'
-import { bookmarksModified$ } from '../api/streams'
-import { savedBookmarks } from '../stores/savedBookmarks'
+import { tabsChanged$ } from '../api/tabs'
+import { bookmarkCountChanged$ } from '../api/streams'
 
-import { checkBookmarkStatus, checkTabs } from './status'
+import { updateActiveTab } from './status'
 
 export async function onMessage (request, sender) {
     console.debug(
@@ -21,8 +20,8 @@ export async function onMessage (request, sender) {
     switch (request.action) {
     case 'recentCategories':
         return await getRecentCategories(5)
-    case 'bookmarkStatus':
-        return await savedBookmarks.getBookmark(request.tab.id)
+    case 'savedBookmarks':
+        return await searchWithUrl(request.tab.url)
     case 'categorySearch':
         return await categorySearch(request.query)
     default:
@@ -30,11 +29,15 @@ export async function onMessage (request, sender) {
     }
 }
 
-currentTab$
-    // .spy('[background] current tab changed:')
-    .observe(checkBookmarkStatus)
+// listen for bookmarks being created or removed
+bookmarkCountChanged$
+    // .spy('[background] bookmark count changed:')
+    .observe(updateActiveTab)
 
-bookmarksModified$
-    // .spy('[background] bookmarks modified:')
-    .debounce(1000, { immediate: true })
-    .observe(checkTabs)
+// listen to tab URL changes, tab switching and window switching
+tabsChanged$
+    // .spy('[background] tabs changed:')
+    .observe(updateActiveTab)
+
+// update when the extension loads initially
+updateActiveTab()

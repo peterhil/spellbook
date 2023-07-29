@@ -4,43 +4,35 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import browser from 'webextension-polyfill'
+
+import { activeTabQuery } from '../api/tabs'
 import { browserAction } from '../lib/compat'
+import { searchWithUrl } from '../api/bookmarks'
 
-import { map } from 'rambda'
-
-import { searchWithBookmark } from '../api/bookmarks'
-import { getActiveTabs } from '../api/tabs'
-import { savedBookmarks } from '../stores/savedBookmarks'
-
-function setBookmarkStatus (bookmarks, tabId) {
-    // console.debug('[background] setBookmarkStatus:', tabId, bookmarks.length)
-    const badgeText = bookmarks.length > 1
-        ? bookmarks.length.toString()
-        : ''
+function updateIcon (bookmarks, tabId) {
+    // console.debug('[background] updateIcon:', tabId, bookmarks.length)
     const icon = bookmarks.length > 0
         ? '../img/spellbook_icon_bookmarked.png'
         : '../img/spellbook_icon.png'
+    const badgeText = bookmarks.length > 1
+        ? bookmarks.length.toString()
+        : ''
 
     browserAction.setIcon({ path: icon, tabId })
     browserAction.setBadgeText({ text: badgeText, tabId })
 }
 
-export async function checkBookmarkStatus (activeTab) {
-    const bookmarks = await searchWithBookmark(activeTab)
-    // console.debug('[background] Bookmarks found:', { activeTab, bookmarks })
+async function updateTab (tabs) {
+    if (tabs[0]) {
+        const currentTab = tabs[0]
+        const bookmarks = await searchWithUrl(currentTab.url)
 
-    setBookmarkStatus(bookmarks, activeTab.id)
-    savedBookmarks.setBookmark(activeTab.id, bookmarks || [])
-
-    return bookmarks
+        updateIcon(bookmarks, currentTab.id)
+    }
 }
 
-export async function checkTabs () {
-    const activeTabs = await getActiveTabs()
-    // console.debug('[background] checking active tabs:', activeTabs)
-
-    // Clear saved bookmarks cache when bookmarks are modified
-    savedBookmarks.reset()
-
-    return await map(checkBookmarkStatus, activeTabs)
+export async function updateActiveTab () {
+    const tabs = await browser.tabs.query(activeTabQuery)
+    updateTab(tabs)
 }

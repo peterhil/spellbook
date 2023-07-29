@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Released versions
 
+## [0.6.1] - 2023-07-30 Bug fixes, rework browser event handling
+
+Github [closed issues for v0.6.1](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.6.1)
+
+### Changed
+
+* Rework and clean up browser event handling
+
+### Fixed
+
+* Fix popup state on adding a new subcategory [Issue #91]
+* Fix updating browser action [Issue #90]
+* Fix subcategory collapsing on enter [Issue #83]
+
+[Issue #83]: https://github.com/peterhil/spellbook/issues/83
+[Issue #90]: https://github.com/peterhil/spellbook/issues/90
+[Issue #91]: https://github.com/peterhil/spellbook/issues/91
+
+
 ## [0.6.0] - 2023-07-18 Manifest V3, show and remove saved bookmarks
 
 Github [closed issues for v0.6.0](https://github.com/peterhil/spellbook/issues?q=is%3Aissue+is%3Aclosed+milestone%3A0.6.0)
@@ -369,7 +388,8 @@ Introduce [Functional](https://en.wikipedia.org/wiki/Functional_reactive_program
 
 - Post a bookmark with Ajax to a backend called Grimoire that uses Ruby on Rails and Neo4j graph database
 
-[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/peterhil/spellbook/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/peterhil/spellbook/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/peterhil/spellbook/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/peterhil/spellbook/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/peterhil/spellbook/compare/v0.4.1...v0.4.2
