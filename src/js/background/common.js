@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { categorySearch, searchWithBookmark } from '../api/bookmarks'
+import { categorySearch, searchWithUrl } from '../api/bookmarks'
 import { getRecentCategories } from '../api/categories'
 import { tabsChanged$ } from '../api/tabs'
 import { bookmarkCountChanged$ } from '../api/streams'
@@ -21,7 +21,7 @@ export async function onMessage (request, sender) {
     case 'recentCategories':
         return await getRecentCategories(5)
     case 'savedBookmarks':
-        return await searchWithBookmark(request.tab)
+        return await searchWithUrl(request.tab.url)
     case 'categorySearch':
         return await categorySearch(request.query)
     default:

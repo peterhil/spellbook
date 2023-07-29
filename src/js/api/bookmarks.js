@@ -22,23 +22,21 @@ export const categorySearch = async (query) => {
     })
 }
 
-export function searchWithBookmark (bookmark) {
-    let query
+export function searchWithUrl (url) {
+    // console.debug('searchWithUrl:', url)
+    if (!url) return []
 
-    // console.debug('searchWithBookmark:', bookmark)
-    if (!bookmark?.url) return []
-    if (zd.browser.firefox && test(/^about:/, bookmark.url)) {
+    if (zd.browser.firefox && test(/^about:/, url)) {
         // Query object with 'about:' url scheme will throw a
         // SecurityError and a TypeError, so query with string even if
         // it might return partial matches.
-        query = bookmark.url
-    }
-    else {
-        // String query on Chrome replaces special characters with spaces,
+
+        // A string query on Chrome replaces special characters with spaces,
         // so for example 'chrome://extensions' would return all bookmarks
-        // with chrome and extensions... so query object it is:
-        query = { url: bookmark.url }
+        // with chrome and extensions...
+
+        return browser.bookmarks.search(url)
     }
 
-    return browser.bookmarks.search(query)
+    return browser.bookmarks.search({ url })
 }

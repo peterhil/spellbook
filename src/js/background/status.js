@@ -8,7 +8,7 @@ import browser from 'webextension-polyfill'
 
 import { activeTabQuery } from '../api/tabs'
 import { browserAction } from '../lib/compat'
-import { searchWithBookmark } from '../api/bookmarks'
+import { searchWithUrl } from '../api/bookmarks'
 
 function updateIcon (bookmarks, tabId) {
     // console.debug('[background] updateIcon:', tabId, bookmarks.length)
@@ -26,7 +26,7 @@ function updateIcon (bookmarks, tabId) {
 async function updateTab (tabs) {
     if (tabs[0]) {
         const currentTab = tabs[0]
-        const bookmarks = await searchWithBookmark(currentTab)
+        const bookmarks = await searchWithUrl(currentTab.url)
 
         updateIcon(bookmarks, currentTab.id)
     }
