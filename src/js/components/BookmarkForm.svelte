@@ -1,6 +1,6 @@
 <script>
     import browser from 'webextension-polyfill'
-    import { equals, pick } from 'rambda'
+    import { pick } from 'rambda'
     import { onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
@@ -11,21 +11,14 @@
     import Button from './Button.svelte'
     import CategorySearch from './CategorySearch.svelte'
     import CategorySelector from './CategorySelector.svelte'
-    import ChildCategories from './ChildCategories.svelte'
-    import Modal from './Modal.svelte'
-    import DropdownGroup from './DropdownGroup.svelte'
     import DropdownToggles from './DropdownToggles.svelte'
     import Favicon from './Favicon.svelte'
     import Icon from './Icon.svelte'
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
-    import RecentCategories from './RecentCategories.svelte'
-    import SearchResults from './SearchResults.svelte'
 
     export let bookmark
     let form
-
-    const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     function onSearchFocus () {
         // console.debug('[CategorySelector] onSearchFocus')
