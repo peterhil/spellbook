@@ -65,3 +65,10 @@ a:focus,
         background: $secondary-color;
     }
 }
+
+.modal:target,
+.modal.active {
+    .modal-overlay {
+        background: #3337;
+    }
+}

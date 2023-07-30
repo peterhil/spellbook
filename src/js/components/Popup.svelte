@@ -1,6 +1,6 @@
 <script>
     import browser from 'webextension-polyfill'
-    import { indexBy, prop, sortBy, toPairs } from 'rambda'
+    import { equals, indexBy, prop, sortBy, toPairs } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
     import { activeTabQuery } from '../api/tabs'
@@ -14,6 +14,17 @@
     import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
     import CloseButton from './CloseButton.svelte'
+
+    import { dropdownShown } from '../stores/dropdown'
+    import { search } from '../stores/search'
+
+    import ChildCategories from './ChildCategories.svelte'
+    import Modal from './Modal.svelte'
+    import DropdownGroup from './DropdownGroup.svelte'
+    import RecentCategories from './RecentCategories.svelte'
+    import SearchResults from './SearchResults.svelte'
+
+    const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
@@ -88,5 +99,21 @@
             {/each}
         </div>
         <BookmarkForm bookmark={ $currentTab } />
+
+        <DropdownGroup>
+            <Modal name={'search'}>
+                {#if isVisible('search') && $search.last }
+                    <SearchResults categories={$search.results} />
+                {/if}
+            </Modal>
+
+            <Modal name={'children'}>
+                <ChildCategories />
+            </Modal>
+
+            <Modal name={'recent'}>
+                <RecentCategories />
+            </Modal>
+        </DropdownGroup>
     </div>
 </div>

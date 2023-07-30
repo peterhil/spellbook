@@ -52,6 +52,10 @@ body {
         justify-content: space-between;
         margin: -1px;
     }
+
+    .card-body {
+        position: relative;
+    }
 }
 
 // Styles
@@ -110,6 +114,33 @@ body {
     .icon.favicon {
         width: 24px;
         height: 24px;
+    }
+}
+
+.modal:target,
+.modal.active {
+    &.modal-menu {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 0;
+        border-radius: 0;
+
+        .modal-container {
+            height: 100%;
+            max-height: 100%;
+            max-width: none;
+            padding: 0;
+        }
+
+        .modal-header {
+            padding: 0.4rem;
+        }
+
+        .modal-body,
+        .modal-footer {
+            padding: 0;
+        }
     }
 }
 

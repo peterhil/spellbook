@@ -12,7 +12,7 @@
     import CategorySearch from './CategorySearch.svelte'
     import CategorySelector from './CategorySelector.svelte'
     import ChildCategories from './ChildCategories.svelte'
-    import Dropdown from './Dropdown.svelte'
+    import Modal from './Modal.svelte'
     import DropdownGroup from './DropdownGroup.svelte'
     import DropdownToggles from './DropdownToggles.svelte'
     import Favicon from './Favicon.svelte'
@@ -104,22 +104,6 @@
 
             <DropdownToggles />
         </CategorySelector>
-
-        <DropdownGroup>
-            <Dropdown name={'search'}>
-                {#if isVisible('search') && $search.last }
-                    <SearchResults categories={$search.results} />
-                {/if}
-            </Dropdown>
-
-            <Dropdown name={'children'}>
-                <ChildCategories />
-            </Dropdown>
-
-            <Dropdown name={'recent'}>
-                <RecentCategories />
-            </Dropdown>
-        </DropdownGroup>
     </div>
 
     <div class="form-group subcategory"
