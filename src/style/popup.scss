@@ -116,3 +116,10 @@ body {
 .status .label {
     margin-bottom: 0.2rem;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
