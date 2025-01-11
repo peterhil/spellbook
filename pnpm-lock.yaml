@@ -32,7 +32,7 @@ specifiers:
   rollup-plugin-sass: ^1.2.2
   rollup-plugin-svelte: ^7.1.0
   sass: ^1.63.6
-  spectre.css: github:Valexr/spectre
+  spectre.css: npm:@spectre-org/spectre-css@^1.2.0
   stylelint: ^15.10.1
   stylelint-config-rational-order: ^0.1.2
   stylelint-config-sass-guidelines: ^10.0.0
@@ -51,7 +51,7 @@ dependencies:
   events: 3.3.0
   kefir: 3.8.8
   rambda: 6.9.0
-  spectre.css: github.com/Valexr/spectre/dfe3bc2c59d23cd4bfd43c690aae3655576ff708
+  spectre.css: /@spectre-org/spectre-css/1.2.0
   zepto-detect: 0.0.0
 
 devDependencies:
@@ -1009,6 +1009,10 @@ packages:
     resolution: {integrity: sha512-TV7t8GKYaJWsn00tFDqBw8+Uqmr8A0fRU1tvTQhyZzGv0sJCGRQL3JGMI3ucuKo3XIZdUP+Lx7/gh2t3lewy7g==}
     engines: {node: '>=14.16'}
     dev: true
+
+  /@spectre-org/spectre-css/1.2.0:
+    resolution: {integrity: sha512-EaVfxZcXty6nIu8WFcwuHrjn2dXY+d5K8pCrB6eKsQUvEGiUPF2GOBcF9LoxAfDkmJwn/QAIQRuQ8mursccs8g==}
+    dev: false
 
   /@sveltejs/vite-plugin-svelte-inspector/1.0.4_qmyddjugf3q2thbvwz2uskxt7a:
     resolution: {integrity: sha512-zjiuZ3yydBtwpF3bj0kQNV0YXe+iKE545QGZVTaylW3eAzFr+pJ/cwK8lZEaRp4JtaJXhD5DyWAV4AxLh6DgaQ==}
@@ -8728,9 +8732,3 @@ packages:
       async: 3.2.6
       jszip: 3.10.1
     dev: true
-
-  github.com/Valexr/spectre/dfe3bc2c59d23cd4bfd43c690aae3655576ff708:
-    resolution: {tarball: https://codeload.github.com/Valexr/spectre/tar.gz/dfe3bc2c59d23cd4bfd43c690aae3655576ff708}
-    name: spectre.css
-    version: 0.5.9
-    dev: false
