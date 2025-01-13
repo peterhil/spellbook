@@ -8,7 +8,7 @@ function executeAction (target = 'firefox') {
     return {
         suggested_key: {
             default: defaultKey,
-            mac: 'Alt+S',
+            mac: 'Ctrl+B',
         },
         description: '__MSG_execute_browser_action__',
     }
