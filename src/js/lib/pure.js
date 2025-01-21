@@ -8,7 +8,6 @@
 
 import {
     compose,
-    head,
     isEmpty,
     prop,
     sortBy,
@@ -21,14 +20,6 @@ export const hasItems = array => {
 
 export const isFunction = fn => {
     return typeof fn === 'function'
-}
-
-export function safeHead (list) {
-    return (
-        list && !isEmpty(list)
-            ? head(list)
-            : null
-    )
 }
 
 export const sortByTitleCaseInsensitive = sortBy(compose(toLower, prop('title')))

@@ -1,6 +1,6 @@
 {
     "name": "spellbook",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "Spellbook bookmark manager",
     "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
     "license": "MPL-2.0",
@@ -29,7 +29,7 @@
         "events": "^3.3.0",
         "kefir": "~3.8.8",
         "rambda": "^6.7.0",
-        "spectre.css": "github:Valexr/spectre",
+        "spectre.css": "npm:@spectre-org/spectre-css@^1.2.0",
         "zepto-detect": "~0.0.0"
     },
     "devDependencies": {

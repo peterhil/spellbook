@@ -44,6 +44,8 @@
            {placeholder}
            on:change={handleInput}
            on:input={handleInput}
+           on:keydown
+           on:keyup
            >
     <slot></slot>
 </div>

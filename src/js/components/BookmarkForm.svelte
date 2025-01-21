@@ -39,6 +39,19 @@
         $dropdownShown = 'search'
     }
 
+    function preventEnter (event) {
+        // console.debug('preventEnter:', event)
+
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            event.stopPropagation()
+
+            return true
+        }
+
+        return false
+    }
+
     async function onSubmit (event) {
         if (!form.reportValidity()) return false
 
@@ -57,7 +70,6 @@
         const newBookmark = await browser.bookmarks.create(pick(bookmarkFields, data))
         console.info('[BookmarkForm] Bookmark saved:', newBookmark)
 
-        location.reload() // Refresh the popup
         return false
     }
 
@@ -115,7 +127,8 @@
          class:d-hide={ $dropdownShown !== 'subcategory' }
          >
         <InputGroup name="subcategory"
-                    label={ t('add_subcategory') }>
+                    label={ t('add_subcategory') }
+                    on:keydown={preventEnter}>
             <Button name="toggleSubcategory" classes="input-group-btn">
                 <Icon icon="cross" />
             </Button>
