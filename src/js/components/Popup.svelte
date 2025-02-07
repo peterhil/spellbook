@@ -64,7 +64,7 @@
     })
 </script>
 
-<div class="stripe">
+<div class="stripe stripe-bg">
     <h1>Spellbook</h1>
 </div>
 <div class="card">

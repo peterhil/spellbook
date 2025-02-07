@@ -32,13 +32,13 @@ body {
     height: auto;
     margin: 0;
     padding: 0;
-    background-color: transparent;
 }
 
 .popup {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
+    overflow: visible;
 
     h1 {
         font-size: 0.9rem;
@@ -56,6 +56,9 @@ body {
     width: 100%;
     min-height: 9px;
     color: $light-color;
+}
+
+.stripe-bg {
     background-color: $primary-color;
     background-image: url('../img/spellbook-bg.jpg');
     background-repeat: repeat;
