@@ -13,7 +13,6 @@
 
     import Bookmark from './Bookmark.svelte'
     import BookmarkForm from './BookmarkForm.svelte'
-    import CloseButton from './CloseButton.svelte'
 
     $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
@@ -39,11 +38,6 @@
             .catch(console.error)
     }
 
-    function onClose () {
-        window.close()
-        return false
-    }
-
     function updateSavedBookmarks (bookmarks) {
         const sorted = sortBy(prop('dateAdded'), bookmarks || [])
         const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
@@ -54,7 +48,6 @@
 
     onMount(() => {
         messages.on('savedBookmarks', updateSavedBookmarks)
-        messages.on('button:close', onClose)
         messages.on('deleteBookmark', deleteBookmark)
 
         currentTabStatus()
@@ -67,7 +60,6 @@
 
     onDestroy(() => {
         messages.off('savedBookmarks', updateSavedBookmarks)
-        messages.off('button:close', onClose)
         messages.off('deleteBookmark', deleteBookmark)
     })
 </script>
@@ -77,7 +69,6 @@
 </div>
 <div class="card">
     <div class="card-header">
-        <CloseButton />
         <h1>
             { popupHeader }
             <span class="bookmark-count">({ bookmarkCount })</span>
