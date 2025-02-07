@@ -65,6 +65,11 @@ body {
     background-repeat: repeat;
     background-position: 0 22%;
     background-size: cover;
+
+    h1 {
+        margin: 0;
+        padding: .25rem .8rem;
+    }
 }
 
 .bookmark-form {

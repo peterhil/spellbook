@@ -72,7 +72,9 @@
     })
 </script>
 
-<div class="stripe"></div>
+<div class="stripe">
+    <h1>Spellbook</h1>
+</div>
 <div class="card">
     <div class="card-header">
         <CloseButton />
