@@ -4,9 +4,9 @@
 
 <ul class="tab tab-block">
     <li class="tab-item active">
-        <a href="#">{ t('tab_organise') }</a>
+        <a href="#">{ t('tab_add') }</a>
     </li>
     <li class="tab-item">
-        <a href="#">{ t('tab_explore') }</a>
+        <a href="#">{ t('tab_url') }</a>
     </li>
 </ul>

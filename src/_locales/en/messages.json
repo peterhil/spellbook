@@ -23,8 +23,8 @@
     "selected_category": { "message": "Selected category" },
     "selection": { "message": "Selection" },
     "subcategories": { "message": "Subcategories" },
-    "tab_explore": { "message": "Explore" },
-    "tab_organise": { "message": "Organise" },
+    "tab_add": { "message": "Add" },
+    "tab_url": { "message": "Search by URL" },
     "title": { "message": "Title" },
     "url": { "message": "Url" }
 }

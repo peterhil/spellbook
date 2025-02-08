@@ -23,8 +23,8 @@
     "selected_category": { "message": "Valittu kategoria" },
     "selection": { "message": "Valinta" },
     "subcategories": { "message": "Alakategoriat" },
-    "tab_explore": { "message": "Selaa" },
-    "tab_organise": { "message": "Järjestele" },
+    "tab_add": { "message": "Lisää" },
+    "tab_url": { "message": "Hae osoitteella" },
     "title": { "message": "Nimi" },
     "url": { "message": "Osoite" }
 }

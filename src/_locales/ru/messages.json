@@ -23,8 +23,8 @@
     "selected_category": { "message": "Выбранной категории" },
     "selection": { "message": "Выбор" },
     "subcategories": { "message": "Подкатегории" },
-    "tab_explore": { "message": "Исследовать" },
-    "tab_organise": { "message": "Организовать" },
+    "tab_add": { "message": "Добавить" },
+    "tab_url": { "message": "Поиск по адресу" },
     "title": { "message": "Название" },
     "url": { "message": "Ссылка" }
 }
