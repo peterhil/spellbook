@@ -23,6 +23,8 @@
     "selected_category": { "message": "Catégorie sélectionnée" },
     "selection": { "message": "Sélection" },
     "subcategories": { "message": "Sous-catégories" },
+    "tab_add": { "message": "Ajouter" },
+    "tab_url": { "message": "Recherche par URL" },
     "title": { "message": "Titre" },
     "url": { "message": "Url" }
 }
