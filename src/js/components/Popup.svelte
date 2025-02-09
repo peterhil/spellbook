@@ -1,26 +1,23 @@
 <script>
     import browser from 'webextension-polyfill'
-    import { indexBy, prop, sortBy, toPairs } from 'rambda'
-    import { onDestroy, onMount } from 'svelte'
 
-    import { activeTabQuery } from '../api/tabs'
-    import { messages } from '../lib/messaging'
-    import { bookmarkCountChanged$ } from '../api/streams'
-    import { t } from '../lib/translate'
-
-    import { currentTab } from '../stores/currentTab'
-    import { savedBookmarks } from '../stores/savedBookmarks'
+    import { onMount } from 'svelte'
 
     import TabAdd from './TabAdd.svelte'
     import TabUrlSearch from './TabUrlSearch.svelte'
     import Tabs from './Tabs.svelte'
 
-    $: bookmarkCount = $savedBookmarks.size
-    $: popupHeader = (
-        bookmarkCount >= 1
-            ? t('saved_bookmark')
-            : t('add_bookmark')
-    )
+    import { bookmarkCountChanged$ } from '../api/streams'
+    import { activeTabQuery } from '../api/tabs'
+    import { messages } from '../lib/messaging'
+    import { t } from '../lib/translate'
+    import { currentTab } from '../stores/currentTab'
+
+    const tabs = [
+        { id: 'add', label: t('tab_add'), component: TabAdd },
+        { id: 'url', label: t('tab_url'), component: TabUrlSearch },
+    ]
+    let mode = tabs[0]
 
     async function currentTabStatus () {
         const tabs = await browser.tabs.query(activeTabQuery)
@@ -29,52 +26,19 @@
         // console.debug('[Popup] currentTabStatus:', tab)
         if (tab) {
             $currentTab = { ...tab }
-            messages.emit('api', { action: 'savedBookmarks', tab })
         }
     }
 
-    async function deleteBookmark (bookmark) {
-        // console.debug('Deleting bookmark:', bookmark)
-        browser.bookmarks.remove(bookmark.id)
-            .catch(console.error)
-    }
-
-    function onClose () {
-        window.close()
-        return false
-    }
-
-    function updateSavedBookmarks (bookmarks) {
-        const sorted = sortBy(prop('dateAdded'), bookmarks || [])
-        const saved = new Map(toPairs(indexBy(prop('id'), sorted)))
-        // console.debug('[Popup] updateBookmarks sorted:', { bookmarks, sorted, saved })
-
-        $savedBookmarks = saved
-    }
-
     onMount(() => {
-        messages.on('savedBookmarks', updateSavedBookmarks)
-        messages.on('button:close', onClose)
-        messages.on('deleteBookmark', deleteBookmark)
-
         currentTabStatus()
-
-        messages.emit('api', { action: 'recentCategories' })
 
         // Refresh contents when bookmarks change
         bookmarkCountChanged$.observe(currentTabStatus)
-    })
-
-    onDestroy(() => {
-        messages.off('savedBookmarks', updateSavedBookmarks)
-        messages.off('button:close', onClose)
-        messages.off('deleteBookmark', deleteBookmark)
     })
 </script>
 
 <div class="popup">
     <div class="stripe"></div>
-    <Tabs />
-    <TabUrlSearch />
-    <TabAdd />
+    <Tabs {tabs} bind:active={mode} />
+    <svelte:component this={mode.component} />
 </div>

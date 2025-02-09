@@ -1,12 +1,20 @@
 <script>
-    import { t } from '../lib/translate'
+    export let tabs
+    export let active = {}
+
+    function activate (tab) {
+        active = tab
+    }
 </script>
 
 <ul class="tab tab-block">
-    <li class="tab-item active">
-        <a href="#add">{ t('tab_add') }</a>
-    </li>
-    <li class="tab-item">
-        <a href="#url">{ t('tab_url') }</a>
-    </li>
+    {#each tabs as tab}
+        <li class="tab-item" class:active={ active.id === tab.id }>
+            <a href="#{ tab.id }"
+               on:click|preventDefault={ () => activate(tab) }
+               >
+                { tab.label }
+            </a>
+        </li>
+    {/each}
 </ul>

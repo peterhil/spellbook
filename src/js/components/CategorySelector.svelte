@@ -43,7 +43,7 @@
         { t('category') }
         <small class="status float-right">
             <slot name="status"></slot>
-            {#if $selection.id }
+            {#if lastSelection && $selection.id }
                 <span class="label label-primary" title="{ t('selected_category') }">
                     <IconFa icon="check" />
                     { lastSelection.title }
