@@ -9,21 +9,21 @@
     import { activeTabQuery } from '../api/tabs'
     import { currentTab } from '../stores/currentTab'
 
-    async function currentTabStatus () {
+    async function currentTabInfo () {
         const tabs = await browser.tabs.query(activeTabQuery)
         const tab = tabs[0]
 
-        // console.debug('[Popup] currentTabStatus:', tab)
+        // console.debug('[Popup] currentTabInfo:', tab)
         if (tab) {
             $currentTab = { ...tab }
         }
     }
 
     onMount(() => {
-        currentTabStatus()
+        currentTabInfo()
 
         // Refresh contents when bookmarks change
-        bookmarkCountChanged$.observe(currentTabStatus)
+        bookmarkCountChanged$.observe(currentTabInfo)
     })
 </script>
 
