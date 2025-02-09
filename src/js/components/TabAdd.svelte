@@ -8,6 +8,7 @@
     import { bookmarkCountChanged$ } from '../api/streams'
     import { activeTabQuery } from '../api/tabs'
     import { currentTab } from '../stores/currentTab'
+    import { dropdownShown } from '../stores/dropdown'
 
     async function currentTabInfo () {
         const tabs = await browser.tabs.query(activeTabQuery)
@@ -27,7 +28,7 @@
     })
 </script>
 
-<div class="card">
+<div class="card" class:expanded={ $dropdownShown }>
     <div class="card-body">
         <BookmarkForm bookmark={ $currentTab } />
     </div>

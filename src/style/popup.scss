@@ -35,10 +35,11 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    padding-bottom: 0.7rem;
 }
 
 .popup {
-    max-height: var(--popup-max-height);
+    max-height: calc(var(--popup-max-height) - 0.75rem);
     overflow: hidden auto;
 
     h1 {
@@ -46,8 +47,8 @@ body {
         margin-block: 0.25rem;
     }
 
-    .card-header {
-        margin: -1px;
+    .card.expanded {
+        min-height: 388px; // Prevent scroll bars
     }
 
     .popup-header {

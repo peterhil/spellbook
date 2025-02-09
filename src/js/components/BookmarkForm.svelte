@@ -29,7 +29,9 @@
 
     function onSearchFocus () {
         // console.debug('[CategorySelector] onSearchFocus')
-        $dropdownShown = 'search'
+        if ($search.last) {
+            $dropdownShown = 'search'
+        }
     }
 
     function updateCategories (results) {
