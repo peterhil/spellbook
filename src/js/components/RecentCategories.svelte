@@ -14,6 +14,7 @@
 
     onMount(() => {
         messages.on('recentCategories', updateRecentCategories)
+        messages.emit('api', { action: 'recentCategories' })
     })
 
     onDestroy(() => {

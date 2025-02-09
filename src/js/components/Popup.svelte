@@ -9,7 +9,6 @@
 
     import { bookmarkCountChanged$ } from '../api/streams'
     import { activeTabQuery } from '../api/tabs'
-    import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { currentTab } from '../stores/currentTab'
 

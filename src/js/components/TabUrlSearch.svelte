@@ -5,7 +5,6 @@
     import { onDestroy, onMount } from 'svelte'
 
     import Bookmark from './Bookmark.svelte'
-    import CloseButton from './CloseButton.svelte'
 
     import { bookmarkCountChanged$ } from '../api/streams'
     import { activeTabQuery } from '../api/tabs'
