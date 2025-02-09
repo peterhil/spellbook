@@ -9,7 +9,7 @@ import browser from 'webextension-polyfill'
 
 import { browserEvent$ } from './helpers'
 
-export const activeTabQuery = {
+const activeTabQuery = {
     active: true,
     currentWindow: true,
 }
