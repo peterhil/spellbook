@@ -68,9 +68,16 @@ body {
 // Styles
 
 .stripe {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     min-height: 16px;
     color: $light-color;
+
+    .status {
+        flex-grow: 1;
+        text-align: right;
+    }
 }
 
 .stripe-bg {
