@@ -13,9 +13,13 @@
 </script>
 
 <div class="popup">
-    <div class="stripe stripe-bg">
-        <h1>Spellbook</h1>
+    <div class="popup-header">
+        <div class="stripe stripe-bg">
+            <h1>Spellbook</h1>
+        </div>
+        <Tabs {tabs} bind:active={mode} />
     </div>
-    <Tabs {tabs} bind:active={mode} />
-    <svelte:component this={mode.component} />
+    <div class="popup-body">
+        <svelte:component this={mode.component} />
+    </div>
 </div>
