@@ -11,6 +11,8 @@ import { bookmarkCountChanged$ } from '../api/streams'
 
 import { updateActiveTab } from './status'
 
+// In case there are problems with Chrome using an async listener, see:
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage#sending_an_asynchronous_response_using_a_promise
 export async function onMessage (request, sender) {
     console.debug(
         '[background] Message:', request.action, request,
