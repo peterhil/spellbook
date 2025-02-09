@@ -7,7 +7,7 @@
     import Bookmark from './Bookmark.svelte'
 
     import { bookmarkCountChanged$ } from '../api/streams'
-    import { activeTabQuery } from '../api/tabs'
+    import { getCurrentTab } from '../api/tabs'
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { savedBookmarks } from '../stores/savedBookmarks'
@@ -26,13 +26,10 @@
     }
 
     async function getSavedBookmarks () {
-        const tabs = await browser.tabs.query(activeTabQuery)
-        const tab = tabs[0]
+        const tab = await getCurrentTab()
 
         // console.debug('[Popup] getSavedBookmarks:', tab)
-        if (tab) {
-            messages.emit('api', { action: 'savedBookmarks', tab })
-        }
+        messages.emit('api', { action: 'savedBookmarks', tab })
     }
 
     function updateSavedBookmarks (bookmarks) {

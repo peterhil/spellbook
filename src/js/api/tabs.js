@@ -14,6 +14,13 @@ export const activeTabQuery = {
     currentWindow: true,
 }
 
+export async function getCurrentTab () {
+    const tabs = await browser.tabs.query(activeTabQuery)
+    const current = tabs[0]
+
+    return current
+}
+
 const onActivated$ = browserEvent$(browser.tabs.onActivated)
 const onFocusChanged$ = browserEvent$(browser.windows.onFocusChanged)
 const onUpdated$ = browserEvent$(browser.tabs.onUpdated)

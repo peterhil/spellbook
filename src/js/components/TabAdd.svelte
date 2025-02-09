@@ -6,20 +6,15 @@
     import BookmarkForm from './BookmarkForm.svelte'
 
     import { bookmarkCountChanged$ } from '../api/streams'
-    import { activeTabQuery, tabsChanged$ } from '../api/tabs'
+    import { getCurrentTab, tabsChanged$ } from '../api/tabs'
     import { currentTab } from '../stores/currentTab'
     import { dropdownShown } from '../stores/dropdown'
 
     async function currentTabInfo () {
-        // console.time('currentTabInfo')
-        const tabs = await browser.tabs.query(activeTabQuery)
-        const tab = tabs[0]
+        const tab = await getCurrentTab()
 
         // console.debug('[Popup] currentTabInfo:', tab)
-        if (tab) {
-            $currentTab = { ...tab }
-        }
-        // console.timeEnd('currentTabInfo')
+        $currentTab = { ...tab }
     }
 
     onMount(() => {
