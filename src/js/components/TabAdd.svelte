@@ -6,11 +6,12 @@
     import BookmarkForm from './BookmarkForm.svelte'
 
     import { bookmarkCountChanged$ } from '../api/streams'
-    import { activeTabQuery } from '../api/tabs'
+    import { activeTabQuery, tabsChanged$ } from '../api/tabs'
     import { currentTab } from '../stores/currentTab'
     import { dropdownShown } from '../stores/dropdown'
 
     async function currentTabInfo () {
+        // console.time('currentTabInfo')
         const tabs = await browser.tabs.query(activeTabQuery)
         const tab = tabs[0]
 
@@ -18,13 +19,15 @@
         if (tab) {
             $currentTab = { ...tab }
         }
+        // console.timeEnd('currentTabInfo')
     }
 
     onMount(() => {
         currentTabInfo()
 
-        // Refresh contents when bookmarks change
+        // Refresh contents when bookmarks or tabs change
         bookmarkCountChanged$.observe(currentTabInfo)
+        tabsChanged$.observe(currentTabInfo)
     })
 </script>
 
