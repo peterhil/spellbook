@@ -55,7 +55,13 @@ body {
         position: sticky;
         z-index: 1000;
         top: 0;
-        box-shadow: 6px 6px 10px #4442;
+    }
+
+    .stripe {
+        h1 {
+            margin: 0;
+            padding: .25rem .8rem;
+        }
     }
 }
 
@@ -73,13 +79,6 @@ body {
     background-repeat: repeat;
     background-position: 0 22%;
     background-size: cover;
-}
-
-.popup .stripe {
-    h1 {
-        margin: 0;
-        padding: .25rem .8rem;
-    }
 }
 
 .bookmark-form {
