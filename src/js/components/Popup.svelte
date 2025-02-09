@@ -11,9 +11,8 @@
     import { currentTab } from '../stores/currentTab'
     import { savedBookmarks } from '../stores/savedBookmarks'
 
-    import Bookmark from './Bookmark.svelte'
-    import BookmarkForm from './BookmarkForm.svelte'
-    import CloseButton from './CloseButton.svelte'
+    import TabAdd from './TabAdd.svelte'
+    import TabUrlSearch from './TabUrlSearch.svelte'
     import Tabs from './Tabs.svelte'
 
     $: bookmarkCount = $savedBookmarks.size
@@ -73,22 +72,9 @@
     })
 </script>
 
-<div class="stripe"></div>
-<div class="card">
+<div class="popup">
+    <div class="stripe"></div>
     <Tabs />
-    <div class="card-header">
-        <CloseButton />
-        <h1>
-            { popupHeader }
-            <span class="bookmark-count">({ bookmarkCount })</span>
-        </h1>
-    </div>
-    <div class="card-body">
-        <div class="saved-bookmarks">
-            {#each [...$savedBookmarks.values()] as bookmark (bookmark.id)}
-                <Bookmark {bookmark} />
-            {/each}
-        </div>
-        <BookmarkForm bookmark={ $currentTab } />
-    </div>
+    <TabUrlSearch />
+    <TabAdd />
 </div>
