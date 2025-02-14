@@ -1,6 +1,4 @@
 <script>
-    import browser from 'webextension-polyfill'
-
     import { onMount } from 'svelte'
 
     import BookmarkForm from './BookmarkForm.svelte'
@@ -10,6 +8,8 @@
     import { currentTab } from '../stores/currentTab'
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
+
+    export let active = true
 
     $: expanded = $dropdownShown === 'search' ? $search.last : $dropdownShown
 
@@ -29,7 +29,7 @@
     })
 </script>
 
-<div class="card" class:expanded>
+<div class="card" class:expanded class:d-hide={ !active }>
     <div class="card-body">
         <BookmarkForm bookmark={ $currentTab } />
     </div>

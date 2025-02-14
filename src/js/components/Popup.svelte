@@ -1,6 +1,4 @@
 <script>
-    import browser from 'webextension-polyfill'
-
     import { indexBy, prop, sortBy, toPairs } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
 
@@ -69,6 +67,7 @@
         <Tabs {tabs} bind:active={mode} />
     </div>
     <div class="popup-body">
-        <svelte:component this={mode.component} />
+        <TabAdd active={ mode.id === 'add' } />
+        <TabUrlSearch active={ mode.id === 'url' } />
     </div>
 </div>

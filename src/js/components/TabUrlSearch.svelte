@@ -4,6 +4,8 @@
     import { t } from '../lib/translate'
     import { savedBookmarks } from '../stores/savedBookmarks'
 
+    export let active = true
+
     $: bookmarkCount = $savedBookmarks.size
     $: popupHeader = (
         bookmarkCount >= 1
@@ -12,7 +14,7 @@
     )
 </script>
 
-<div class="card">
+<div class="card" class:d-hide={ !active }>
     <div class="card-header">
         <h1>
             { popupHeader }
