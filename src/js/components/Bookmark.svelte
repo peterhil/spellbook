@@ -8,8 +8,8 @@
     export let bookmark
 
     function onDelete () {
-        messages.emit('deleteBookmark', bookmark)
-        return false
+        messages.emit('api', { action: 'deleteBookmark', bookmark })
+        return true
     }
 </script>
 
@@ -21,7 +21,7 @@
    tabindex="0">
     <button class="btn btn-sm float-right"
             type="button"
-            on:click|preventDefault={onDelete}>
+            on:click|preventDefault|stopPropagation={onDelete}>
         <Icon icon="cross" />
     </button>
     <div class="title">

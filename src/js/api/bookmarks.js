@@ -20,6 +20,14 @@ export const categorySearch = async (query) => {
     })
 }
 
+export async function deleteBookmark (bookmark) {
+    // console.debug('Deleting bookmark:', bookmark)
+    console.time('bookmark deletion')
+    return browser.bookmarks.remove(bookmark.id)
+        .then(() => console.timeEnd('bookmark deletion'))
+        .catch(console.error)
+}
+
 export async function searchWithUrl (url) {
     let bookmarks = []
 

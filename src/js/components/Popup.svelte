@@ -22,12 +22,6 @@
 
     $: bookmarkCount = $savedBookmarks.size
 
-    async function deleteBookmark (bookmark) {
-        // console.debug('Deleting bookmark:', bookmark)
-        return browser.bookmarks.remove(bookmark.id)
-            .catch(console.error)
-    }
-
     async function updateState () {
         const tab = await getCurrentTab()
 
@@ -45,7 +39,6 @@
     }
 
     onMount(() => {
-        messages.on('deleteBookmark', deleteBookmark)
         messages.on('savedBookmarks', updateSavedBookmarks)
 
         updateState()
@@ -55,7 +48,6 @@
     })
 
     onDestroy(() => {
-        messages.off('deleteBookmark', deleteBookmark)
         messages.off('savedBookmarks', updateSavedBookmarks)
     })
 </script>
