@@ -14,7 +14,7 @@
 
     const tabs = [
         { id: 'add', label: t('tab_add'), component: TabAdd },
-        { id: 'url', label: t('tab_url'), component: TabUrlSearch },
+        { id: 'url', label: t('saved_bookmark'), component: TabUrlSearch },
     ]
     let mode = tabs[0]
 
