@@ -91,7 +91,7 @@ importers:
         specifier: ^10.0.0
         version: 10.4.0
       rollup:
-        specifier: ^3.26.1
+        specifier: ^3.29.5
         version: 3.29.5
       rollup-plugin-copy:
         specifier: ^3.4.0
