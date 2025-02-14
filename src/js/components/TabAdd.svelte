@@ -9,6 +9,9 @@
     import { getCurrentTab, tabsChanged$ } from '../api/tabs'
     import { currentTab } from '../stores/currentTab'
     import { dropdownShown } from '../stores/dropdown'
+    import { search } from '../stores/search'
+
+    $: expanded = $dropdownShown === 'search' ? $search.last : $dropdownShown
 
     async function currentTabInfo () {
         const tab = await getCurrentTab()
@@ -26,7 +29,7 @@
     })
 </script>
 
-<div class="card" class:expanded={ $dropdownShown }>
+<div class="card" class:expanded>
     <div class="card-body">
         <BookmarkForm bookmark={ $currentTab } />
     </div>
