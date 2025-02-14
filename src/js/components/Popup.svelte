@@ -28,11 +28,12 @@
             .catch(console.error)
     }
 
-    async function getSavedBookmarks () {
+    async function updateState () {
         const tab = await getCurrentTab()
 
-        // console.debug('[Popup] getSavedBookmarks:', tab)
+        // console.debug('[Popup] updateState:', tab)
         messages.emit('api', { action: 'savedBookmarks', tab })
+        messages.emit('api', { action: 'recentCategories' })
     }
 
     function updateSavedBookmarks (bookmarks) {
@@ -47,10 +48,10 @@
         messages.on('deleteBookmark', deleteBookmark)
         messages.on('savedBookmarks', updateSavedBookmarks)
 
-        getSavedBookmarks()
+        updateState()
 
         // Refresh contents when bookmarks change
-        bookmarkCountChanged$.observe(getSavedBookmarks)
+        bookmarkCountChanged$.observe(updateState)
     })
 
     onDestroy(() => {
