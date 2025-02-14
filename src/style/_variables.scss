@@ -25,5 +25,15 @@ $focus-color: #55b9d9b0;
 $highlight-color: #ffe9b3;
 
 // Other variables
-
 $card-padding: .75rem;
+
+// Added variables
+$tab-bg: #f8f8f8;
+$tab-color: #3d1973;
+
+$tab-active-bg: $light-color;
+$tab-active-color: $primary-color;
+$tab-active-text: $dark-color;
+
+$tab-hover-color: #1fbacc;
+$tab-hover-text: $focus-color;

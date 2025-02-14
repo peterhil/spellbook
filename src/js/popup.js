@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+'use strict'
+
 import browser from 'webextension-polyfill'
 
 import './lib/icons'
@@ -15,11 +17,15 @@ import Popup from './components/Popup.svelte'
 function onLoad (event) {
     messages.on('api', async (request) => {
         const { action } = request
+        // console.group(action)
         // console.debug('[popup] API request:', action, request)
+        // console.time('[popup] API')
 
         try {
             const response = await browser.runtime.sendMessage(request)
             // console.debug('[popup] API response:', action, response)
+            // console.timeEnd('[popup] API')
+            // console.groupEnd(action)
 
             messages.emit(action, response)
         }

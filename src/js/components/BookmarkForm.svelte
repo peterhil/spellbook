@@ -1,7 +1,7 @@
 <script>
     import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
     import { humanizeDate, t } from '../lib/translate'
@@ -75,6 +75,10 @@
 
     onMount(() => {
         messages.on('categorySearch', updateCategories)
+    })
+
+    onDestroy(() => {
+        $dropdownShown = null
     })
 </script>
 

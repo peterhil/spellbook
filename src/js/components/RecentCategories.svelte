@@ -7,13 +7,18 @@
 
     export let recentCategories = []
 
-    const updateRecentCategories = (categories) => {
+    function getRecentCategories () {
+        messages.emit('api', { action: 'recentCategories' })
+    }
+
+    function updateRecentCategories (categories) {
         // console.debug('[RecentCategories] updateRecentCategories:', categories)
         recentCategories = categories
     }
 
     onMount(() => {
         messages.on('recentCategories', updateRecentCategories)
+        getRecentCategories()
     })
 
     onDestroy(() => {

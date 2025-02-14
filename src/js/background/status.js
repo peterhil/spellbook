@@ -6,33 +6,27 @@
 
 import browser from 'webextension-polyfill'
 
-import { activeTabQuery } from '../api/tabs'
+import { getCurrentTab } from '../api/tabs'
 import { browserAction } from '../lib/compat'
 import { searchWithUrl } from '../api/bookmarks'
 
-function updateIcon (bookmarks, tabId) {
-    // console.debug('[background] updateIcon:', tabId, bookmarks.length)
-    const icon = bookmarks.length > 0
+async function updateIcon (tabId, bookmarkCount) {
+    const icon = bookmarkCount > 0
         ? '../img/spellbook_icon_bookmarked.png'
         : '../img/spellbook_icon.png'
-    const badgeText = bookmarks.length > 1
-        ? bookmarks.length.toString()
+    const badgeText = bookmarkCount > 0
+        ? bookmarkCount.toString()
         : ''
 
-    browserAction.setIcon({ path: icon, tabId })
-    browserAction.setBadgeText({ text: badgeText, tabId })
-}
-
-async function updateTab (tabs) {
-    if (tabs[0]) {
-        const currentTab = tabs[0]
-        const bookmarks = await searchWithUrl(currentTab.url)
-
-        updateIcon(bookmarks, currentTab.id)
-    }
+    return Promise.all([
+        browserAction.setIcon({ path: icon, tabId }),
+        browserAction.setBadgeText({ text: badgeText, tabId }),
+    ])
 }
 
 export async function updateActiveTab () {
-    const tabs = await browser.tabs.query(activeTabQuery)
-    updateTab(tabs)
+    const tab = await getCurrentTab()
+    const bookmarks = await searchWithUrl(tab.url)
+
+    return updateIcon(tab.id, bookmarks.length)
 }

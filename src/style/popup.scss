@@ -10,56 +10,77 @@
 
 // Basic layout
 
+:root {
+  --popup-max-width: 800px;
+  --popup-max-height: 600px;
+}
+
 html {
     display: flex;
-    flex-direction: row;
     justify-content: flex-end;
-    box-sizing: content-box;
-    width: 100%;
     height: auto;
-    margin: 0;
-    padding: 0.25rem;
     padding: 0;
     background-color: $gray-color;
 }
 
+// Style body element for popup size
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Popups#popup_resizing
 body {
     box-sizing: border-box;
     width: 42ch;
-    min-width: 180px;
-    max-width: 100%;
-    // max-width: 640px;
     height: auto;
+    min-width: 180px;
+    max-width: var(--popup-max-width);
+    max-height: var(--popup-max-height);
+    overflow: hidden;
     margin: 0;
     padding: 0;
-    background-color: transparent;
+    padding-bottom: 0.7rem;
 }
 
 .popup {
-    position: relative;
-    width: 100%;
-    height: auto;
+    max-height: calc(var(--popup-max-height) - 0.75rem);
+    overflow: hidden auto;
 
     h1 {
         font-size: 0.9rem;
         margin-block: 0.25rem;
     }
 
-    .card-header {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-content: space-between;
-        margin: -1px;
+    .card.expanded {
+        min-height: 388px; // Prevent scroll bars
+    }
+
+    .popup-header {
+        position: sticky;
+        z-index: 1000;
+        top: 0;
+    }
+
+    .stripe {
+        h1 {
+            margin: 0;
+            padding: .25rem .8rem;
+        }
     }
 }
 
 // Styles
 
 .stripe {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    min-height: 9px;
+    min-height: 16px;
     color: $light-color;
+
+    .status {
+        flex-grow: 1;
+        text-align: right;
+    }
+}
+
+.stripe-bg {
     background-color: $primary-color;
     background-image: url('../img/spellbook-bg.jpg');
     background-repeat: repeat;
