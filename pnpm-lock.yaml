@@ -82,7 +82,7 @@ importers:
         specifier: ^8.4.21
         version: 8.5.2
       puppeteer:
-        specifier: ^10.0.0
+        specifier: ^10.4.0
         version: 10.4.0
       rollup:
         specifier: ^3.29.5
