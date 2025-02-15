@@ -81,7 +81,8 @@
             "esbuild"
         ],
         "overrides": {
-            "@rollup/plugin-eslint>eslint": "$eslint"
+            "@rollup/plugin-eslint>eslint": "$eslint",
+            "postcss": "^8.5.2"
         }
     }
 }
