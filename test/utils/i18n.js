@@ -32,7 +32,7 @@ function getLocalizedMessages (languageCode) {
     try {
         return JSON.parse(rawdata)
     }
-    catch (err) {
+    catch {
         throw new Error('Failed to parse localization at:', messagePath)
     }
 }

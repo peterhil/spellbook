@@ -12,7 +12,7 @@ import { messages } from './lib/messaging'
 
 import Popup from './components/Popup.svelte'
 
-function onLoad (event) {
+function onLoad () {
     messages.on('api', async (request) => {
         const { action } = request
         // console.debug('[popup] API request:', action, request)
@@ -28,7 +28,7 @@ function onLoad (event) {
         }
     })
 
-    new Popup({ // eslint-disable-line no-new
+    new Popup({
         target: document.getElementById('popup'),
         props: {},
     })

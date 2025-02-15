@@ -15,7 +15,7 @@
         "firefox:sign": "web-ext -s dist sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET",
         "firefox:beta": "pnpm run firefox:sign -- --channel=unlisted",
         "lint": "run-s -n check lint:js lint:styles",
-        "lint:js": "eslint --ignore-pattern '!.*.cjs' ./.*.cjs ./*.js ./*.mjs src/**/*.js src/**/*.svelte test/**/*.js",
+        "lint:js": "eslint .",
         "lint:styles": "stylelint src/**/*.{css,scss}",
         "release": "run-s -n release:chrome release:firefox",
         "release:chrome": "TARGET=chrome run-s -n lint build zip:chrome",
@@ -34,10 +34,8 @@
         "zepto-detect": "~0.0.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.22.6",
-        "@babel/eslint-parser": "^7.22.6",
-        "@eslint/eslintrc": "^3.2.0",
-        "@eslint/js": "^9.20.0",
+        "@eslint/compat": "^1.2.5",
+        "@eslint/js": "^9.18.0",
         "@fortawesome/fontawesome-svg-core": "^6.4.0",
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@rollup/plugin-commonjs": "^25.0.2",
@@ -45,15 +43,12 @@
         "@rollup/plugin-node-resolve": "^15.0.1",
         "@rollup/plugin-terser": "^0.4.3",
         "@testing-library/svelte": "^3.2.2",
-        "eslint": "^9.20.1",
-        "eslint-config-standard": "^17.1.0",
+        "eslint": "^9.18.0",
         "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-lube": "^0.4.3",
-        "eslint-plugin-n": "^16.6.2",
-        "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^6.6.0",
-        "eslint-plugin-svelte3": "^4.0.0",
-        "globals": "^15.15.0",
+        "eslint-plugin-svelte": "^2.46.1",
+        "globals": "^15.14.0",
         "mocha": "^10.2.0",
         "npm-run-all": "^4.1.5",
         "postcss": "^8.5.2",
@@ -82,7 +77,12 @@
     ],
     "pnpm": {
         "onlyBuiltDependencies": [
-            "svelte-preprocess"
-        ]
+            "svelte-preprocess",
+            "esbuild"
+        ],
+        "overrides": {
+            "@rollup/plugin-eslint>eslint": "$eslint",
+            "postcss": "^8.5.2"
+        }
     }
 }
