@@ -88,7 +88,7 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       postcss:
-        specifier: ^8.4.21
+        specifier: ^8.5.2
         version: 8.5.2
       puppeteer:
         specifier: ^10.4.0
