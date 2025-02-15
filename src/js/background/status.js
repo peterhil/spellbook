@@ -4,8 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import browser from 'webextension-polyfill'
-
 import { getCurrentTab } from '../api/tabs'
 import { browserAction } from '../lib/compat'
 import { searchWithUrl } from '../api/bookmarks'
