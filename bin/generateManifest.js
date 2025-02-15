@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from 'fs/promises'
+import { writeFile } from 'fs/promises'
 
 import { chrome, firefox } from '../src/manifest.js'
-import { isDev, outDir, readJsonFile, rel, target } from '../utils.config.mjs'
+import { outDir, readJsonFile, rel, target } from '../utils.config.mjs'
 
 const isFF = target === 'firefox'
 const platform = (isFF ? firefox : chrome)

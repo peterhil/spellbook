@@ -1,6 +1,6 @@
 import globals from 'globals'
 import js from '@eslint/js'
-import importPlugin from 'eslint-plugin-import'
+// import importPlugin from 'eslint-plugin-import'
 import pluginPromise from 'eslint-plugin-promise'
 import svelte from 'eslint-plugin-svelte'
 

@@ -13,6 +13,7 @@
     onMount(() => {
         browser.bookmarks.getTree()
             .then(update)
+            .catch(console.error)
     })
 </script>
 

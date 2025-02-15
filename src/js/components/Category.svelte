@@ -6,7 +6,7 @@
     export let category
     let elem
 
-    function onClick (event) {
+    function onClick () {
         const selection = { ...elem.dataset }
         // console.debug('[Category] clicked:', selection, event)
         messages.emit('categorySelected', selection)

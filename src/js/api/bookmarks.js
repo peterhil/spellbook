@@ -9,15 +9,12 @@ import browser from 'webextension-polyfill'
 import { sortByTitleCaseInsensitive } from '../lib/pure'
 import { isCategory } from './helpers'
 
-export const categorySearch = async (query) => {
-    return new Promise((resolve, reject) => {
-        return browser.bookmarks.search(query).then(bookmarks => {
-            const categories = bookmarks.filter(isCategory)
-            const sorted = sortByTitleCaseInsensitive(categories)
+export async function categorySearch (query) {
+    const bookmarks = await browser.bookmarks.search(query)
+    const categories = bookmarks.filter(isCategory)
+    const sorted = sortByTitleCaseInsensitive(categories)
 
-            resolve(sorted)
-        })
-    })
+    return sorted
 }
 
 export async function searchWithUrl (url) {
@@ -29,7 +26,7 @@ export async function searchWithUrl (url) {
     try {
         bookmarks = await browser.bookmarks.search({ url })
     }
-    catch (err) {
+    catch {
         console.warn('[api/bookmarks] Unsupported URL:', url)
     }
 

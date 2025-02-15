@@ -13,8 +13,7 @@ import { updateActiveTab } from './status'
 
 export async function onMessage (request, sender) {
     console.debug(
-        '[background] Message:', request.action, request,
-        // { source, sender }
+        '[background] Message:', request.action, request, sender,
     )
 
     switch (request.action) {
