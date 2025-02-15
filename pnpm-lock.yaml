@@ -51,9 +51,6 @@ importers:
       '@testing-library/svelte':
         specifier: ^3.0.3
         version: 3.2.2(svelte@3.59.2)
-      chokidar:
-        specifier: ^3.5.1
-        version: 3.6.0
       eslint:
         specifier: ^8.44.0
         version: 8.57.1
