@@ -52,7 +52,7 @@
         return false
     }
 
-    async function onSubmit (event) {
+    async function onSubmit () {
         if (!form.reportValidity()) return false
 
         const data = Object.fromEntries(new FormData(form))

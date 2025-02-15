@@ -15,8 +15,7 @@ import { updateActiveTab } from './status'
 // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage#sending_an_asynchronous_response_using_a_promise
 export async function onMessage (request, sender) {
     console.debug(
-        '[background] Message:', request.action, request,
-        // { source, sender }
+        '[background] Message:', request.action, request, sender,
     )
 
     switch (request.action) {

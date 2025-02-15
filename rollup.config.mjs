@@ -11,6 +11,7 @@ import terser from '@rollup/plugin-terser'
 import { isDev, outputDir, target } from './utils.config.mjs'
 
 const format = 'es'
+const sassOptions = { api: 'modern' }
 const sourcemap = (isDev ? 'inline' : false)
 const verbose = true
 
@@ -28,11 +29,11 @@ const plugins = [
             dev: isDev,
         },
         preprocess: preprocess({
-            style: sass(),
+            style: sass(sassOptions),
         }),
     }),
 
-    sass(),
+    sass(sassOptions),
 
     // Convert CommonJS libraries to ES6
     resolve({
@@ -105,6 +106,7 @@ export default [
         },
         plugins: [
             sass({
+                api: 'modern',
                 output: outputDir('style/popup.css'),
             })
         ],
