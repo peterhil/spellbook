@@ -28,7 +28,7 @@
     "dependencies": {
         "events": "^3.3.0",
         "kefir": "~3.8.8",
-        "rambda": "^6.7.0",
+        "rambda": "^6.9.0",
         "spectre.css": "github:Valexr/spectre",
         "zepto-detect": "~0.0.0"
     },
