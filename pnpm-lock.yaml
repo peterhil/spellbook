@@ -58,16 +58,16 @@ importers:
         specifier: ^17.1.0
         version: 17.1.0(eslint-plugin-import@2.31.0(eslint@9.20.1))(eslint-plugin-n@16.6.2(eslint@9.20.1))(eslint-plugin-promise@6.6.0(eslint@9.20.1))(eslint@9.20.1)
       eslint-plugin-import:
-        specifier: ^2.27.5
+        specifier: ^2.31.0
         version: 2.31.0(eslint@9.20.1)
       eslint-plugin-n:
-        specifier: '^15.0.0 || ^16.0.0 '
+        specifier: ^16.6.2
         version: 16.6.2(eslint@9.20.1)
       eslint-plugin-node:
         specifier: ^11.1.0
         version: 11.1.0(eslint@9.20.1)
       eslint-plugin-promise:
-        specifier: ^6.1.1
+        specifier: ^6.6.0
         version: 6.6.0(eslint@9.20.1)
       eslint-plugin-svelte3:
         specifier: ^4.0.0
