@@ -109,7 +109,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(rollup@3.29.5)(svelte@3.59.2)
       sass:
-        specifier: ^1.63.6
+        specifier: ^1.85.0
         version: 1.85.0
       stylelint:
         specifier: ^15.10.1
