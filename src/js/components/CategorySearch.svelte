@@ -1,4 +1,7 @@
 <script>
+    import { createBubbler } from 'svelte/legacy';
+
+    const bubble = createBubbler();
     import { length } from 'rambda'
     import { onMount } from 'svelte'
 
@@ -7,7 +10,7 @@
     import { t } from '../lib/translate'
     import { search } from '../stores/search'
 
-    let input = ''
+    let input = $state('')
 
     function searchCategories (query) {
         // console.debug('[CategorySearch] search:', query)
@@ -50,6 +53,6 @@
        class="form-input"
        bind:this={ input }
        bind:value={ $search.query }
-       on:focus
+       onfocus={bubble('focus')}
        placeholder={ t('search_placeholder') }
        autocomplete="off">

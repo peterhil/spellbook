@@ -4,7 +4,7 @@
 
     import CategoryMenu from './CategoryMenu.svelte'
 
-    let categories = []
+    let categories = $state([])
 
     function update (tree) {
         categories = tree[0]?.children || []

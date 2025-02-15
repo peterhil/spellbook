@@ -1,15 +1,35 @@
 <script>
+    import { createBubbler } from 'svelte/legacy';
+
+    const bubble = createBubbler();
     import { equals } from 'rambda'
     import { t } from '../../lib/translate'
 
-    export let name
-    export let type = 'text'
-    export let required = false
-    export let value = ''
+    /**
+     * @typedef {Object} Props
+     * @property {any} name
+     * @property {string} [type]
+     * @property {boolean} [required]
+     * @property {string} [value]
+     * @property {any} [title]
+     * @property {string} [placeholder]
+     * @property {boolean} [autocomplete]
+     * @property {import('svelte').Snippet} [label]
+     * @property {import('svelte').Snippet} [children]
+     */
 
-    export let label = (type === 'hidden' ? '' : t(name))
-    export let placeholder = ''
-    export let autocomplete = true
+    /** @type {Props} */
+    let {
+        name,
+        type = 'text',
+        required = false,
+        value = $bindable(''),
+        title = type === 'hidden' ? '' : t(name),
+        placeholder = '',
+        autocomplete = true,
+        label,
+        children
+    } = $props();
 
     // Handle input with two way binding of 'type':
     // https://stackoverflow.com/a/57393751/470560
@@ -29,11 +49,13 @@
     }
 </script>
 
-<slot name="label">
+{#if label}
+    {@render label()}
+{:else}
     <label for={name}>
-        { label }
+        { title }
     </label>
-</slot>
+{/if}
 <div class="input-group">
     <input class="form-input"
            {name}
@@ -42,10 +64,10 @@
            {required}
            {autocomplete}
            {placeholder}
-           on:change={handleInput}
-           on:input={handleInput}
-           on:keydown
-           on:keyup
+           onchange={handleInput}
+           oninput={handleInput}
+           onkeydown={bubble('keydown')}
+           onkeyup={bubble('keyup')}
            >
-    <slot></slot>
+    {@render children?.()}
 </div>

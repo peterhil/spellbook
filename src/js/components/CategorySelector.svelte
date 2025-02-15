@@ -10,7 +10,15 @@
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
 
-    export let lastSelection = null
+    /**
+     * @typedef {Object} Props
+     * @property {any} [lastSelection]
+     * @property {import('svelte').Snippet} [status]
+     * @property {import('svelte').Snippet} [children]
+     */
+
+    /** @type {Props} */
+    let { lastSelection = $bindable(null), status, children } = $props();
 
     function clearSelection () {
         // console.debug('[CategorySelector] clearSelection')
@@ -39,17 +47,19 @@
     bind:value={ $selection.id }
     on:categorySelected={ onSelection }
     >
-    <label slot="label" for="parentId" class="clearfix">
-        { t('category') }
-        <small class="status float-right">
-            <slot name="status"></slot>
-            {#if lastSelection && $selection.id }
-                <span class="label label-primary" title="{ t('selected_category') }">
-                    <IconFa icon="check" />
-                    { lastSelection.title }
-                </span>
-            {/if}
-        </small>
-    </label>
-    <slot></slot>
+    {#snippet label()}
+        <label  for="parentId" class="clearfix">
+            { t('category') }
+            <small class="status float-right">
+                {@render status?.()}
+                {#if lastSelection && $selection.id}
+                    <span class="label label-primary" title="{ t('selected_category') }">
+                        <IconFa icon="check" />
+                        { lastSelection.title }
+                    </span>
+                {/if}
+            </small>
+        </label>
+    {/snippet}
+    {@render children?.()}
 </InputGroup>

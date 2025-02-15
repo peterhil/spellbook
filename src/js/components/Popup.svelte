@@ -16,9 +16,9 @@
         { id: 'add', label: t('tab_add'), component: TabAdd },
         { id: 'url', label: t('saved_bookmark'), component: TabUrlSearch },
     ]
-    let mode = tabs[0]
+    let mode = $state(tabs[0])
 
-    $: bookmarkCount = $savedBookmarks.size
+    let bookmarkCount = $derived($savedBookmarks.size)
 
     async function updateState () {
         const tab = await getCurrentTab()

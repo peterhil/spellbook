@@ -1,4 +1,6 @@
 <script>
+    import { preventDefault } from 'svelte/legacy';
+
     import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
@@ -22,8 +24,8 @@
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
-    export let bookmark
-    let form
+    let { bookmark = $bindable() } = $props();
+    let form = $state()
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
@@ -84,25 +86,27 @@
 
 <form class="bookmark-form"
       bind:this={ form }
-      on:submit|preventDefault={ onSubmit }
+      onsubmit={preventDefault(onSubmit)}
       >
-    {#if bookmark.dateAdded }
+    {#if bookmark.dateAdded}
     <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>
     {/if}
-    {#if bookmark.parentId }
+    {#if bookmark.parentId}
     <p>{ t('category') }: { bookmark.parentId }</p>
     {/if}
 
     <div class="form-group">
         <CategorySelector>
-            <span slot="status">
-                {#if $search.last }
-                    <span class="label" title="{ t('search') }">
-                        <IconFa icon="search" />
-                        { $search.last }
-                    </span>
-                {/if}
-            </span>
+            {#snippet status()}
+                        <span >
+                    {#if $search.last}
+                        <span class="label" title="{ t('search') }">
+                            <IconFa icon="search" />
+                            { $search.last }
+                        </span>
+                    {/if}
+                </span>
+                    {/snippet}
 
             <CategorySearch on:focus={ onSearchFocus } />
 
@@ -111,7 +115,7 @@
 
         <DropdownGroup>
             <Dropdown name={'search'}>
-                {#if isVisible('search') && $search.last }
+                {#if isVisible('search') && $search.last}
                     <SearchResults categories={$search.results} />
                 {/if}
             </Dropdown>

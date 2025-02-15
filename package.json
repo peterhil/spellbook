@@ -62,7 +62,7 @@
         "stylelint": "^15.10.1",
         "stylelint-config-sass-guidelines": "^10.0.0",
         "stylelint-config-standard": "^34.0.0",
-        "svelte": "^4.2.19",
+        "svelte": "^5.0.0",
         "svelte-check": "^4.1.4",
         "svelte-preprocess": "^6.0.3",
         "svelte-preprocess-sass": "^1.0.0",
