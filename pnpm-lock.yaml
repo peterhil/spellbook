@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@rollup/plugin-eslint>eslint': ^9.18.0
+
 importers:
 
   .:
@@ -3862,10 +3865,11 @@ snapshots:
   '@rollup/plugin-eslint@9.0.5(rollup@3.29.5)':
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@3.29.5)
-      eslint: 8.57.1
+      eslint: 9.20.1
     optionalDependencies:
       rollup: 3.29.5
     transitivePeerDependencies:
+      - jiti
       - supports-color
 
   '@rollup/plugin-node-resolve@15.3.1(rollup@3.29.5)':

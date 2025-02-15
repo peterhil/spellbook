@@ -81,6 +81,9 @@
         "onlyBuiltDependencies": [
             "svelte-preprocess",
             "esbuild"
-        ]
+        ],
+        "overrides": {
+            "@rollup/plugin-eslint>eslint": "$eslint"
+        }
     }
 }
