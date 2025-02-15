@@ -129,9 +129,6 @@ importers:
       svelte-preprocess-sass:
         specifier: ^1.0.0
         version: 1.0.0
-      vite:
-        specifier: ^4.3.9
-        version: 4.5.9(@types/node@22.13.4)(sass@1.85.0)(sugarss@2.0.0)(terser@5.39.0)
       vite-plugin-eslint:
         specifier: ^1.8.1
         version: 1.8.1(eslint@8.57.1)(vite@4.5.9(@types/node@22.13.4)(sass@1.85.0)(sugarss@2.0.0)(terser@5.39.0))
