@@ -10,7 +10,7 @@ with novel UI innovations.
 Get it now for
 [Google Chrome](https://chrome.google.com/webstore/detail/spellbook/mpngjgnmljpfedcllnndbeeponjdjcnk)
 or
-[Mozilla Firefox](https://addons.mozilla.org/fi/firefox/addon/spellbook-peterhil/).
+[Mozilla Firefox](https://addons.mozilla.org/firefox/addon/spellbook-peterhil/).
 
 
 ## Unpacked installation
