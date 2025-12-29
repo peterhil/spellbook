@@ -1,17 +1,16 @@
 <script>
-   import { preventDefault, stopPropagation } from 'svelte/legacy';
-
     import { getParentId } from '../api/categories.js'
     import { messages } from '../lib/messaging'
 
     import BookmarkPath from './BookmarkPath.svelte'
     import Icon from './Icon.svelte'
 
-   let { bookmark } = $props();
+    let { bookmark } = $props();
 
-    function onDelete () {
+    function onDelete (event) {
+        event.preventDefault()
+        event.stopPropagation()
         messages.emit('api', { action: 'deleteBookmark', bookmark })
-        return true
     }
 </script>
 
@@ -23,7 +22,7 @@
    tabindex="0">
     <button class="btn btn-sm float-right"
             type="button"
-            onclick={stopPropagation(preventDefault(onDelete))}>
+            onclick={onDelete}>
         <Icon icon="cross" />
     </button>
     <div class="title">

@@ -1,6 +1,4 @@
 <script>
-    import { preventDefault } from 'svelte/legacy';
-
     import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
     import { onDestroy, onMount } from 'svelte'
@@ -54,7 +52,9 @@
         return false
     }
 
-    async function onSubmit () {
+    async function onsubmit (event) {
+        event.preventDefault()
+
         if (!form.reportValidity()) return false
 
         const data = Object.fromEntries(new FormData(form))
@@ -86,7 +86,7 @@
 
 <form class="bookmark-form"
       bind:this={ form }
-      onsubmit={preventDefault(onSubmit)}
+      {onsubmit}
       >
     {#if bookmark.dateAdded}
     <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>

@@ -1,7 +1,4 @@
 <script>
-    import { createBubbler } from 'svelte/legacy';
-
-    const bubble = createBubbler();
     import { length } from 'rambda'
     import { onMount } from 'svelte'
 
@@ -53,6 +50,5 @@
        class="form-input"
        bind:this={ input }
        bind:value={ $search.query }
-       onfocus={bubble('focus')}
        placeholder={ t('search_placeholder') }
        autocomplete="off">
