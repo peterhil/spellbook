@@ -135,8 +135,12 @@
          class:d-hide={ $dropdownShown !== 'subcategory' }
          >
         <InputGroup name="subcategory"
-                    label={ t('add_subcategory') }
                     on:keydown={preventEnter}>
+            {#snippet label()}
+            <label for="subcategory">
+                {t('add_subcategory')}
+            </label>
+            {/snippet}
             <Button name="toggleSubcategory" classes="input-group-btn">
                 <Icon icon="cross" />
             </Button>
@@ -148,6 +152,11 @@
                     required="true"
                     type="url"
                     bind:value={ bookmark.url }>
+            {#snippet label()}
+            <label for="url">
+                {t('url')}
+            </label>
+            {/snippet}
             <Favicon icon={ bookmark.favIconUrl } />
         </InputGroup>
     </div>
@@ -155,13 +164,19 @@
     <div class="form-group">
         <InputGroup name="title"
                     required="true"
-                    bind:value={ bookmark.title } />
+                    bind:value={ bookmark.title }>
+            {#snippet label()}
+            <label for="title">
+                {t('title')}
+            </label>
+            {/snippet}
+        </InputGroup>
     </div>
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
                 class="btn btn-primary">
-            { t('buttons_add') }
+            {t('buttons_add')}
         </button>
     </div>
 </form>

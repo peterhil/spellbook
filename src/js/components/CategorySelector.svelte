@@ -18,7 +18,11 @@
      */
 
     /** @type {Props} */
-    let { lastSelection = $bindable(null), status, children } = $props();
+    let {
+        lastSelection = $bindable(null),
+        status,
+        children,
+    } = $props()
 
     function clearSelection () {
         // console.debug('[CategorySelector] clearSelection')
@@ -48,7 +52,7 @@
     on:categorySelected={ onSelection }
     >
     {#snippet label()}
-    <label  for="parentId" class="clearfix">
+    <label for="parentId" class="clearfix">
         { t('category') }
         <small class="status float-right">
             {@render status?.()}

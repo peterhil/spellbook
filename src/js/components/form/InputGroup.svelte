@@ -1,16 +1,17 @@
 <!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot (label to label_1) making the component unusable -->
 <script>
     import { equals } from 'rambda'
-    import { t } from '../../lib/translate'
 
-    export let name
-    export let type = 'text'
-    export let required = false
-    export let value = ''
-
-    export let label = (type === 'hidden' ? '' : t(name))
-    export let placeholder = ''
-    export let autocomplete = true
+    let {
+        children,
+        name,
+        type = 'text',
+        required = false,
+        value = '',
+        label,
+        placeholder = '',
+        autocomplete = true,
+    } = $props()
 
     // Handle input with two way binding of 'type':
     // https://stackoverflow.com/a/57393751/470560
@@ -30,11 +31,7 @@
     }
 </script>
 
-<slot name="label">
-    <label for={name}>
-        { label }
-    </label>
-</slot>
+{@render label?.()}
 <div class="input-group">
     <input class="form-input"
            {name}
@@ -43,10 +40,10 @@
            {required}
            {autocomplete}
            {placeholder}
-           on:change={handleInput}
-           on:input={handleInput}
-           on:keydown
-           on:keyup
+           onchange={handleInput}
+           oninput={handleInput}
+           onkeydown={handleInput}
+           onkeyup={handleInput}
            >
-    <slot></slot>
+    {@render children?.()}
 </div>
