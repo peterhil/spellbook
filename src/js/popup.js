@@ -13,6 +13,7 @@ import events from './lib/events'
 import { messages } from './lib/messaging'
 
 import Popup from './components/Popup.svelte'
+import { mount } from "svelte";
 
 function onLoad () {
     messages.on('api', async (request) => {
@@ -34,7 +35,7 @@ function onLoad () {
         }
     })
 
-    new Popup({
+    mount(Popup, {
         target: document.getElementById('popup'),
         props: {},
     })

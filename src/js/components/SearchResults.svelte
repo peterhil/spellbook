@@ -4,7 +4,7 @@
     import CategoryMenu from './CategoryMenu.svelte'
     import MainCategories from './MainCategories.svelte'
 
-    export let categories = []
+    let { categories = [] } = $props();
 </script>
 
 <ul class="menu" tabindex="-1">
@@ -12,7 +12,7 @@
         { t('search_results') }
         ({ categories.length } { t('results') })
     </small>
-    {#if not(isEmpty(categories)) }
+    {#if not(isEmpty(categories))}
         <CategoryMenu categories={categories} />
         <li class="divider" data-content={ t('root_categories') }></li>
         <MainCategories />

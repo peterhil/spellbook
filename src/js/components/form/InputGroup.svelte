@@ -1,3 +1,4 @@
+<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot (label to label_1) making the component unusable -->
 <script>
     import { equals } from 'rambda'
     import { t } from '../../lib/translate'

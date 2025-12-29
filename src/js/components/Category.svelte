@@ -1,10 +1,12 @@
 <script>
+   import { preventDefault } from 'svelte/legacy';
+
     import { messages } from '../lib/messaging'
     import { getParentId } from '../api/categories.js'
     import BookmarkPath from './BookmarkPath.svelte'
 
-    export let category
-    let elem
+   let { category } = $props();
+    let elem = $state()
 
     function onClick () {
         const selection = { ...elem.dataset }
@@ -16,7 +18,7 @@
 
 <a href="#{category.id}" class="category" tabindex="0"
    bind:this={elem}
-   on:click|preventDefault={onClick}
+   onclick={preventDefault(onClick)}
    data-title={category.title}
    data-id={category.id}
    data-parent-id={getParentId(category)}

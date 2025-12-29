@@ -9,9 +9,15 @@
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
-    export let active = true
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [active]
+     */
 
-    $: expanded = $dropdownShown === 'search' ? $search.last : $dropdownShown
+    /** @type {Props} */
+    let { active = true } = $props();
+
+    let expanded = $derived($dropdownShown === 'search' ? $search.last : $dropdownShown)
 
     async function currentTabInfo () {
         const tab = await getCurrentTab()

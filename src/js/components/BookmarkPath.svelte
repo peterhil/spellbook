@@ -2,7 +2,7 @@
     import { getParentPath } from '../api/categories.js'
     import { t } from '../lib/translate'
 
-    export let bookmark
+    let { bookmark } = $props();
 
     async function getPath (bookmark) {
         const path = await getParentPath(bookmark)
@@ -12,9 +12,9 @@
 </script>
 
 <small class="parents">
-    {#await getPath(bookmark) }
+    {#await getPath(bookmark)}
         <span class="loading">Loading...</span>
-    {:then path }
+    {:then path}
         { path }
     {/await}
 </small>

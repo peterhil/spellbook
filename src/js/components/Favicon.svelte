@@ -1,7 +1,7 @@
 <script>
     import Icon from '../components/Icon.svelte'
 
-    export let icon
+    let { icon } = $props();
 </script>
 
 <span class="input-group-addon" class:with-icon={ icon }>

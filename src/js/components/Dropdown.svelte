@@ -2,7 +2,7 @@
     import { equals } from 'rambda'
     import { dropdownShown } from '../stores/dropdown'
 
-    export let name
+    let { name, children } = $props();
 
     export const isVisible = equals(name)
 </script>
@@ -12,5 +12,5 @@
      class:active={ isVisible($dropdownShown) }
      class:d-hide={ !isVisible($dropdownShown) }
      >
-    <slot></slot>
+    {@render children?.()}
 </nav>

@@ -1,7 +1,7 @@
 <script>
     import Category from './Category.svelte'
 
-    export let categories
+    let { categories } = $props();
 </script>
 
 {#each categories as category}
