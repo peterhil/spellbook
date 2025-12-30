@@ -10,14 +10,6 @@
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
 
-    /**
-     * @typedef {Object} Props
-     * @property {any} [lastSelection]
-     * @property {import('svelte').Snippet} [status]
-     * @property {import('svelte').Snippet} [children]
-     */
-
-    /** @type {Props} */
     let {
         lastSelection = $bindable(null),
         status,
