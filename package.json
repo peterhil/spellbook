@@ -21,7 +21,6 @@
         "release:chrome": "TARGET=chrome run-s -n lint build zip:chrome",
         "release:firefox": "TARGET=firefox run-s -n lint build zip:firefox",
         "test": "mocha test",
-        "test:puppeteer": "mocha test/test.js",
         "version": "echo $npm_package_version",
         "zip:firefox": "web-ext -s dist build",
         "zip:chrome": "VERSION=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) && cd dist && zip -r9v ../web-ext-artifacts/spellbook-$VERSION-chrome.zip * && cd -"
