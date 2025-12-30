@@ -10,7 +10,11 @@
     import IconFa from './IconFa.svelte'
     import InputGroup from './form/InputGroup.svelte'
 
-    export let lastSelection = null
+    let {
+        lastSelection = $bindable(null),
+        status,
+        children,
+    } = $props()
 
     function clearSelection () {
         // console.debug('[CategorySelector] clearSelection')
@@ -33,23 +37,22 @@
     })
 </script>
 
-<InputGroup
-    name="parentId"
-    type="hidden"
-    bind:value={ $selection.id }
-    on:categorySelected={ onSelection }
-    >
-    <label slot="label" for="parentId" class="clearfix">
-        { t('category') }
-        <small class="status float-right">
-            <slot name="status"></slot>
-            {#if lastSelection && $selection.id }
-                <span class="label label-primary" title="{ t('selected_category') }">
-                    <IconFa icon="check" />
-                    { lastSelection.title }
-                </span>
-            {/if}
-        </small>
-    </label>
-    <slot></slot>
-</InputGroup>
+<label class="clearfix">
+    { t('category') }
+    <small class="status float-right">
+        {@render status?.()}
+        {#if lastSelection && $selection.id}
+            <span class="label label-primary" title="{ t('selected_category') }">
+                <IconFa icon="check" />
+                { lastSelection.title }
+            </span>
+        {/if}
+    </small>
+    <InputGroup
+        name="parentId"
+        type="hidden"
+        bind:value={ $selection.id }
+        >
+        {@render children?.()}
+    </InputGroup>
+</label>

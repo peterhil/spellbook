@@ -4,13 +4,13 @@
     import { t } from '../lib/translate'
     import { savedBookmarks } from '../stores/savedBookmarks'
 
-    export let active = true
+    let { active = true } = $props()
 
-    $: bookmarkCount = $savedBookmarks.size
-    $: popupHeader = (
-        bookmarkCount >= 1
+    let bookmarkCount = $derived($savedBookmarks.size)
+    let popupHeader = (
+        $derived(bookmarkCount >= 1
             ? t('saved_bookmark')
-            : t('add_bookmark')
+            : t('add_bookmark'))
     )
 </script>
 
