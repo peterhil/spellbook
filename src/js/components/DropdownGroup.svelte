@@ -4,13 +4,8 @@
 
     import { dropdownShown } from '../stores/dropdown'
     import { messages } from '../lib/messaging'
-    /**
-     * @typedef {Object} Props
-     * @property {import('svelte').Snippet} [children]
-     */
 
-    /** @type {Props} */
-    let { children } = $props();
+    let { children } = $props()
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 

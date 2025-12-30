@@ -5,7 +5,7 @@
     import BookmarkPath from './BookmarkPath.svelte'
     import Icon from './Icon.svelte'
 
-    let { bookmark } = $props();
+    let { bookmark } = $props()
 
     function onDelete (event) {
         event.preventDefault()

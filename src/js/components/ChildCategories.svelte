@@ -7,9 +7,10 @@
     import { messages } from '../lib/messaging'
     import { t } from '../lib/translate'
     import { sortByTitleCaseInsensitive } from '../lib/pure'
+
     import CategoryMenu from './CategoryMenu.svelte'
 
-    let { children = $bindable([]) } = $props();
+    let { children = $bindable([]) } = $props()
 
     async function updateChildren (category) {
         // console.debug('[ChildCategories] updateChildren:', category)

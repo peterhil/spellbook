@@ -4,7 +4,7 @@
     import CategoryMenu from './CategoryMenu.svelte'
     import MainCategories from './MainCategories.svelte'
 
-    let { categories = [] } = $props();
+    let { categories = [] } = $props()
 </script>
 
 <ul class="menu" tabindex="-1">

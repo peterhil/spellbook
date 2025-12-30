@@ -9,13 +9,7 @@
     import { dropdownShown } from '../stores/dropdown'
     import { search } from '../stores/search'
 
-    /**
-     * @typedef {Object} Props
-     * @property {boolean} [active]
-     */
-
-    /** @type {Props} */
-    let { active = true } = $props();
+    let { active = true } = $props()
 
     let expanded = $derived($dropdownShown === 'search' ? $search.last : $dropdownShown)
 

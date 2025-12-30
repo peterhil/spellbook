@@ -4,13 +4,7 @@
     import { t } from '../lib/translate'
     import { savedBookmarks } from '../stores/savedBookmarks'
 
-    /**
-     * @typedef {Object} Props
-     * @property {boolean} [active]
-     */
-
-    /** @type {Props} */
-    let { active = true } = $props();
+    let { active = true } = $props()
 
     let bookmarkCount = $derived($savedBookmarks.size)
     let popupHeader = (

@@ -2,7 +2,7 @@
     import { getParentPath } from '../api/categories.js'
     import { t } from '../lib/translate'
 
-    let { bookmark } = $props();
+    let { bookmark } = $props()
 
     async function getPath (bookmark) {
         const path = await getParentPath(bookmark)

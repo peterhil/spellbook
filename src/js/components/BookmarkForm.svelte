@@ -22,7 +22,8 @@
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
-    let { bookmark = $bindable() } = $props();
+    let { bookmark = $bindable() } = $props()
+
     let form = $state()
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)

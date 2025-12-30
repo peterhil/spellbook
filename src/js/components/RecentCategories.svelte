@@ -5,7 +5,7 @@
     import { t } from '../lib/translate'
     import CategoryMenu from './CategoryMenu.svelte'
 
-    let { recentCategories = $bindable([]) } = $props();
+    let { recentCategories = $bindable([]) } = $props()
 
     function getRecentCategories () {
         messages.emit('api', { action: 'recentCategories' })
