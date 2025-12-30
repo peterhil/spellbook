@@ -7,7 +7,6 @@
         type = 'text',
         required = false,
         value = '',
-        label,
         placeholder = '',
         autocomplete = true,
     } = $props()
@@ -30,7 +29,6 @@
     }
 </script>
 
-{@render label?.()}
 <div class="input-group">
     <input class="form-input"
            {name}

@@ -135,43 +135,43 @@
          class:active={ $dropdownShown === 'subcategory' }
          class:d-hide={ $dropdownShown !== 'subcategory' }
          >
-        <InputGroup name="subcategory"
-                    onkeydown={preventEnter}>
-            {#snippet label()}
-            <label for="subcategory">
-                {t('add_subcategory')}
-            </label>
-            {/snippet}
-            <Button name="toggleSubcategory" classes="input-group-btn">
-                <Icon icon="cross" />
-            </Button>
-        </InputGroup>
+        <label>
+            {t('add_subcategory')}
+            <InputGroup
+                name="subcategory"
+                onkeydown={preventEnter}
+                >
+                <Button name="toggleSubcategory" classes="input-group-btn">
+                    <Icon icon="cross" />
+                </Button>
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group">
-        <InputGroup name="url"
-                    required="true"
-                    type="url"
-                    bind:value={ bookmark.url }>
-            {#snippet label()}
-            <label for="url">
-                {t('url')}
-            </label>
-            {/snippet}
-            <Favicon icon={ bookmark.favIconUrl } />
-        </InputGroup>
+        <label>
+            {t('url')}
+            <InputGroup
+                name="url"
+                required="true"
+                type="url"
+                bind:value={ bookmark.url }
+                >
+                <Favicon icon={ bookmark.favIconUrl } />
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group">
-        <InputGroup name="title"
-                    required="true"
-                    bind:value={ bookmark.title }>
-            {#snippet label()}
-            <label for="title">
-                {t('title')}
-            </label>
-            {/snippet}
-        </InputGroup>
+        <label>
+            {t('title')}
+            <InputGroup
+                name="title"
+                required="true"
+                bind:value={ bookmark.title }
+                >
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group text-right buttons-row">

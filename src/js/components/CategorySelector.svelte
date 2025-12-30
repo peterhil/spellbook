@@ -37,24 +37,22 @@
     })
 </script>
 
-<InputGroup
-    name="parentId"
-    type="hidden"
-    bind:value={ $selection.id }
-    >
-    {#snippet label()}
-    <label for="parentId" class="clearfix">
-        { t('category') }
-        <small class="status float-right">
-            {@render status?.()}
-            {#if lastSelection && $selection.id}
-                <span class="label label-primary" title="{ t('selected_category') }">
-                    <IconFa icon="check" />
-                    { lastSelection.title }
-                </span>
-            {/if}
-        </small>
-    </label>
-    {/snippet}
-    {@render children?.()}
-</InputGroup>
+<label class="clearfix">
+    { t('category') }
+    <small class="status float-right">
+        {@render status?.()}
+        {#if lastSelection && $selection.id}
+            <span class="label label-primary" title="{ t('selected_category') }">
+                <IconFa icon="check" />
+                { lastSelection.title }
+            </span>
+        {/if}
+    </small>
+    <InputGroup
+        name="parentId"
+        type="hidden"
+        bind:value={ $selection.id }
+        >
+        {@render children?.()}
+    </InputGroup>
+</label>
