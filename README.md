@@ -35,7 +35,6 @@ Then add the `dev` directory as [unpacked extension to Chrome](https://developer
 
 ```
 pnpm run test
-pnpm run test:puppeteer
 ```
 
 ## Technology stack
