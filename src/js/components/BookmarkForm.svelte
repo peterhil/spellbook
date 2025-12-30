@@ -109,7 +109,7 @@
             </span>
             {/snippet}
 
-            <CategorySearch on:focus={ onSearchFocus } />
+            <CategorySearch onfocus={ onSearchFocus } />
 
             <DropdownToggles />
         </CategorySelector>
@@ -136,7 +136,7 @@
          class:d-hide={ $dropdownShown !== 'subcategory' }
          >
         <InputGroup name="subcategory"
-                    on:keydown={preventEnter}>
+                    onkeydown={preventEnter}>
             {#snippet label()}
             <label for="subcategory">
                 {t('add_subcategory')}

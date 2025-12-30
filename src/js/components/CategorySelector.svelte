@@ -49,7 +49,6 @@
     name="parentId"
     type="hidden"
     bind:value={ $selection.id }
-    on:categorySelected={ onSelection }
     >
     {#snippet label()}
     <label for="parentId" class="clearfix">
