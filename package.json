@@ -50,7 +50,6 @@
         "globals": "^15.14.0",
         "mocha": "^10.2.0",
         "npm-run-all": "^4.1.5",
-        "postcss": "^8.5.2",
         "rollup": "^3.29.5",
         "rollup-plugin-copy": "^3.4.0",
         "rollup-plugin-execute": "^1.1.1",
@@ -79,8 +78,7 @@
             "esbuild"
         ],
         "overrides": {
-            "@rollup/plugin-eslint>eslint": "$eslint",
-            "postcss": "^8.5.2"
+            "@rollup/plugin-eslint>eslint": "$eslint"
         }
     }
 }
