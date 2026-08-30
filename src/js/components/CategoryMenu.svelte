@@ -4,7 +4,7 @@
     let { categories } = $props()
 </script>
 
-{#each categories as category}
+{#each categories as category (category.id)}
     <div class="menu-item">
         <Category category={category} />
     </div>
