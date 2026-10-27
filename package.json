@@ -52,7 +52,7 @@
         "rollup-plugin-execute": "^1.1.1",
         "rollup-plugin-sass": "1.16.0-rc.1",
         "rollup-plugin-svelte": "^7.2.2",
-        "sass": "^1.85.0",
+        "sass": "^1.106.1",
         "stylelint": "^17.16.0",
         "stylelint-config-sass-guidelines": "^13.0.0",
         "stylelint-config-standard": "^40.0.0",
@@ -71,8 +71,9 @@
     ],
     "pnpm": {
         "onlyBuiltDependencies": [
-            "svelte-preprocess",
-            "esbuild"
+            "@parcel/watcher",
+            "esbuild",
+            "svelte-preprocess"
         ],
         "overrides": {
             "@rollup/plugin-eslint>eslint": "$eslint"
