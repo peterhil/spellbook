@@ -115,17 +115,17 @@
         </CategorySelector>
 
         <DropdownGroup>
-            <Dropdown name={'search'}>
+            <Dropdown name="search">
                 {#if isVisible('search') && $search.last}
                     <SearchResults categories={$search.results} />
                 {/if}
             </Dropdown>
 
-            <Dropdown name={'children'}>
+            <Dropdown name="children">
                 <ChildCategories />
             </Dropdown>
 
-            <Dropdown name={'recent'}>
+            <Dropdown name="recent">
                 <RecentCategories />
             </Dropdown>
         </DropdownGroup>
