@@ -5,6 +5,8 @@
     import { dropdownShown } from '../stores/dropdown'
     import { messages } from '../lib/messaging'
 
+    let { children } = $props()
+
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
     function toggleDropdown (dropdown) {
@@ -26,4 +28,4 @@
     })
 </script>
 
-<slot></slot>
+{@render children?.()}

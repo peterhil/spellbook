@@ -1,21 +1,28 @@
 <script>
     import { messages } from '../lib/messaging'
 
-    export let name
-    export let kind = 'primary'
-    export let classes = ''
-    export let title = null
+    let {
+        name,
+        kind = 'primary',
+        classes = '',
+        title = null,
+        children
+    } = $props()
 
-    export function onClick (event) {
+    export function onclick (event) {
+        event.preventDefault()
+
         // console.debug('[Button] clicked:', name)
         messages.emit('button:' + name, event)
+
         return false
     }
 </script>
 
-<button on:click|preventDefault="{onClick}"
-        class="btn btn-{kind} {classes}"
+<button class="btn btn-{kind} {classes}"
         tabindex="0"
-        {title} >
-    <slot />
+        {onclick}
+        {title}
+        >
+    {@render children?.()}
 </button>

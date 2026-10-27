@@ -1,5 +1,5 @@
 <script>
-    export let icon = 'times'
+    let { icon = 'times' } = $props()
 </script>
 
 <i class="icon fas fa-{icon}"></i>

@@ -9,9 +9,16 @@ import browser from 'webextension-polyfill'
 
 import { browserEvent$ } from './helpers'
 
-export const activeTabQuery = {
+const activeTabQuery = {
     active: true,
     currentWindow: true,
+}
+
+export async function getCurrentTab () {
+    const tabs = await browser.tabs.query(activeTabQuery)
+    const current = tabs[0]
+
+    return current
 }
 
 const onActivated$ = browserEvent$(browser.tabs.onActivated)
@@ -23,4 +30,4 @@ export const tabsChanged$ = merge([
     onActivated$,
     onFocusChanged$,
 ])
-    .debounce(125, { immediate: false })
+    .debounce(250, { immediate: true })

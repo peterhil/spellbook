@@ -5,11 +5,12 @@
     import BookmarkPath from './BookmarkPath.svelte'
     import Icon from './Icon.svelte'
 
-    export let bookmark
+    let { bookmark } = $props()
 
-    function onDelete () {
-        messages.emit('deleteBookmark', bookmark)
-        return false
+    function onDelete (event) {
+        event.preventDefault()
+        event.stopPropagation()
+        messages.emit('api', { action: 'deleteBookmark', bookmark })
     }
 </script>
 
@@ -21,7 +22,7 @@
    tabindex="0">
     <button class="btn btn-sm float-right"
             type="button"
-            on:click|preventDefault={onDelete}>
+            onclick={onDelete}>
         <Icon icon="cross" />
     </button>
     <div class="title">

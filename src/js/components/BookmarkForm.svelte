@@ -1,7 +1,7 @@
 <script>
     import browser from 'webextension-polyfill'
     import { equals, pick } from 'rambda'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
 
     import { messages } from '../lib/messaging'
     import { humanizeDate, t } from '../lib/translate'
@@ -22,8 +22,9 @@
     import RecentCategories from './RecentCategories.svelte'
     import SearchResults from './SearchResults.svelte'
 
-    export let bookmark
-    let form
+    let { bookmark = $bindable() } = $props()
+
+    let form = $state()
 
     const isVisible = (dropdown) => equals($dropdownShown, dropdown)
 
@@ -52,7 +53,9 @@
         return false
     }
 
-    async function onSubmit () {
+    async function onsubmit (event) {
+        event.preventDefault()
+
         if (!form.reportValidity()) return false
 
         const data = Object.fromEntries(new FormData(form))
@@ -76,47 +79,53 @@
     onMount(() => {
         messages.on('categorySearch', updateCategories)
     })
+
+    onDestroy(() => {
+        $dropdownShown = null
+    })
 </script>
 
 <form class="bookmark-form"
       bind:this={ form }
-      on:submit|preventDefault={ onSubmit }
+      {onsubmit}
       >
-    {#if bookmark.dateAdded }
+    {#if bookmark.dateAdded}
     <p>{ t('added') }: { humanizeDate(bookmark.dateAdded) }</p>
     {/if}
-    {#if bookmark.parentId }
+    {#if bookmark.parentId}
     <p>{ t('category') }: { bookmark.parentId }</p>
     {/if}
 
     <div class="form-group">
         <CategorySelector>
-            <span slot="status">
-                {#if $search.last }
+            {#snippet status()}
+            <span >
+                {#if $search.last}
                     <span class="label" title="{ t('search') }">
                         <IconFa icon="search" />
                         { $search.last }
                     </span>
                 {/if}
             </span>
+            {/snippet}
 
-            <CategorySearch on:focus={ onSearchFocus } />
+            <CategorySearch onfocus={ onSearchFocus } />
 
             <DropdownToggles />
         </CategorySelector>
 
         <DropdownGroup>
-            <Dropdown name={'search'}>
-                {#if isVisible('search') && $search.last }
+            <Dropdown name="search">
+                {#if isVisible('search') && $search.last}
                     <SearchResults categories={$search.results} />
                 {/if}
             </Dropdown>
 
-            <Dropdown name={'children'}>
+            <Dropdown name="children">
                 <ChildCategories />
             </Dropdown>
 
-            <Dropdown name={'recent'}>
+            <Dropdown name="recent">
                 <RecentCategories />
             </Dropdown>
         </DropdownGroup>
@@ -126,34 +135,49 @@
          class:active={ $dropdownShown === 'subcategory' }
          class:d-hide={ $dropdownShown !== 'subcategory' }
          >
-        <InputGroup name="subcategory"
-                    label={ t('add_subcategory') }
-                    on:keydown={preventEnter}>
-            <Button name="toggleSubcategory" classes="input-group-btn">
-                <Icon icon="cross" />
-            </Button>
-        </InputGroup>
+        <label>
+            {t('add_subcategory')}
+            <InputGroup
+                name="subcategory"
+                onkeydown={preventEnter}
+                >
+                <Button name="toggleSubcategory" classes="input-group-btn">
+                    <Icon icon="cross" />
+                </Button>
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group">
-        <InputGroup name="url"
-                    required="true"
-                    type="url"
-                    bind:value={ bookmark.url }>
-            <Favicon icon={ bookmark.favIconUrl } />
-        </InputGroup>
+        <label>
+            {t('url')}
+            <InputGroup
+                name="url"
+                required="true"
+                type="url"
+                bind:value={ bookmark.url }
+                >
+                <Favicon icon={ bookmark.favIconUrl } />
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group">
-        <InputGroup name="title"
-                    required="true"
-                    bind:value={ bookmark.title } />
+        <label>
+            {t('title')}
+            <InputGroup
+                name="title"
+                required="true"
+                bind:value={ bookmark.title }
+                >
+            </InputGroup>
+        </label>
     </div>
 
     <div class="form-group text-right buttons-row">
         <button type="submit"
                 class="btn btn-primary">
-            { t('buttons_add') }
+            {t('buttons_add')}
         </button>
     </div>
 </form>

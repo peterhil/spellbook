@@ -22,4 +22,4 @@ export const bookmarkCountChanged$ = merge([
     bookmarkCreated$,
     bookmarkRemoved$,
 ])
-    .debounce(250, { immediate: false })
+    .debounce(250, { immediate: true })

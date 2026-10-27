@@ -7,7 +7,7 @@
     import { t } from '../lib/translate'
     import { search } from '../stores/search'
 
-    let input = ''
+    let input = $state('')
 
     function searchCategories (query) {
         // console.debug('[CategorySearch] search:', query)
@@ -50,6 +50,5 @@
        class="form-input"
        bind:this={ input }
        bind:value={ $search.query }
-       on:focus
        placeholder={ t('search_placeholder') }
        autocomplete="off">
